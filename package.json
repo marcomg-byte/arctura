@@ -8,18 +8,22 @@
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev run build",
     "build:atomics": "yarn workspace @arctura-ui/atomics build",
+    "lint": "yarn workspaces foreach --all --topological-dev run lint",
+    "lint:fix": "yarn workspaces foreach --all --topological-dev run lint:fix",
     "test": "yarn workspaces foreach --all --topological-dev run test",
     "test:atomics": "yarn workspace @arctura-ui/atomics test"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "eslint": "^9.39.1",
+    "@typescript-eslint/eslint-plugin": "^8.61.1",
+    "@typescript-eslint/parser": "^8.61.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.6.0",
-    "prettier": "^3.7.4",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.59.2"
+    "prettier": "^3.7.4"
+  },
+  "dependencies": {
+    "typescript": "^6.0.3"
   }
 }

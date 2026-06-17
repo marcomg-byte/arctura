@@ -1,10 +1,4 @@
-import type {
-  AnchorHTMLAttributes,
-  JSX,
-  HTMLAttributes,
-  ReactNode,
-  Ref,
-} from 'react';
+import type { AnchorHTMLAttributes, JSX, HTMLAttributes, ReactNode, Ref } from 'react';
 import classNames from 'classnames';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -245,7 +239,7 @@ function Badge({
     filledClasses,
     ghostClasses,
     outlineClasses,
-    className,
+    className
   );
 
   if (href) {
@@ -261,9 +255,7 @@ function Badge({
           <FontAwesomeIcon icon={icon} className={iconClasses} />
         )}
         {children}
-        {icon && iconPosition === 'end' && (
-          <FontAwesomeIcon icon={icon} className={iconClasses} />
-        )}
+        {icon && iconPosition === 'end' && <FontAwesomeIcon icon={icon} className={iconClasses} />}
       </a>
     );
   }
@@ -274,13 +266,9 @@ function Badge({
       ref={ref as Ref<HTMLDivElement>}
       {...(rest as HTMLAttributes<HTMLDivElement>)}
     >
-      {icon && iconPosition === 'start' && (
-        <FontAwesomeIcon icon={icon} className={iconClasses} />
-      )}
+      {icon && iconPosition === 'start' && <FontAwesomeIcon icon={icon} className={iconClasses} />}
       {children}
-      {icon && iconPosition === 'end' && (
-        <FontAwesomeIcon icon={icon} className={iconClasses} />
-      )}
+      {icon && iconPosition === 'end' && <FontAwesomeIcon icon={icon} className={iconClasses} />}
     </div>
   );
 }
