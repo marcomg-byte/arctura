@@ -8,14 +8,7 @@ import type {
   ReactNode,
   Ref,
 } from 'react';
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { Children, cloneElement, isValidElement, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { useControlled } from '@/lib';
@@ -46,14 +39,7 @@ type ListStatus = 'error' | 'info' | 'success' | 'warning';
 type ListBackground = 'primary' | 'secondary' | 'subtle' | 'inverse';
 
 /** Text and surface colors supported by the list container. */
-type ListColor =
-  | 'accent'
-  | 'black'
-  | 'inverse'
-  | 'primary'
-  | 'secondary'
-  | 'subtle'
-  | 'white';
+type ListColor = 'accent' | 'black' | 'inverse' | 'primary' | 'secondary' | 'subtle' | 'white';
 
 /** Internal list item shape used to track selection state. */
 interface ListItem {
@@ -211,17 +197,12 @@ function List({
           results.push({
             key,
             label: props?.label || '',
-            selected:
-              (props?.selected || props?.defaultSelected || false) &&
-              selectable,
+            selected: (props?.selected || props?.defaultSelected || false) && selectable,
             value: props?.value,
           });
         }
 
-        if (
-          isValidElement(child) &&
-          (child as ElementWithChildren).props?.children
-        ) {
+        if (isValidElement(child) && (child as ElementWithChildren).props?.children) {
           walk((child as ElementWithChildren).props.children);
         }
       });
@@ -253,7 +234,7 @@ function List({
           label: item?.label,
           value: item?.value,
         })),
-    [items],
+    [items]
   );
 
   const classes = twMerge(
@@ -267,7 +248,7 @@ function List({
       'mg:w-32': size === 'md' && !fullWidth,
       'mg:w-40': size === 'lg' && !fullWidth,
     }),
-    className,
+    className
   );
 
   const handleClick = (key: string) => {
@@ -306,14 +287,11 @@ function List({
               selected: items.find((item) => item.key === key)?.selected,
               selectable,
               status,
-            }),
+            })
           );
         }
 
-        if (
-          isValidElement(child) &&
-          (child as ElementWithChildren).props?.children
-        ) {
+        if (isValidElement(child) && (child as ElementWithChildren).props?.children) {
           walk((child as ElementWithChildren).props?.children);
         }
       });
@@ -324,7 +302,7 @@ function List({
       cloneElement(child, {
         firstIndex: index === 0,
         lastIndex: results.length - 1 === index,
-      }),
+      })
     );
     return indexedResults;
   };

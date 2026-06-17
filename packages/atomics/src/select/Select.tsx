@@ -40,10 +40,7 @@ interface SelectClasses {
 }
 
 /** Props for the Select component. */
-interface SelectProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  'onChange' | 'className'
-> {
+interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'className'> {
   /** Class name hooks for the internal elements. */
   classes?: SelectClasses;
   /** Initial value used when the component is uncontrolled. */
@@ -137,19 +134,16 @@ const Select: FC<SelectProps> = ({
         'mg:bg-primary': variant === 'filled',
         'mg:cursor-not-allowed mg:opacity-50': disabled,
         'mg:hover:cursor-pointer': !disabled,
-      },
+      }
     ),
-    classes?.container,
+    classes?.container
   );
 
-  const labelClasses = twMerge(
-    'mg:text-xs mg:sm:text-sm mg:lg:text-lg',
-    classes?.label,
-  );
+  const labelClasses = twMerge('mg:text-xs mg:sm:text-sm mg:lg:text-lg', classes?.label);
 
   const placeholderClasses = twMerge(
     'mg:relative mg:flex mg:justify-start mg:items-center mg:gap-1 mg:p-1 mg:text-xs mg:w-full',
-    classes?.placeholder,
+    classes?.placeholder
   );
 
   const optionsContainerClasses = twMerge(
@@ -158,9 +152,9 @@ const Select: FC<SelectProps> = ({
       {
         'mg:border-solid mg:border-1 mg:border-primary mg:rounded-sm mg:bg-secondary':
           variant === 'outline',
-      },
+      }
     ),
-    classes?.optionsContainer,
+    classes?.optionsContainer
   );
 
   const optionClasses = twMerge(
@@ -168,31 +162,31 @@ const Select: FC<SelectProps> = ({
       'mg:flex mg:justify-between mg:items-center mg:px-1.5 mg:py-1 mg:w-full mg:text-xs',
       {
         'mg:hover:text-accent': variant === 'outline',
-      },
+      }
     ),
-    classes?.option?.root,
+    classes?.option?.root
   );
 
   const optionIconClasses = twMerge(
     'mg:text-sm mg:sm:text-sm mg:lg:text-lg',
-    classes?.option?.icon,
+    classes?.option?.icon
   );
 
   const rootClasses = twMerge(
     'mg:inline-flex mg:flex-col mg:items-start mg:justify-center mg:gap-0.5 mg:min-w-12 mg:min-h-2 mg:h-full mg:font-body mg:text-inverse',
-    classes?.root,
+    classes?.root
   );
 
   const iconClasses = twMerge(
     classNames('mg:text-sm mg:transition-transform mg:duration-200', {
       'mg:rotate-180': isOpen,
     }),
-    classes?.icon,
+    classes?.icon
   );
 
   const iconContainerClasses = twMerge(
     'mg:relative mg:flex mg:justify-center mg:items-center mg:p-0.5',
-    classes?.iconContainer,
+    classes?.iconContainer
   );
 
   const handleClickAway = useCallback((event: globalThis.MouseEvent) => {
@@ -227,11 +221,7 @@ const Select: FC<SelectProps> = ({
   }, [isOpen, handleClickAway]);
 
   return (
-    <div
-      className={rootClasses}
-      ref={ref}
-      {...(rest as HTMLAttributes<HTMLDivElement>)}
-    >
+    <div className={rootClasses} ref={ref} {...(rest as HTMLAttributes<HTMLDivElement>)}>
       {label && <label className={labelClasses}>{label}</label>}
       <div
         aria-disabled={disabled}
@@ -257,10 +247,7 @@ const Select: FC<SelectProps> = ({
                 tabIndex={disabled ? -1 : tabIndex + (index + 1)}
               >
                 {option.icon && (
-                  <FontAwesomeIcon
-                    className={optionIconClasses}
-                    icon={option.icon}
-                  />
+                  <FontAwesomeIcon className={optionIconClasses} icon={option.icon} />
                 )}
                 {option.label}
               </li>
@@ -268,9 +255,7 @@ const Select: FC<SelectProps> = ({
           </ul>
         )}
       </div>
-      {name && (
-        <input type="hidden" name={name} value={value ?? defaultValue ?? ''} />
-      )}
+      {name && <input type="hidden" name={name} value={value ?? defaultValue ?? ''} />}
     </div>
   );
 };

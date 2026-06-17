@@ -5,10 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Fade from 'embla-carousel-fade';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import {
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '../buttons';
 import type { IconButtonVariant } from '../buttons';
 
@@ -91,10 +88,7 @@ const lgSlideBasisClasses: Record<CarouselSlidesPerView, string> = {
 /**
  * Props for the Carousel component.
  */
-interface CarouselProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  'className'
-> {
+interface CarouselProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
   /** ARIA label for the carousel region. */
   'aria-label'?: string;
   /** Automatically advances slides on an interval. */
@@ -185,10 +179,7 @@ const Carousel: FC<CarouselProps> = ({
   transitionDuration = 25,
   ...rest
 }) => {
-  const smSlidesPerGroup = Math.min(
-    slidesPerGroup,
-    2,
-  ) as CarouselSlidesPerGroup;
+  const smSlidesPerGroup = Math.min(slidesPerGroup, 2) as CarouselSlidesPerGroup;
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop,
@@ -203,12 +194,10 @@ const Carousel: FC<CarouselProps> = ({
         },
       },
     },
-    [...(transition === 'fade' ? [Fade()] : [])],
+    [...(transition === 'fade' ? [Fade()] : [])]
   );
   const [selectedIndex, setSelectedIndex] = useState<number>(defaultIndex);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>(
-    () => emblaApi?.scrollSnapList() ?? [],
-  );
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>(() => emblaApi?.scrollSnapList() ?? []);
 
   const isPaused = useRef(false);
   const slidesLength = Children.toArray(children).length;
@@ -260,7 +249,7 @@ const Carousel: FC<CarouselProps> = ({
 
   const rootClasses = twMerge(
     'mg:flex mg:flex-col mg:justify-center mg:items-center mg:w-full',
-    classes?.root,
+    classes?.root
   );
 
   const containerClasses = twMerge(
@@ -268,20 +257,17 @@ const Carousel: FC<CarouselProps> = ({
       'mg:relative mg:flex mg:justify-start mg:w-full mg:pt-4 mg:px-3 mg:overflow-hidden mg:xs:px-4 mg:sm:pt-6 mg:sm:px-8',
       {
         'mg:cursor-grab': enableSwipe,
-      },
+      }
     ),
-    classes?.container,
+    classes?.container
   );
 
   const controlsContainerClasses = twMerge(
     'mg:absolute mg:top-1/2 mg:left-0 mg:w-full mg:flex mg:items-center mg:justify-between mg:px-1 mg:pointer-events-none mg:sm:px-2',
-    classes?.controlsContainer,
+    classes?.controlsContainer
   );
 
-  const controlsClasses = classNames(
-    'mg:pointer-events-auto',
-    classes?.controls,
-  );
+  const controlsClasses = classNames('mg:pointer-events-auto', classes?.controls);
 
   const dotClasses = (index: number) =>
     twMerge(
@@ -289,12 +275,12 @@ const Carousel: FC<CarouselProps> = ({
         'mg:bg-secondary': index === selectedIndex,
         'mg:bg-secondary-subtle': index !== selectedIndex,
       }),
-      classes?.dot,
+      classes?.dot
     );
 
   const dotsContainerClasses = twMerge(
     'mg:flex mg:justify-center mg:items-center mg:gap-2 mg:w-full mg:h-6',
-    classes?.dotsContainer,
+    classes?.dotsContainer
   );
 
   const slidesContainerClasses = twMerge(
@@ -306,23 +292,23 @@ const Carousel: FC<CarouselProps> = ({
       'mg:gap-5 mg:pl-5': gap === 40,
       'mg:gap-6 mg:pl-6': gap === 48,
     }),
-    classes?.slidesContainer,
+    classes?.slidesContainer
   );
 
   const slideClasses = twMerge(
     classNames(
       'mg:h-full mg:flex mg:justify-center mg:items-stretch mg:min-w-0 mg:basis-[90%] mg:p-2 mg:shrink-0',
       smSlideBasisClasses[slidesPerView],
-      lgSlideBasisClasses[slidesPerView],
+      lgSlideBasisClasses[slidesPerView]
     ),
-    classes?.slide,
+    classes?.slide
   );
 
   const slideInnerClasses = twMerge(
     classNames('mg:flex mg:w-full', {
       'mg:justify-center': slidesPerView > 1,
     }),
-    classes?.slideInner,
+    classes?.slideInner
   );
 
   const renderSlides = (children: ReactNode) => {
@@ -365,11 +351,7 @@ const Carousel: FC<CarouselProps> = ({
   }, [autoPlay, emblaApi, handleNext, interval]);
 
   return (
-    <div
-      className={rootClasses}
-      ref={ref}
-      {...(rest as HTMLAttributes<HTMLDivElement>)}
-    >
+    <div className={rootClasses} ref={ref} {...(rest as HTMLAttributes<HTMLDivElement>)}>
       <div
         aria-label={ariaLabel}
         role={role}

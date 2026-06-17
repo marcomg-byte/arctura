@@ -112,19 +112,10 @@ type IconButtonProps = (AnchorProps | ButtonProps) & BaseProps;
  * sizing and motion classes used by the component.
  */
 const renderChildren = (children: IconButtonChildren, className?: string) => {
-  const imageClasses = twMerge(
-    'mg:object-cover mg:animate-fade-in mg:duration-500',
-    className,
-  );
+  const imageClasses = twMerge('mg:object-cover mg:animate-fade-in mg:duration-500', className);
 
   if ('iconName' in children) {
-    return (
-      <FontAwesomeIcon
-        key={children.iconName}
-        className={className}
-        icon={children}
-      />
-    );
+    return <FontAwesomeIcon key={children.iconName} className={className} icon={children} />;
   }
 
   if (isValidElement(children)) {
@@ -191,7 +182,7 @@ function IconButton({
       'mg:text-sm': size === 'sm',
       'mg:text-base': size === 'md',
       'mg:text-lg': size === 'lg',
-    },
+    }
   );
 
   const outlineClasses =
@@ -202,7 +193,7 @@ function IconButton({
             'mg:text-primary mg:border-primary': color === 'primary',
             'mg:text-secondary mg:border-secondary': color === 'secondary',
             'mg:text-accent mg:border-accent': color === 'accent',
-          },
+          }
         )
       : '';
 
@@ -217,7 +208,7 @@ function IconButton({
 
   const iconButtonClasses = twMerge(
     classNames(containerClasses, outlineClasses, filledClasses),
-    classes?.iconButton,
+    classes?.iconButton
   );
 
   if (href) {

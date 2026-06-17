@@ -23,7 +23,7 @@ describe('Button', () => {
     render(
       <Button href="/projects" target="_blank" aria-label="Open projects">
         Projects
-      </Button>,
+      </Button>
     );
 
     const button = screen.getByRole('link', { name: 'Open projects' });
@@ -45,7 +45,7 @@ describe('Button', () => {
         classes={{ button: 'custom-button' }}
       >
         Continue
-      </Button>,
+      </Button>
     );
 
     const button = screen.getByRole('button', { name: 'Continue' });
@@ -61,7 +61,7 @@ describe('Button', () => {
     render(
       <Button type="submit" disabled aria-label="Submit form">
         Submit
-      </Button>,
+      </Button>
     );
 
     const button = screen.getByRole('button', { name: 'Submit form' });
@@ -71,9 +71,7 @@ describe('Button', () => {
   });
 
   it('renders a start icon before the button content', () => {
-    const { container } = render(
-      <Button startAdornment={faCheck}>Done</Button>,
-    );
+    const { container } = render(<Button startAdornment={faCheck}>Done</Button>);
 
     const button = screen.getByRole('button', { name: 'Done' });
     const icon = container.querySelector('svg');

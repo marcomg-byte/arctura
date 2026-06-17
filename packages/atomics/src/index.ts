@@ -8,12 +8,7 @@ import type {
   IconButtonVariant,
   FabClasses,
 } from './buttons';
-import {
-  Card,
-  Header as CardHeader,
-  Media as CardMedia,
-  Footer as CardFooter,
-} from './card';
+import { Card, Header as CardHeader, Media as CardMedia, Footer as CardFooter } from './card';
 import type { FooterAction } from './card';
 import { Carousel, Hero } from './carousel';
 import { Drawer } from './drawer';

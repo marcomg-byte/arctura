@@ -18,7 +18,7 @@ describe('TextArea', () => {
         cols={20}
         required
         fullWidth
-      />,
+      />
     );
 
     const textarea = screen.getByRole('textbox', { name: 'Message' });
@@ -53,13 +53,10 @@ describe('TextArea', () => {
         clearable
         defaultValue="Hello"
         onClear={handleClear}
-        startAdornments={[
-          { icon: faComment },
-          { children: 'Insert', onClick: handleAction },
-        ]}
+        startAdornments={[{ icon: faComment }, { children: 'Insert', onClick: handleAction }]}
         endAdornments={[{ src: '/images/icon.png', alt: 'End icon' }]}
         classes={{ adornment: 'custom-adornment' }}
-      />,
+      />
     );
 
     fireEvent.click(screen.getByRole('button', { name: 'Clear input' }));
@@ -67,14 +64,9 @@ describe('TextArea', () => {
 
     expect(handleClear).toHaveBeenCalledTimes(1);
     expect(handleAction).toHaveBeenCalledTimes(1);
-    expect(screen.getByAltText('End icon').getAttribute('src')).toContain(
-      'icon.png',
-    );
+    expect(screen.getByAltText('End icon').getAttribute('src')).toContain('icon.png');
     expect(
-      document
-        .querySelector('svg[data-icon="comment"]')
-        ?.closest('button')
-        ?.getAttribute('class'),
+      document.querySelector('svg[data-icon="comment"]')?.closest('button')?.getAttribute('class')
     ).toContain('custom-adornment');
   });
 
@@ -85,7 +77,7 @@ describe('TextArea', () => {
         status="warning"
         color="white"
         classes={{ container: 'custom-container', textarea: 'custom-area' }}
-      />,
+      />
     );
 
     const wrapper = container.firstElementChild as HTMLElement;

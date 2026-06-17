@@ -9,7 +9,7 @@ describe('Typography', () => {
     render(
       <Typography variant="h2" bold color="accent" align="center">
         Section title
-      </Typography>,
+      </Typography>
     );
 
     const heading = screen.getByRole('heading', {
@@ -28,7 +28,7 @@ describe('Typography', () => {
     render(
       <Typography variant="large" color="secondary" clamp={4}>
         Body copy
-      </Typography>,
+      </Typography>
     );
 
     const paragraph = screen.getByText('Body copy');
@@ -41,16 +41,9 @@ describe('Typography', () => {
 
   it('renders as a span when requested', () => {
     render(
-      <Typography
-        span
-        variant="small"
-        truncate
-        underline
-        removePadding
-        className="custom-type"
-      >
+      <Typography span variant="small" truncate underline removePadding className="custom-type">
         Inline label
-      </Typography>,
+      </Typography>
     );
 
     const span = screen.getByText('Inline label');

@@ -35,9 +35,7 @@ const defaultBreakpoint = breakpointsKeys[0];
  */
 function remToPx(value: string): number {
   const rem = Number(value.replace('rem', ''));
-  const rootFontSize = Number.parseFloat(
-    getComputedStyle(document.documentElement).fontSize,
-  );
+  const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
 
   return rem * rootFontSize;
 }
@@ -118,15 +116,13 @@ function useBreakpoints(): {
   const breakpoint: Breakpoint = useSyncExternalStore(
     subscribeToViewport,
     getCurrentBreakpoint,
-    () => defaultBreakpoint,
+    () => defaultBreakpoint
   );
   const breakpointIndex = breakpointsKeys.indexOf(breakpoint);
 
-  const isAtLeast = (target: Breakpoint) =>
-    breakpointIndex >= breakpointsKeys.indexOf(target);
+  const isAtLeast = (target: Breakpoint) => breakpointIndex >= breakpointsKeys.indexOf(target);
 
-  const isBelow = (target: Breakpoint) =>
-    breakpointIndex < breakpointsKeys.indexOf(target);
+  const isBelow = (target: Breakpoint) => breakpointIndex < breakpointsKeys.indexOf(target);
 
   return {
     breakpoint,

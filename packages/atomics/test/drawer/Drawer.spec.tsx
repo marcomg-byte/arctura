@@ -19,7 +19,7 @@ describe('Drawer', () => {
         }}
       >
         Drawer content
-      </Drawer>,
+      </Drawer>
     );
 
     const root = screen.getByText('Drawer content').closest('.mg\\:relative');
@@ -36,7 +36,7 @@ describe('Drawer', () => {
     render(
       <Drawer open={false} onClose={vi.fn()} anchor="right">
         Content
-      </Drawer>,
+      </Drawer>
     );
 
     const root = screen.getByText('Content').closest('.mg\\:relative');
@@ -50,7 +50,7 @@ describe('Drawer', () => {
     render(
       <Drawer open onClose={handleClose}>
         Content
-      </Drawer>,
+      </Drawer>
     );
 
     fireEvent.click(screen.getByRole('button'));
@@ -65,7 +65,7 @@ describe('Drawer', () => {
     render(
       <Drawer open closeOnEscape={false} onClose={handleClose}>
         Content
-      </Drawer>,
+      </Drawer>
     );
 
     fireEvent.keyDown(document, { key: 'Escape' });
@@ -78,7 +78,7 @@ describe('Drawer', () => {
     const { rerender } = render(
       <Drawer open onClose={vi.fn()} onBackdropClick={handleBackdropClick}>
         Content
-      </Drawer>,
+      </Drawer>
     );
 
     fireEvent.click(document.querySelector('[aria-hidden="true"]') as Element);
@@ -87,11 +87,9 @@ describe('Drawer', () => {
     rerender(
       <Drawer open onClose={vi.fn()} showBackdrop={false}>
         Content
-      </Drawer>,
+      </Drawer>
     );
 
-    expect(document.querySelector('[aria-hidden="true"]')?.className).toContain(
-      'mg:opacity-0',
-    );
+    expect(document.querySelector('[aria-hidden="true"]')?.className).toContain('mg:opacity-0');
   });
 });

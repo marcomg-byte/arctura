@@ -23,7 +23,7 @@ describe('Badge', () => {
     render(
       <Badge href="/projects" target="_blank" aria-label="Projects badge">
         Projects
-      </Badge>,
+      </Badge>
     );
 
     const badge = screen.getByRole('link', { name: 'Projects badge' });
@@ -37,14 +37,9 @@ describe('Badge', () => {
 
   it('applies explicit size, color, variant, and custom classes', () => {
     render(
-      <Badge
-        color="danger"
-        size="lg"
-        variant="outline"
-        className="custom-badge"
-      >
+      <Badge color="danger" size="lg" variant="outline" className="custom-badge">
         Critical
-      </Badge>,
+      </Badge>
     );
 
     const badge = screen.getByText('Critical');
@@ -60,7 +55,7 @@ describe('Badge', () => {
     const { container } = render(
       <Badge icon={faCheck} iconPosition="start" color="success">
         Done
-      </Badge>,
+      </Badge>
     );
 
     const badge = screen.getByText('Done');
@@ -76,7 +71,7 @@ describe('Badge', () => {
     const { container } = render(
       <Badge icon={faCheck} color="info">
         Done
-      </Badge>,
+      </Badge>
     );
 
     const badge = screen.getByText('Done');

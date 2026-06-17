@@ -102,15 +102,7 @@ type TextInputStatus = 'success' | 'warning' | 'error';
  */
 type TextInputType = Exclude<
   JSX.IntrinsicElements['input']['type'],
-  | 'button'
-  | 'checkbox'
-  | 'date'
-  | 'datetime-local'
-  | 'month'
-  | 'radio'
-  | 'range'
-  | 'time'
-  | 'week'
+  'button' | 'checkbox' | 'date' | 'datetime-local' | 'month' | 'radio' | 'range' | 'time' | 'week'
 >;
 
 /**
@@ -222,7 +214,7 @@ interface TextInputProps extends Omit<
 const renderAdornment = (
   adornment: TextInputAdornment,
   color: TextInputAdornmentColor = 'white',
-  className?: string,
+  className?: string
 ) => {
   const iconClasses = classNames(
     'mg:text-base',
@@ -234,12 +226,12 @@ const renderAdornment = (
       'mg:text-accent': color === 'accent',
       'mg:text-subtle': color === 'subtle',
     },
-    className,
+    className
   );
 
   const imageClasses = classNames(
     'mg:object-contain mg:animate-fade-in mg:duration-500',
-    className,
+    className
   );
 
   if ('iconName' in adornment) {
@@ -351,9 +343,9 @@ const TextInput: FC<TextInputProps> = ({
       'mg:flex mg:flex-col mg:gap-2 mg:relative mg:bg-inherit mg:pt-0.5 mg:pb-3 mg:h-full',
       {
         'mg:w-full': fullWidth,
-      },
+      }
     ),
-    classes?.container,
+    classes?.container
   );
 
   const clearButtonClasses = classNames(
@@ -367,7 +359,7 @@ const TextInput: FC<TextInputProps> = ({
       'mg:text-white': adornmentColor === 'white',
       'mg:shrink-0': fullWidth,
     },
-    classes?.clearButton,
+    classes?.clearButton
   );
 
   const helperClasses = twMerge(
@@ -383,7 +375,7 @@ const TextInput: FC<TextInputProps> = ({
       'mg:text-warning': status === 'warning' && !error,
       'mg:text-danger': status === 'error' || error,
     }),
-    classes?.helper,
+    classes?.helper
   );
 
   const inputClasses = twMerge(
@@ -397,7 +389,7 @@ const TextInput: FC<TextInputProps> = ({
       'mg:w-52': size === 'lg' && !fullWidth,
       'mg:grow': fullWidth,
     }),
-    classes?.input,
+    classes?.input
   );
 
   const inputContainerClasses = twMerge(
@@ -411,9 +403,9 @@ const TextInput: FC<TextInputProps> = ({
         'mg:w-full': fullWidth,
         'mg:has-[input:focus]:outline-1 mg:has-[input:focus]:outline-primary mg:has-[input:focus]:outline-offset-4':
           !clicked && value === '',
-      },
+      }
     ),
-    classes?.inputContainer,
+    classes?.inputContainer
   );
 
   const labelClasses = twMerge(
@@ -429,7 +421,7 @@ const TextInput: FC<TextInputProps> = ({
       'mg:text-warning': status === 'warning' && !error,
       'mg:text-danger': status === 'error' || error,
     }),
-    classes?.label,
+    classes?.label
   );
 
   const toggleButtonClasses = classNames(
@@ -443,7 +435,7 @@ const TextInput: FC<TextInputProps> = ({
       'mg:text-white': adornmentColor === 'white',
       'mg:shrink-0': fullWidth,
     },
-    classes?.toggleButton,
+    classes?.toggleButton
   );
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -480,8 +472,7 @@ const TextInput: FC<TextInputProps> = ({
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    const isEscape =
-      event.key === 'Escape' || event.key === 'Esc' || event.code === 'Escape';
+    const isEscape = event.key === 'Escape' || event.key === 'Esc' || event.code === 'Escape';
 
     if (isEscape) {
       setClicked(false);
@@ -539,12 +530,7 @@ const TextInput: FC<TextInputProps> = ({
             {faXmark}
           </IconButton>
         )}
-        {startAdornment &&
-          renderAdornment(
-            startAdornment,
-            adornmentColor,
-            classes?.startAdornment,
-          )}
+        {startAdornment && renderAdornment(startAdornment, adornmentColor, classes?.startAdornment)}
         <input
           aria-describedby={ariaDescribedBy}
           aria-label={ariaLabel}

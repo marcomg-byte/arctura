@@ -10,8 +10,7 @@ vi.mock('@/lib', async (importOriginal) => {
   return {
     ...actual,
     useBreakpoints: () => ({
-      isBelow: (breakpoint: string) =>
-        breakpoint === 'sm' ? breakpointState.belowSm : false,
+      isBelow: (breakpoint: string) => (breakpoint === 'sm' ? breakpointState.belowSm : false),
       current: breakpointState.belowSm ? 'xs' : 'lg',
     }),
   };
@@ -30,7 +29,7 @@ describe('ProgressStepper', () => {
       <ProgressStepper onInit={handleInit} defaultStep={1}>
         <Step label="First" title="First" />
         <Step label="Second" title="Second" />
-      </ProgressStepper>,
+      </ProgressStepper>
     );
 
     expect(handleInit).toHaveBeenCalled();
@@ -45,7 +44,7 @@ describe('ProgressStepper', () => {
       <ProgressStepper onComplete={handleComplete}>
         <Step label="First" title="First" />
         <Step label="Second" title="Second" />
-      </ProgressStepper>,
+      </ProgressStepper>
     );
 
     fireEvent.click(screen.getByRole('button', { name: 'NEXT' }));
@@ -68,7 +67,7 @@ describe('ProgressStepper', () => {
       >
         <Step label="First" title="First" />
         <Step label="Second" title="Second" />
-      </ProgressStepper>,
+      </ProgressStepper>
     );
 
     fireEvent.click(screen.getByRole('button', { name: 'First' }));
@@ -85,7 +84,7 @@ describe('ProgressStepper', () => {
       <ProgressStepper data-testid="stepper">
         <Step label="First" />
         <Step label="Second" />
-      </ProgressStepper>,
+      </ProgressStepper>
     );
 
     expect(screen.getByRole('list').className).toContain('mg:flex-col');
@@ -94,7 +93,7 @@ describe('ProgressStepper', () => {
       <ProgressStepper data-testid="stepper" forceHorizontal>
         <Step label="First" />
         <Step label="Second" />
-      </ProgressStepper>,
+      </ProgressStepper>
     );
 
     expect(screen.getByRole('list').className).not.toContain('mg:flex-col');

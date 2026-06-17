@@ -33,7 +33,7 @@ describe('Form', () => {
         disclaimer={{ adornment: faInfoCircle, text: 'We reply soon.' }}
       >
         <TextInput aria-label="Name" defaultValue="Marco" />
-      </Form>,
+      </Form>
     );
 
     const form = screen.getByRole('form', { name: 'Contact form' });
@@ -42,12 +42,8 @@ describe('Form', () => {
     expect(form.getAttribute('method')).toBe('post');
     expect(form.getAttribute('name')).toBe('contact');
     expect(form.hasAttribute('novalidate')).toBe(true);
-    expect(
-      screen.getByRole('heading', { level: 2, name: 'Contact' }),
-    ).toBeDefined();
-    expect(screen.getByAltText('Logo').getAttribute('src')).toContain(
-      'logo.png',
-    );
+    expect(screen.getByRole('heading', { level: 2, name: 'Contact' })).toBeDefined();
+    expect(screen.getByAltText('Logo').getAttribute('src')).toContain('logo.png');
     expect(screen.getByText('We reply soon.')).toBeDefined();
     expect(container.querySelectorAll('svg').length).toBeGreaterThan(0);
     expect(screen.getByRole('button', { name: 'SUBMIT' })).toBeDefined();
@@ -57,24 +53,17 @@ describe('Form', () => {
   it('clones text fields, reports changes, and submits current values', () => {
     const handleChange = vi.fn();
     const handleSubmit = vi.fn(
-      (
-        event: { preventDefault: () => void },
-        _values?: unknown,
-        _error?: boolean,
-      ) => event.preventDefault(),
+      (event: { preventDefault: () => void }, _values?: unknown, _error?: boolean) =>
+        event.preventDefault()
     );
 
     render(
-      <Form
-        aria-label="Contact form"
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      >
+      <Form aria-label="Contact form" onChange={handleChange} onSubmit={handleSubmit}>
         <TextInput aria-label="Name" defaultValue="Marco" />
         <div>
           <TextArea aria-label="Message" defaultValue="Hello" />
         </div>
-      </Form>,
+      </Form>
     );
 
     handleChange.mockClear();
@@ -113,7 +102,7 @@ describe('Form', () => {
     render(
       <Form aria-label="Contact form" onReset={handleReset}>
         <TextInput aria-label="Name" defaultValue="Marco" />
-      </Form>,
+      </Form>
     );
 
     const input = screen.getByRole('textbox', { name: 'Name' });

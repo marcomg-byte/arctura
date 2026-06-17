@@ -18,7 +18,7 @@ describe('ListItem', () => {
 
   it('renders anchor and div variants', () => {
     const { rerender } = render(
-      <ListItem as="a" href="/projects" target="_blank" label="Projects" />,
+      <ListItem as="a" href="/projects" target="_blank" label="Projects" />
     );
 
     const anchor = screen.getByText('Projects').closest('a') as HTMLElement;
@@ -32,9 +32,7 @@ describe('ListItem', () => {
 
   it('calls click handlers or selects itself when uncontrolled', () => {
     const handleClick = vi.fn();
-    const { rerender } = render(
-      <ListItem label="Handled" onClick={handleClick} />,
-    );
+    const { rerender } = render(<ListItem label="Handled" onClick={handleClick} />);
 
     fireEvent.click(screen.getByText('Handled').closest('li') as HTMLElement);
     expect(handleClick).toHaveBeenCalledTimes(1);
@@ -49,25 +47,14 @@ describe('ListItem', () => {
 
   it('renders icon and image adornments with status classes', () => {
     const { rerender, container } = render(
-      <ListItem label="Done" adornment={faCheck} status="success" />,
+      <ListItem label="Done" adornment={faCheck} status="success" />
     );
 
-    expect(container.querySelector('svg')?.getAttribute('data-icon')).toBe(
-      'check',
-    );
-    expect(container.querySelector('svg')?.getAttribute('class')).toContain(
-      'mg:text-success',
-    );
+    expect(container.querySelector('svg')?.getAttribute('data-icon')).toBe('check');
+    expect(container.querySelector('svg')?.getAttribute('class')).toContain('mg:text-success');
 
-    rerender(
-      <ListItem
-        label="Avatar"
-        adornment={{ src: '/images/avatar.png', alt: 'Avatar' }}
-      />,
-    );
+    rerender(<ListItem label="Avatar" adornment={{ src: '/images/avatar.png', alt: 'Avatar' }} />);
 
-    expect(screen.getByAltText('Avatar').getAttribute('src')).toContain(
-      'avatar.png',
-    );
+    expect(screen.getByAltText('Avatar').getAttribute('src')).toContain('avatar.png');
   });
 });

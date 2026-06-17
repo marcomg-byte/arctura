@@ -99,15 +99,11 @@ const Media: FC<MediaProps> = ({
     {
       'mg:rounded-tl-lg mg:rounded-tr-lg': headerless,
       'mg:rounded-bl-lg mg:rounded-br-lg': footerless,
-    },
+    }
   );
 
   return (
-    <div
-      className={classes}
-      ref={ref}
-      {...(rest as HTMLAttributes<HTMLDivElement>)}
-    >
+    <div className={classes} ref={ref} {...(rest as HTMLAttributes<HTMLDivElement>)}>
       <img
         alt={alt}
         src={src}

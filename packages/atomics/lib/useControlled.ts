@@ -36,13 +36,8 @@ interface useControlledProps<StateType> {
  * @see https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook for more on custom hooks.
  * @see useControlledProps
  */
-function useControlled<StateType>({
-  defaultValue,
-  value,
-}: useControlledProps<StateType>) {
-  const [internalValue, setInternalValue] = useState<StateType | undefined>(
-    defaultValue,
-  );
+function useControlled<StateType>({ defaultValue, value }: useControlledProps<StateType>) {
+  const [internalValue, setInternalValue] = useState<StateType | undefined>(defaultValue);
 
   const isControlled = value !== undefined;
 

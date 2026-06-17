@@ -49,22 +49,14 @@ describe('Hero', () => {
           links: [{ href: '/projects', label: 'Projects', variant: 'outline' }],
           variant: 'h2',
         }}
-      />,
+      />
     );
 
-    expect(
-      screen.getByRole('heading', { level: 2, name: 'Welcome' }),
-    ).toBeDefined();
+    expect(screen.getByRole('heading', { level: 2, name: 'Welcome' })).toBeDefined();
     expect(screen.getByText('Build something useful.')).toBeDefined();
-    expect(
-      screen.getByRole('link', { name: 'Projects' }).getAttribute('href'),
-    ).toBe('/projects');
-    expect(screen.getByAltText('Hero one').getAttribute('src')).toContain(
-      'hero-1.jpg',
-    );
-    expect(screen.getByAltText('Hero two').getAttribute('src')).toContain(
-      'hero-2.jpg',
-    );
+    expect(screen.getByRole('link', { name: 'Projects' }).getAttribute('href')).toBe('/projects');
+    expect(screen.getByAltText('Hero one').getAttribute('src')).toContain('hero-1.jpg');
+    expect(screen.getByAltText('Hero two').getAttribute('src')).toContain('hero-2.jpg');
   });
 
   it('renders controls and dots for multiple images and calls mocked Embla API', () => {
@@ -103,7 +95,7 @@ describe('Hero', () => {
         transition="fade"
         transitionDuration={700}
         classes={{ root: 'custom-hero', slide: 'custom-slide' }}
-      />,
+      />
     );
 
     const firstImage = screen.getByAltText('Hero one');
@@ -113,9 +105,7 @@ describe('Hero', () => {
     expect(firstSlide.className).toContain('mg:aspect-[16/9]');
     expect(firstSlide.className).toContain('mg:transition-opacity');
     expect(firstSlide.className).toContain('custom-slide');
-    expect(firstSlide.getAttribute('style')).toContain(
-      'transition-duration: 700ms',
-    );
+    expect(firstSlide.getAttribute('style')).toContain('transition-duration: 700ms');
     expect(firstImage.getAttribute('loading')).toBe('lazy');
     expect(firstImage.getAttribute('style')).toContain('object-fit: contain');
   });

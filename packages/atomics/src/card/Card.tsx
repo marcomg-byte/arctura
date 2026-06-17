@@ -1,11 +1,4 @@
-import type {
-  ComponentProps,
-  FC,
-  HTMLAttributes,
-  ReactElement,
-  ReactNode,
-  Ref,
-} from 'react';
+import type { ComponentProps, FC, HTMLAttributes, ReactElement, ReactNode, Ref } from 'react';
 import React, { Children } from 'react';
 import { Header } from './Header';
 import { Media } from './Media';

@@ -156,10 +156,7 @@ type ListItemProps = (AnchorProps | DivProps | LiProps) & BaseProps;
  * classes applied.
  */
 const renderAdornment = (adornment: ListItemAdornment, className?: string) => {
-  const imageClasses = twMerge(
-    'mg:object-contain mg:animate-fade-in mg:duration-500',
-    className,
-  );
+  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
 
   if ('iconName' in adornment) {
     return <FontAwesomeIcon icon={adornment} className={className} />;
@@ -258,7 +255,7 @@ function ListItem({
       'mg:text-info': status === 'info' || adornmentColor === 'info',
       'mg:text-warning': status === 'warning' || adornmentColor === 'warning',
     },
-    classes?.adornment,
+    classes?.adornment
   );
 
   const rootClasses = twMerge(
@@ -272,39 +269,29 @@ function ListItem({
         'mg:opacity-80': disabled,
         'mg:rounded-b-lg': lastIndex,
         'mg:hover:scale-105 mg:hover:px-2 mg:duration-500': !selectable,
-      },
+      }
     ),
-    classes?.root,
+    classes?.root
   );
 
   const containerClasses = twMerge(
     classNames('mg:flex mg:items-center mg:w-full'),
-    classes?.container,
+    classes?.container
   );
 
   const childrenClasses = twMerge(
     classNames('mg:flex mg:flex-col mg:grow mg:gap-2 mg:py-2 mg:pr-2'),
-    classes?.children,
+    classes?.children
   );
 
-  const labelClasses = twMerge(
-    classNames('mg:group-hover:text-accent'),
-    classes?.label,
-  );
+  const labelClasses = twMerge(classNames('mg:group-hover:text-accent'), classes?.label);
 
-  const titleClasses = twMerge(
-    classNames('mg:group-hover:text-accent'),
-    classes?.title,
-  );
+  const titleClasses = twMerge(classNames('mg:group-hover:text-accent'), classes?.title);
 
-  const handleClick = (
-    event: MouseEvent<HTMLAnchorElement | HTMLDivElement | HTMLLIElement>,
-  ) => {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement | HTMLDivElement | HTMLLIElement>) => {
     if (onClick) {
       if ((as === 'a' || href) && onClick) {
-        (onClick as AnchorProps['onClick'])!(
-          event as MouseEvent<HTMLAnchorElement>,
-        );
+        (onClick as AnchorProps['onClick'])!(event as MouseEvent<HTMLAnchorElement>);
       } else if (as === 'div') {
         (onClick as DivProps['onClick'])!(event as MouseEvent<HTMLDivElement>);
       } else {

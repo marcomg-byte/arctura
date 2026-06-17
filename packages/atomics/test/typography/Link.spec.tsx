@@ -10,7 +10,7 @@ describe('Link', () => {
     render(
       <Link href="/projects" target="_blank" color="secondary">
         Projects
-      </Link>,
+      </Link>
     );
 
     const anchor = screen.getByRole('link', { name: 'Projects' });
@@ -28,7 +28,7 @@ describe('Link', () => {
     render(
       <Link href="/about" variant="h3" color="accent">
         About
-      </Link>,
+      </Link>
     );
 
     const heading = screen.getByRole('heading', { level: 3, name: 'About' });
@@ -51,7 +51,7 @@ describe('Link', () => {
         anchorProps={{ 'aria-label': 'Open contact page', rel: 'noreferrer' }}
       >
         Contact
-      </Link>,
+      </Link>
     );
 
     const anchor = screen.getByRole('link', { name: 'Open contact page' });

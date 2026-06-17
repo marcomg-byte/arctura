@@ -18,7 +18,7 @@ describe('Connector', () => {
 
   it('renders active, completed, and vertical states', () => {
     const { rerender, container } = render(
-      <Connector active orientation="vertical" data-testid="connector" />,
+      <Connector active orientation="vertical" data-testid="connector" />
     );
 
     let content = container.querySelector('[data-testid="connector"]')

@@ -26,7 +26,7 @@ describe('Fab', () => {
     render(
       <Fab href="/contact" target="_blank" aria-label="Open contact">
         Contact
-      </Fab>,
+      </Fab>
     );
 
     const fab = screen.getByRole('link', { name: 'Open contact' });
@@ -40,14 +40,9 @@ describe('Fab', () => {
 
   it('applies extended variant, size, color, and custom classes', () => {
     render(
-      <Fab
-        variant="extended"
-        size="lg"
-        color="accent"
-        classes={{ button: 'custom-fab' }}
-      >
+      <Fab variant="extended" size="lg" color="accent" classes={{ button: 'custom-fab' }}>
         Create
-      </Fab>,
+      </Fab>
     );
 
     const fab = screen.getByRole('button', { name: 'Create' });
@@ -66,7 +61,7 @@ describe('Fab', () => {
     render(
       <Fab type="submit" onClick={handleClick}>
         Send
-      </Fab>,
+      </Fab>
     );
 
     const fab = screen.getByRole('button', { name: 'Send' });
@@ -81,7 +76,7 @@ describe('Fab', () => {
     render(
       <Fab startAdornment={faCheck} classes={{ adornment: 'custom-icon' }}>
         Done
-      </Fab>,
+      </Fab>
     );
 
     const fab = screen.getByRole('button', { name: 'Done' });

@@ -66,14 +66,7 @@ interface FooterProps extends HTMLAttributes<HTMLDivElement> {
  * );
  * ```
  */
-const Footer: FC<FooterProps> = ({
-  actions,
-  description,
-  subtitle,
-  title,
-  ref,
-  ...rest
-}) => {
+const Footer: FC<FooterProps> = ({ actions, description, subtitle, title, ref, ...rest }) => {
   return (
     <div
       className="mg:flex mg:grow mg:flex-col mg:justify-between mg:items-start mg:gap-3 mg:w-full mg:px-3 mg:py-2"

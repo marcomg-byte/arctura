@@ -4,10 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
-import {
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Button, IconButton } from '../buttons';
 import { Typography } from '../typography';
 import type { HeadingVariant } from '../typography';
@@ -252,9 +249,7 @@ const Hero: FC<HeroProps> = ({
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>(() =>
-    images.map((_, i) => i),
-  );
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>(() => images.map((_, i) => i));
   const isPaused = useRef(false);
 
   const handleSelect = useCallback(() => {
@@ -297,35 +292,32 @@ const Hero: FC<HeroProps> = ({
     classNames(
       'mg:relative mg:overflow-hidden mg:isolate',
       responsive && 'mg:w-full',
-      enableSwipe && 'mg:cursor-grab',
+      enableSwipe && 'mg:cursor-grab'
     ),
-    classes?.root,
+    classes?.root
   );
 
   const viewportClasses = twMerge(
     classNames('mg:flex', {
       'mg:touch-pan-y': enableSwipe,
     }),
-    classes?.viewport,
+    classes?.viewport
   );
 
   const dotClasses = (index: number) =>
     twMerge(
-      classNames(
-        'mg:w-2 mg:h-2 mg:rounded-full mg:transition-colors mg:hover:cursor-pointer',
-        {
-          'mg:bg-secondary': index === selectedIndex,
-          'mg:bg-secondary-subtle': index !== selectedIndex,
-        },
-      ),
-      classes?.dot,
+      classNames('mg:w-2 mg:h-2 mg:rounded-full mg:transition-colors mg:hover:cursor-pointer', {
+        'mg:bg-secondary': index === selectedIndex,
+        'mg:bg-secondary-subtle': index !== selectedIndex,
+      }),
+      classes?.dot
     );
 
   const slideClasses = twMerge(
     classNames('mg:flex-[0_0_100%] mg:relative', imageContainerClasses, {
       'mg:transition-opacity': transition === 'fade',
     }),
-    classes?.slide,
+    classes?.slide
   );
 
   const headerClasses = twMerge(
@@ -333,9 +325,9 @@ const Hero: FC<HeroProps> = ({
       'mg:absolute mg:z-10 mg:flex mg:flex-col',
       responsive
         ? 'mg:inset-x-4 mg:top-1/2 mg:max-w-[calc(100%-2rem)] mg:-translate-y-1/2 mg:sm:inset-x-auto mg:sm:top-1/4 mg:sm:left-1/6 mg:sm:max-w-[min(72%,48rem)] mg:sm:translate-y-0 mg:gap-1 mg:sm:gap-2'
-        : 'mg:top-1/4 mg:left-1/6 mg:gap-2',
+        : 'mg:top-1/4 mg:left-1/6 mg:gap-2'
     ),
-    classes?.header?.root,
+    classes?.header?.root
   );
 
   const actionClasses = twMerge(
@@ -343,9 +335,9 @@ const Hero: FC<HeroProps> = ({
       'mg:flex mg:justify-start',
       responsive
         ? 'mg:items-start mg:gap-2 mg:xs:flex-row mg:xs:flex-wrap mg:sm:items-center mg:sm:gap-4'
-        : 'mg:items-center mg:gap-4',
+        : 'mg:items-center mg:gap-4'
     ),
-    classes?.action,
+    classes?.action
   );
 
   const controlsClasses = twMerge(
@@ -353,17 +345,17 @@ const Hero: FC<HeroProps> = ({
       'mg:absolute mg:left-0 mg:z-10 mg:flex mg:w-full mg:items-center mg:justify-between mg:pointer-events-none',
       responsive
         ? 'mg:top-1/2 mg:-translate-y-1/2 mg:px-2 mg:sm:top-1/3 mg:sm:translate-y-0 mg:sm:px-6'
-        : 'mg:top-1/3 mg:px-6',
+        : 'mg:top-1/3 mg:px-6'
     ),
-    classes?.controls,
+    classes?.controls
   );
 
   const dotsContainerClasses = twMerge(
     classNames(
       'mg:absolute mg:left-1/2 mg:z-10 mg:flex mg:-translate-x-1/2 mg:gap-2',
-      responsive ? 'mg:bottom-3 mg:sm:bottom-4' : 'mg:bottom-4',
+      responsive ? 'mg:bottom-3 mg:sm:bottom-4' : 'mg:bottom-4'
     ),
-    classes?.dotsContainer,
+    classes?.dotsContainer
   );
 
   useEffect(() => {
@@ -420,11 +412,7 @@ const Hero: FC<HeroProps> = ({
       </div>
       <div className={headerClasses}>
         {header?.title && (
-          <Typography
-            className={classes?.header?.title}
-            color="white"
-            variant={header?.variant}
-          >
+          <Typography className={classes?.header?.title} color="white" variant={header?.variant}>
             {header.title}
           </Typography>
         )}

@@ -22,14 +22,7 @@ interface NodeClasses {
  * @description Allowed color variants applied to the node border and hover states.
  * - `primary`, `secondary`, `accent`, `error`, `info`, `success`, `warning`
  */
-type NodeColor =
-  | 'primary'
-  | 'secondary'
-  | 'accent'
-  | 'error'
-  | 'info'
-  | 'success'
-  | 'warning';
+type NodeColor = 'primary' | 'secondary' | 'accent' | 'error' | 'info' | 'success' | 'warning';
 
 /**
  * @typedef NodeImage
@@ -70,10 +63,7 @@ interface NodeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
  */
 const renderAdornment = (adornment: NodeAdornment, className?: string) => {
   const iconClasses = twMerge('mg:text-sm', className);
-  const imageClasses = twMerge(
-    'mg:object-contain mg:animate-fade-in mg:duration-500',
-    className,
-  );
+  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
 
   if ('iconName' in adornment) {
     return <FontAwesomeIcon className={iconClasses} icon={adornment} />;
@@ -158,9 +148,9 @@ const Node: FC<NodeProps> = ({
           color === 'warning',
       },
       circularClasses,
-      extendedClasses,
+      extendedClasses
     ),
-    classes?.container,
+    classes?.container
   );
 
   return (

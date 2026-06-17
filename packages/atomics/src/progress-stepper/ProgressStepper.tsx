@@ -8,14 +8,7 @@ import type {
   ReactNode,
   Ref,
 } from 'react';
-import {
-  Children,
-  cloneElement,
-  Fragment,
-  isValidElement,
-  useEffect,
-  useState,
-} from 'react';
+import { Children, cloneElement, Fragment, isValidElement, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Step } from './Step';
 import type { StepClasses } from './Step';
@@ -100,10 +93,7 @@ interface ProgressStepperClasses {
  * Props for the ProgressStepper component, extending standard HTML div attributes.
  * Includes properties for active step index, custom connectors, click handling, layout orientation, and linear mode.
  */
-interface ProgressStepperProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  'className'
-> {
+interface ProgressStepperProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
   /** Controlled value representing the currently active step object. */
   activeStep?: StepType;
   /** One or more `<Step />` nodes to render inside the stepper. */
@@ -140,10 +130,7 @@ interface ProgressStepperProps extends Omit<
  * @param {number} defaultStepProp - Index to mark as active by default when no child sets `active`.
  * @returns {StepType[]} An array of step objects with `key`, `active`, and `completed` fields.
  */
-function mapChildrenToSteps(
-  children: ReactNode,
-  defaultStepProp: number,
-): StepType[] {
+function mapChildrenToSteps(children: ReactNode, defaultStepProp: number): StepType[] {
   if (Array.isArray(children)) {
     const mappedSteps: StepType[] = Children.toArray(children)
       .map((child, index) => {
@@ -151,8 +138,7 @@ function mapChildrenToSteps(
           const stepProps = child.props as StepComponent['props'];
           return {
             key: `step-${index}`,
-            active:
-              index === defaultStepProp ? true : stepProps?.active || false,
+            active: index === defaultStepProp ? true : stepProps?.active || false,
             completed: stepProps?.completed || false,
             label: stepProps?.label,
           };
@@ -222,19 +208,18 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
   ...rest
 }) => {
   const currentStepCount = Children.toArray(childrenProp).filter(
-    (child) => isValidElement(child) && child.type === Step,
+    (child) => isValidElement(child) && child.type === Step
   ).length;
 
   const [steps, setSteps] = useState<StepType[]>(() =>
-    mapChildrenToSteps(childrenProp, defaultStepProp),
+    mapChildrenToSteps(childrenProp, defaultStepProp)
   );
 
   const [trackedStepCount, setTrackedStepCount] = useState(currentStepCount);
 
   useEffect(() => {
     if (onInit) {
-      const initialStep =
-        steps.find((step) => step.active) ?? steps[defaultStepProp];
+      const initialStep = steps.find((step) => step.active) ?? steps[defaultStepProp];
 
       if (initialStep) {
         onInit(initialStep);
@@ -267,12 +252,12 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
 
   const buttonsContainerClasses = twMerge(
     'mg:flex mg:gap-1 mg:items-center',
-    classes?.buttonsContainer,
+    classes?.buttonsContainer
   );
 
   const controlsClasses = twMerge(
     'mg:w-full mg:flex mg:items-center mg:justify-between mg:pb-5 mg:sm:pb-6 mg:px-6',
-    classes?.controls,
+    classes?.controls
   );
 
   const outerClasses = twMerge('mg:flex mg:flex-col mg:w-full', classes?.outer);
@@ -281,18 +266,14 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
     classNames(
       'mg:w-full mg:h-full mg:flex mg:px-6 mg:pb-2 mg:pt-0 mg:sm:pt-6 mg:overflow-x-scroll mg:scrollbar-subtle',
       {
-        'mg:flex-col':
-          orientation === 'vertical' || (isBelowSm && !forceHorizontal),
+        'mg:flex-col': orientation === 'vertical' || (isBelowSm && !forceHorizontal),
         'mg:justify-between': orientation === 'horizontal' && !isBelowSm,
-      },
+      }
     ),
-    classes?.root,
+    classes?.root
   );
 
-  const handleStepClick = (
-    event: MouseEvent<HTMLButtonElement>,
-    stepIndex: number,
-  ) => {
+  const handleStepClick = (event: MouseEvent<HTMLButtonElement>, stepIndex: number) => {
     const newValue = steps.map((step) => {
       if (step.key === `step-${stepIndex}`) {
         if (step.completed) {
@@ -405,7 +386,7 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
           active: false,
           completed: false,
         };
-      }),
+      })
     );
 
     if (!onInit && onStepClick) {
@@ -441,13 +422,10 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
                 completed: steps[index]?.completed,
                 linear,
                 onClick: !linear
-                  ? (event: MouseEvent<HTMLButtonElement>) =>
-                      handleStepClick(event, index)
+                  ? (event: MouseEvent<HTMLButtonElement>) => handleStepClick(event, index)
                   : undefined,
               }),
-              connector: (
-                <Connector classes={classes?.connector} lastIndex={isLast} />
-              ),
+              connector: <Connector classes={classes?.connector} lastIndex={isLast} />,
             };
           }
           return null;
@@ -459,8 +437,7 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
   };
 
   const children = renderChildren(childrenProp);
-  const activeStepLabel =
-    activeStep?.label || capitalize(activeStep?.key || '');
+  const activeStepLabel = activeStep?.label || capitalize(activeStep?.key || '');
   const activeStepCompleted = activeStep?.completed;
 
   useEffect(() => {
@@ -497,46 +474,26 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
           </Typography>
           <div className={buttonsContainerClasses}>
             {completed && !linear && (
-              <Button
-                classes={classes?.button}
-                onClick={handleReset}
-                variant="outline"
-              >
+              <Button classes={classes?.button} onClick={handleReset} variant="outline">
                 RESET
               </Button>
             )}
             {!completed && linear && (
               <>
-                <Button
-                  classes={classes?.button}
-                  onClick={handleNext}
-                  variant="outline"
-                >
+                <Button classes={classes?.button} onClick={handleNext} variant="outline">
                   NEXT
                 </Button>
-                <Button
-                  classes={classes?.button}
-                  onClick={handleComplete}
-                  variant="outline"
-                >
+                <Button classes={classes?.button} onClick={handleComplete} variant="outline">
                   {activeStepCompleted ? 'UNDO' : 'COMPLETE'}
                 </Button>
               </>
             )}
             {completed && linear && (
               <>
-                <Button
-                  classes={classes?.button}
-                  onClick={handleComplete}
-                  variant="outline"
-                >
+                <Button classes={classes?.button} onClick={handleComplete} variant="outline">
                   UNDO
                 </Button>
-                <Button
-                  classes={classes?.button}
-                  onClick={handleReset}
-                  variant="outline"
-                >
+                <Button classes={classes?.button} onClick={handleReset} variant="outline">
                   FINISH
                 </Button>
               </>

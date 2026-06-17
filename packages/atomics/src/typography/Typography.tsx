@@ -62,14 +62,7 @@ type HeadingVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
  * Used internally for type checks and rendering.
  * @see HeadingVariant
  */
-const headingVariants = [
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-] as HeadingVariant[];
+const headingVariants = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as HeadingVariant[];
 
 /**
  * Paragraph style variants for Typography.
@@ -267,9 +260,9 @@ function Typography({
       paragraphClasses,
       spanClasses,
       variantTextClasses[variant as TypographyVariant],
-      clamp ? clampClasses[clamp] : '',
+      clamp ? clampClasses[clamp] : ''
     ),
-    className,
+    className
   );
 
   if (span) {
@@ -283,10 +276,7 @@ function Typography({
   if (isHeading) {
     const Component = variant as HeadingVariant;
     return (
-      <Component
-        className={classes}
-        {...(rest as HTMLAttributes<HTMLHeadingElement>)}
-      >
+      <Component className={classes} {...(rest as HTMLAttributes<HTMLHeadingElement>)}>
         {children}
       </Component>
     );

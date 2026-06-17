@@ -17,7 +17,7 @@ describe('TextInput', () => {
         placeholder="hello@example.com"
         required
         fullWidth
-      />,
+      />
     );
 
     const input = screen.getByRole('textbox', { name: 'Email' });
@@ -46,9 +46,7 @@ describe('TextInput', () => {
   it('runs validation callbacks for pattern errors', () => {
     const handleError = vi.fn();
 
-    render(
-      <TextInput aria-label="Code" pattern={/^\d+$/} onError={handleError} />,
-    );
+    render(<TextInput aria-label="Code" pattern={/^\d+$/} onError={handleError} />);
 
     fireEvent.change(screen.getByRole('textbox', { name: 'Code' }), {
       target: { value: 'abc' },
@@ -68,34 +66,26 @@ describe('TextInput', () => {
         onClear={handleClear}
         startAdornment={faEnvelope}
         endAdornment={{ src: '/images/icon.png', alt: 'End icon' }}
-      />,
+      />
     );
 
     fireEvent.click(screen.getByRole('button', { name: 'Clear input' }));
 
     expect(handleClear).toHaveBeenCalledTimes(1);
-    expect(
-      container
-        .querySelector('svg[data-icon="envelope"]')
-        ?.getAttribute('data-icon'),
-    ).toBe('envelope');
-    expect(screen.getByAltText('End icon').getAttribute('src')).toContain(
-      'icon.png',
+    expect(container.querySelector('svg[data-icon="envelope"]')?.getAttribute('data-icon')).toBe(
+      'envelope'
     );
+    expect(screen.getByAltText('End icon').getAttribute('src')).toContain('icon.png');
   });
 
   it('toggles password visibility', () => {
-    render(
-      <TextInput aria-label="Password" type="password" defaultValue="secret" />,
-    );
+    render(<TextInput aria-label="Password" type="password" defaultValue="secret" />);
 
     const input = screen.getByLabelText('Password') as HTMLInputElement;
 
     expect(input.getAttribute('type')).toBe('password');
 
-    fireEvent.click(
-      screen.getByRole('button', { name: 'Toggle password visibility' }),
-    );
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle password visibility' }));
 
     expect(input.getAttribute('type')).toBe('text');
   });

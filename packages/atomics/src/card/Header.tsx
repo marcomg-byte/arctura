@@ -1,11 +1,4 @@
-import type {
-  ComponentProps,
-  FC,
-  HTMLAttributes,
-  ReactElement,
-  ReactNode,
-  Ref,
-} from 'react';
+import type { ComponentProps, FC, HTMLAttributes, ReactElement, ReactNode, Ref } from 'react';
 import { cloneElement, isValidElement } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
@@ -105,14 +98,7 @@ const renderAdornment = (adornment: HeaderAdornment) => {
  * );
  * ```
  */
-const Header: FC<HeaderProps> = ({
-  adornment,
-  badge,
-  ref,
-  subtitle,
-  title,
-  ...rest
-}) => {
+const Header: FC<HeaderProps> = ({ adornment, badge, ref, subtitle, title, ...rest }) => {
   return (
     <div
       className="mg:flex mg:flex-col mg:gap-1 mg:px-3 mg:py-2"

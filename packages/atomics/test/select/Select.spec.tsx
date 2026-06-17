@@ -12,15 +12,11 @@ const options = [
 
 describe('Select', () => {
   it('renders label, placeholder, and hidden input', () => {
-    const { container } = render(
-      <Select label="Choice" name="choice" placeholder="Pick one" />,
-    );
+    const { container } = render(<Select label="Choice" name="choice" placeholder="Pick one" />);
 
     expect(screen.getByText('Choice')).toBeDefined();
     expect(screen.getByText('Pick one')).toBeDefined();
-    expect(container.querySelector('input')?.getAttribute('name')).toBe(
-      'choice',
-    );
+    expect(container.querySelector('input')?.getAttribute('name')).toBe('choice');
   });
 
   it('opens options and updates uncontrolled selection', () => {
@@ -59,15 +55,11 @@ describe('Select', () => {
   });
 
   it('closes when clicking away and renders option icons', () => {
-    const { container } = render(
-      <Select options={options} placeholder="Pick one" />,
-    );
+    const { container } = render(<Select options={options} placeholder="Pick one" />);
 
     fireEvent.click(screen.getByText('Pick one'));
 
-    expect(container.querySelector('li svg')?.getAttribute('data-icon')).toBe(
-      'check',
-    );
+    expect(container.querySelector('li svg')?.getAttribute('data-icon')).toBe('check');
 
     fireEvent.mouseDown(document.body);
 

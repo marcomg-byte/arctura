@@ -6,9 +6,7 @@ afterEach(cleanup);
 
 describe('Media', () => {
   it('renders a Next image with default media classes', () => {
-    const { container } = render(
-      <Media src="/images/project.jpg" alt="Project preview" />,
-    );
+    const { container } = render(<Media src="/images/project.jpg" alt="Project preview" />);
 
     const wrapper = container.firstElementChild as HTMLElement;
     const image = screen.getByAltText('Project preview');
@@ -30,7 +28,7 @@ describe('Media', () => {
         footerless
         priority="eager"
         sizes="50vw"
-      />,
+      />
     );
 
     const wrapper = container.firstElementChild as HTMLElement;

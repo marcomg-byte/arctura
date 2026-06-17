@@ -1,12 +1,5 @@
 'use client';
-import type {
-  FC,
-  HTMLAttributes,
-  KeyboardEvent,
-  MouseEvent,
-  ReactNode,
-  Ref,
-} from 'react';
+import type { FC, HTMLAttributes, KeyboardEvent, MouseEvent, ReactNode, Ref } from 'react';
 import { useEffect } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
@@ -33,10 +26,7 @@ interface DrawerHeader {
   rightSlot?: ReactNode;
 }
 
-interface DrawerProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  'className'
-> {
+interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
   'aria-label'?: string;
   'aria-labelledby'?: string;
   anchor?: 'left' | 'right' | 'top' | 'bottom';
@@ -103,9 +93,9 @@ const Drawer: FC<DrawerProps> = ({
         'mg:items-start mg:justify-end': anchor === 'right',
         'mg:items-start mg:justify-stretch': anchor === 'top',
         'mg:items-end mg:justify-stretch': anchor === 'bottom',
-      },
+      }
     ),
-    classes?.backdrop,
+    classes?.backdrop
   );
 
   const overlayClasses = twMerge(
@@ -114,34 +104,22 @@ const Drawer: FC<DrawerProps> = ({
       {
         'mg:opacity-100': showBackdrop,
         'mg:opacity-0': !showBackdrop,
-      },
+      }
     ),
-    classes?.overlay,
+    classes?.overlay
   );
   const headerClasses = twMerge(
     classNames('mg:flex mg:justify-between mg:w-full mg:py-3 mg:px-6'),
-    classes?.header?.root,
+    classes?.header?.root
   );
 
-  const headerCenterClasses = twMerge(
-    classNames('mg:flex mg:gap-3'),
-    classes?.header?.center,
-  );
+  const headerCenterClasses = twMerge(classNames('mg:flex mg:gap-3'), classes?.header?.center);
 
-  const headerLeftSectionClasses = twMerge(
-    classNames('mg:flex mg:gap-3'),
-    classes?.header?.left,
-  );
+  const headerLeftSectionClasses = twMerge(classNames('mg:flex mg:gap-3'), classes?.header?.left);
 
-  const headerRightClasses = twMerge(
-    classNames('mg:flex mg:gap-3'),
-    classes?.header?.right,
-  );
+  const headerRightClasses = twMerge(classNames('mg:flex mg:gap-3'), classes?.header?.right);
 
-  const bodyClasses = twMerge(
-    classNames('mg:flex mg:flex-col mg:w-full'),
-    classes?.body,
-  );
+  const bodyClasses = twMerge(classNames('mg:flex mg:flex-col mg:w-full'), classes?.body);
 
   const rootClasses = twMerge(
     classNames(
@@ -155,9 +133,9 @@ const Drawer: FC<DrawerProps> = ({
         'mg:translate-x-full': !open && anchor === 'right',
         'mg:-translate-y-full': !open && anchor === 'top',
         'mg:translate-y-full': !open && anchor === 'bottom',
-      },
+      }
     ),
-    classes?.root,
+    classes?.root
   );
 
   const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -169,17 +147,8 @@ const Drawer: FC<DrawerProps> = ({
   };
 
   return (
-    <div
-      className={backdropClasses}
-      ref={backdropRef}
-      tabIndex={-1}
-      {...backdropProps}
-    >
-      <div
-        className={overlayClasses}
-        aria-hidden
-        onClick={handleBackdropClick}
-      />
+    <div className={backdropClasses} ref={backdropRef} tabIndex={-1} {...backdropProps}>
+      <div className={overlayClasses} aria-hidden onClick={handleBackdropClick} />
       <div className={rootClasses} onKeyDown={onKeyDown} ref={ref} {...rest}>
         <div className={headerClasses}>
           <div className={headerLeftSectionClasses}>

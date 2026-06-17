@@ -16,10 +16,7 @@ interface ConnectorClasses {
 /**
  * Props accepted by the `Connector` component.
  */
-interface ConnectorProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  'className'
-> {
+interface ConnectorProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
   /** Whether the connector is currently active (uses active styling). */
   active?: boolean;
   /** Optional class overrides for the connector wrapper and line. */
@@ -60,10 +57,7 @@ const Connector: FC<ConnectorProps> = ({
   ref,
   ...rest
 }) => {
-  const containerClasses = twMerge(
-    'mg:relative mg:flex mg:h-full mg:grow',
-    classes?.container,
-  );
+  const containerClasses = twMerge('mg:relative mg:flex mg:h-full mg:grow', classes?.container);
 
   const contentClasses = twMerge(
     classNames('mg:relative mg:transform mg:translate-y-7', {
@@ -73,7 +67,7 @@ const Connector: FC<ConnectorProps> = ({
       'mg:bg-primary': active,
       'mg:bg-success-primary': completed,
     }),
-    classes?.content,
+    classes?.content
   );
 
   if (lastIndex) {

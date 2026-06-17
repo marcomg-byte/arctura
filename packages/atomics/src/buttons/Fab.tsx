@@ -25,14 +25,7 @@ interface FabClasses {
 /**
  * Allowed color theme names for the Fab component.
  */
-type FabColor =
-  | 'primary'
-  | 'secondary'
-  | 'accent'
-  | 'error'
-  | 'info'
-  | 'success'
-  | 'warning';
+type FabColor = 'primary' | 'secondary' | 'accent' | 'error' | 'info' | 'success' | 'warning';
 
 /**
  * Image payload for a Fab adornment.
@@ -72,10 +65,7 @@ interface BaseProps {
  * Props when the `Fab` is rendered as an anchor (`<a>`).
  * Extends native anchor attributes but disallows `type`.
  */
-interface AnchorProps extends Omit<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  'className'
-> {
+interface AnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
   /** Destination URL for the anchor. */
   href?: string;
   /** Click handler when rendered as an anchor. */
@@ -92,10 +82,7 @@ interface AnchorProps extends Omit<
  * Props when the `Fab` is rendered as a button (`<button>`).
  * Extends native button attributes but disallows `href` and `target`.
  */
-interface ButtonProps extends Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  'className'
-> {
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   /** Explicitly disallowed on the button variant. */
   href?: never;
   /** Click handler when rendered as a button. */
@@ -122,10 +109,7 @@ type FabProps = (AnchorProps | ButtonProps) & BaseProps;
 const renderAdornment = (adornment: FabAdornment, className?: string) => {
   const iconClasses = classNames('mg:text-xs', className);
 
-  const imageClasses = twMerge(
-    'mg:object-contain mg:animate-fade-in mg:duration-500',
-    className,
-  );
+  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
 
   if ('iconName' in adornment) {
     return <FontAwesomeIcon className={iconClasses} icon={adornment} />;
@@ -216,9 +200,9 @@ function Fab({
         'mg:hover:border-accent mg:hover:text-accent': color !== 'accent',
       },
       circularClasses,
-      extendedClasses,
+      extendedClasses
     ),
-    classes?.button,
+    classes?.button
   );
 
   if (href) {

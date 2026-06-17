@@ -9,10 +9,4 @@ import { Link } from './Link';
 import type { LinkClasses } from './Link';
 
 export { Link, Typography };
-export type {
-  HeadingVariant,
-  LinkClasses,
-  ParagraphVariant,
-  TypographyColor,
-  TypographyVariant,
-};
+export type { HeadingVariant, LinkClasses, ParagraphVariant, TypographyColor, TypographyVariant };

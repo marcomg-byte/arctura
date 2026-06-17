@@ -21,7 +21,7 @@ describe('Step', () => {
         index={1}
         title="Details"
         description={<Typography>Step description</Typography>}
-      />,
+      />
     );
 
     const title = screen.getByRole('heading', { level: 3, name: 'Details' });
@@ -42,7 +42,7 @@ describe('Step', () => {
         icon={faCheck}
         onClick={handleClick}
         title="Done"
-      />,
+      />
     );
 
     const button = screen.getByRole('button', { name: 'Clickable step' });
@@ -51,8 +51,6 @@ describe('Step', () => {
 
     expect(handleClick).toHaveBeenCalledTimes(1);
     expect(button.className).toContain('mg:border-success');
-    expect(button.querySelector('svg')?.getAttribute('data-icon')).toBe(
-      'check',
-    );
+    expect(button.querySelector('svg')?.getAttribute('data-icon')).toBe('check');
   });
 });

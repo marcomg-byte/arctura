@@ -19,11 +19,7 @@ describe('Header', () => {
 
   it('renders icon adornments and cloned badges', () => {
     const { container } = render(
-      <Header
-        title="Project"
-        adornment={faStar}
-        badge={<Badge color="success">New</Badge>}
-      />,
+      <Header title="Project" adornment={faStar} badge={<Badge color="success">New</Badge>} />
     );
 
     const icon = container.querySelector('svg');
@@ -36,12 +32,7 @@ describe('Header', () => {
   });
 
   it('renders image adornments', () => {
-    render(
-      <Header
-        title="Project"
-        adornment={{ src: '/images/logo.png', alt: 'Logo' }}
-      />,
-    );
+    render(<Header title="Project" adornment={{ src: '/images/logo.png', alt: 'Logo' }} />);
 
     const image = screen.getByAltText('Logo');
 

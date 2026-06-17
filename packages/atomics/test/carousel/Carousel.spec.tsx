@@ -45,12 +45,10 @@ describe('Carousel', () => {
         <div>Slide 1</div>
         <div>Slide 2</div>
         <div>Slide 3</div>
-      </Carousel>,
+      </Carousel>
     );
 
-    expect(
-      screen.getByRole('region', { name: 'Featured projects' }),
-    ).toBeDefined();
+    expect(screen.getByRole('region', { name: 'Featured projects' })).toBeDefined();
     expect(screen.getByText('Slide 1')).toBeDefined();
     expect(screen.getByText('Slide 2')).toBeDefined();
     expect(screen.getByText('Slide 3')).toBeDefined();
@@ -63,7 +61,7 @@ describe('Carousel', () => {
         <div>Slide 1</div>
         <div>Slide 2</div>
         <div>Slide 3</div>
-      </Carousel>,
+      </Carousel>
     );
 
     const buttons = screen.getAllByRole('button');
@@ -81,7 +79,7 @@ describe('Carousel', () => {
       <Carousel showControls={false} showDots={false}>
         <div>Slide 1</div>
         <div>Slide 2</div>
-      </Carousel>,
+      </Carousel>
     );
 
     expect(screen.queryAllByRole('button')).toHaveLength(0);
@@ -99,18 +97,16 @@ describe('Carousel', () => {
         }}
       >
         <div>Slide 1</div>
-      </Carousel>,
+      </Carousel>
     );
 
     expect(container.firstElementChild?.className).toContain('custom-root');
-    expect(
-      screen.getByText('Slide 1').parentElement?.parentElement?.className,
-    ).toContain('custom-slide');
-    expect(
-      screen.getByText('Slide 1').parentElement?.parentElement?.className,
-    ).toContain('mg:lg:basis-[22.5%]');
-    expect(container.querySelector('.custom-container')?.className).toContain(
-      'mg:cursor-grab',
+    expect(screen.getByText('Slide 1').parentElement?.parentElement?.className).toContain(
+      'custom-slide'
     );
+    expect(screen.getByText('Slide 1').parentElement?.parentElement?.className).toContain(
+      'mg:lg:basis-[22.5%]'
+    );
+    expect(container.querySelector('.custom-container')?.className).toContain('mg:cursor-grab');
   });
 });

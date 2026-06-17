@@ -46,23 +46,14 @@ interface StepClasses {
  * - `info`: Uses the info color from the theme.
  * - `warning`: Uses the warning color from the theme.
  */
-type StepColor =
-  | 'primary'
-  | 'secondary'
-  | 'accent'
-  | 'error'
-  | 'info'
-  | 'warning';
+type StepColor = 'primary' | 'secondary' | 'accent' | 'error' | 'info' | 'warning';
 
 /**
  * @interface StepProps
  * @extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>
  * @description Props accepted by the `Step` component.
  */
-interface StepProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  'onClick' | 'className'
-> {
+interface StepProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'className'> {
   /** Whether the step is currently active (shows expanded content). */
   active?: boolean;
   /** Optional class overrides for the step container, node, and content. */
@@ -169,12 +160,12 @@ const Step: FC<StepProps> = ({
 }) => {
   const bodyClasses = twMerge(
     'mg:animate-fade-in mg:transition-opacity mg:duration-300',
-    classes?.body,
+    classes?.body
   );
 
   const descriptionContainerClasses = twMerge(
     'mg:flex mg:flex-col mg:text-primary mg:gap-1',
-    classes?.descriptionContainer,
+    classes?.descriptionContainer
   );
 
   const rootClasses = twMerge(
@@ -184,18 +175,12 @@ const Step: FC<StepProps> = ({
       'mg:relative mg:z-10 mg:min-w-32 mg:hover:bg-primary mg:transition-all mg:duration-200 mg:ease-in-out mg:hover:scale-105 mg:hover:shadow-lg':
         active,
     }),
-    classes?.root,
+    classes?.root
   );
 
-  const titleClasses = classNames(
-    'mg:text-base mg:sm:text-xl mg:lg:text-3xl',
-    classes?.title,
-  );
+  const titleClasses = classNames('mg:text-base mg:sm:text-xl mg:lg:text-3xl', classes?.title);
 
-  const nodeContainerClasses = twMerge(
-    'mg:flex mg:pb-2',
-    classes?.nodeContainer,
-  );
+  const nodeContainerClasses = twMerge('mg:flex mg:pb-2', classes?.nodeContainer);
 
   const index = indexProp !== undefined ? (indexProp + 1).toString() : '–';
 
@@ -215,13 +200,7 @@ const Step: FC<StepProps> = ({
         </div>
         {active && (
           <div className={bodyClasses}>
-            <Typography
-              removePadding
-              className={titleClasses}
-              bold
-              color="primary"
-              variant="h3"
-            >
+            <Typography removePadding className={titleClasses} bold color="primary" variant="h3">
               {title}
             </Typography>
             <div className={descriptionContainerClasses}>
@@ -247,13 +226,7 @@ const Step: FC<StepProps> = ({
       </div>
       {active && (
         <div className={bodyClasses}>
-          <Typography
-            removePadding
-            className={titleClasses}
-            bold
-            color="primary"
-            variant="h3"
-          >
+          <Typography removePadding className={titleClasses} bold color="primary" variant="h3">
             {title}
           </Typography>
           <div className={descriptionContainerClasses}>

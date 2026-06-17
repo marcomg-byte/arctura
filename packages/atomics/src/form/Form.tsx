@@ -10,13 +10,7 @@ import type {
   Ref,
   SubmitEvent,
 } from 'react';
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  useEffect,
-  useState,
-} from 'react';
+import { Children, cloneElement, isValidElement, useEffect, useState } from 'react';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TextArea } from './TextArea';
@@ -45,14 +39,7 @@ type FormAdornment = IconDefinition | { src: string; alt?: string };
  * - 'accent' | 'primary' | 'secondary' | 'subtle' map to theme token names.
  * - 'black' | 'white' | 'inverse' are additional semantic colors used by the UI.
  */
-type FormColor =
-  | 'accent'
-  | 'black'
-  | 'inverse'
-  | 'primary'
-  | 'secondary'
-  | 'subtle'
-  | 'white';
+type FormColor = 'accent' | 'black' | 'inverse' | 'primary' | 'secondary' | 'subtle' | 'white';
 
 /**
  * Class names for the disclaimer sub-elements.
@@ -146,11 +133,7 @@ interface FormProps extends Omit<
   /** Reset event handler for the form element. */
   onReset?: (event: SubmitEvent<HTMLFormElement>) => void;
   /** Submit event handler for the form element. */
-  onSubmit?: (
-    event: SubmitEvent<HTMLFormElement>,
-    values?: FormValue[],
-    error?: boolean,
-  ) => void;
+  onSubmit?: (event: SubmitEvent<HTMLFormElement>, values?: FormValue[], error?: boolean) => void;
   /** Ref to access the underlying HTML form element. */
   ref?: Ref<HTMLFormElement>;
   /** Optional adornment to render at the start of the form header (icon or image). */
@@ -241,10 +224,7 @@ const mapState = (children?: ReactNode): FormValue[] => {
         });
       }
 
-      if (
-        isValidElement(child) &&
-        (child as ElementWithChildren).props?.children
-      ) {
+      if (isValidElement(child) && (child as ElementWithChildren).props?.children) {
         walk((child as ElementWithChildren).props.children);
       }
     });
@@ -264,17 +244,14 @@ const mapState = (children?: ReactNode): FormValue[] => {
  * @param {FormAdornment} adornment - IconDefinition or image descriptor.
  * @returns {JSX.Element} A `FontAwesomeIcon` or `Image` element.
  */
-const renderAdornment = (
-  adornment: FormAdornment,
-  className?: string,
-): JSX.Element => {
+const renderAdornment = (adornment: FormAdornment, className?: string): JSX.Element => {
   const iconClasses = classNames(
     'mg:animate-fade-in mg:transition-transform mg:duration-500 mg:hover:scale-110',
-    className,
+    className
   );
   const imageClasses = twMerge(
     'mg:object-contain mg:animate-fade-in mg:transition-transform mg:duration-500 mg:hover:scale-110',
-    className,
+    className
   );
 
   if ('iconName' in adornment) {
@@ -370,12 +347,12 @@ const Form: FC<FormProps> = ({
       'mg:text-subtle': adornmentColor === 'subtle',
       'mg:text-white': adornmentColor === 'white',
     },
-    classes?.adornment,
+    classes?.adornment
   );
 
   const bodyClasses = twMerge(
     'mg:flex mg:flex-col mg:items-start mg:gap-3 mg:bg-inherit mg:w-full',
-    classes?.body,
+    classes?.body
   );
 
   const disclaimerAdornmentClasses = classNames(
@@ -389,32 +366,32 @@ const Form: FC<FormProps> = ({
       'mg:text-subtle': adornmentColor === 'subtle',
       'mg:text-white': adornmentColor === 'white',
     },
-    classes?.disclaimer?.adornment,
+    classes?.disclaimer?.adornment
   );
 
   const disclaimerContainerClasses = twMerge(
     'mg:flex mg:grow mg:gap-2',
-    classes?.disclaimer?.container,
+    classes?.disclaimer?.container
   );
 
   const headerClasses = twMerge(
     'mg:flex mg:items-center mg:justify-between mg:w-full',
-    classes?.header,
+    classes?.header
   );
 
   const footerClasses = twMerge(
     'mg:flex mg:flex-col mg:items-start mg:gap-3 mg:sm:flex-row mg:sm:items-center mg:justify-between mg:w-full',
-    classes?.footer,
+    classes?.footer
   );
 
   const footerButtonsContainerClasses = twMerge(
     classNames('mg:flex mg:items-center mg:justify-between mg:w-full'),
-    classes?.footerButtonsContainer,
+    classes?.footerButtonsContainer
   );
 
   const formClasses = twMerge(
     'mg:flex mg:flex-col mg:p-6 mg:gap-4 mg:rounded-lg mg:bg-inherit',
-    classes?.form,
+    classes?.form
   );
 
   const submitButtonClasses = classNames(
@@ -427,12 +404,12 @@ const Form: FC<FormProps> = ({
       'mg:text-subtle': adornmentColor === 'subtle',
       'mg:text-white': adornmentColor === 'white',
     },
-    classes?.submitButton,
+    classes?.submitButton
   );
 
   const handleInputChange = (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
-    key?: string,
+    key?: string
   ) => {
     setValues((prev) => {
       let changed = false;
@@ -579,35 +556,19 @@ const Form: FC<FormProps> = ({
       <div className={footerClasses}>
         {isBelowSm ? (
           <div className={footerButtonsContainerClasses}>
-            <Button
-              classes={{ button: submitButtonClasses }}
-              type="submit"
-              variant="outline"
-            >
+            <Button classes={{ button: submitButtonClasses }} type="submit" variant="outline">
               SUBMIT
             </Button>
-            <Button
-              classes={{ button: submitButtonClasses }}
-              type="reset"
-              variant="outline"
-            >
+            <Button classes={{ button: submitButtonClasses }} type="reset" variant="outline">
               RESET
             </Button>
           </div>
         ) : (
           <>
-            <Button
-              classes={{ button: submitButtonClasses }}
-              type="submit"
-              variant="outline"
-            >
+            <Button classes={{ button: submitButtonClasses }} type="submit" variant="outline">
               SUBMIT
             </Button>
-            <Button
-              classes={{ button: submitButtonClasses }}
-              type="reset"
-              variant="outline"
-            >
+            <Button classes={{ button: submitButtonClasses }} type="reset" variant="outline">
               RESET
             </Button>
           </>
@@ -615,10 +576,7 @@ const Form: FC<FormProps> = ({
         {disclaimer && (
           <div className={disclaimerContainerClasses}>
             {disclaimer?.adornment &&
-              renderAdornment(
-                disclaimer?.adornment,
-                disclaimerAdornmentClasses,
-              )}
+              renderAdornment(disclaimer?.adornment, disclaimerAdornmentClasses)}
             <Typography
               clamp={10}
               className={classes?.disclaimer?.text}

@@ -10,7 +10,7 @@ describe('List', () => {
     const { rerender } = render(
       <List background="secondary" size="lg" data-testid="list">
         <ListItem label="One" />
-      </List>,
+      </List>
     );
 
     expect(screen.getByTestId('list').tagName).toBe('UL');
@@ -20,14 +20,14 @@ describe('List', () => {
     rerender(
       <List as="ol" data-testid="list">
         <ListItem label="One" />
-      </List>,
+      </List>
     );
     expect(screen.getByTestId('list').tagName).toBe('OL');
 
     rerender(
       <List as="div" fullWidth data-testid="list">
         <ListItem label="One" />
-      </List>,
+      </List>
     );
     expect(screen.getByTestId('list').tagName).toBe('DIV');
     expect(screen.getByTestId('list').className).toContain('mg:w-full');
@@ -39,7 +39,7 @@ describe('List', () => {
       <List onChange={handleChange} divider status="info">
         <ListItem title="First" label="Alpha" value="alpha" defaultSelected />
         <ListItem title="Second" label="Beta" value="beta" />
-      </List>,
+      </List>
     );
 
     expect(handleChange).toHaveBeenCalledWith([
@@ -62,7 +62,7 @@ describe('List', () => {
     render(
       <List selectable={false} disabled onChange={handleChange}>
         <ListItem label="Alpha" value="alpha" defaultSelected />
-      </List>,
+      </List>
     );
 
     const item = screen.getByText('Alpha').closest('li') as HTMLElement;
@@ -80,7 +80,7 @@ describe('List', () => {
         <div>
           <ListItem label="Nested" href="/nested" />
         </div>
-      </List>,
+      </List>
     );
 
     const item = screen.getByText('Nested').closest('a') as HTMLElement;

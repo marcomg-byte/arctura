@@ -19,14 +19,9 @@ describe('Node', () => {
 
   it('applies extended variant, color, size, and custom classes', () => {
     render(
-      <Node
-        variant="extended"
-        size="lg"
-        color="warning"
-        classes={{ container: 'custom-node' }}
-      >
+      <Node variant="extended" size="lg" color="warning" classes={{ container: 'custom-node' }}>
         Step
-      </Node>,
+      </Node>
     );
 
     const node = screen.getByText('Step');
@@ -46,7 +41,7 @@ describe('Node', () => {
         classes={{ adornment: 'custom-adornment' }}
       >
         2
-      </Node>,
+      </Node>
     );
 
     const icon = container.querySelector('svg');

@@ -1,10 +1,4 @@
-import type {
-  AnchorHTMLAttributes,
-  FC,
-  MouseEvent,
-  ReactNode,
-  Ref,
-} from 'react';
+import type { AnchorHTMLAttributes, FC, MouseEvent, ReactNode, Ref } from 'react';
 import { headingVariants, Typography } from './Typography';
 import type {
   HeadingVariant,
@@ -22,9 +16,7 @@ import classNames from 'classnames';
  * @param variant - Typography variant to inspect.
  * @returns True when the variant maps to one of the heading tags.
  */
-const isHeadingVariant = (
-  variant: TypographyVariant,
-): variant is HeadingVariant =>
+const isHeadingVariant = (variant: TypographyVariant): variant is HeadingVariant =>
   headingVariants.includes(variant as HeadingVariant);
 
 /**
@@ -125,20 +117,15 @@ const Link: FC<LinkProps> = ({
   variant = 'base',
   ...rest
 }) => {
-  const anchorClasses = twMerge(
-    classNames('mg:flex mg:group'),
-    classes?.anchor,
-  );
+  const anchorClasses = twMerge(classNames('mg:flex mg:group'), classes?.anchor);
   const typographyClasses = twMerge(
     classNames('mg:cursor-pointer', {
       'mg:group-hover:text-accent': color !== 'accent',
       'mg:group-hover:text-subtle-hover': color === 'accent',
-      'mg:group-active:text-active mg:group-visited:text-active':
-        color !== 'active',
-      'mg:group-active:text-active-hover mg:group-visited:text-active-hover':
-        color === 'active',
+      'mg:group-active:text-active mg:group-visited:text-active': color !== 'active',
+      'mg:group-active:text-active-hover mg:group-visited:text-active-hover': color === 'active',
     }),
-    classes?.typography,
+    classes?.typography
   );
 
   if (isHeadingVariant(variant)) {

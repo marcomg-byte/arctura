@@ -267,11 +267,7 @@ interface TextAreaProps extends Omit<
  * @param className - Optional className to apply to the rendered control.
  * @returns A React element suitable for rendering inside the adornment container.
  */
-const renderAdornment = (
-  adornment: TextAreaAdornment,
-  index: number,
-  className?: string,
-) => {
+const renderAdornment = (adornment: TextAreaAdornment, index: number, className?: string) => {
   if (typeof adornment === 'object' && 'icon' in adornment) {
     return (
       <IconButton
@@ -395,9 +391,9 @@ const TextArea: FC<TextAreaProps> = ({
         'mg:w-full': fullWidth,
         'mg:has-[textarea:focus-visible]:outline-1 mg:has-[textarea:focus-visible]:outline-primary mg:has-[textarea:focus-visible]:outline-offset-4':
           !clicked && value === '',
-      },
+      }
     ),
-    classes?.container,
+    classes?.container
   );
   const adornmentClasses = classNames(
     'mg:shrink-0',
@@ -410,15 +406,15 @@ const TextArea: FC<TextAreaProps> = ({
       'mg:text-subtle': adornmentColor === 'subtle',
       'mg:text-white': adornmentColor === 'white',
     },
-    classes?.adornment,
+    classes?.adornment
   );
   const adornmentContainerClasses = twMerge(
     'mg:flex mg:w-full mg:gap-2 mg:overflow-x-auto mg:scrollbar-subtle mg:p-1',
-    classes?.adornmentContainer,
+    classes?.adornmentContainer
   );
   const rightAdormentContainerClasses = classNames(
     adornmentContainerClasses,
-    'mg:flex-row-reverse',
+    'mg:flex-row-reverse'
   );
   const labelClasses = twMerge(
     classNames('mg:font-body mg:text-sm', {
@@ -433,7 +429,7 @@ const TextArea: FC<TextAreaProps> = ({
       'mg:text-warning': status === 'warning' && !error,
       'mg:text-danger': status === 'error' || error,
     }),
-    classes?.label,
+    classes?.label
   );
   const textareaClasses = twMerge(
     classNames('mg:focus-visible:outline-0 mg:caret-accent', {
@@ -446,7 +442,7 @@ const TextArea: FC<TextAreaProps> = ({
       'mg:w-52': size === 'lg' && !fullWidth,
       'mg:w-full mg:h-24': fullWidth,
     }),
-    classes?.textarea,
+    classes?.textarea
   );
 
   const handleBlur = (event: FocusEvent<HTMLTextAreaElement>) => {
@@ -473,8 +469,7 @@ const TextArea: FC<TextAreaProps> = ({
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    const isEscape =
-      event.key === 'Escape' || event.key === 'Esc' || event.code === 'Escape';
+    const isEscape = event.key === 'Escape' || event.key === 'Esc' || event.code === 'Escape';
 
     if (isEscape) {
       setClicked(false);
@@ -516,12 +511,12 @@ const TextArea: FC<TextAreaProps> = ({
             </IconButton>
           )}
           {startAdornments.map((adornment, index) =>
-            renderAdornment(adornment, index, adornmentClasses),
+            renderAdornment(adornment, index, adornmentClasses)
           )}
         </div>
         <div className={rightAdormentContainerClasses}>
           {endAdornments.map((adornment, index) =>
-            renderAdornment(adornment, index, adornmentClasses),
+            renderAdornment(adornment, index, adornmentClasses)
           )}
         </div>
       </div>

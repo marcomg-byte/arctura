@@ -1,11 +1,5 @@
 'use client';
-import type {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  JSX,
-  ReactNode,
-  Ref,
-} from 'react';
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, JSX, ReactNode, Ref } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -104,10 +98,7 @@ interface BaseProps {
  * @property {Ref<HTMLAnchorElement>} [ref] - Ref for the anchor element.
  * @property {'primary' | 'secondary' | 'text' | 'outline'} [variant] - The visual style of the anchor button.
  */
-interface AnchorProps extends Omit<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  'className'
-> {
+interface AnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
   href: string;
   ref?: Ref<HTMLAnchorElement>;
   target?: string;
@@ -124,10 +115,7 @@ interface AnchorProps extends Omit<
  * @property {Ref<HTMLButtonElement>} [ref] - Ref for the button element.
  * @property {'primary' | 'secondary' | 'text' | 'outline'} [variant] - The visual style of the button.
  */
-interface ButtonProps extends Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  'className'
-> {
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   href?: never;
   ref?: Ref<HTMLButtonElement>;
   target?: never;
@@ -151,19 +139,10 @@ type ButtonComponentProps = (AnchorProps | ButtonProps) & BaseProps;
  */
 const renderAdornment = (adornment: ButtonAdornment, className?: string) => {
   const iconClasses = twMerge('mg:text-xs', className);
-  const imageClasses = twMerge(
-    'mg:object-contain mg:animate-fade-in mg:duration-500',
-    className,
-  );
+  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
 
   if ('iconName' in adornment) {
-    return (
-      <FontAwesomeIcon
-        key={adornment.iconName}
-        icon={adornment}
-        className={iconClasses}
-      />
-    );
+    return <FontAwesomeIcon key={adornment.iconName} icon={adornment} className={iconClasses} />;
   }
 
   return (
@@ -225,9 +204,7 @@ function Button({
   const isEndAdornmentIcon = endAdornment && 'iconName' in endAdornment;
   const isStartAdornmentImage = startAdornment && 'src' in startAdornment;
   const isEndAdornmentImage = endAdornment && 'src' in endAdornment;
-  const buttonSizeClasses = responsive
-    ? responsiveSizeClasses[size]
-    : sizeClasses[size];
+  const buttonSizeClasses = responsive ? responsiveSizeClasses[size] : sizeClasses[size];
   const fullWidthClasses = responsive
     ? 'mg:w-full mg:py-2 mg:rounded-lg mg:text-sm mg:sm:py-3 mg:sm:text-base'
     : 'mg:w-full mg:py-3 mg:rounded-lg mg:text-base';
@@ -246,9 +223,9 @@ function Button({
           variant === 'outline',
         'mg:gap-2': (isStartAdornmentIcon || isEndAdornmentIcon) && children,
         'mg:gap-1': (isStartAdornmentImage || isEndAdornmentImage) && children,
-      },
+      }
     ),
-    classes?.button,
+    classes?.button
   );
 
   if (href) {

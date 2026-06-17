@@ -26,7 +26,7 @@ describe('IconButton', () => {
     render(
       <IconButton href="/projects" target="_blank" aria-label="Open projects">
         {faPlus}
-      </IconButton>,
+      </IconButton>
     );
 
     const button = screen.getByRole('link', { name: 'Open projects' });
@@ -51,7 +51,7 @@ describe('IconButton', () => {
         }}
       >
         {faCheck}
-      </IconButton>,
+      </IconButton>
     );
 
     const button = screen.getByRole('button', { name: 'Accent action' });
@@ -68,14 +68,9 @@ describe('IconButton', () => {
     const handleClick = vi.fn();
 
     render(
-      <IconButton
-        aria-label="Submit"
-        disabled
-        onClick={handleClick}
-        type="submit"
-      >
+      <IconButton aria-label="Submit" disabled onClick={handleClick} type="submit">
         {faCheck}
-      </IconButton>,
+      </IconButton>
     );
 
     const button = screen.getByRole('button', { name: 'Submit' });
@@ -93,13 +88,9 @@ describe('IconButton', () => {
     });
 
     render(
-      <IconButton
-        href="/contact"
-        aria-label="Open contact"
-        onClick={handleClick}
-      >
+      <IconButton href="/contact" aria-label="Open contact" onClick={handleClick}>
         {faCheck}
-      </IconButton>,
+      </IconButton>
     );
 
     const button = screen.getByRole('link', { name: 'Open contact' });
@@ -112,13 +103,8 @@ describe('IconButton', () => {
   it('renders and normalizes native image children', () => {
     render(
       <IconButton aria-label="Profile" classes={{ children: 'custom-image' }}>
-        <img
-          src="/images/profile.jpg"
-          alt="Profile image"
-          width={1}
-          height={1}
-        />
-      </IconButton>,
+        <img src="/images/profile.jpg" alt="Profile image" width={1} height={1} />
+      </IconButton>
     );
 
     const button = screen.getByRole('button', { name: 'Profile' });
