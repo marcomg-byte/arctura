@@ -1,7 +1,20 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@/components/ui/atomics": ["./src/index.ts"],
+      "@/components/ui/atomics/*": ["./src/*"],
+      "@/lib": ["./lib/index.ts"],
+      "@/tokens.json": ["./tokens.json"],
+      "@/*": ["./src/*"]
+    },
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": "./",
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": false
+  },
+  "include": ["lib/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "tokens.json"]
 }
