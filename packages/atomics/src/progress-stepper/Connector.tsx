@@ -41,7 +41,7 @@ interface ConnectorProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className
  * @returns {JSX.Element | null} The connector element or `null` for the last step.
  * @example
  * ```tsx
- * import { Connector } from '@/components/ui/atomics';
+ * import { Connector } from '@/src';
  *
  * const MyConnector = () => (
  *  <Connector active={true} completed={false} orientation="horizontal" />

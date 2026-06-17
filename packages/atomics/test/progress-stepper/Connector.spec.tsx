@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
-import { Connector } from '@/components/ui/atomics/progress-stepper/Connector';
+import { Connector } from '@/src/progress-stepper/Connector';
 
 afterEach(cleanup);
 

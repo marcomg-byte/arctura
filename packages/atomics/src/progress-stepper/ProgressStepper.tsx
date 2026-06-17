@@ -10,15 +10,15 @@ import type {
 } from 'react';
 import { Children, cloneElement, Fragment, isValidElement, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Step } from './Step';
-import type { StepClasses } from './Step';
-import { Connector } from './Connector';
-import type { ConnectorClasses } from './Connector';
-import { Button } from '../buttons';
-import type { ButtonClasses } from '../buttons';
-import { Typography } from '../typography';
+import { Step } from '@/src/progress-stepper/Step';
+import type { StepClasses } from '@/src/progress-stepper/Step';
+import { Connector } from '@/src/progress-stepper/Connector';
+import type { ConnectorClasses } from '@/src/progress-stepper/Connector';
+import { Button } from '@/src/buttons';
+import type { ButtonClasses } from '@/src/buttons';
+import { Typography } from '@/src/typography';
 import { useControlled, useBreakpoints } from '@/lib';
-import { capitalize } from '../utils';
+import { capitalize } from '@/src/utils';
 import { twMerge } from 'tailwind-merge';
 
 /**
@@ -172,8 +172,8 @@ function mapChildrenToSteps(children: ReactNode, defaultStepProp: number): StepT
  * @example
  * ```tsx
  * import { useState } from 'react';
- * import { ProgressStepper, Step } from '@/components/ui/atomics';
- * import type { StepType } from '@/components/ui/atomics';
+ * import { ProgressStepper, Step } from '@/src';
+ * import type { StepType } from '@/src';
  *
  * const MyStepper = () => {
  *   const [activeStep, setActiveStep] = useState<StepType>({});

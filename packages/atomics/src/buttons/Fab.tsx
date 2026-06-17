@@ -136,7 +136,7 @@ const renderAdornment = (adornment: FabAdornment, className?: string) => {
  *
  * @example
  * ```tsx
- * import { Fab } from  '@/components/ui';
+ * import { Fab } from  '@/src';
  * import { faPlus } from '@fortawesome/free-solid-svg-icons';
  *
  * const MyComponent = () => (

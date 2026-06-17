@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Badge } from '@/components/ui/atomics/badge/Badge';
+import { Badge } from '@/src/badge/Badge';
 
 afterEach(cleanup);
 

@@ -148,7 +148,7 @@ const renderChildren = (children: IconButtonChildren, className?: string) => {
  *
  * @example
  * ```tsx
- * import { IconButton } from '@/components/ui/atomics';
+ * import { IconButton } from '@/src';
  * import { faCoffee } from '@fortawesome/free-solid-svg-icons';
  *
  * const MyIconButton = () => (

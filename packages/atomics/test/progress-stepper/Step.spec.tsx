@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Step } from '@/components/ui/atomics/progress-stepper/Step';
-import { Typography } from '@/components/ui/atomics/typography/Typography';
+import { Step } from '@/src/progress-stepper/Step';
+import { Typography } from '@/src/typography/Typography';
 
 afterEach(cleanup);
 

@@ -1,12 +1,12 @@
 import type { AnchorHTMLAttributes, FC, MouseEvent, ReactNode, Ref } from 'react';
-import { headingVariants, Typography } from './Typography';
+import { headingVariants, Typography } from '@/src/typography/Typography';
 import type {
   HeadingVariant,
   ParagraphVariant,
   TypographyColor,
   TypographyProps as TypographyComponentProps,
   TypographyVariant,
-} from './Typography';
+} from '@/src/typography/Typography';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
 
@@ -71,7 +71,7 @@ interface LinkProps extends TypographyProps {
  *
  * @example
  * ```tsx
- * import { Link } from '@/components/ui/atomics/typography';
+ * import { Link } from '@/src/typography';
  *
  * export function ContactLinks() {
  *   return (

@@ -1,8 +1,8 @@
 import type { ComponentProps, FC, HTMLAttributes, ReactElement, ReactNode, Ref } from 'react';
 import React, { Children } from 'react';
-import { Header } from './Header';
-import { Media } from './Media';
-import { Footer } from './Footer';
+import { Header } from '@/src/card/Header';
+import { Media } from '@/src/card/Media';
+import { Footer } from '@/src/card/Footer';
 
 /**
  * Props for the Card component.
@@ -25,7 +25,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @example
  * ```tsx
- * import { Card, Header, Media, Footer } from '@/components/ui/atomics';
+ * import { Card, Header, Media, Footer } from '@/src';
  *
  * const MyCard = () => (
  *  <Card>

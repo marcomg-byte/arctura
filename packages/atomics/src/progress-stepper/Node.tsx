@@ -91,7 +91,7 @@ const renderAdornment = (adornment: NodeAdornment, className?: string) => {
  * @returns {JSX.Element} The rendered node element.
  * @example
  * ```tsx
- * import { Node } from '@/components/ui/atomics';
+ * import { Node } from '@/src';
  * import { faCheck } from '@fortawesome/free-solid-svg-icons';
  *
  * const MyNode = () => (

@@ -13,7 +13,7 @@ import { useState } from 'react';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
-import { Button, IconButton } from '../buttons';
+import { Button, IconButton } from '@/src/buttons';
 import { useControlled } from '@/lib';
 import { twMerge } from 'tailwind-merge';
 
@@ -319,7 +319,7 @@ const renderAdornment = (adornment: TextAreaAdornment, index: number, className?
  * @returns A JSX element rendering the styled textarea with optional adornments.
  * @example
  * ```tsx
- * import { TextArea } from '@/components/ui';
+ * import { TextArea } from '@/src';
  *
  * const MyTextArea = () => (
  *  <TextArea

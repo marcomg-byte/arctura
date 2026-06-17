@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { IconButton } from '../buttons';
+import { IconButton } from '@/src/buttons';
 import { useControlled } from '@/lib';
 
 interface DrawerClasses {

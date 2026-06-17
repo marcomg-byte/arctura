@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { ProgressStepper } from '@/components/ui/atomics/progress-stepper/ProgressStepper';
-import { Step } from '@/components/ui/atomics/progress-stepper/Step';
+import { ProgressStepper } from '@/src/progress-stepper/ProgressStepper';
+import { Step } from '@/src/progress-stepper/Step';
 
 const breakpointState = vi.hoisted(() => ({ belowSm: false }));
 

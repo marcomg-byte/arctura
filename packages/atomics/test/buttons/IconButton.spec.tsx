@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { MouseEvent } from 'react';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { IconButton } from '@/components/ui/atomics/buttons/IconButton';
+import { IconButton } from '@/src/buttons/IconButton';
 
 afterEach(cleanup);
 

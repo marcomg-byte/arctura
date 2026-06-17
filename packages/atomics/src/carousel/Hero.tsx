@@ -5,9 +5,9 @@ import useEmblaCarousel from 'embla-carousel-react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { Button, IconButton } from '../buttons';
-import { Typography } from '../typography';
-import type { HeadingVariant } from '../typography';
+import { Button, IconButton } from '@/src/buttons';
+import { Typography } from '@/src/typography';
+import type { HeadingVariant } from '@/src/typography';
 
 /**
  * Optional class overrides for the hero layout regions.
@@ -188,7 +188,7 @@ interface HeroProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
  *
  * @example
  * ```tsx
- * import { Hero } from '@/components/ui/atomics';
+ * import { Hero } from '@/src';
  *
  * const MyHero = () => (
  *  <Hero

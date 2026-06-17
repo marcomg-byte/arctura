@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { Drawer } from '@/components/ui/atomics/drawer/Drawer';
+import { Drawer } from '@/src/drawer/Drawer';
 
 afterEach(cleanup);
 

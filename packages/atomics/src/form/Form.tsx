@@ -13,12 +13,12 @@ import type {
 import { Children, cloneElement, isValidElement, useEffect, useState } from 'react';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TextArea } from './TextArea';
-import { TextInput } from './TextInput';
+import { TextArea } from '@/src/form/TextArea';
+import { TextInput } from '@/src/form/TextInput';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import { Button } from '../buttons';
-import { Typography } from '../typography';
+import { Button } from '@/src/buttons';
+import { Typography } from '@/src/typography';
 import { useBreakpoints, useControlled } from '@/lib';
 
 /**
@@ -280,7 +280,7 @@ const renderAdornment = (adornment: FormAdornment, className?: string): JSX.Elem
  * @returns {JSX.Element} The rendered form element.
  * @example
  * ```tsx
- * import { Form, Button } from '@/components/ui/atomics';
+ * import { Form, Button } from '@/src';
  * import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
  *
  * const MyForm = () => (

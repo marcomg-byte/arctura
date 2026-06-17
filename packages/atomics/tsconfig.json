@@ -2,11 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@/components/ui/atomics": ["./src/index.ts"],
-      "@/components/ui/atomics/*": ["./src/*"],
-      "@/lib": ["./lib/index.ts"],
-      "@/tokens.json": ["./tokens.json"],
-      "@/*": ["./src/*"]
+      "@/*": ["./*"]
     },
     "noEmit": false,
     "outDir": "dist",

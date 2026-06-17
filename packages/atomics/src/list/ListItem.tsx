@@ -12,8 +12,8 @@ import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
-import { Typography } from '../typography';
-import type { TypographyColor } from '../typography';
+import { Typography } from '@/src/typography';
+import type { TypographyColor } from '@/src/typography';
 import { useControlled } from '@/lib';
 
 /** Either an icon definition or an image source used for the leading adornment. */
@@ -185,7 +185,7 @@ const renderAdornment = (adornment: ListItemAdornment, className?: string) => {
  *
  * @example
  * ```tsx
- * import { ListItem } from '@/components/ui/atomics/list/ListItem';
+ * import { ListItem } from '@/src/list/ListItem';
  *
  * export function Example() {
  *   return (

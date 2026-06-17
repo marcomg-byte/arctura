@@ -8,6 +8,7 @@
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev run build",
     "build:atomics": "yarn workspace @arctura-ui/atomics build",
+    "clean": "yarn workspaces foreach --all --topological-dev run clean",
     "lint": "yarn workspaces foreach --all --topological-dev run lint",
     "lint:fix": "yarn workspaces foreach --all --topological-dev run lint:fix",
     "test": "yarn workspaces foreach --all --topological-dev run test",

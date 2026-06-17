@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
-import { Media } from '@/components/ui/atomics/card/Media';
+import { Media } from '@/src/card/Media';
 
 afterEach(cleanup);
 

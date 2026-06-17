@@ -6,8 +6,8 @@ import Fade from 'embla-carousel-fade';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { IconButton } from '../buttons';
-import type { IconButtonVariant } from '../buttons';
+import { IconButton } from '@/src/buttons';
+import type { IconButtonVariant } from '@/src/buttons';
 
 /**
  * Optional class overrides for the carousel layout regions.
@@ -137,7 +137,7 @@ interface CarouselProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'
  *
  * @example
  * ```tsx
- * import { Carousel } from '@/components/ui/atomics';
+ * import { Carousel } from '@/src';
  *
  * const MyCarousel = () => (
  *  <Carousel

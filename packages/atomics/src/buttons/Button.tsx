@@ -169,7 +169,7 @@ const renderAdornment = (adornment: ButtonAdornment, className?: string) => {
  *
  * @example
  * ```tsx
- * import { Button } from '@/components/ui/atomics';
+ * import { Button } from '@/src';
  * import { faCoffee } from '@fortawesome/free-solid-svg-icons';
  *
  * const MyButton = () => (

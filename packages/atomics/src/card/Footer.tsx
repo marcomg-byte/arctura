@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes, Ref } from 'react';
-import { Button } from '../buttons';
-import type { ButtonAdornment, ButtonVariant } from '../buttons';
-import { Typography } from '../typography';
+import { Button } from '@/src/buttons';
+import type { ButtonAdornment, ButtonVariant } from '@/src/buttons';
+import { Typography } from '@/src/typography';
 
 /**
  * Describes an action button for the Card Footer.
@@ -51,7 +51,7 @@ interface FooterProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @example
  * ```tsx
- * import { Footer } from '@/components/ui/atomics';
+ * import { Footer } from '@/src';
  *
  * const MyCardFooter = () => (
  *  <Footer

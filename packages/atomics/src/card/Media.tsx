@@ -70,7 +70,7 @@ const aspectRatioClasses: Record<AspectRatio, string> = {
  *
  * @example
  * ```tsx
- * import { Media } from '@/components/ui/atomics';
+ * import { Media } from '@/src';
  *
  * const MyCardMedia = () => (
  *  <Media

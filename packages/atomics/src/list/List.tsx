@@ -12,7 +12,7 @@ import { Children, cloneElement, isValidElement, useEffect, useMemo, useState } 
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { useControlled } from '@/lib';
-import { ListItem as ListItemComponent } from './ListItem';
+import { ListItem as ListItemComponent } from '@/src/list/ListItem';
 
 /** React element helper that guarantees an optional `children` prop. */
 type ElementWithChildren = ReactElement<{ children?: ReactNode }>;
@@ -138,8 +138,8 @@ type ListProps = (DivProps | OlProps | UlProps) & BaseProps;
  *
  * @example
  * ```tsx
- * import { List } from '@/components/ui';
- * import { ListItem } from '@/components/ui';
+ * import { List } from '@/src';
+ * import { ListItem } from '@/src';
  *
  * export function Example() {
  *   return (

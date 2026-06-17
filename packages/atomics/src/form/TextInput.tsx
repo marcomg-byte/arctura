@@ -16,7 +16,7 @@ import { twMerge } from 'tailwind-merge';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faEyeSlash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconButton } from '../buttons';
+import { IconButton } from '@/src/buttons';
 import { useControlled } from '@/lib';
 
 /**
@@ -268,7 +268,7 @@ const renderAdornment = (
  * @returns JSX element representing the `TextInput` component.
  * @example
  * ```tsx
- * import { TextInput } from '@/components/ui';
+ * import { TextInput } from '@/src';
  *
  * const MyTextInput = () => (
  *  <TextInput

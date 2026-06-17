@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { useControlled } from '@/lib';
-import { capitalize } from '../utils';
+import { capitalize } from '@/src/utils';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 
@@ -81,7 +81,7 @@ interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 
  *
  * @example
  * ```tsx
- * import { Select } from '@/components/select/Select';
+ * import { Select } from '@/src/select/Select';
  *
  * function App() {
  *  const options = [

@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { MouseEvent } from 'react';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { Link } from '@/components/ui/atomics/typography/Link';
+import { Link } from '@/src/typography/Link';
 
 afterEach(cleanup);
 

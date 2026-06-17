@@ -6,16 +6,12 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@/components/ui/atomics',
-        replacement: resolve(__dirname, 'src'),
-      },
-      {
         find: '@/lib',
         replacement: resolve(__dirname, 'lib/index.ts'),
       },
       {
         find: '@',
-        replacement: resolve(__dirname, 'src'),
+        replacement: resolve(__dirname),
       },
     ],
   },

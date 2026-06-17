@@ -120,7 +120,7 @@ type BadgeProps = (DivProps | AnchorProps) & BaseProps;
  *
  * @example
  * ```tsx
- * import { Badge } from '@/components/ui/atomics';
+ * import { Badge } from '@/src';
  * import { faCheck } from '@fortawesome/free-solid-svg-icons';
  *
  * const MyBadge = () => (
