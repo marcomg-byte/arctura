@@ -1,7 +1,16 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": "./",
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": false
+  },
+  "include": ["lib/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "tokens.json"]
 }
