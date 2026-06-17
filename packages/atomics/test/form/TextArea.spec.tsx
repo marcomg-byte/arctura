@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
-import { TextArea } from '@/src/form/TextArea';
+import { TextArea } from '../../src/form/TextArea';
 
 afterEach(cleanup);
 

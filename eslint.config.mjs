@@ -6,9 +6,16 @@ import prettierConfig from 'eslint-config-prettier';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import jsonPlugin from '@eslint/json';
 
 const libraryConfig = defineConfig([
-  js.configs.recommended,
+  {
+    ignores: ['**/dist/**', '**/node_modules/**', '**/*.d.ts', '**/*.d.ts.map'],
+  },
+  {
+    ...js.configs.recommended,
+    files: ['**/*.{js,mjs,cjs}'],
+  },
   prettierConfig,
   prettierRecommended,
   {
@@ -21,6 +28,7 @@ const libraryConfig = defineConfig([
       parser: tsParser,
       globals: {
         ...globals.browser,
+        ...globals.node,
       },
     },
     rules: {
@@ -47,6 +55,13 @@ const libraryConfig = defineConfig([
     languageOptions: {
       globals: globals.node,
     },
+  },
+  {
+    files: ['**/*.json'],
+    ignores: ['node_modules/**', 'dist/**'],
+    plugins: { json: jsonPlugin },
+    language: 'json/json',
+    extends: ['json/recommended'],
   },
 ]);
 

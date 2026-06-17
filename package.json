@@ -8,21 +8,38 @@
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev run build",
     "build:atomics": "yarn workspace @arctura-ui/atomics build",
+    "build:theme": "yarn workspace @arctura-ui/theme build",
     "clean": "yarn workspaces foreach --all --topological-dev run clean",
+    "clean:atomics": "yarn workspace @arctura-ui/atomics clean",
+    "clean:theme": "yarn workspace @arctura-ui/theme clean",
     "lint": "yarn workspaces foreach --all --topological-dev run lint",
     "lint:fix": "yarn workspaces foreach --all --topological-dev run lint:fix",
-    "test": "yarn workspaces foreach --all --topological-dev run test",
-    "test:atomics": "yarn workspace @arctura-ui/atomics test"
+    "lint:atomics": "yarn workspace @arctura-ui/atomics lint",
+    "lint:theme": "yarn workspace @arctura-ui/theme lint",
+    "test": "vitest run",
+    "test:cov": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:atomics": "yarn workspace @arctura-ui/atomics test",
+    "test:theme": "yarn workspace @arctura-ui/theme test",
+    "theme:parse": "yarn workspace @arctura-ui/theme theme:parse",
+    "typecheck": "yarn workspaces foreach --all --topological-dev run typecheck",
+    "typecheck:atomics": "yarn workspace @arctura-ui/atomics typecheck",
+    "typecheck:theme": "yarn workspace @arctura-ui/theme typecheck"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@eslint/json": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
+    "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/ui": "4.1.8",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.6.0",
-    "prettier": "^3.7.4"
+    "prettier": "^3.7.4",
+    "vitest": "^4.1.8"
   },
   "dependencies": {
     "typescript": "^6.0.3"

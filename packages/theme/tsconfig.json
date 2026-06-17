@@ -4,14 +4,15 @@
     "paths": {
       "@/*": ["./*"]
     },
+    "rootDir": "./src",
+    "types": ["node"],
     "noEmit": false,
     "outDir": "dist",
-    "rootDir": "./",
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": false
   },
-  "include": ["lib/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "tokens.json"],
-  "exclude": ["node_modules", "test/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "src/errors/**/*.ts", "test/**/*.ts"]
 }

@@ -1,12 +1,12 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { faInfoCircle, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { Form } from '@/src/form/Form';
-import { TextInput } from '@/src/form/TextInput';
-import { TextArea } from '@/src/form/TextArea';
+import { Form } from '../../src/form/Form';
+import { TextInput } from '../../src/form/TextInput';
+import { TextArea } from '../../src/form/TextArea';
 
-vi.mock('@/lib', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@/lib')>();
+vi.mock('../../lib', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../lib')>();
   return {
     ...actual,
     useBreakpoints: () => ({

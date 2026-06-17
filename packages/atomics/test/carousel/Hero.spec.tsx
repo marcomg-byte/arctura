@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { Hero } from '@/src/carousel/Hero';
+import { Hero } from '../../src/carousel/Hero';
 
 const emblaState = vi.hoisted(() => ({
   selected: 0,

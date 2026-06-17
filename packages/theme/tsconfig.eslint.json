@@ -1,14 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "paths": {
-      "@/*": ["./*"]
-    },
     "rootDir": "./",
     "noEmit": true
   },
   "include": [
-    "lib/**/*.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     "test/**/*.ts",
@@ -16,5 +12,5 @@
     "vite.config.ts",
     "vitest.config.mts"
   ],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["dist", "node_modules"]
 }

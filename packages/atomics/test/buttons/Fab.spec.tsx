@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Fab } from '@/src/buttons/Fab';
+import { Fab } from '../../src/buttons/Fab';
 
 afterEach(cleanup);
 

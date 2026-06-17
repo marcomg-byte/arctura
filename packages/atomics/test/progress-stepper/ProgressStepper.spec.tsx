@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { ProgressStepper } from '@/src/progress-stepper/ProgressStepper';
-import { Step } from '@/src/progress-stepper/Step';
+import { ProgressStepper } from '../../src/progress-stepper/ProgressStepper';
+import { Step } from '../../src/progress-stepper/Step';
 
 const breakpointState = vi.hoisted(() => ({ belowSm: false }));
 
-vi.mock('@/lib', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@/lib')>();
+vi.mock('../../lib', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../lib')>();
   return {
     ...actual,
     useBreakpoints: () => ({

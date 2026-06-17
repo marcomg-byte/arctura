@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { List } from '@/src/list/List';
-import { ListItem } from '@/src/list/ListItem';
+import { List } from '../../src/list/List';
+import { ListItem } from '../../src/list/ListItem';
 
 afterEach(cleanup);
 
