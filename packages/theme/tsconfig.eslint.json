@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./",
+    "rootDir": "../..",
     "noEmit": true
   },
   "include": [
@@ -10,7 +10,8 @@
     "test/**/*.ts",
     "test/**/*.tsx",
     "vite.config.ts",
-    "vitest.config.mts"
+    "vitest.config.mts",
+    "../../vite.config.ts"
   ],
   "exclude": ["dist", "node_modules"]
 }
