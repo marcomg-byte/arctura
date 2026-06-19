@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
-import { Typography } from '@/src/typography/Typography';
+import { Typography } from '../../src/typography/Typography';
 
 afterEach(cleanup);
 

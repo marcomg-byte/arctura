@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { TextInput } from '@/src/form/TextInput';
+import { TextInput } from '../../src/form/TextInput';
 
 afterEach(cleanup);
 

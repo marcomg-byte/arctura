@@ -22,6 +22,7 @@ export default defineConfig({
     tsconfigPaths: true,
   },
   test: {
+    name: 'atomics',
     environment: 'jsdom',
   },
 });

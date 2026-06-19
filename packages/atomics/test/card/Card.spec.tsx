@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
-import { Card } from '@/src/card/Card';
-import { Header } from '@/src/card/Header';
-import { Media } from '@/src/card/Media';
-import { Footer } from '@/src/card/Footer';
+import { Card } from '../../src/card/Card';
+import { Header } from '../../src/card/Header';
+import { Media } from '../../src/card/Media';
+import { Footer } from '../../src/card/Footer';
 
 afterEach(cleanup);
 

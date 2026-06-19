@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Footer } from '@/src/card/Footer';
+import { Footer } from '../../src/card/Footer';
 
 afterEach(cleanup);
 

@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Node } from '@/src/progress-stepper/Node';
+import { Node } from '../../src/progress-stepper/Node';
 
 afterEach(cleanup);
 

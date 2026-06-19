@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { Badge } from '@/src/badge/Badge';
-import { Header } from '@/src/card/Header';
+import { Badge } from '../../src/badge/Badge';
+import { Header } from '../../src/card/Header';
 
 afterEach(cleanup);
 
