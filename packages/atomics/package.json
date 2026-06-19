@@ -11,6 +11,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./hooks": {
+      "types": "./dist/lib/hooks.d.ts",
+      "import": "./dist/hooks.js",
+      "require": "./dist/hooks.cjs"
     }
   },
   "files": [
@@ -52,6 +57,7 @@
     "eslint": "^9.39.1",
     "jsdom": "^29.1.1",
     "rimraf": "^6.1.3",
+    "typescript": "^6.0.3",
     "vite": "^8.0.12",
     "vitest": "^4.1.8"
   }
