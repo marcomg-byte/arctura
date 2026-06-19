@@ -1,0 +1,187 @@
+name: Release
+
+on:
+  pull_request:
+    types:
+      - closed
+
+permissions:
+  contents: write
+  id-token: write
+  pull-requests: read
+  issues: write
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: >
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main' &&
+      (
+        contains(github.event.pull_request.labels.*.name, 'patch') ||
+        contains(github.event.pull_request.labels.*.name, 'minor') ||
+        contains(github.event.pull_request.labels.*.name, 'major')
+      )
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Determine release type
+        id: release-type
+        env:
+          PATCH: ${{ contains(github.event.pull_request.labels.*.name, 'patch') }}
+          MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'minor') }}
+          MAJOR: ${{ contains(github.event.pull_request.labels.*.name, 'major') }}
+        run: |
+          count=0
+          [ "$PATCH" = "true" ] && bump="patch" && count=$((count + 1))
+          [ "$MINOR" = "true" ] && bump="minor" && count=$((count + 1))
+          [ "$MAJOR" = "true" ] && bump="major" && count=$((count + 1))
+
+          if [ "$count" -ne 1 ]; then
+            echo "Exactly one release label is required."
+            exit 1
+          fi
+
+          echo "bump=$bump" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Bump package versions
+        id: version
+        env:
+          RELEASE_BUMP: ${{ steps.release-type.outputs.bump }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          const bump = process.env.RELEASE_BUMP;
+          const packagePaths = [
+            'packages/atomics/package.json',
+            'packages/theme/package.json',
+          ];
+
+          function nextVersion(version) {
+            const match = version.match(/^(\d+)\.(\d+)\.(\d+)$/);
+
+            if (!match) {
+              throw new Error(`Unsupported package version: ${version}`);
+            }
+
+            const major = Number(match[1]);
+            const minor = Number(match[2]);
+            const patch = Number(match[3]);
+
+            if (bump === 'major') {
+              return `${major + 1}.0.0`;
+            }
+
+            if (bump === 'minor') {
+              return `${major}.${minor + 1}.0`;
+            }
+
+            if (bump === 'patch') {
+              return `${major}.${minor}.${patch + 1}`;
+            }
+
+            throw new Error(`Unsupported release bump: ${bump}`);
+          }
+
+          const packages = packagePaths.map((path) => ({
+            path,
+            manifest: JSON.parse(fs.readFileSync(path, 'utf8')),
+          }));
+
+          const versions = new Set(packages.map(({ manifest }) => manifest.version));
+
+          if (versions.size !== 1) {
+            throw new Error('Workspace package versions are out of sync.');
+          }
+
+          const version = nextVersion(packages[0].manifest.version);
+
+          for (const pkg of packages) {
+            pkg.manifest.version = version;
+            fs.writeFileSync(pkg.path, `${JSON.stringify(pkg.manifest, null, 2)}\n`);
+          }
+          NODE
+
+          version=$(node -p "require('./packages/atomics/package.json').version")
+          theme_version=$(node -p "require('./packages/theme/package.json').version")
+
+          if [ "$version" != "$theme_version" ]; then
+            echo "Workspace package versions are out of sync."
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Commit release version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add packages/atomics/package.json packages/theme/package.json
+          git commit -m "chore: release v${{ steps.version.outputs.version }}"
+          git tag v${{ steps.version.outputs.version }}
+          git push origin main
+          git push origin v${{ steps.version.outputs.version }}
+
+      - name: Publish atomics package
+        working-directory: packages/atomics
+        run: npm publish --access public
+
+      - name: Publish theme package
+        working-directory: packages/theme
+        run: npm publish --access public
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh auth status
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --title "${{ steps.version.outputs.tag }}" \
+            --notes "Released from PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}"
+
+      - name: Mark Pull Request as Released
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          cat <<'JSON' | gh api "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" \
+            --method POST \
+            --input -
+          {
+            "labels": ["released"]
+          }
+          JSON

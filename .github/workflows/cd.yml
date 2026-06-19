@@ -1,0 +1,42 @@
+name: CD
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-packages:
+    name: Build and publish dry run
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Dry-run atomics publish
+        working-directory: packages/atomics
+        run: npm publish --dry-run --access public
+
+      - name: Dry-run theme publish
+        working-directory: packages/theme
+        run: npm publish --dry-run --access public

@@ -5,9 +5,9 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@arctura-ui/atomics@workspace:packages/atomics":
+"@arctura/atomics@workspace:packages/atomics":
   version: 0.0.0-use.local
-  resolution: "@arctura-ui/atomics@workspace:packages/atomics"
+  resolution: "@arctura/atomics@workspace:packages/atomics"
   dependencies:
     "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.1.0"
@@ -35,9 +35,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@arctura-ui/theme@workspace:packages/theme":
+"@arctura/theme@workspace:packages/theme":
   version: 0.0.0-use.local
-  resolution: "@arctura-ui/theme@workspace:packages/theme"
+  resolution: "@arctura/theme@workspace:packages/theme"
   dependencies:
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/react": "npm:^16.3.2"
@@ -58,7 +58,7 @@ __metadata:
     vite: "npm:^8.0.12"
     vitest: "npm:4.1.8"
   bin:
-    arctura-theme: ./dist/cli.js
+    arctura-theme: dist/cli.js
   languageName: unknown
   linkType: soft
 
@@ -1466,9 +1466,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"arctura-ui@workspace:.":
+"arctura@workspace:.":
   version: 0.0.0-use.local
-  resolution: "arctura-ui@workspace:."
+  resolution: "arctura@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.39.1"
     "@eslint/json": "npm:^2.0.0"
