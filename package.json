@@ -9,7 +9,7 @@
     "build": "yarn workspaces foreach --all --topological-dev run build",
     "build:atomics": "yarn workspace @arctura-ui/atomics build",
     "build:theme": "yarn workspace @arctura-ui/theme build",
-    "clean": "yarn workspaces foreach --all --topological-dev run clean",
+    "clean": "yarn workspaces foreach --all --topological-dev run clean && rimraf coverage",
     "clean:atomics": "yarn workspace @arctura-ui/atomics clean",
     "clean:theme": "yarn workspace @arctura-ui/theme clean",
     "lint": "yarn workspaces foreach --all --topological-dev run lint",
@@ -32,14 +32,16 @@
     "@eslint/json": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
-    "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/coverage-istanbul": "4.1.8",
+    "@vitest/coverage-v8": "4.1.8",
     "@vitest/ui": "4.1.8",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.6.0",
     "prettier": "^3.7.4",
-    "vitest": "^4.1.8"
+    "rimraf": "^6.1.3",
+    "vitest": "4.1.8"
   },
   "dependencies": {
     "typescript": "^6.0.3"

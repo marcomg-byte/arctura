@@ -1,41 +1,23 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'node:path';
+import { makeLibraryConfig } from '../../vite.config';
 
-export default defineConfig({
-  resolve: {
-    alias: [
-      {
-        find: '@/lib',
-        replacement: resolve(__dirname, 'lib/index.ts'),
-      },
-      {
-        find: '@',
-        replacement: resolve(__dirname),
-      },
-    ],
+export default makeLibraryConfig({
+  packageRoot: __dirname,
+  entry: {
+    index: resolve(__dirname, 'src/index.ts'),
+    hooks: resolve(__dirname, 'lib/hooks.ts'),
   },
-  build: {
-    lib: {
-      entry: {
-        index: resolve(__dirname, 'src/index.ts'),
-        hooks: resolve(__dirname, 'lib/hooks.ts'),
-      },
-      formats: ['es', 'cjs'],
-      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
+  aliases: [
+    {
+      find: '@/lib',
+      replacement: resolve(__dirname, 'lib/index.ts'),
     },
-    rollupOptions: {
-      external: [
-        '@fortawesome/free-solid-svg-icons',
-        '@fortawesome/react-fontawesome',
-        'classnames',
-        'embla-carousel-fade',
-        'embla-carousel-react',
-        'react',
-        'react/jsx-runtime',
-        'tailwind-merge',
-      ],
+    {
+      find: '@',
+      replacement: resolve(__dirname),
     },
-  },
+  ],
+  external: ['react/jsx-runtime'],
   plugins: [react()],
 });
