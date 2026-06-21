@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   verify-packages:
-    name: Build and publish dry run
+    name: Build and package dry run
     runs-on: ubuntu-latest
 
     steps:
@@ -33,10 +33,10 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Dry-run atomics publish
+      - name: Dry-run atomics package
         working-directory: packages/atomics
-        run: npm publish --dry-run --access public
+        run: npm pack --dry-run
 
-      - name: Dry-run theme publish
+      - name: Dry-run theme package
         working-directory: packages/theme
-        run: npm publish --dry-run --access public
+        run: npm pack --dry-run
