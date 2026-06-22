@@ -147,6 +147,14 @@ jobs:
       - name: Build packages
         run: yarn build
 
+      - name: Dry-run atomics publish
+        working-directory: packages/atomics
+        run: npm publish --dry-run --access public
+
+      - name: Dry-run theme publish
+        working-directory: packages/theme
+        run: npm publish --dry-run --access public
+
       - name: Commit release version
         run: |
           git config user.name "github-actions[bot]"

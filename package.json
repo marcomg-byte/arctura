@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "repository": {
-    "url": "https://github.com/marcomg-byte/arctura"
+    "url": "git+https://github.com/marcomg-byte/arctura.git"
   },
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev run build",
