@@ -8,6 +8,15 @@ Theme token utilities, CSS generation, and a client-side hook for switching them
 yarn add @arctura/theme
 ```
 
+## Current Version
+
+`0.0.2`
+
+## Versions
+
+- `0.0.2` - current package version
+- `0.0.1` - first alpha version
+
 ## Exports
 
 ```tsx
@@ -45,6 +54,21 @@ If no arguments are provided, the CLI defaults to:
 
 - `./tokens.json` for input
 - `./theme.css` for output
+
+## Programmatic Parse
+
+If you want to generate theme CSS from code instead of the CLI, use the parser exports directly.
+
+```ts
+import tokens from './tokens.json' with { type: 'json' };
+import { buildCssFile, generateTheme } from '@arctura/theme/parser';
+
+const css = generateTheme(tokens);
+
+await buildCssFile(css, './theme.css');
+```
+
+If you already have the tokens object in memory, `generateTheme(tokens)` returns the CSS string and you can write it wherever you need.
 
 ## Token Shape
 

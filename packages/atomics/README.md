@@ -8,6 +8,15 @@ Reusable React components and hooks for the Arctura design system.
 yarn add @arctura/atomics
 ```
 
+## Current Version
+
+`0.0.2`
+
+## Versions
+
+- `0.0.2` - current package version
+- `0.0.1` - first version
+
 ## Public API
 
 Import components from the package root:

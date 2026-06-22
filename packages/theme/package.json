@@ -2,14 +2,13 @@
   "name": "@arctura/theme",
   "version": "0.0.1",
   "type": "module",
-  "private": false,
   "packageManager": "yarn@4.11.0",
   "license": "MIT",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "repository": {
-    "url": "https://github.com/marcomg-byte/arctura"
+    "url": "git+https://github.com/marcomg-byte/arctura.git"
   },
   "bin": {
     "arctura-theme": "dist/cli.js"
