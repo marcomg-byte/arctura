@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  id-token: write
   pull-requests: read
   issues: write
 
@@ -16,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  release:
+  prepare-release:
     if: >
       github.event.pull_request.merged == true &&
       github.event.pull_request.base.ref == 'main' &&
@@ -66,7 +65,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          registry-url: https://registry.npmjs.org
 
       - name: Enable Corepack
         run: corepack enable
@@ -147,13 +145,13 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Dry-run atomics publish
+      - name: Check atomics package contents
         working-directory: packages/atomics
-        run: npm publish --dry-run --access public
+        run: npm pack --dry-run
 
-      - name: Dry-run theme publish
+      - name: Check theme package contents
         working-directory: packages/theme
-        run: npm publish --dry-run --access public
+        run: npm pack --dry-run
 
       - name: Commit release version
         run: |
@@ -164,14 +162,6 @@ jobs:
           git tag v${{ steps.version.outputs.version }}
           git push origin main
           git push origin v${{ steps.version.outputs.version }}
-
-      - name: Publish atomics package
-        working-directory: packages/atomics
-        run: npm publish --access public
-
-      - name: Publish theme package
-        working-directory: packages/theme
-        run: npm publish --access public
 
       - name: Create GitHub Release
         env:
