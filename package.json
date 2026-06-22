@@ -1,31 +1,34 @@
 {
-  "name": "arctura-ui",
+  "name": "arctura",
   "packageManager": "yarn@4.11.0",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
+  "repository": {
+    "url": "https://github.com/marcomg-byte/arctura"
+  },
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev run build",
-    "build:atomics": "yarn workspace @arctura-ui/atomics build",
-    "build:theme": "yarn workspace @arctura-ui/theme build",
+    "build:atomics": "yarn workspace @arctura/atomics build",
+    "build:theme": "yarn workspace @arctura/theme build",
     "clean": "yarn workspaces foreach --all --topological-dev run clean && rimraf coverage",
-    "clean:atomics": "yarn workspace @arctura-ui/atomics clean",
-    "clean:theme": "yarn workspace @arctura-ui/theme clean",
+    "clean:atomics": "yarn workspace @arctura/atomics clean",
+    "clean:theme": "yarn workspace @arctura/theme clean",
     "lint": "yarn workspaces foreach --all --topological-dev run lint",
     "lint:fix": "yarn workspaces foreach --all --topological-dev run lint:fix",
-    "lint:atomics": "yarn workspace @arctura-ui/atomics lint",
-    "lint:theme": "yarn workspace @arctura-ui/theme lint",
+    "lint:atomics": "yarn workspace @arctura/atomics lint",
+    "lint:theme": "yarn workspace @arctura/theme lint",
     "test": "vitest run",
     "test:cov": "vitest run --coverage",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "test:atomics": "yarn workspace @arctura-ui/atomics test",
-    "test:theme": "yarn workspace @arctura-ui/theme test",
-    "theme:parse": "yarn workspace @arctura-ui/theme theme:parse",
+    "test:atomics": "yarn workspace @arctura/atomics test",
+    "test:theme": "yarn workspace @arctura/theme test",
+    "theme:parse": "yarn workspace @arctura/theme theme:parse",
     "typecheck": "yarn workspaces foreach --all --topological-dev run typecheck",
-    "typecheck:atomics": "yarn workspace @arctura-ui/atomics typecheck",
-    "typecheck:theme": "yarn workspace @arctura-ui/theme typecheck"
+    "typecheck:atomics": "yarn workspace @arctura/atomics typecheck",
+    "typecheck:theme": "yarn workspace @arctura/theme typecheck"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
