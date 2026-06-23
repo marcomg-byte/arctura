@@ -40,8 +40,8 @@ jobs:
 
       - name: Publish atomics package
         working-directory: packages/atomics
-        run: npm publish --access public
+        run: npm publish --access public --provenance
 
       - name: Publish theme package
         working-directory: packages/theme
-        run: npm publish --access public
+        run: npm publish --access public --provenance
