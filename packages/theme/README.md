@@ -10,12 +10,13 @@ yarn add @arctura/theme
 
 ## Current Version
 
-`0.0.2`
+`0.0.3`
 
 ## Versions
 
-- `0.0.2` - current package version
-- `0.0.1` - first alpha version
+- `0.0.3` - current package version
+- `0.0.2` - alpha version
+- `0.0.1` - first version
 
 ## Exports
 
