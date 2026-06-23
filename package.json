@@ -2,6 +2,7 @@
   "name": "arctura",
   "packageManager": "yarn@4.11.0",
   "private": true,
+  "license": "UNLICENSED",
   "workspaces": [
     "packages/*"
   ],
