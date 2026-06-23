@@ -1,0 +1,16 @@
+Repository License Notice
+
+Copyright (c) 2026 Marco Antonio Melo Garcia. All rights reserved.
+
+The root of this repository is not licensed for public use. This includes
+repository configuration, GitHub workflows, automation, documentation, and
+other files outside the published package directories.
+
+The published packages are licensed separately:
+
+- packages/atomics is licensed under the MIT License. See
+  packages/atomics/LICENSE.
+- packages/theme is licensed under the MIT License. See packages/theme/LICENSE.
+
+No license is granted for any other repository content unless a license file or
+notice in that content states otherwise.
