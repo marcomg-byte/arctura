@@ -217,20 +217,20 @@ const renderAdornment = (
   className?: string
 ) => {
   const iconClasses = classNames(
-    'mg:text-base',
+    'au:text-base',
     {
-      'mg:text-white': color === 'white',
-      'mg:text-black': color === 'black',
-      'mg:text-primary': color === 'primary',
-      'mg:text-secondary': color === 'secondary',
-      'mg:text-accent': color === 'accent',
-      'mg:text-subtle': color === 'subtle',
+      'au:text-white': color === 'white',
+      'au:text-black': color === 'black',
+      'au:text-primary': color === 'primary',
+      'au:text-secondary': color === 'secondary',
+      'au:text-accent': color === 'accent',
+      'au:text-subtle': color === 'subtle',
     },
     className
   );
 
   const imageClasses = classNames(
-    'mg:object-contain mg:animate-fade-in mg:duration-500',
+    'au:object-contain au:animate-fade-in au:duration-500',
     className
   );
 
@@ -340,9 +340,9 @@ const TextInput: FC<TextInputProps> = ({
 
   const containerClasses = twMerge(
     classNames(
-      'mg:flex mg:flex-col mg:gap-2 mg:relative mg:bg-inherit mg:pt-0.5 mg:pb-3 mg:h-full',
+      'au:flex au:flex-col au:gap-2 au:relative au:bg-inherit au:pt-0.5 au:pb-3 au:h-full',
       {
-        'mg:w-full': fullWidth,
+        'au:w-full': fullWidth,
       }
     ),
     classes?.container
@@ -350,58 +350,58 @@ const TextInput: FC<TextInputProps> = ({
 
   const clearButtonClasses = classNames(
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
-      'mg:shrink-0': fullWidth,
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
+      'au:shrink-0': fullWidth,
     },
     classes?.clearButton
   );
 
   const helperClasses = twMerge(
-    classNames('mg:font-body mg:text-sm', {
-      'mg:text-accent': adornmentColor === 'accent' && !status && !error,
-      'mg:text-black': adornmentColor === 'black' && !status && !error,
-      'mg:text-inverse': adornmentColor === 'inverse' && !status && !error,
-      'mg:text-primary': adornmentColor === 'primary' && !status && !error,
-      'mg:text-secondary': adornmentColor === 'secondary' && !status && !error,
-      'mg:text-subtle': adornmentColor === 'subtle' && !status && !error,
-      'mg:text-white': adornmentColor === 'white' && !status && !error,
-      'mg:text-success': status === 'success' && !error,
-      'mg:text-warning': status === 'warning' && !error,
-      'mg:text-danger': status === 'error' || error,
+    classNames('au:font-body au:text-sm', {
+      'au:text-accent': adornmentColor === 'accent' && !status && !error,
+      'au:text-black': adornmentColor === 'black' && !status && !error,
+      'au:text-inverse': adornmentColor === 'inverse' && !status && !error,
+      'au:text-primary': adornmentColor === 'primary' && !status && !error,
+      'au:text-secondary': adornmentColor === 'secondary' && !status && !error,
+      'au:text-subtle': adornmentColor === 'subtle' && !status && !error,
+      'au:text-white': adornmentColor === 'white' && !status && !error,
+      'au:text-success': status === 'success' && !error,
+      'au:text-warning': status === 'warning' && !error,
+      'au:text-danger': status === 'error' || error,
     }),
     classes?.helper
   );
 
   const inputClasses = twMerge(
-    classNames('mg:focus-visible:outline-0 mg:caret-white', {
-      'mg:text-black': color === 'black',
-      'mg:text-inverse': color === 'inverse',
-      'mg:text-primary': color === 'primary',
-      'mg:text-white': color === 'white',
-      'mg:w-12': size === 'sm' && !fullWidth,
-      'mg:w-32': size === 'md' && !fullWidth,
-      'mg:w-52': size === 'lg' && !fullWidth,
-      'mg:grow': fullWidth,
+    classNames('au:focus-visible:outline-0 au:caret-white', {
+      'au:text-black': color === 'black',
+      'au:text-inverse': color === 'inverse',
+      'au:text-primary': color === 'primary',
+      'au:text-white': color === 'white',
+      'au:w-12': size === 'sm' && !fullWidth,
+      'au:w-32': size === 'md' && !fullWidth,
+      'au:w-52': size === 'lg' && !fullWidth,
+      'au:grow': fullWidth,
     }),
     classes?.input
   );
 
   const inputContainerClasses = twMerge(
     classNames(
-      'mg:flex mg:h-full mg:items-center mg:border-solid mg:gap-2 mg:border-1 mg:rounded-md mg:px-3 mg:py-2 mg:hover:border-accent',
+      'au:flex au:h-full au:items-center au:border-solid au:gap-2 au:border-1 au:rounded-md au:px-3 au:py-2 au:hover:border-accent',
       {
-        'mg:border-danger': error || status === 'error',
-        'mg:border-warning': status === 'warning',
-        'mg:border-success': status === 'success',
-        'mg:border-primary': !error && !status,
-        'mg:w-full': fullWidth,
-        'mg:has-[input:focus]:outline-1 mg:has-[input:focus]:outline-primary mg:has-[input:focus]:outline-offset-4':
+        'au:border-danger': error || status === 'error',
+        'au:border-warning': status === 'warning',
+        'au:border-success': status === 'success',
+        'au:border-primary': !error && !status,
+        'au:w-full': fullWidth,
+        'au:has-[input:focus]:outline-1 au:has-[input:focus]:outline-primary au:has-[input:focus]:outline-offset-4':
           !clicked && value === '',
       }
     ),
@@ -409,31 +409,31 @@ const TextInput: FC<TextInputProps> = ({
   );
 
   const labelClasses = twMerge(
-    classNames('mg:font-body mg:text-sm', {
-      'mg:text-accent': adornmentColor === 'accent' && !status && !error,
-      'mg:text-black': adornmentColor === 'black' && !status && !error,
-      'mg:text-inverse': adornmentColor === 'inverse' && !status && !error,
-      'mg:text-primary': adornmentColor === 'primary' && !status && !error,
-      'mg:text-secondary': adornmentColor === 'secondary' && !status && !error,
-      'mg:text-subtle': adornmentColor === 'subtle' && !status && !error,
-      'mg:text-white': adornmentColor === 'white' && !status && !error,
-      'mg:text-success': status === 'success' && !error,
-      'mg:text-warning': status === 'warning' && !error,
-      'mg:text-danger': status === 'error' || error,
+    classNames('au:font-body au:text-sm', {
+      'au:text-accent': adornmentColor === 'accent' && !status && !error,
+      'au:text-black': adornmentColor === 'black' && !status && !error,
+      'au:text-inverse': adornmentColor === 'inverse' && !status && !error,
+      'au:text-primary': adornmentColor === 'primary' && !status && !error,
+      'au:text-secondary': adornmentColor === 'secondary' && !status && !error,
+      'au:text-subtle': adornmentColor === 'subtle' && !status && !error,
+      'au:text-white': adornmentColor === 'white' && !status && !error,
+      'au:text-success': status === 'success' && !error,
+      'au:text-warning': status === 'warning' && !error,
+      'au:text-danger': status === 'error' || error,
     }),
     classes?.label
   );
 
   const toggleButtonClasses = classNames(
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
-      'mg:shrink-0': fullWidth,
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
+      'au:shrink-0': fullWidth,
     },
     classes?.toggleButton
   );
@@ -511,11 +511,11 @@ const TextInput: FC<TextInputProps> = ({
 
   return (
     <div className={containerClasses}>
-      <div className="mg:absolute mg:-top-0.75 mg:bg-inherit mg:left-3.5 mg:animate-slide-in-top">
+      <div className="au:absolute au:-top-0.75 au:bg-inherit au:left-3.5 au:animate-slide-in-top">
         {label && (
           <p className={labelClasses}>
             {label}
-            {required && <span className="mg:text-danger"> *</span>}
+            {required && <span className="au:text-danger"> *</span>}
           </p>
         )}
       </div>
@@ -574,11 +574,11 @@ const TextInput: FC<TextInputProps> = ({
           </IconButton>
         )}
       </div>
-      <div className="mg:absolute mg:bottom-0 mg:left-3.5 mg:bg-inherit mg:animate-slide-in-bottom">
+      <div className="au:absolute au:bottom-0 au:left-3.5 au:bg-inherit au:animate-slide-in-bottom">
         {helperText && (
           <p className={helperClasses}>
             {helperText}
-            {required && <span className="mg:text-danger"> *</span>}
+            {required && <span className="au:text-danger"> *</span>}
           </p>
         )}
       </div>

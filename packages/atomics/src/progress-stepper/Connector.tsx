@@ -57,15 +57,15 @@ const Connector: FC<ConnectorProps> = ({
   ref,
   ...rest
 }) => {
-  const containerClasses = twMerge('mg:relative mg:flex mg:h-full mg:grow', classes?.container);
+  const containerClasses = twMerge('au:relative au:flex au:h-full au:grow', classes?.container);
 
   const contentClasses = twMerge(
-    classNames('mg:relative mg:transform mg:translate-y-7', {
-      'mg:h-2px mg:w-full': orientation === 'horizontal',
-      'mg:w-2px mg:h-full': orientation === 'vertical',
-      'mg:bg-accent': !active && !completed,
-      'mg:bg-primary': active,
-      'mg:bg-success-primary': completed,
+    classNames('au:relative au:transform au:translate-y-7', {
+      'au:h-2px au:w-full': orientation === 'horizontal',
+      'au:w-2px au:h-full': orientation === 'vertical',
+      'au:bg-accent': !active && !completed,
+      'au:bg-primary': active,
+      'au:bg-success-primary': completed,
     }),
     classes?.content
   );

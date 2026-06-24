@@ -16,16 +16,16 @@ type ClampLine = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
  * @see ClampLine
  */
 const clampClasses: Record<ClampLine, string> = {
-  1: 'mg:line-clamp-1',
-  2: 'mg:line-clamp-2',
-  3: 'mg:line-clamp-3',
-  4: 'mg:line-clamp-4',
-  5: 'mg:line-clamp-5',
-  6: 'mg:line-clamp-6',
-  7: 'mg:line-clamp-7',
-  8: 'mg:line-clamp-8',
-  9: 'mg:line-clamp-9',
-  10: 'mg:line-clamp-10',
+  1: 'au:line-clamp-1',
+  2: 'au:line-clamp-2',
+  3: 'au:line-clamp-3',
+  4: 'au:line-clamp-4',
+  5: 'au:line-clamp-5',
+  6: 'au:line-clamp-6',
+  7: 'au:line-clamp-7',
+  8: 'au:line-clamp-8',
+  9: 'au:line-clamp-9',
+  10: 'au:line-clamp-10',
 };
 
 /**
@@ -89,15 +89,15 @@ const paragraphVariants = ['base', 'small', 'large'] as ParagraphVariant[];
  * Larger breakpoints preserve the current desktop sizes.
  */
 const variantTextClasses: Record<TypographyVariant, string> = {
-  base: 'mg:text-base',
-  small: 'mg:text-sm',
-  large: 'mg:text-base mg:sm:text-lg',
-  h1: 'mg:text-5xl mg:sm:text-6xl mg:lg:text-8xl',
-  h2: 'mg:text-4xl mg:sm:text-5xl mg:lg:text-7xl',
-  h3: 'mg:text-3xl mg:sm:text-4xl mg:lg:text-6xl',
-  h4: 'mg:text-base mg:sm:text-lg',
-  h5: 'mg:text-sm mg:sm:text-base',
-  h6: 'mg:text-sm',
+  base: 'au:text-base',
+  small: 'au:text-sm',
+  large: 'au:text-base au:sm:text-lg',
+  h1: 'au:text-5xl au:sm:text-6xl au:lg:text-8xl',
+  h2: 'au:text-4xl au:sm:text-5xl au:lg:text-7xl',
+  h3: 'au:text-3xl au:sm:text-4xl au:lg:text-6xl',
+  h4: 'au:text-base au:sm:text-lg',
+  h5: 'au:text-sm au:sm:text-base',
+  h6: 'au:text-sm',
 };
 
 /**
@@ -217,44 +217,44 @@ function Typography({
 
   const headingClasses = isHeading
     ? classNames({
-        'mg:font-extrabold': bold,
-        'mg:font-heading': !bold,
+        'au:font-extrabold': bold,
+        'au:font-heading': !bold,
       })
     : '';
 
   const paragraphClasses = isParagraph
     ? classNames({
-        'mg:font-bold': bold,
-        'mg:font-body': !bold,
+        'au:font-bold': bold,
+        'au:font-body': !bold,
       })
     : '';
 
   const spanClasses = span
     ? classNames({
-        'mg:font-bold': bold,
-        'mg:font-body': isParagraph,
-        'mg:font-heading': isHeading,
+        'au:font-bold': bold,
+        'au:font-body': isParagraph,
+        'au:font-heading': isHeading,
       })
     : '';
 
   const classes = twMerge(
     classNames(
       {
-        'mg:py-1': !removePadding,
-        'mg:text-left': align === 'left',
-        'mg:text-center': align === 'center',
-        'mg:text-right': align === 'right',
-        'mg:text-justify': align === 'justify',
-        'mg:truncate': truncate,
-        'mg:underline': underline,
-        'mg:text-active': color === 'active',
-        'mg:text-black': color === 'black',
-        'mg:text-primary': color === 'primary',
-        'mg:text-secondary': color === 'secondary',
-        'mg:text-accent': color === 'accent',
-        'mg:text-subtle': color === 'subtle',
-        'mg:text-inverse': color === 'inverse',
-        'mg:text-white': color === 'white',
+        'au:py-1': !removePadding,
+        'au:text-left': align === 'left',
+        'au:text-center': align === 'center',
+        'au:text-right': align === 'right',
+        'au:text-justify': align === 'justify',
+        'au:truncate': truncate,
+        'au:underline': underline,
+        'au:text-active': color === 'active',
+        'au:text-black': color === 'black',
+        'au:text-primary': color === 'primary',
+        'au:text-secondary': color === 'secondary',
+        'au:text-accent': color === 'accent',
+        'au:text-subtle': color === 'subtle',
+        'au:text-inverse': color === 'inverse',
+        'au:text-white': color === 'white',
       },
       headingClasses,
       paragraphClasses,

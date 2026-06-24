@@ -156,7 +156,7 @@ type ListItemProps = (AnchorProps | DivProps | LiProps) & BaseProps;
  * classes applied.
  */
 const renderAdornment = (adornment: ListItemAdornment, className?: string) => {
-  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
+  const imageClasses = twMerge('au:object-contain au:animate-fade-in au:duration-500', className);
 
   if ('iconName' in adornment) {
     return <FontAwesomeIcon icon={adornment} className={className} />;
@@ -241,52 +241,52 @@ function ListItem({
   });
 
   const adornmentClasses = classNames(
-    'mg:text-base mg:p-1 mg:group-hover:text-accent',
+    'au:text-base au:p-1 au:group-hover:text-accent',
     {
-      'mg:text-accent': adornmentColor === 'accent' && !status,
-      'mg:text-black': adornmentColor === 'black' && !status,
-      'mg:text-inverse': adornmentColor === 'inverse' && !status,
-      'mg:text-primary': adornmentColor === 'primary' && !status,
-      'mg:text-secondary': adornmentColor === 'secondary' && !status,
-      'mg:text-subtle': adornmentColor === 'subtle' && !status,
-      'mg:text-white': adornmentColor === 'white' && !status,
-      'mg:text-success': status === 'success' || adornmentColor === 'success',
-      'mg:text-danger': status === 'error' || adornmentColor === 'danger',
-      'mg:text-info': status === 'info' || adornmentColor === 'info',
-      'mg:text-warning': status === 'warning' || adornmentColor === 'warning',
+      'au:text-accent': adornmentColor === 'accent' && !status,
+      'au:text-black': adornmentColor === 'black' && !status,
+      'au:text-inverse': adornmentColor === 'inverse' && !status,
+      'au:text-primary': adornmentColor === 'primary' && !status,
+      'au:text-secondary': adornmentColor === 'secondary' && !status,
+      'au:text-subtle': adornmentColor === 'subtle' && !status,
+      'au:text-white': adornmentColor === 'white' && !status,
+      'au:text-success': status === 'success' || adornmentColor === 'success',
+      'au:text-danger': status === 'error' || adornmentColor === 'danger',
+      'au:text-info': status === 'info' || adornmentColor === 'info',
+      'au:text-warning': status === 'warning' || adornmentColor === 'warning',
     },
     classes?.adornment
   );
 
   const rootClasses = twMerge(
     classNames(
-      'mg:flex mg:flex-col mg:items-center mg:w-full mg:transition-all',
-      'mg:focus-visible:outline-1 mg:focus-visible:outline-offset-4 mg:focus-visible:outline-primary',
+      'au:flex au:flex-col au:items-center au:w-full au:transition-all',
+      'au:focus-visible:outline-1 au:focus-visible:outline-offset-4 au:focus-visible:outline-primary',
       {
-        'mg:group mg:hover:cursor-pointer mg:duration-200': selectable,
-        'mg:rounded-t-lg': firstIndex,
-        'mg:bg-black/50': selected,
-        'mg:opacity-80': disabled,
-        'mg:rounded-b-lg': lastIndex,
-        'mg:hover:scale-105 mg:hover:px-2 mg:duration-500': !selectable,
+        'au:group au:hover:cursor-pointer au:duration-200': selectable,
+        'au:rounded-t-lg': firstIndex,
+        'au:bg-black/50': selected,
+        'au:opacity-80': disabled,
+        'au:rounded-b-lg': lastIndex,
+        'au:hover:scale-105 au:hover:px-2 au:duration-500': !selectable,
       }
     ),
     classes?.root
   );
 
   const containerClasses = twMerge(
-    classNames('mg:flex mg:items-center mg:w-full'),
+    classNames('au:flex au:items-center au:w-full'),
     classes?.container
   );
 
   const childrenClasses = twMerge(
-    classNames('mg:flex mg:flex-col mg:grow mg:gap-2 mg:py-2 mg:pr-2'),
+    classNames('au:flex au:flex-col au:grow au:gap-2 au:py-2 au:pr-2'),
     classes?.children
   );
 
-  const labelClasses = twMerge(classNames('mg:group-hover:text-accent'), classes?.label);
+  const labelClasses = twMerge(classNames('au:group-hover:text-accent'), classes?.label);
 
-  const titleClasses = twMerge(classNames('mg:group-hover:text-accent'), classes?.title);
+  const titleClasses = twMerge(classNames('au:group-hover:text-accent'), classes?.title);
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement | HTMLDivElement | HTMLLIElement>) => {
     if (onClick) {
@@ -384,7 +384,7 @@ function ListItem({
         </div>
       </div>
       {divider && !lastIndex && (
-        <div className="mg:w-9/10 mg:h-0 mg:border-solid mg:border-b-1 mg:border-b-primary" />
+        <div className="au:w-9/10 au:h-0 au:border-solid au:border-b-1 au:border-b-primary" />
       )}
     </li>
   );

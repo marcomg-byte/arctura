@@ -18,10 +18,10 @@ describe('Link', () => {
 
     expect(anchor.getAttribute('href')).toBe('/projects');
     expect(anchor.getAttribute('target')).toBe('_blank');
-    expect(anchor.className).toContain('mg:flex');
+    expect(anchor.className).toContain('au:flex');
     expect(text.tagName).toBe('P');
-    expect(text.className).toContain('mg:text-secondary');
-    expect(text.className).toContain('mg:cursor-pointer');
+    expect(text.className).toContain('au:text-secondary');
+    expect(text.className).toContain('au:cursor-pointer');
   });
 
   it('renders heading typography for heading variants', () => {
@@ -34,8 +34,8 @@ describe('Link', () => {
     const heading = screen.getByRole('heading', { level: 3, name: 'About' });
 
     expect(heading.tagName).toBe('H3');
-    expect(heading.className).toContain('mg:text-accent');
-    expect(heading.className).toContain('mg:group-hover:text-subtle-hover');
+    expect(heading.className).toContain('au:text-accent');
+    expect(heading.className).toContain('au:group-hover:text-subtle-hover');
   });
 
   it('forwards anchor props, click handlers, and custom classes', () => {

@@ -71,7 +71,7 @@ const Card: FC<CardProps> = ({ children, ref, ...rest }) => {
 
   return (
     <div
-      className="mg:flex mg:min-w-36 mg:max-w-52 mg:w-full mg:flex-col mg:justify-start mg:bg-primary-subtle mg:rounded-lg mg:shadow-lg mg:shadow-black/20 mg:ring-1 mg:ring-black/5 mg:transition-transform mg:duration-200 mg:hover:scale-[1.02]"
+      className="au:flex au:min-w-36 au:max-w-52 au:w-full au:flex-col au:justify-start au:bg-primary-subtle au:rounded-lg au:shadow-lg au:shadow-black/20 au:ring-1 au:ring-black/5 au:transition-transform au:duration-200 au:hover:scale-[1.02]"
       ref={ref}
       {...(rest as HTMLAttributes<HTMLDivElement>)}
     >

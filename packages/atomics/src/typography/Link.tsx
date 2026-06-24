@@ -75,14 +75,14 @@ interface LinkProps extends TypographyProps {
  *
  * export function ContactLinks() {
  *   return (
- *     <div className="mg:flex mg:flex-col mg:gap-3">
+ *     <div className="au:flex au:flex-col au:gap-3">
  *       <Link
  *         href="mailto:hello@example.com"
  *         variant="h3"
  *         color="primary"
  *         classes={{
- *           anchor: 'mg:inline-flex',
- *           typography: 'mg:font-semibold',
+ *           anchor: 'au:inline-flex',
+ *           typography: 'au:font-semibold',
  *         }}
  *       >
  *         hello@example.com
@@ -117,13 +117,13 @@ const Link: FC<LinkProps> = ({
   variant = 'base',
   ...rest
 }) => {
-  const anchorClasses = twMerge(classNames('mg:flex mg:group'), classes?.anchor);
+  const anchorClasses = twMerge(classNames('au:flex au:group'), classes?.anchor);
   const typographyClasses = twMerge(
-    classNames('mg:cursor-pointer', {
-      'mg:group-hover:text-accent': color !== 'accent',
-      'mg:group-hover:text-subtle-hover': color === 'accent',
-      'mg:group-active:text-active mg:group-visited:text-active': color !== 'active',
-      'mg:group-active:text-active-hover mg:group-visited:text-active-hover': color === 'active',
+    classNames('au:cursor-pointer', {
+      'au:group-hover:text-accent': color !== 'accent',
+      'au:group-hover:text-subtle-hover': color === 'accent',
+      'au:group-active:text-active au:group-visited:text-active': color !== 'active',
+      'au:group-active:text-active-hover au:group-visited:text-active-hover': color === 'active',
     }),
     classes?.typography
   );

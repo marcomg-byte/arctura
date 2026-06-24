@@ -102,8 +102,8 @@ describe('Hero', () => {
     const firstSlide = firstImage.parentElement as HTMLElement;
 
     expect(container.firstElementChild?.className).toContain('custom-hero');
-    expect(firstSlide.className).toContain('mg:aspect-[16/9]');
-    expect(firstSlide.className).toContain('mg:transition-opacity');
+    expect(firstSlide.className).toContain('au:aspect-[16/9]');
+    expect(firstSlide.className).toContain('au:transition-opacity');
     expect(firstSlide.className).toContain('custom-slide');
     expect(firstSlide.getAttribute('style')).toContain('transition-duration: 700ms');
     expect(firstImage.getAttribute('loading')).toBe('lazy');

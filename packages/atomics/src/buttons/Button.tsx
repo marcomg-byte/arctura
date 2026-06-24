@@ -58,9 +58,9 @@ type ButtonVariant = 'primary' | 'secondary' | 'text' | 'outline';
  * Maps ButtonSize values to fixed spacing, radius, and text size classes.
  */
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'mg:px-1.5 mg:py-1 mg:rounded-sm mg:text-sm',
-  md: 'mg:px-2.5 mg:py-2 mg:rounded-md mg:text-sm',
-  lg: 'mg:px-3.5 mg:py-3 mg:rounded-lg mg:text-base',
+  sm: 'au:px-1.5 au:py-1 au:rounded-sm au:text-sm',
+  md: 'au:px-2.5 au:py-2 au:rounded-md au:text-sm',
+  lg: 'au:px-3.5 au:py-3 au:rounded-lg au:text-base',
 };
 
 /**
@@ -68,9 +68,9 @@ const sizeClasses: Record<ButtonSize, string> = {
  * Larger breakpoints preserve the fixed size classes.
  */
 const responsiveSizeClasses: Record<ButtonSize, string> = {
-  sm: 'mg:px-1.5 mg:py-1 mg:rounded-sm mg:text-sm',
-  md: 'mg:px-2 mg:py-1.5 mg:rounded-md mg:text-sm mg:sm:px-2.5 mg:sm:py-2',
-  lg: 'mg:px-2.5 mg:py-2 mg:rounded-md mg:text-sm mg:sm:px-3.5 mg:sm:py-3 mg:sm:rounded-lg mg:sm:text-base',
+  sm: 'au:px-1.5 au:py-1 au:rounded-sm au:text-sm',
+  md: 'au:px-2 au:py-1.5 au:rounded-md au:text-sm au:sm:px-2.5 au:sm:py-2',
+  lg: 'au:px-2.5 au:py-2 au:rounded-md au:text-sm au:sm:px-3.5 au:sm:py-3 au:sm:rounded-lg au:sm:text-base',
 };
 
 /**
@@ -138,8 +138,8 @@ type ButtonComponentProps = (AnchorProps | ButtonProps) & BaseProps;
  * @returns {JSX.Element} The rendered icon or image element.
  */
 const renderAdornment = (adornment: ButtonAdornment, className?: string) => {
-  const iconClasses = twMerge('mg:text-xs', className);
-  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
+  const iconClasses = twMerge('au:text-xs', className);
+  const imageClasses = twMerge('au:object-contain au:animate-fade-in au:duration-500', className);
 
   if ('iconName' in adornment) {
     return <FontAwesomeIcon key={adornment.iconName} icon={adornment} className={iconClasses} />;
@@ -206,23 +206,23 @@ function Button({
   const isEndAdornmentImage = endAdornment && 'src' in endAdornment;
   const buttonSizeClasses = responsive ? responsiveSizeClasses[size] : sizeClasses[size];
   const fullWidthClasses = responsive
-    ? 'mg:w-full mg:py-2 mg:rounded-lg mg:text-sm mg:sm:py-3 mg:sm:text-base'
-    : 'mg:w-full mg:py-3 mg:rounded-lg mg:text-base';
+    ? 'au:w-full au:py-2 au:rounded-lg au:text-sm au:sm:py-3 au:sm:text-base'
+    : 'au:w-full au:py-3 au:rounded-lg au:text-base';
 
   const buttonClasses = twMerge(
     classNames(
-      'mg:inline-flex mg:items-center mg:justify-between mg:font-body mg:text-primary mg:hover:text-primary-hover mg:hover:cursor-pointer',
-      'mg:focus-visible:outline-1 mg:focus-visible:outline-offset-4 mg:focus-visible:outline-primary',
+      'au:inline-flex au:items-center au:justify-between au:font-body au:text-primary au:hover:text-primary-hover au:hover:cursor-pointer',
+      'au:focus-visible:outline-1 au:focus-visible:outline-offset-4 au:focus-visible:outline-primary',
       fullWidth ? fullWidthClasses : buttonSizeClasses,
       {
-        'mg:bg-primary mg:hover:bg-primary-hover': variant === 'primary',
-        'mg:bg-secondary mg:hover:bg-secondary-hover': variant === 'secondary',
-        'mg:bg-transparent mg:hover:border-solid mg:hover:border-1 mg:hover:border-accent':
+        'au:bg-primary au:hover:bg-primary-hover': variant === 'primary',
+        'au:bg-secondary au:hover:bg-secondary-hover': variant === 'secondary',
+        'au:bg-transparent au:hover:border-solid au:hover:border-1 au:hover:border-accent':
           variant === 'text',
-        'mg:border-solid mg:border-1 mg:border-primary mg:hover:border-accent':
+        'au:border-solid au:border-1 au:border-primary au:hover:border-accent':
           variant === 'outline',
-        'mg:gap-2': (isStartAdornmentIcon || isEndAdornmentIcon) && children,
-        'mg:gap-1': (isStartAdornmentImage || isEndAdornmentImage) && children,
+        'au:gap-2': (isStartAdornmentIcon || isEndAdornmentIcon) && children,
+        'au:gap-1': (isStartAdornmentImage || isEndAdornmentImage) && children,
       }
     ),
     classes?.button

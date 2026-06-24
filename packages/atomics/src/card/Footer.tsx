@@ -69,15 +69,15 @@ interface FooterProps extends HTMLAttributes<HTMLDivElement> {
 const Footer: FC<FooterProps> = ({ actions, description, subtitle, title, ref, ...rest }) => {
   return (
     <div
-      className="mg:flex mg:grow mg:flex-col mg:justify-between mg:items-start mg:gap-3 mg:w-full mg:px-3 mg:py-2"
+      className="au:flex au:grow au:flex-col au:justify-between au:items-start au:gap-3 au:w-full au:px-3 au:py-2"
       ref={ref}
       {...(rest as HTMLAttributes<HTMLDivElement>)}
     >
-      <div className="mg:flex mg:flex-col mg:justify-center mg:items-start mg:gap-1.5">
+      <div className="au:flex au:flex-col au:justify-center au:items-start au:gap-1.5">
         {title && (
           <>
             <Typography
-              className="mg:text-base mg:sm:text-xl mg:lg:text-3xl"
+              className="au:text-base au:sm:text-xl au:lg:text-3xl"
               clamp={3}
               bold
               variant="h3"
@@ -98,10 +98,10 @@ const Footer: FC<FooterProps> = ({ actions, description, subtitle, title, ref, .
         )}
       </div>
       {actions && (
-        <div className="mg:flex mg:justify-start mg:items-center mg:gap-2">
+        <div className="au:flex au:justify-start au:items-center au:gap-2">
           {actions.map((action, index) => (
             <Button
-              classes={{ button: 'mg:animate-fade-in mg:duration-500' }}
+              classes={{ button: 'au:animate-fade-in au:duration-500' }}
               endAdornment={action?.endAdornment}
               href={action?.href as string}
               key={`footer-action-${index}`}

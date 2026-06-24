@@ -67,22 +67,22 @@ type CarouselTransition = 'fade' | 'slide';
  * Maps CarouselSlidesPerView values to small breakpoint slide basis classes.
  */
 const smSlideBasisClasses: Record<CarouselSlidesPerView, string> = {
-  1: 'mg:sm:basis-[90%]',
-  2: 'mg:sm:basis-[45%]',
-  3: 'mg:sm:basis-[45%]',
-  4: 'mg:sm:basis-[45%]',
-  5: 'mg:sm:basis-[45%]',
+  1: 'au:sm:basis-[90%]',
+  2: 'au:sm:basis-[45%]',
+  3: 'au:sm:basis-[45%]',
+  4: 'au:sm:basis-[45%]',
+  5: 'au:sm:basis-[45%]',
 };
 
 /**
  * Maps CarouselSlidesPerView values to large breakpoint slide basis classes.
  */
 const lgSlideBasisClasses: Record<CarouselSlidesPerView, string> = {
-  1: 'mg:lg:basis-[90%]',
-  2: 'mg:lg:basis-[45%]',
-  3: 'mg:lg:basis-[30%]',
-  4: 'mg:lg:basis-[22.5%]',
-  5: 'mg:lg:basis-[18%]',
+  1: 'au:lg:basis-[90%]',
+  2: 'au:lg:basis-[45%]',
+  3: 'au:lg:basis-[30%]',
+  4: 'au:lg:basis-[22.5%]',
+  5: 'au:lg:basis-[18%]',
 };
 
 /**
@@ -248,56 +248,56 @@ const Carousel: FC<CarouselProps> = ({
   };
 
   const rootClasses = twMerge(
-    'mg:flex mg:flex-col mg:justify-center mg:items-center mg:w-full',
+    'au:flex au:flex-col au:justify-center au:items-center au:w-full',
     classes?.root
   );
 
   const containerClasses = twMerge(
     classNames(
-      'mg:relative mg:flex mg:justify-start mg:w-full mg:pt-4 mg:px-3 mg:overflow-hidden mg:xs:px-4 mg:sm:pt-6 mg:sm:px-8',
+      'au:relative au:flex au:justify-start au:w-full au:pt-4 au:px-3 au:overflow-hidden au:xs:px-4 au:sm:pt-6 au:sm:px-8',
       {
-        'mg:cursor-grab': enableSwipe,
+        'au:cursor-grab': enableSwipe,
       }
     ),
     classes?.container
   );
 
   const controlsContainerClasses = twMerge(
-    'mg:absolute mg:top-1/2 mg:left-0 mg:w-full mg:flex mg:items-center mg:justify-between mg:px-1 mg:pointer-events-none mg:sm:px-2',
+    'au:absolute au:top-1/2 au:left-0 au:w-full au:flex au:items-center au:justify-between au:px-1 au:pointer-events-none au:sm:px-2',
     classes?.controlsContainer
   );
 
-  const controlsClasses = classNames('mg:pointer-events-auto', classes?.controls);
+  const controlsClasses = classNames('au:pointer-events-auto', classes?.controls);
 
   const dotClasses = (index: number) =>
     twMerge(
-      classNames('mg:w-2 mg:h-2 mg:rounded-full mg:hover:cursor-pointer', {
-        'mg:bg-secondary': index === selectedIndex,
-        'mg:bg-secondary-subtle': index !== selectedIndex,
+      classNames('au:w-2 au:h-2 au:rounded-full au:hover:cursor-pointer', {
+        'au:bg-secondary': index === selectedIndex,
+        'au:bg-secondary-subtle': index !== selectedIndex,
       }),
       classes?.dot
     );
 
   const dotsContainerClasses = twMerge(
-    'mg:flex mg:justify-center mg:items-center mg:gap-2 mg:w-full mg:h-6',
+    'au:flex au:justify-center au:items-center au:gap-2 au:w-full au:h-6',
     classes?.dotsContainer
   );
 
   const slidesContainerClasses = twMerge(
-    classNames('mg:flex mg:items-stretch mg:justify-start mg:pb-3 mg:w-full', {
-      'mg:gap-1 mg:pl-1': gap === 8,
-      'mg:gap-2 mg:pl-2': gap === 16,
-      'mg:gap-3 mg:pl-3': gap === 24,
-      'mg:gap-4 mg:pl-4': gap === 32,
-      'mg:gap-5 mg:pl-5': gap === 40,
-      'mg:gap-6 mg:pl-6': gap === 48,
+    classNames('au:flex au:items-stretch au:justify-start au:pb-3 au:w-full', {
+      'au:gap-1 au:pl-1': gap === 8,
+      'au:gap-2 au:pl-2': gap === 16,
+      'au:gap-3 au:pl-3': gap === 24,
+      'au:gap-4 au:pl-4': gap === 32,
+      'au:gap-5 au:pl-5': gap === 40,
+      'au:gap-6 au:pl-6': gap === 48,
     }),
     classes?.slidesContainer
   );
 
   const slideClasses = twMerge(
     classNames(
-      'mg:h-full mg:flex mg:justify-center mg:items-stretch mg:min-w-0 mg:basis-[90%] mg:p-2 mg:shrink-0',
+      'au:h-full au:flex au:justify-center au:items-stretch au:min-w-0 au:basis-[90%] au:p-2 au:shrink-0',
       smSlideBasisClasses[slidesPerView],
       lgSlideBasisClasses[slidesPerView]
     ),
@@ -305,8 +305,8 @@ const Carousel: FC<CarouselProps> = ({
   );
 
   const slideInnerClasses = twMerge(
-    classNames('mg:flex mg:w-full', {
-      'mg:justify-center': slidesPerView > 1,
+    classNames('au:flex au:w-full', {
+      'au:justify-center': slidesPerView > 1,
     }),
     classes?.slideInner
   );

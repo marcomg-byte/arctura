@@ -21,7 +21,7 @@ describe('Card', () => {
     const card = screen.getByTestId('card');
     const directChildren = Array.from(card.children);
 
-    expect(card.className).toContain('mg:flex');
+    expect(card.className).toContain('au:flex');
     expect(screen.queryByText('Ignored child')).toBeNull();
     expect(directChildren[0].textContent).toContain('Header title');
     expect(directChildren[1].querySelector('img')?.getAttribute('alt')).toBe('Card media');
@@ -38,7 +38,7 @@ describe('Card', () => {
 
     const media = container.querySelector('img')?.parentElement as HTMLElement;
 
-    expect(media.className).toContain('mg:rounded-tl-lg');
-    expect(media.className).toContain('mg:rounded-bl-lg');
+    expect(media.className).toContain('au:rounded-tl-lg');
+    expect(media.className).toContain('au:rounded-bl-lg');
   });
 });

@@ -246,11 +246,11 @@ const mapState = (children?: ReactNode): FormValue[] => {
  */
 const renderAdornment = (adornment: FormAdornment, className?: string): JSX.Element => {
   const iconClasses = classNames(
-    'mg:animate-fade-in mg:transition-transform mg:duration-500 mg:hover:scale-110',
+    'au:animate-fade-in au:transition-transform au:duration-500 au:hover:scale-110',
     className
   );
   const imageClasses = twMerge(
-    'mg:object-contain mg:animate-fade-in mg:transition-transform mg:duration-500 mg:hover:scale-110',
+    'au:object-contain au:animate-fade-in au:transition-transform au:duration-500 au:hover:scale-110',
     className
   );
 
@@ -337,72 +337,72 @@ const Form: FC<FormProps> = ({
   const isBelowSm = isBelow('sm');
 
   const adornmentClasses = classNames(
-    'mg:text-2xl',
+    'au:text-2xl',
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
     },
     classes?.adornment
   );
 
   const bodyClasses = twMerge(
-    'mg:flex mg:flex-col mg:items-start mg:gap-3 mg:bg-inherit mg:w-full',
+    'au:flex au:flex-col au:items-start au:gap-3 au:bg-inherit au:w-full',
     classes?.body
   );
 
   const disclaimerAdornmentClasses = classNames(
-    'mg:p-1 mg:text-2xl',
+    'au:p-1 au:text-2xl',
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
     },
     classes?.disclaimer?.adornment
   );
 
   const disclaimerContainerClasses = twMerge(
-    'mg:flex mg:grow mg:gap-2',
+    'au:flex au:grow au:gap-2',
     classes?.disclaimer?.container
   );
 
   const headerClasses = twMerge(
-    'mg:flex mg:items-center mg:justify-between mg:w-full',
+    'au:flex au:items-center au:justify-between au:w-full',
     classes?.header
   );
 
   const footerClasses = twMerge(
-    'mg:flex mg:flex-col mg:items-start mg:gap-3 mg:sm:flex-row mg:sm:items-center mg:justify-between mg:w-full',
+    'au:flex au:flex-col au:items-start au:gap-3 au:sm:flex-row au:sm:items-center au:justify-between au:w-full',
     classes?.footer
   );
 
   const footerButtonsContainerClasses = twMerge(
-    classNames('mg:flex mg:items-center mg:justify-between mg:w-full'),
+    classNames('au:flex au:items-center au:justify-between au:w-full'),
     classes?.footerButtonsContainer
   );
 
   const formClasses = twMerge(
-    'mg:flex mg:flex-col mg:p-6 mg:gap-4 mg:rounded-lg mg:bg-inherit',
+    'au:flex au:flex-col au:p-6 au:gap-4 au:rounded-lg au:bg-inherit',
     classes?.form
   );
 
   const submitButtonClasses = classNames(
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
     },
     classes?.submitButton
   );
@@ -542,7 +542,7 @@ const Form: FC<FormProps> = ({
       {...rest}
     >
       <div className={headerClasses}>
-        <div className="mg:flex mg:items-center mg:gap-2">
+        <div className="au:flex au:items-center au:gap-2">
           {startAdornment && renderAdornment(startAdornment, adornmentClasses)}
           {title && (
             <Typography color="white" variant="h2">

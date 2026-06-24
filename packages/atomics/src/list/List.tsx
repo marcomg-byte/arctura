@@ -238,15 +238,15 @@ function List({
   );
 
   const classes = twMerge(
-    classNames('mg:flex mg:flex-col mg:rounded-lg', {
-      'mg:bg-inverse': background === 'inverse',
-      'mg:bg-primary': background === 'primary',
-      'mg:bg-secondary': background === 'secondary',
-      'mg:bg-subtle': background === 'subtle',
-      'mg:w-full': fullWidth,
-      'mg:w-24': size === 'sm' && !fullWidth,
-      'mg:w-32': size === 'md' && !fullWidth,
-      'mg:w-40': size === 'lg' && !fullWidth,
+    classNames('au:flex au:flex-col au:rounded-lg', {
+      'au:bg-inverse': background === 'inverse',
+      'au:bg-primary': background === 'primary',
+      'au:bg-secondary': background === 'secondary',
+      'au:bg-subtle': background === 'subtle',
+      'au:w-full': fullWidth,
+      'au:w-24': size === 'sm' && !fullWidth,
+      'au:w-32': size === 'md' && !fullWidth,
+      'au:w-40': size === 'lg' && !fullWidth,
     }),
     className
   );

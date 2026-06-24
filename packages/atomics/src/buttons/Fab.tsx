@@ -107,9 +107,9 @@ type FabProps = (AnchorProps | ButtonProps) & BaseProps;
  * @returns {JSX.Element} The rendered adornment element.
  */
 const renderAdornment = (adornment: FabAdornment, className?: string) => {
-  const iconClasses = classNames('mg:text-xs', className);
+  const iconClasses = classNames('au:text-xs', className);
 
-  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
+  const imageClasses = twMerge('au:object-contain au:animate-fade-in au:duration-500', className);
 
   if ('iconName' in adornment) {
     return <FontAwesomeIcon className={iconClasses} icon={adornment} />;
@@ -170,34 +170,34 @@ function Fab({
 }: FabProps): JSX.Element {
   const circularClasses =
     variant === 'circular'
-      ? classNames('mg:rounded-full', {
-          'mg:h-4 mg:w-4': size === 'sm',
-          'mg:h-6 mg:w-6': size === 'md',
-          'mg:h-8 mg:w-8': size === 'lg',
+      ? classNames('au:rounded-full', {
+          'au:h-4 au:w-4': size === 'sm',
+          'au:h-6 au:w-6': size === 'md',
+          'au:h-8 au:w-8': size === 'lg',
         })
       : '';
   const extendedClasses =
     variant === 'extended'
-      ? classNames('mg:rounded-lg', {
-          'mg:w-4 mg:h-2': size === 'sm',
-          'mg:w-5 mg:h-3': size === 'md',
-          'mg:w-6 mg:h-4': size === 'lg',
+      ? classNames('au:rounded-lg', {
+          'au:w-4 au:h-2': size === 'sm',
+          'au:w-5 au:h-3': size === 'md',
+          'au:w-6 au:h-4': size === 'lg',
         })
       : '';
   const buttonClasses = twMerge(
     classNames(
-      'mg:inline-flex mg:items-center mg:justify-center mg:border-solid mg:border-1 mg:hover:cursor-pointer',
-      'mg:focus-visible:outline-1 mg:focus-visible:outline-offset-4 mg:focus-visible:outline-primary',
+      'au:inline-flex au:items-center au:justify-center au:border-solid au:border-1 au:hover:cursor-pointer',
+      'au:focus-visible:outline-1 au:focus-visible:outline-offset-4 au:focus-visible:outline-primary',
       {
-        'mg:border-primary mg:text-primary': color === 'primary',
-        'mg:border-secondary mg:text-secondary': color === 'secondary',
-        'mg:border-accent mg:hover:border-accent-hover mg:text-accent mg:hover:text-accent-hover':
+        'au:border-primary au:text-primary': color === 'primary',
+        'au:border-secondary au:text-secondary': color === 'secondary',
+        'au:border-accent au:hover:border-accent-hover au:text-accent au:hover:text-accent-hover':
           color === 'accent',
-        'mg:border-error mg:text-danger': color === 'error',
-        'mg:border-info mg:text-info': color === 'info',
-        'mg:border-success mg:text-success': color === 'success',
-        'mg:border-warning mg:text-warning': color === 'warning',
-        'mg:hover:border-accent mg:hover:text-accent': color !== 'accent',
+        'au:border-error au:text-danger': color === 'error',
+        'au:border-info au:text-info': color === 'info',
+        'au:border-success au:text-success': color === 'success',
+        'au:border-warning au:text-warning': color === 'warning',
+        'au:hover:border-accent au:hover:text-accent': color !== 'accent',
       },
       circularClasses,
       extendedClasses

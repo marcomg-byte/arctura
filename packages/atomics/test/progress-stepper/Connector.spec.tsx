@@ -11,9 +11,9 @@ describe('Connector', () => {
     const content = container.querySelector('[data-testid="connector"]')
       ?.firstElementChild as HTMLElement;
 
-    expect(content.className).toContain('mg:h-2px');
-    expect(content.className).toContain('mg:w-full');
-    expect(content.className).toContain('mg:bg-accent');
+    expect(content.className).toContain('au:h-2px');
+    expect(content.className).toContain('au:w-full');
+    expect(content.className).toContain('au:bg-accent');
   });
 
   it('renders active, completed, and vertical states', () => {
@@ -23,14 +23,14 @@ describe('Connector', () => {
 
     let content = container.querySelector('[data-testid="connector"]')
       ?.firstElementChild as HTMLElement;
-    expect(content.className).toContain('mg:w-2px');
-    expect(content.className).toContain('mg:h-full');
-    expect(content.className).toContain('mg:bg-primary');
+    expect(content.className).toContain('au:w-2px');
+    expect(content.className).toContain('au:h-full');
+    expect(content.className).toContain('au:bg-primary');
 
     rerender(<Connector completed data-testid="connector" />);
     content = container.querySelector('[data-testid="connector"]')
       ?.firstElementChild as HTMLElement;
-    expect(content.className).toContain('mg:bg-success-primary');
+    expect(content.className).toContain('au:bg-success-primary');
   });
 
   it('renders nothing for the last index', () => {

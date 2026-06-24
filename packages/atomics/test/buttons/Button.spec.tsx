@@ -13,10 +13,10 @@ describe('Button', () => {
 
     expect(button.tagName).toBe('BUTTON');
     expect(button.getAttribute('type')).toBe('button');
-    expect(button.className).toContain('mg:inline-flex');
-    expect(button.className).toContain('mg:bg-primary');
-    expect(button.className).toContain('mg:px-2');
-    expect(button.className).toContain('mg:sm:px-2.5');
+    expect(button.className).toContain('au:inline-flex');
+    expect(button.className).toContain('au:bg-primary');
+    expect(button.className).toContain('au:px-2');
+    expect(button.className).toContain('au:sm:px-2.5');
   });
 
   it('renders an anchor when href is provided', () => {
@@ -32,7 +32,7 @@ describe('Button', () => {
     expect(button.getAttribute('href')).toBe('/projects');
     expect(button.getAttribute('target')).toBe('_blank');
     expect(button.getAttribute('aria-label')).toBe('Open projects');
-    expect(button.className).toContain('mg:bg-primary');
+    expect(button.className).toContain('au:bg-primary');
   });
 
   it('applies explicit size, variant, full width, and custom button classes', () => {
@@ -50,10 +50,10 @@ describe('Button', () => {
 
     const button = screen.getByRole('button', { name: 'Continue' });
 
-    expect(button.className).toContain('mg:w-full');
-    expect(button.className).toContain('mg:py-3');
-    expect(button.className).toContain('mg:text-base');
-    expect(button.className).toContain('mg:border-primary');
+    expect(button.className).toContain('au:w-full');
+    expect(button.className).toContain('au:py-3');
+    expect(button.className).toContain('au:text-base');
+    expect(button.className).toContain('au:border-primary');
     expect(button.className).toContain('custom-button');
   });
 
@@ -78,8 +78,8 @@ describe('Button', () => {
 
     expect(icon).not.toBeNull();
     expect(icon?.getAttribute('data-icon')).toBe('check');
-    expect(icon?.getAttribute('class')).toContain('mg:text-xs');
-    expect(button.className).toContain('mg:gap-2');
+    expect(icon?.getAttribute('class')).toContain('au:text-xs');
+    expect(button.className).toContain('au:gap-2');
     expect(button.firstElementChild).toBe(icon);
   });
 
@@ -91,8 +91,8 @@ describe('Button', () => {
 
     expect(icon).not.toBeNull();
     expect(icon?.getAttribute('data-icon')).toBe('check');
-    expect(icon?.getAttribute('class')).toContain('mg:text-xs');
-    expect(button.className).toContain('mg:gap-2');
+    expect(icon?.getAttribute('class')).toContain('au:text-xs');
+    expect(button.className).toContain('au:gap-2');
     expect(button.lastElementChild).toBe(icon);
   });
 });

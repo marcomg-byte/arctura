@@ -106,7 +106,7 @@ const renderDescription = (description: ReactNode): ReactNode => {
 
       if (child.type === Typography) {
         return cloneElement<TypographyProps>(child as TypographyComponent, {
-          className: 'mg:text-xs mg:sm:text-sm mg:lg:text-lg',
+          className: 'au:text-xs au:sm:text-sm au:lg:text-lg',
         });
       }
 
@@ -159,28 +159,28 @@ const Step: FC<StepProps> = ({
   ...rest
 }) => {
   const bodyClasses = twMerge(
-    'mg:animate-fade-in mg:transition-opacity mg:duration-300',
+    'au:animate-fade-in au:transition-opacity au:duration-300',
     classes?.body
   );
 
   const descriptionContainerClasses = twMerge(
-    'mg:flex mg:flex-col mg:text-primary mg:gap-1',
+    'au:flex au:flex-col au:text-primary au:gap-1',
     classes?.descriptionContainer
   );
 
   const rootClasses = twMerge(
-    classNames('mg:flex mg:max-w-44 mg:p-3 mg:rounded-md', {
-      'mg:flex-col mg:gap-1': orientation === 'horizontal',
-      'mg:justify-between mg:items-start': orientation === 'vertical',
-      'mg:relative mg:z-10 mg:min-w-32 mg:hover:bg-primary mg:transition-all mg:duration-200 mg:ease-in-out mg:hover:scale-105 mg:hover:shadow-lg':
+    classNames('au:flex au:max-w-44 au:p-3 au:rounded-md', {
+      'au:flex-col au:gap-1': orientation === 'horizontal',
+      'au:justify-between au:items-start': orientation === 'vertical',
+      'au:relative au:z-10 au:min-w-32 au:hover:bg-primary au:transition-all au:duration-200 au:ease-in-out au:hover:scale-105 au:hover:shadow-lg':
         active,
     }),
     classes?.root
   );
 
-  const titleClasses = classNames('mg:text-base mg:sm:text-xl mg:lg:text-3xl', classes?.title);
+  const titleClasses = classNames('au:text-base au:sm:text-xl au:lg:text-3xl', classes?.title);
 
-  const nodeContainerClasses = twMerge('mg:flex mg:pb-2', classes?.nodeContainer);
+  const nodeContainerClasses = twMerge('au:flex au:pb-2', classes?.nodeContainer);
 
   const index = indexProp !== undefined ? (indexProp + 1).toString() : '–';
 

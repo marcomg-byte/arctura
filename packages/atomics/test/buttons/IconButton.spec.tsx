@@ -14,11 +14,11 @@ describe('IconButton', () => {
     const icon = button.querySelector('svg');
 
     expect(button.tagName).toBe('BUTTON');
-    expect(button.className).toContain('mg:flex');
-    expect(button.className).toContain('mg:text-sm');
-    expect(button.className).toContain('mg:bg-transparent');
-    expect(button.className).toContain('mg:border-primary');
-    expect(button.className).toContain('mg:text-primary');
+    expect(button.className).toContain('au:flex');
+    expect(button.className).toContain('au:text-sm');
+    expect(button.className).toContain('au:bg-transparent');
+    expect(button.className).toContain('au:border-primary');
+    expect(button.className).toContain('au:text-primary');
     expect(icon?.getAttribute('data-icon')).toBe('check');
   });
 
@@ -57,9 +57,9 @@ describe('IconButton', () => {
     const button = screen.getByRole('button', { name: 'Accent action' });
     const icon = button.querySelector('svg');
 
-    expect(button.className).toContain('mg:text-lg');
-    expect(button.className).toContain('mg:bg-accent');
-    expect(button.className).toContain('mg:hover:bg-accent-hover');
+    expect(button.className).toContain('au:text-lg');
+    expect(button.className).toContain('au:bg-accent');
+    expect(button.className).toContain('au:hover:bg-accent-hover');
     expect(button.className).toContain('custom-icon-button');
     expect(icon?.getAttribute('class')).toContain('custom-child');
   });
@@ -113,7 +113,7 @@ describe('IconButton', () => {
     expect(button.contains(image)).toBe(true);
     expect(image.getAttribute('width')).toBe('24');
     expect(image.getAttribute('height')).toBe('24');
-    expect(image.getAttribute('class')).toContain('mg:object-cover');
+    expect(image.getAttribute('class')).toContain('au:object-cover');
     expect(image.getAttribute('class')).toContain('custom-image');
   });
 });

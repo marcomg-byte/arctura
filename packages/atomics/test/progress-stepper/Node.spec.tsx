@@ -11,10 +11,10 @@ describe('Node', () => {
 
     const node = screen.getByText('1');
 
-    expect(node.className).toContain('mg:inline-flex');
-    expect(node.className).toContain('mg:rounded-full');
-    expect(node.className).toContain('mg:h-6');
-    expect(node.className).toContain('mg:border-primary');
+    expect(node.className).toContain('au:inline-flex');
+    expect(node.className).toContain('au:rounded-full');
+    expect(node.className).toContain('au:h-6');
+    expect(node.className).toContain('au:border-primary');
   });
 
   it('applies extended variant, color, size, and custom classes', () => {
@@ -26,10 +26,10 @@ describe('Node', () => {
 
     const node = screen.getByText('Step');
 
-    expect(node.className).toContain('mg:rounded-lg');
-    expect(node.className).toContain('mg:w-6');
-    expect(node.className).toContain('mg:h-4');
-    expect(node.className).toContain('mg:border-warning');
+    expect(node.className).toContain('au:rounded-lg');
+    expect(node.className).toContain('au:w-6');
+    expect(node.className).toContain('au:h-4');
+    expect(node.className).toContain('au:border-warning');
     expect(node.className).toContain('custom-node');
   });
 

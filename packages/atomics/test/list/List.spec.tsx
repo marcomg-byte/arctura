@@ -14,8 +14,8 @@ describe('List', () => {
     );
 
     expect(screen.getByTestId('list').tagName).toBe('UL');
-    expect(screen.getByTestId('list').className).toContain('mg:bg-secondary');
-    expect(screen.getByTestId('list').className).toContain('mg:w-40');
+    expect(screen.getByTestId('list').className).toContain('au:bg-secondary');
+    expect(screen.getByTestId('list').className).toContain('au:w-40');
 
     rerender(
       <List as="ol" data-testid="list">
@@ -30,7 +30,7 @@ describe('List', () => {
       </List>
     );
     expect(screen.getByTestId('list').tagName).toBe('DIV');
-    expect(screen.getByTestId('list').className).toContain('mg:w-full');
+    expect(screen.getByTestId('list').className).toContain('au:w-full');
   });
 
   it('propagates selection props and reports selected items', () => {
@@ -53,7 +53,7 @@ describe('List', () => {
       { key: 'list-item-1', label: 'Alpha', value: 'alpha' },
       { key: 'list-item-2', label: 'Beta', value: 'beta' },
     ]);
-    expect(document.querySelector('.mg\\:border-b-primary')).toBeDefined();
+    expect(document.querySelector('.au\\:border-b-primary')).toBeDefined();
   });
 
   it('respects non-selectable and disabled states', () => {
@@ -70,7 +70,7 @@ describe('List', () => {
     fireEvent.click(item);
 
     expect(item.getAttribute('tabindex')).toBe('-1');
-    expect(item.className).toContain('mg:opacity-80');
+    expect(item.className).toContain('au:opacity-80');
     expect(handleChange).not.toHaveBeenCalled();
   });
 

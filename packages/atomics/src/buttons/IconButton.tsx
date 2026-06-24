@@ -112,7 +112,7 @@ type IconButtonProps = (AnchorProps | ButtonProps) & BaseProps;
  * sizing and motion classes used by the component.
  */
 const renderChildren = (children: IconButtonChildren, className?: string) => {
-  const imageClasses = twMerge('mg:object-cover mg:animate-fade-in mg:duration-500', className);
+  const imageClasses = twMerge('au:object-cover au:animate-fade-in au:duration-500', className);
 
   if ('iconName' in children) {
     return <FontAwesomeIcon key={children.iconName} className={className} icon={children} />;
@@ -176,33 +176,33 @@ function IconButton({
   ...rest
 }: IconButtonProps): JSX.Element {
   const containerClasses = classNames(
-    'mg:flex mg:items-center mg:justify-center mg:rounded-lg mg:font-body mg:p-1 mg:min-h-2 mg:min-w-2 mg:hover:cursor-pointer',
-    'mg:focus-visible:outline-1 mg:focus-visible:outline-offset-4 mg:focus-visible:outline-primary',
+    'au:flex au:items-center au:justify-center au:rounded-lg au:font-body au:p-1 au:min-h-2 au:min-w-2 au:hover:cursor-pointer',
+    'au:focus-visible:outline-1 au:focus-visible:outline-offset-4 au:focus-visible:outline-primary',
     {
-      'mg:text-sm': size === 'sm',
-      'mg:text-base': size === 'md',
-      'mg:text-lg': size === 'lg',
+      'au:text-sm': size === 'sm',
+      'au:text-base': size === 'md',
+      'au:text-lg': size === 'lg',
     }
   );
 
   const outlineClasses =
     variant === 'outline'
       ? classNames(
-          'mg:border-solid mg:border-1 mg:hover:border-accent mg:bg-transparent mg:text-primary',
+          'au:border-solid au:border-1 au:hover:border-accent au:bg-transparent au:text-primary',
           {
-            'mg:text-primary mg:border-primary': color === 'primary',
-            'mg:text-secondary mg:border-secondary': color === 'secondary',
-            'mg:text-accent mg:border-accent': color === 'accent',
+            'au:text-primary au:border-primary': color === 'primary',
+            'au:text-secondary au:border-secondary': color === 'secondary',
+            'au:text-accent au:border-accent': color === 'accent',
           }
         )
       : '';
 
   const filledClasses =
     variant === 'filled'
-      ? classNames('mg:text-primary mg:hover:text-inverse', {
-          'mg:bg-primary mg:hover:bg-primary-hover': color === 'primary',
-          'mg:bg-secondary mg:hover:bg-secondary-hover': color === 'secondary',
-          'mg:bg-accent mg:hover:bg-accent-hover': color === 'accent',
+      ? classNames('au:text-primary au:hover:text-inverse', {
+          'au:bg-primary au:hover:bg-primary-hover': color === 'primary',
+          'au:bg-secondary au:hover:bg-secondary-hover': color === 'secondary',
+          'au:bg-accent au:hover:bg-accent-hover': color === 'accent',
         })
       : '';
 

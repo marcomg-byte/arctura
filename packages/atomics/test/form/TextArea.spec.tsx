@@ -28,7 +28,7 @@ describe('TextArea', () => {
     expect(textarea.getAttribute('id')).toBe('message');
     expect(textarea.getAttribute('name')).toBe('message');
     expect(textarea.getAttribute('rows')).toBe('4');
-    expect(textarea.className).toContain('mg:w-full');
+    expect(textarea.className).toContain('au:w-full');
   });
 
   it('updates uncontrolled values and clears with Escape', () => {
@@ -83,9 +83,9 @@ describe('TextArea', () => {
     const wrapper = container.firstElementChild as HTMLElement;
     const textarea = screen.getByRole('textbox', { name: 'Message' });
 
-    expect(wrapper.className).toContain('mg:border-warning');
+    expect(wrapper.className).toContain('au:border-warning');
     expect(wrapper.className).toContain('custom-container');
-    expect(textarea.className).toContain('mg:text-white');
+    expect(textarea.className).toContain('au:text-white');
     expect(textarea.className).toContain('custom-area');
   });
 });

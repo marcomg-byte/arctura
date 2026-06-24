@@ -22,14 +22,14 @@ describe('Drawer', () => {
       </Drawer>
     );
 
-    const root = screen.getByText('Drawer content').closest('.mg\\:relative');
+    const root = screen.getByText('Drawer content').closest('.au\\:relative');
     const overlay = container.querySelector('[aria-hidden="true"]');
 
     expect(screen.getByText('Menu')).toBeDefined();
     expect(screen.getByText('Left')).toBeDefined();
     expect(screen.getByText('Right')).toBeDefined();
-    expect(root?.className).toContain('mg:translate-x-0');
-    expect(overlay?.className).toContain('mg:opacity-100');
+    expect(root?.className).toContain('au:translate-x-0');
+    expect(overlay?.className).toContain('au:opacity-100');
   });
 
   it('applies closed transform classes by anchor', () => {
@@ -39,9 +39,9 @@ describe('Drawer', () => {
       </Drawer>
     );
 
-    const root = screen.getByText('Content').closest('.mg\\:relative');
+    const root = screen.getByText('Content').closest('.au\\:relative');
 
-    expect(root?.className).toContain('mg:translate-x-full');
+    expect(root?.className).toContain('au:translate-x-full');
   });
 
   it('calls onClose from close button and Escape key', () => {
@@ -90,6 +90,6 @@ describe('Drawer', () => {
       </Drawer>
     );
 
-    expect(document.querySelector('[aria-hidden="true"]')?.className).toContain('mg:opacity-0');
+    expect(document.querySelector('[aria-hidden="true"]')?.className).toContain('au:opacity-0');
   });
 });

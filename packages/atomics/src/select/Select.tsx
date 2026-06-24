@@ -127,30 +127,30 @@ const Select: FC<SelectProps> = ({
 
   const containerClasses = twMerge(
     classNames(
-      'mg:relative mg:flex mg:justify-start mg:items-center mg:gap-1 mg:rounded-sm mg:w-full mg:h-full',
+      'au:relative au:flex au:justify-start au:items-center au:gap-1 au:rounded-sm au:w-full au:h-full',
       {
-        'mg:border-1 mg:border-solid mg:border-primary mg:hover:border-hover':
+        'au:border-1 au:border-solid au:border-primary au:hover:border-hover':
           variant === 'outline',
-        'mg:bg-primary': variant === 'filled',
-        'mg:cursor-not-allowed mg:opacity-50': disabled,
-        'mg:hover:cursor-pointer': !disabled,
+        'au:bg-primary': variant === 'filled',
+        'au:cursor-not-allowed au:opacity-50': disabled,
+        'au:hover:cursor-pointer': !disabled,
       }
     ),
     classes?.container
   );
 
-  const labelClasses = twMerge('mg:text-xs mg:sm:text-sm mg:lg:text-lg', classes?.label);
+  const labelClasses = twMerge('au:text-xs au:sm:text-sm au:lg:text-lg', classes?.label);
 
   const placeholderClasses = twMerge(
-    'mg:relative mg:flex mg:justify-start mg:items-center mg:gap-1 mg:p-1 mg:text-xs mg:w-full',
+    'au:relative au:flex au:justify-start au:items-center au:gap-1 au:p-1 au:text-xs au:w-full',
     classes?.placeholder
   );
 
   const optionsContainerClasses = twMerge(
     classNames(
-      'mg:absolute mg:top-full mg:left-0 mg:mt-1 mg:flex mg:flex-col mg:justify-start mg:items-center mg:w-full',
+      'au:absolute au:top-full au:left-0 au:mt-1 au:flex au:flex-col au:justify-start au:items-center au:w-full',
       {
-        'mg:border-solid mg:border-1 mg:border-primary mg:rounded-sm mg:bg-secondary':
+        'au:border-solid au:border-1 au:border-primary au:rounded-sm au:bg-secondary':
           variant === 'outline',
       }
     ),
@@ -159,33 +159,33 @@ const Select: FC<SelectProps> = ({
 
   const optionClasses = twMerge(
     classNames(
-      'mg:flex mg:justify-between mg:items-center mg:px-1.5 mg:py-1 mg:w-full mg:text-xs',
+      'au:flex au:justify-between au:items-center au:px-1.5 au:py-1 au:w-full au:text-xs',
       {
-        'mg:hover:text-accent': variant === 'outline',
+        'au:hover:text-accent': variant === 'outline',
       }
     ),
     classes?.option?.root
   );
 
   const optionIconClasses = twMerge(
-    'mg:text-sm mg:sm:text-sm mg:lg:text-lg',
+    'au:text-sm au:sm:text-sm au:lg:text-lg',
     classes?.option?.icon
   );
 
   const rootClasses = twMerge(
-    'mg:inline-flex mg:flex-col mg:items-start mg:justify-center mg:gap-0.5 mg:min-w-12 mg:min-h-2 mg:h-full mg:font-body mg:text-inverse',
+    'au:inline-flex au:flex-col au:items-start au:justify-center au:gap-0.5 au:min-w-12 au:min-h-2 au:h-full au:font-body au:text-inverse',
     classes?.root
   );
 
   const iconClasses = twMerge(
-    classNames('mg:text-sm mg:transition-transform mg:duration-200', {
-      'mg:rotate-180': isOpen,
+    classNames('au:text-sm au:transition-transform au:duration-200', {
+      'au:rotate-180': isOpen,
     }),
     classes?.icon
   );
 
   const iconContainerClasses = twMerge(
-    'mg:relative mg:flex mg:justify-center mg:items-center mg:p-0.5',
+    'au:relative au:flex au:justify-center au:items-center au:p-0.5',
     classes?.iconContainer
   );
 

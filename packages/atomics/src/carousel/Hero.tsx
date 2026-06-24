@@ -87,11 +87,11 @@ type HeroHeight = 'sm' | 'md' | 'lg' | 'xl' | 'full';
  * @property {'full'} full - Full height class.
  */
 const heightClasses: Record<HeroHeight, string> = {
-  sm: 'mg:h-[300px]',
-  md: 'mg:h-[450px]',
-  lg: 'mg:h-[600px]',
-  xl: 'mg:h-[750px]',
-  full: 'mg:h-full',
+  sm: 'au:h-[300px]',
+  md: 'au:h-[450px]',
+  lg: 'au:h-[600px]',
+  xl: 'au:h-[750px]',
+  full: 'au:h-full',
 };
 
 /**
@@ -103,11 +103,11 @@ const heightClasses: Record<HeroHeight, string> = {
  * @property {'full'} full - Full-height responsive class.
  */
 const responsiveHeightClasses: Record<HeroHeight, string> = {
-  sm: 'mg:h-[260px] mg:sm:h-[300px]',
-  md: 'mg:h-[340px] mg:sm:h-[450px]',
-  lg: 'mg:h-[420px] mg:sm:h-[600px]',
-  xl: 'mg:h-[520px] mg:sm:h-[750px]',
-  full: 'mg:min-h-svh mg:h-svh',
+  sm: 'au:h-[260px] au:sm:h-[300px]',
+  md: 'au:h-[340px] au:sm:h-[450px]',
+  lg: 'au:h-[420px] au:sm:h-[600px]',
+  xl: 'au:h-[520px] au:sm:h-[750px]',
+  full: 'au:min-h-svh au:h-svh',
 };
 
 /**
@@ -123,9 +123,9 @@ type HeroAspectRatio = '16:9' | '4:3' | '1:1';
  * @property {'1:1'} '1:1' - 1:1 aspect ratio class.
  */
 const aspectRatioClasses: Record<HeroAspectRatio, string> = {
-  '16:9': 'mg:aspect-[16/9]',
-  '4:3': 'mg:aspect-[4/3]',
-  '1:1': 'mg:aspect-square',
+  '16:9': 'au:aspect-[16/9]',
+  '4:3': 'au:aspect-[4/3]',
+  '1:1': 'au:aspect-square',
 };
 
 /**
@@ -135,9 +135,9 @@ const aspectRatioClasses: Record<HeroAspectRatio, string> = {
  * @property {'1:1'} '1:1' - 1:1 responsive aspect ratio class.
  */
 const responsiveAspectRatioClasses: Record<HeroAspectRatio, string> = {
-  '16:9': 'mg:aspect-[4/5] mg:sm:aspect-[16/9]',
-  '4:3': 'mg:aspect-[4/5] mg:sm:aspect-[4/3]',
-  '1:1': 'mg:aspect-square',
+  '16:9': 'au:aspect-[4/5] au:sm:aspect-[16/9]',
+  '4:3': 'au:aspect-[4/5] au:sm:aspect-[4/3]',
+  '1:1': 'au:aspect-square',
 };
 
 /**
@@ -290,70 +290,70 @@ const Hero: FC<HeroProps> = ({
 
   const containerClasses = twMerge(
     classNames(
-      'mg:relative mg:overflow-hidden mg:isolate',
-      responsive && 'mg:w-full',
-      enableSwipe && 'mg:cursor-grab'
+      'au:relative au:overflow-hidden au:isolate',
+      responsive && 'au:w-full',
+      enableSwipe && 'au:cursor-grab'
     ),
     classes?.root
   );
 
   const viewportClasses = twMerge(
-    classNames('mg:flex', {
-      'mg:touch-pan-y': enableSwipe,
+    classNames('au:flex', {
+      'au:touch-pan-y': enableSwipe,
     }),
     classes?.viewport
   );
 
   const dotClasses = (index: number) =>
     twMerge(
-      classNames('mg:w-2 mg:h-2 mg:rounded-full mg:transition-colors mg:hover:cursor-pointer', {
-        'mg:bg-secondary': index === selectedIndex,
-        'mg:bg-secondary-subtle': index !== selectedIndex,
+      classNames('au:w-2 au:h-2 au:rounded-full au:transition-colors au:hover:cursor-pointer', {
+        'au:bg-secondary': index === selectedIndex,
+        'au:bg-secondary-subtle': index !== selectedIndex,
       }),
       classes?.dot
     );
 
   const slideClasses = twMerge(
-    classNames('mg:flex-[0_0_100%] mg:relative', imageContainerClasses, {
-      'mg:transition-opacity': transition === 'fade',
+    classNames('au:flex-[0_0_100%] au:relative', imageContainerClasses, {
+      'au:transition-opacity': transition === 'fade',
     }),
     classes?.slide
   );
 
   const headerClasses = twMerge(
     classNames(
-      'mg:absolute mg:z-10 mg:flex mg:flex-col',
+      'au:absolute au:z-10 au:flex au:flex-col',
       responsive
-        ? 'mg:inset-x-4 mg:top-1/2 mg:max-w-[calc(100%-2rem)] mg:-translate-y-1/2 mg:sm:inset-x-auto mg:sm:top-1/4 mg:sm:left-1/6 mg:sm:max-w-[min(72%,48rem)] mg:sm:translate-y-0 mg:gap-1 mg:sm:gap-2'
-        : 'mg:top-1/4 mg:left-1/6 mg:gap-2'
+        ? 'au:inset-x-4 au:top-1/2 au:max-w-[calc(100%-2rem)] au:-translate-y-1/2 au:sm:inset-x-auto au:sm:top-1/4 au:sm:left-1/6 au:sm:max-w-[min(72%,48rem)] au:sm:translate-y-0 au:gap-1 au:sm:gap-2'
+        : 'au:top-1/4 au:left-1/6 au:gap-2'
     ),
     classes?.header?.root
   );
 
   const actionClasses = twMerge(
     classNames(
-      'mg:flex mg:justify-start',
+      'au:flex au:justify-start',
       responsive
-        ? 'mg:items-start mg:gap-2 mg:xs:flex-row mg:xs:flex-wrap mg:sm:items-center mg:sm:gap-4'
-        : 'mg:items-center mg:gap-4'
+        ? 'au:items-start au:gap-2 au:xs:flex-row au:xs:flex-wrap au:sm:items-center au:sm:gap-4'
+        : 'au:items-center au:gap-4'
     ),
     classes?.action
   );
 
   const controlsClasses = twMerge(
     classNames(
-      'mg:absolute mg:left-0 mg:z-10 mg:flex mg:w-full mg:items-center mg:justify-between mg:pointer-events-none',
+      'au:absolute au:left-0 au:z-10 au:flex au:w-full au:items-center au:justify-between au:pointer-events-none',
       responsive
-        ? 'mg:top-1/2 mg:-translate-y-1/2 mg:px-2 mg:sm:top-1/3 mg:sm:translate-y-0 mg:sm:px-6'
-        : 'mg:top-1/3 mg:px-6'
+        ? 'au:top-1/2 au:-translate-y-1/2 au:px-2 au:sm:top-1/3 au:sm:translate-y-0 au:sm:px-6'
+        : 'au:top-1/3 au:px-6'
     ),
     classes?.controls
   );
 
   const dotsContainerClasses = twMerge(
     classNames(
-      'mg:absolute mg:left-1/2 mg:z-10 mg:flex mg:-translate-x-1/2 mg:gap-2',
-      responsive ? 'mg:bottom-3 mg:sm:bottom-4' : 'mg:bottom-4'
+      'au:absolute au:left-1/2 au:z-10 au:flex au:-translate-x-1/2 au:gap-2',
+      responsive ? 'au:bottom-3 au:sm:bottom-4' : 'au:bottom-4'
     ),
     classes?.dotsContainer
   );
@@ -404,7 +404,7 @@ const Hero: FC<HeroProps> = ({
               src={image.src}
               alt={image.alt}
               loading={lazyLoad ? 'lazy' : 'eager'}
-              className="mg:absolute mg:inset-0 mg:h-full mg:w-full"
+              className="au:absolute au:inset-0 au:h-full au:w-full"
               style={{ objectFit }}
             />
           </div>
@@ -423,7 +423,7 @@ const Hero: FC<HeroProps> = ({
               key={`hero-link-${index}`}
               href={link.href}
               variant={link.variant}
-              classes={{ button: 'mg:animate-fade-in mg:duration-500' }}
+              classes={{ button: 'au:animate-fade-in au:duration-500' }}
               style={{ animationDelay: `${0.2 + index * 0.15}s` }}
             >
               {link.label}
@@ -437,7 +437,7 @@ const Hero: FC<HeroProps> = ({
             variant="filled"
             color="secondary"
             classes={{
-              iconButton: 'mg:pointer-events-auto mg:animate-slide-in-left',
+              iconButton: 'au:pointer-events-auto au:animate-slide-in-left',
             }}
             onClick={handlePrev}
           >
@@ -447,7 +447,7 @@ const Hero: FC<HeroProps> = ({
             variant="filled"
             color="secondary"
             classes={{
-              iconButton: 'mg:pointer-events-auto mg:animate-slide-in-right',
+              iconButton: 'au:pointer-events-auto au:animate-slide-in-right',
             }}
             onClick={handleNext}
           >

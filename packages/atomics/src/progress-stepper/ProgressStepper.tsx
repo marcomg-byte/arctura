@@ -251,23 +251,23 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
   const isBelowSm = isBelow('sm');
 
   const buttonsContainerClasses = twMerge(
-    'mg:flex mg:gap-1 mg:items-center',
+    'au:flex au:gap-1 au:items-center',
     classes?.buttonsContainer
   );
 
   const controlsClasses = twMerge(
-    'mg:w-full mg:flex mg:items-center mg:justify-between mg:pb-5 mg:sm:pb-6 mg:px-6',
+    'au:w-full au:flex au:items-center au:justify-between au:pb-5 au:sm:pb-6 au:px-6',
     classes?.controls
   );
 
-  const outerClasses = twMerge('mg:flex mg:flex-col mg:w-full', classes?.outer);
+  const outerClasses = twMerge('au:flex au:flex-col au:w-full', classes?.outer);
 
   const rootClasses = twMerge(
     classNames(
-      'mg:w-full mg:h-full mg:flex mg:px-6 mg:pb-2 mg:pt-0 mg:sm:pt-6 mg:overflow-x-scroll mg:scrollbar-subtle',
+      'au:w-full au:h-full au:flex au:px-6 au:pb-2 au:pt-0 au:sm:pt-6 au:overflow-x-scroll au:scrollbar-subtle',
       {
-        'mg:flex-col': orientation === 'vertical' || (isBelowSm && !forceHorizontal),
-        'mg:justify-between': orientation === 'horizontal' && !isBelowSm,
+        'au:flex-col': orientation === 'vertical' || (isBelowSm && !forceHorizontal),
+        'au:justify-between': orientation === 'horizontal' && !isBelowSm,
       }
     ),
     classes?.root

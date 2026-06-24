@@ -87,12 +87,12 @@ const Drawer: FC<DrawerProps> = ({
 
   const backdropClasses = twMerge(
     classNames(
-      'mg:fixed mg:w-full mg:h-full mg:inset-0 mg:z-40 mg:flex mg:overflow-hidden mg:transition-opacity mg:duration-200 mg:ease-out',
+      'au:fixed au:w-full au:h-full au:inset-0 au:z-40 au:flex au:overflow-hidden au:transition-opacity au:duration-200 au:ease-out',
       {
-        'mg:items-start mg:justify-start': anchor === 'left',
-        'mg:items-start mg:justify-end': anchor === 'right',
-        'mg:items-start mg:justify-stretch': anchor === 'top',
-        'mg:items-end mg:justify-stretch': anchor === 'bottom',
+        'au:items-start au:justify-start': anchor === 'left',
+        'au:items-start au:justify-end': anchor === 'right',
+        'au:items-start au:justify-stretch': anchor === 'top',
+        'au:items-end au:justify-stretch': anchor === 'bottom',
       }
     ),
     classes?.backdrop
@@ -100,39 +100,39 @@ const Drawer: FC<DrawerProps> = ({
 
   const overlayClasses = twMerge(
     classNames(
-      'mg:absolute mg:inset-0 mg:bg-secondary/80 mg:backdrop-blur-sm mg:transition-opacity mg:duration-200 mg:ease-out',
+      'au:absolute au:inset-0 au:bg-secondary/80 au:backdrop-blur-sm au:transition-opacity au:duration-200 au:ease-out',
       {
-        'mg:opacity-100': showBackdrop,
-        'mg:opacity-0': !showBackdrop,
+        'au:opacity-100': showBackdrop,
+        'au:opacity-0': !showBackdrop,
       }
     ),
     classes?.overlay
   );
   const headerClasses = twMerge(
-    classNames('mg:flex mg:justify-between mg:w-full mg:py-3 mg:px-6'),
+    classNames('au:flex au:justify-between au:w-full au:py-3 au:px-6'),
     classes?.header?.root
   );
 
-  const headerCenterClasses = twMerge(classNames('mg:flex mg:gap-3'), classes?.header?.center);
+  const headerCenterClasses = twMerge(classNames('au:flex au:gap-3'), classes?.header?.center);
 
-  const headerLeftSectionClasses = twMerge(classNames('mg:flex mg:gap-3'), classes?.header?.left);
+  const headerLeftSectionClasses = twMerge(classNames('au:flex au:gap-3'), classes?.header?.left);
 
-  const headerRightClasses = twMerge(classNames('mg:flex mg:gap-3'), classes?.header?.right);
+  const headerRightClasses = twMerge(classNames('au:flex au:gap-3'), classes?.header?.right);
 
-  const bodyClasses = twMerge(classNames('mg:flex mg:flex-col mg:w-full'), classes?.body);
+  const bodyClasses = twMerge(classNames('au:flex au:flex-col au:w-full'), classes?.body);
 
   const rootClasses = twMerge(
     classNames(
-      'mg:relative mg:flex mg:w-full mg:max-w-full mg:grow-0 mg:flex-col mg:pb-2 mg:z-50 mg:bg-secondary mg:opacity-100 mg:text-primary mg:shadow-xl mg:shadow-black/20 mg:transition-transform mg:duration-300 mg:ease-out',
+      'au:relative au:flex au:w-full au:max-w-full au:grow-0 au:flex-col au:pb-2 au:z-50 au:bg-secondary au:opacity-100 au:text-primary au:shadow-xl au:shadow-black/20 au:transition-transform au:duration-300 au:ease-out',
       {
-        'mg:max-w-80 mg:sm:max-w-96': anchor === 'left' || anchor === 'right',
-        'mg:max-h-[85dvh]': anchor === 'top' || anchor === 'bottom',
-        'mg:translate-x-0': open && (anchor === 'left' || anchor === 'right'),
-        'mg:translate-y-0': open && (anchor === 'top' || anchor === 'bottom'),
-        'mg:-translate-x-full': !open && anchor === 'left',
-        'mg:translate-x-full': !open && anchor === 'right',
-        'mg:-translate-y-full': !open && anchor === 'top',
-        'mg:translate-y-full': !open && anchor === 'bottom',
+        'au:max-w-80 au:sm:max-w-96': anchor === 'left' || anchor === 'right',
+        'au:max-h-[85dvh]': anchor === 'top' || anchor === 'bottom',
+        'au:translate-x-0': open && (anchor === 'left' || anchor === 'right'),
+        'au:translate-y-0': open && (anchor === 'top' || anchor === 'bottom'),
+        'au:-translate-x-full': !open && anchor === 'left',
+        'au:translate-x-full': !open && anchor === 'right',
+        'au:-translate-y-full': !open && anchor === 'top',
+        'au:translate-y-full': !open && anchor === 'bottom',
       }
     ),
     classes?.root

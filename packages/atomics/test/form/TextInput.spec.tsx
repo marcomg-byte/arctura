@@ -28,7 +28,7 @@ describe('TextInput', () => {
     expect(input.getAttribute('id')).toBe('email');
     expect(input.getAttribute('name')).toBe('email');
     expect(input.getAttribute('placeholder')).toBe('hello@example.com');
-    expect(input.className).toContain('mg:grow');
+    expect(input.className).toContain('au:grow');
   });
 
   it('updates uncontrolled values and clears with Escape', () => {

@@ -43,7 +43,7 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 const cloneBadge = (badge: ReactElement<ComponentProps<typeof Badge>>) => {
   if (isValidElement(badge)) {
     return cloneElement(badge, {
-      className: 'mg:animate-fade-in',
+      className: 'au:animate-fade-in',
       size: 'xs',
       style: { animationDuration: '2s' },
     });
@@ -69,12 +69,12 @@ const renderAdornment = (adornment: HeaderAdornment) => {
         src={adornment.src || ''}
         width={40}
         height={40}
-        className="mg-object-contain"
+        className="au:object-contain"
       />
     );
   }
 
-  return <FontAwesomeIcon icon={adornment} className="mg-text-sm" />;
+  return <FontAwesomeIcon icon={adornment} className="au:text-sm" />;
 };
 
 /**
@@ -101,16 +101,16 @@ const renderAdornment = (adornment: HeaderAdornment) => {
 const Header: FC<HeaderProps> = ({ adornment, badge, ref, subtitle, title, ...rest }) => {
   return (
     <div
-      className="mg:flex mg:flex-col mg:gap-1 mg:px-3 mg:py-2"
+      className="au:flex au:flex-col au:gap-1 au:px-3 au:py-2"
       ref={ref}
       {...(rest as HTMLAttributes<HTMLDivElement>)}
     >
-      <div className="mg:flex mg:items-center mg:gap-3">
+      <div className="au:flex au:items-center au:gap-3">
         {adornment && renderAdornment(adornment)}
         <Typography
           clamp={3}
           bold
-          className="mg:lg:text-2xl mg:sm:text-lg mg:text-base"
+          className="au:lg:text-2xl au:sm:text-lg au:text-base"
           variant="h2"
         >
           {title}

@@ -62,8 +62,8 @@ interface NodeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
  * @returns {JSX.Element} The rendered adornment element.
  */
 const renderAdornment = (adornment: NodeAdornment, className?: string) => {
-  const iconClasses = twMerge('mg:text-sm', className);
-  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
+  const iconClasses = twMerge('au:text-sm', className);
+  const imageClasses = twMerge('au:object-contain au:animate-fade-in au:duration-500', className);
 
   if ('iconName' in adornment) {
     return <FontAwesomeIcon className={iconClasses} icon={adornment} />;
@@ -114,37 +114,37 @@ const Node: FC<NodeProps> = ({
 }) => {
   const circularClasses =
     variant === 'circular'
-      ? classNames('mg:rounded-full', {
-          'mg:h-4 mg:w-4': size === 'sm',
-          'mg:h-6 mg:w-6': size === 'md',
-          'mg:h-8 mg:w-8': size === 'lg',
+      ? classNames('au:rounded-full', {
+          'au:h-4 au:w-4': size === 'sm',
+          'au:h-6 au:w-6': size === 'md',
+          'au:h-8 au:w-8': size === 'lg',
         })
       : '';
   const extendedClasses =
     variant === 'extended'
-      ? classNames('mg:rounded-lg', {
-          'mg:w-4 mg:h-2': size === 'sm',
-          'mg:w-5 mg:h-3': size === 'md',
-          'mg:w-6 mg:h-4': size === 'lg',
+      ? classNames('au:rounded-lg', {
+          'au:w-4 au:h-2': size === 'sm',
+          'au:w-5 au:h-3': size === 'md',
+          'au:w-6 au:h-4': size === 'lg',
         })
       : '';
   const containerClasses = twMerge(
     classNames(
-      'mg:inline-flex mg:items-center mg:justify-center mg:border-solid mg:border-1 mg:text-primary',
+      'au:inline-flex au:items-center au:justify-center au:border-solid au:border-1 au:text-primary',
       {
-        'mg:border-primary mg:hover:border-primary-hover mg:text-primary mg:hover:text-primary-hover':
+        'au:border-primary au:hover:border-primary-hover au:text-primary au:hover:text-primary-hover':
           color === 'primary',
-        'mg:border-secondary mg:hover:border-secondary-hover mg:text-secondary mg:hover:text-secondary-hover':
+        'au:border-secondary au:hover:border-secondary-hover au:text-secondary au:hover:text-secondary-hover':
           color === 'secondary',
-        'mg:border-accent mg:hover:border-accent-hover mg:text-accent mg:hover:text-accent-hover':
+        'au:border-accent au:hover:border-accent-hover au:text-accent au:hover:text-accent-hover':
           color === 'accent',
-        'mg:border-error mg:hover:border-error-hover mg:text-danger mg:hover:text-danger-hover':
+        'au:border-error au:hover:border-error-hover au:text-danger au:hover:text-danger-hover':
           color === 'error',
-        'mg:border-info mg:hover:border-info-hover mg:text-info mg:hover:text-info-hover':
+        'au:border-info au:hover:border-info-hover au:text-info au:hover:text-info-hover':
           color === 'info',
-        'mg:border-success mg:hover:border-success-hover mg:text-success mg:hover:text-success-hover':
+        'au:border-success au:hover:border-success-hover au:text-success au:hover:text-success-hover':
           color === 'success',
-        'mg:border-warning mg:hover:border-warning-hover mg:text-warning mg:hover:text-warning-hover':
+        'au:border-warning au:hover:border-warning-hover au:text-warning au:hover:text-warning-hover':
           color === 'warning',
       },
       circularClasses,
