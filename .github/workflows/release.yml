@@ -153,6 +153,50 @@ jobs:
         working-directory: packages/theme
         run: npm pack --dry-run
 
+      - name: Create release notes
+        env:
+          RELEASE_BUMP: ${{ steps.release-type.outputs.bump }}
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+          const pullRequest = event.pull_request;
+          const template = fs.readFileSync('.github/release-template.md', 'utf8');
+          const releaseDetails = formatReleaseDetails(pullRequest.body);
+
+          function formatReleaseDetails(body) {
+            const details = body?.trim();
+
+            if (!details) {
+              return '- No release details were provided in the source pull request.';
+            }
+
+            return details.replace(/^(#{1,5})\s/gm, '#$1 ');
+          }
+
+          const values = {
+            TAG: process.env.RELEASE_TAG,
+            VERSION: process.env.RELEASE_VERSION,
+            RELEASE_TYPE: process.env.RELEASE_BUMP,
+            PR_NUMBER: String(pullRequest.number),
+            PR_TITLE: pullRequest.title,
+            RELEASE_DETAILS: releaseDetails,
+          };
+
+          const notes = template.replace(/\{\{([A-Z_]+)\}\}/g, (match, key) => {
+            if (!(key in values)) {
+              throw new Error(`Missing release template value: ${key}`);
+            }
+
+            return values[key];
+          });
+
+          fs.writeFileSync('release-notes.md', notes);
+          NODE
+
       - name: Commit release version
         run: |
           git config user.name "github-actions[bot]"
@@ -170,7 +214,7 @@ jobs:
           gh auth status
           gh release create "${{ steps.version.outputs.tag }}" \
             --title "${{ steps.version.outputs.tag }}" \
-            --notes "Released from PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}"
+            --notes-file release-notes.md
 
       - name: Mark Pull Request as Released
         env:
