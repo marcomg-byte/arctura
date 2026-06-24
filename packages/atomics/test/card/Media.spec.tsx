@@ -11,11 +11,11 @@ describe('Media', () => {
     const wrapper = container.firstElementChild as HTMLElement;
     const image = screen.getByAltText('Project preview');
 
-    expect(wrapper.className).toContain('mg:relative');
-    expect(wrapper.className).toContain('mg:aspect-[4/3]');
+    expect(wrapper.className).toContain('au:relative');
+    expect(wrapper.className).toContain('au:aspect-[4/3]');
     expect(image.getAttribute('src')).toContain('project.jpg');
     expect(image.getAttribute('sizes')).toContain('100vw');
-    expect(image.className).toContain('mg:object-cover');
+    expect(image.className).toContain('au:object-cover');
   });
 
   it('applies aspect ratio and header/footer rounding props', () => {
@@ -34,9 +34,9 @@ describe('Media', () => {
     const wrapper = container.firstElementChild as HTMLElement;
     const image = screen.getByAltText('Project preview');
 
-    expect(wrapper.className).toContain('mg:aspect-video');
-    expect(wrapper.className).toContain('mg:rounded-tl-lg');
-    expect(wrapper.className).toContain('mg:rounded-br-lg');
+    expect(wrapper.className).toContain('au:aspect-video');
+    expect(wrapper.className).toContain('au:rounded-tl-lg');
+    expect(wrapper.className).toContain('au:rounded-br-lg');
     expect(image.getAttribute('sizes')).toBe('50vw');
     expect(image.getAttribute('loading')).not.toBe('lazy');
   });

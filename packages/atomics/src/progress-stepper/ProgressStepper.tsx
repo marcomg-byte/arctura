@@ -10,15 +10,15 @@ import type {
 } from 'react';
 import { Children, cloneElement, Fragment, isValidElement, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Step } from '@/src/progress-stepper/Step';
-import type { StepClasses } from '@/src/progress-stepper/Step';
-import { Connector } from '@/src/progress-stepper/Connector';
-import type { ConnectorClasses } from '@/src/progress-stepper/Connector';
-import { Button } from '@/src/buttons';
-import type { ButtonClasses } from '@/src/buttons';
-import { Typography } from '@/src/typography';
-import { useControlled, useBreakpoints } from '@/lib';
-import { capitalize } from '@/src/utils';
+import { Step } from './Step';
+import type { StepClasses } from './Step';
+import { Connector } from './Connector';
+import type { ConnectorClasses } from './Connector';
+import { Button } from '../buttons';
+import type { ButtonClasses } from '../buttons';
+import { Typography } from '../typography';
+import { useControlled, useBreakpoints } from '../../lib/hooks';
+import { capitalize } from '../utils';
 import { twMerge } from 'tailwind-merge';
 
 /**
@@ -87,11 +87,25 @@ interface ProgressStepperClasses {
 }
 
 /**
- * @interface ProgressStepperProps
- * @extends HTMLAttributes<HTMLDivElement>
- * @description
- * Props for the ProgressStepper component, extending standard HTML div attributes.
- * Includes properties for active step index, custom connectors, click handling, layout orientation, and linear mode.
+ * Props for the ProgressStepper component.
+ *
+ * Use this interface to configure a controlled or uncontrolled stepper flow,
+ * including active step state, completion state, linear navigation, custom
+ * class hooks, responsive orientation, and callbacks for step changes.
+ *
+ * @property [activeStep] - Controlled value representing the active step.
+ * @property [children] - One or more `Step` nodes rendered inside the stepper.
+ * @property [classes] - Class name hooks for stepper layout, controls, and steps.
+ * @property [completed] - Controlled state indicating all steps are complete.
+ * @property [defaultStep] - Initially active step index for uncontrolled usage.
+ * @property [forceHorizontal] - Forces horizontal layout even on small screens.
+ * @property [hideControls] - Hides default controls in non-linear steppers.
+ * @property [linear] - Whether step activation follows linear behavior.
+ * @property [onComplete] - Callback invoked when completion state changes.
+ * @property [onInit] - Callback invoked on mount with the initial active step.
+ * @property [onStepClick] - Callback fired when a step is clicked.
+ * @property [orientation] - Horizontal or vertical layout orientation.
+ * @property [ref] - Ref forwarded to the root step list container.
  */
 interface ProgressStepperProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
   /** Controlled value representing the currently active step object. */
@@ -171,25 +185,27 @@ function mapChildrenToSteps(children: ReactNode, defaultStepProp: number): StepT
  * @returns {JSX.Element} The rendered stepper component.
  * @example
  * ```tsx
+ * import { ProgressStepper, Step } from '@arctura/atomics';
+ * import type { StepType } from '@arctura/atomics';
  * import { useState } from 'react';
- * import { ProgressStepper, Step } from '@/src';
- * import type { StepType } from '@/src';
  *
- * const MyStepper = () => {
+ * export function CheckoutStepper() {
  *   const [activeStep, setActiveStep] = useState<StepType>({});
+ *
  *   return (
  *     <ProgressStepper
  *       activeStep={activeStep}
- *       onStepClick={(event, step) => {
- *         console.log('Step clicked:', step);
+ *       linear={false}
+ *       onStepClick={(_event, step) => {
  *         setActiveStep(step);
- *     }}>
- *       <Step label="Step 1" />
- *       <Step label="Step 2" />
- *       <Step label="Step 3" />
+ *       }}
+ *     >
+ *       <Step label="Cart" title="Review cart" />
+ *       <Step label="Shipping" title="Shipping details" />
+ *       <Step label="Payment" title="Payment method" />
  *     </ProgressStepper>
  *   );
- * };
+ * }
  */
 const ProgressStepper: FC<ProgressStepperProps> = ({
   activeStep: activeStepProp,
@@ -251,23 +267,23 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
   const isBelowSm = isBelow('sm');
 
   const buttonsContainerClasses = twMerge(
-    'mg:flex mg:gap-1 mg:items-center',
+    'au:flex au:gap-1 au:items-center',
     classes?.buttonsContainer
   );
 
   const controlsClasses = twMerge(
-    'mg:w-full mg:flex mg:items-center mg:justify-between mg:pb-5 mg:sm:pb-6 mg:px-6',
+    'au:w-full au:flex au:items-center au:justify-between au:pb-5 au:sm:pb-6 au:px-6',
     classes?.controls
   );
 
-  const outerClasses = twMerge('mg:flex mg:flex-col mg:w-full', classes?.outer);
+  const outerClasses = twMerge('au:flex au:flex-col au:w-full', classes?.outer);
 
   const rootClasses = twMerge(
     classNames(
-      'mg:w-full mg:h-full mg:flex mg:px-6 mg:pb-2 mg:pt-0 mg:sm:pt-6 mg:overflow-x-scroll mg:scrollbar-subtle',
+      'au:w-full au:h-full au:flex au:px-6 au:pb-2 au:pt-0 au:sm:pt-6 au:overflow-x-scroll au:scrollbar-subtle',
       {
-        'mg:flex-col': orientation === 'vertical' || (isBelowSm && !forceHorizontal),
-        'mg:justify-between': orientation === 'horizontal' && !isBelowSm,
+        'au:flex-col': orientation === 'vertical' || (isBelowSm && !forceHorizontal),
+        'au:justify-between': orientation === 'horizontal' && !isBelowSm,
       }
     ),
     classes?.root
@@ -508,4 +524,4 @@ const ProgressStepper: FC<ProgressStepperProps> = ({
 ProgressStepper.displayName = 'ProgressStepper';
 
 export { ProgressStepper };
-export type { ProgressStepperClasses, StepType };
+export type { ProgressStepperClasses, ProgressStepperProps, StepType };

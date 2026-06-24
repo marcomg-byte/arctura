@@ -13,13 +13,13 @@ import type {
 import { Children, cloneElement, isValidElement, useEffect, useState } from 'react';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TextArea } from '@/src/form/TextArea';
-import { TextInput } from '@/src/form/TextInput';
+import { TextArea } from './TextArea';
+import { TextInput } from './TextInput';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import { Button } from '@/src/buttons';
-import { Typography } from '@/src/typography';
-import { useBreakpoints, useControlled } from '@/lib';
+import { Button } from '../buttons';
+import { Typography } from '../typography';
+import { useBreakpoints, useControlled } from '../../lib/hooks';
 
 /**
  * React element shape used when recursively traversing nested children.
@@ -43,6 +43,10 @@ type FormColor = 'accent' | 'black' | 'inverse' | 'primary' | 'secondary' | 'sub
 
 /**
  * Class names for the disclaimer sub-elements.
+ *
+ * @property [adornment] - Classes applied to the disclaimer adornment.
+ * @property [container] - Classes applied to the disclaimer container wrapper.
+ * @property [text] - Classes applied to the disclaimer text element.
  */
 interface DisclaimerClasses {
   /** Classes applied to the disclaimer adornment (icon or image). */
@@ -58,6 +62,15 @@ interface DisclaimerClasses {
  *
  * Each property is optional and, when provided, will be merged with the
  * component's internal class names.
+ *
+ * @property [adornment] - Classes applied to the header/start adornment.
+ * @property [body] - Classes applied to the main body wrapper containing form children.
+ * @property [disclaimer] - Classes for the disclaimer sub-elements.
+ * @property [header] - Classes applied to the form header.
+ * @property [footer] - Classes applied to the form footer.
+ * @property [footerButtonsContainer] - Classes applied to the wrapper that contains the footer action buttons.
+ * @property [form] - Classes applied to the root form element.
+ * @property [submitButton] - Classes applied to the submit button container.
  */
 interface FormClasses {
   /** Classes applied to the header/start adornment. */
@@ -93,6 +106,29 @@ type FormDisclaimer = { adornment?: FormAdornment; text?: string };
  * `className`) and exposes additional configuration used by the component
  * such as adornments, color tokens, class overrides, and an optional
  * disclaimer rendered in the footer.
+ *
+ * @property ['aria-label'] - Accessible label for the form.
+ * @property ['aria-labelledby'] - ID of an element that labels the form.
+ * @property [action] - Native form submission URL.
+ * @property [adornmentColor] - Color used for adornments and accents inside the form.
+ * @property [children] - Child nodes rendered inside the form.
+ * @property [classes] - Class name hooks for form sub-elements.
+ * @property [color] - Color used for text elements in the form and disclaimer.
+ * @property [disclaimer] - Optional disclaimer shown in the form footer.
+ * @property [encType] - Encoding type for form submission.
+ * @property [endAdornment] - Optional adornment rendered at the end of the form header.
+ * @property [error] - Controlled error state for the form.
+ * @property [id] - ID attribute for the form element.
+ * @property [method] - HTTP method used when submitting the form.
+ * @property [name] - Name attribute for form submission.
+ * @property [noValidate] - Disables browser-native validation when true.
+ * @property [onChange] - Handler called with normalized form values and error state.
+ * @property [onReset] - Reset event handler for the form element.
+ * @property [onSubmit] - Submit event handler receiving the event, values, and error state.
+ * @property [ref] - Ref forwarded to the form element.
+ * @property [startAdornment] - Optional adornment rendered at the start of the form header.
+ * @property [title] - Optional title displayed next to adornments.
+ * @property [value] - Initial or controlled values for form fields.
  */
 interface FormProps extends Omit<
   FormHTMLAttributes<HTMLFormElement>,
@@ -152,6 +188,11 @@ interface FormProps extends Omit<
  * - `type`: discriminant for the field component type (`TextInput` or `TextArea`).
  * - `value`: current string value for the field.
  * - `error`: optional boolean flag indicating the field has a validation error.
+ *
+ * @property [error] - Whether the field currently has a validation error.
+ * @property [key] - Unique key generated when mapping children into form state.
+ * @property [type] - Component type of the field.
+ * @property [value] - Current string value for the field.
  */
 interface FormValue {
   /** Whether the field currently has a validation error. */
@@ -246,11 +287,11 @@ const mapState = (children?: ReactNode): FormValue[] => {
  */
 const renderAdornment = (adornment: FormAdornment, className?: string): JSX.Element => {
   const iconClasses = classNames(
-    'mg:animate-fade-in mg:transition-transform mg:duration-500 mg:hover:scale-110',
+    'au:animate-fade-in au:transition-transform au:duration-500 au:hover:scale-110',
     className
   );
   const imageClasses = twMerge(
-    'mg:object-contain mg:animate-fade-in mg:transition-transform mg:duration-500 mg:hover:scale-110',
+    'au:object-contain au:animate-fade-in au:transition-transform au:duration-500 au:hover:scale-110',
     className
   );
 
@@ -280,21 +321,18 @@ const renderAdornment = (adornment: FormAdornment, className?: string): JSX.Elem
  * @returns {JSX.Element} The rendered form element.
  * @example
  * ```tsx
- * import { Form, Button } from '@/src';
+ * import { Button, Form, TextInput } from '@arctura/atomics';
  * import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
  *
- * const MyForm = () => (
- *  <Form
- *    action="/submit"
- *    method="post"
- *    title="Contact Us"
- *    startAdornment={faPaperPlane}
- *  >
- *    <input type="text" name="name" placeholder="Your Name" required />
- *    <input type="email" name="email" placeholder="Your Email" required />
- *    <Button type="submit">Send</Button>
- *  </Form>
- * );
+ * export function ContactForm() {
+ *   return (
+ *     <Form title="Contact us" startAdornment={faPaperPlane} onSubmit={(event) => event.preventDefault()}>
+ *       <TextInput label="Name" name="name" required />
+ *       <TextInput label="Email" name="email" type="email" required />
+ *       <Button type="submit">Send</Button>
+ *     </Form>
+ *   );
+ * }
  * ```
  */
 const Form: FC<FormProps> = ({
@@ -337,72 +375,72 @@ const Form: FC<FormProps> = ({
   const isBelowSm = isBelow('sm');
 
   const adornmentClasses = classNames(
-    'mg:text-2xl',
+    'au:text-2xl',
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
     },
     classes?.adornment
   );
 
   const bodyClasses = twMerge(
-    'mg:flex mg:flex-col mg:items-start mg:gap-3 mg:bg-inherit mg:w-full',
+    'au:flex au:flex-col au:items-start au:gap-3 au:bg-inherit au:w-full',
     classes?.body
   );
 
   const disclaimerAdornmentClasses = classNames(
-    'mg:p-1 mg:text-2xl',
+    'au:p-1 au:text-2xl',
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
     },
     classes?.disclaimer?.adornment
   );
 
   const disclaimerContainerClasses = twMerge(
-    'mg:flex mg:grow mg:gap-2',
+    'au:flex au:grow au:gap-2',
     classes?.disclaimer?.container
   );
 
   const headerClasses = twMerge(
-    'mg:flex mg:items-center mg:justify-between mg:w-full',
+    'au:flex au:items-center au:justify-between au:w-full',
     classes?.header
   );
 
   const footerClasses = twMerge(
-    'mg:flex mg:flex-col mg:items-start mg:gap-3 mg:sm:flex-row mg:sm:items-center mg:justify-between mg:w-full',
+    'au:flex au:flex-col au:items-start au:gap-3 au:sm:flex-row au:sm:items-center au:justify-between au:w-full',
     classes?.footer
   );
 
   const footerButtonsContainerClasses = twMerge(
-    classNames('mg:flex mg:items-center mg:justify-between mg:w-full'),
+    classNames('au:flex au:items-center au:justify-between au:w-full'),
     classes?.footerButtonsContainer
   );
 
   const formClasses = twMerge(
-    'mg:flex mg:flex-col mg:p-6 mg:gap-4 mg:rounded-lg mg:bg-inherit',
+    'au:flex au:flex-col au:p-6 au:gap-4 au:rounded-lg au:bg-inherit',
     classes?.form
   );
 
   const submitButtonClasses = classNames(
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
     },
     classes?.submitButton
   );
@@ -542,7 +580,7 @@ const Form: FC<FormProps> = ({
       {...rest}
     >
       <div className={headerClasses}>
-        <div className="mg:flex mg:items-center mg:gap-2">
+        <div className="au:flex au:items-center au:gap-2">
           {startAdornment && renderAdornment(startAdornment, adornmentClasses)}
           {title && (
             <Typography color="white" variant="h2">
@@ -596,4 +634,12 @@ const Form: FC<FormProps> = ({
 Form.displayName = 'Form';
 
 export { Form };
-export type { FormValue };
+export type {
+  DisclaimerClasses,
+  FormAdornment,
+  FormClasses,
+  FormColor,
+  FormDisclaimer,
+  FormProps,
+  FormValue,
+};

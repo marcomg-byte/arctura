@@ -1,11 +1,15 @@
 import type { ComponentProps, FC, HTMLAttributes, ReactElement, ReactNode, Ref } from 'react';
 import React, { Children } from 'react';
-import { Header } from '@/src/card/Header';
-import { Media } from '@/src/card/Media';
-import { Footer } from '@/src/card/Footer';
+import { Header } from './Header';
+import { Media } from './Media';
+import { Footer } from './Footer';
 
 /**
  * Props for the Card component.
+ *
+ * Use these props when rendering a composable card shell that arranges
+ * `CardHeader`, `CardMedia`, and `CardFooter` children while forwarding
+ * standard div attributes to the card container.
  *
  * @property {ReactNode} [children] - Card content, typically Header, Media, and Footer components.
  * @property {Ref<HTMLDivElement>} [ref] - Ref for the card container div.
@@ -25,15 +29,17 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @example
  * ```tsx
- * import { Card, Header, Media, Footer } from '@/src';
+ * import { Card, CardFooter, CardHeader, CardMedia } from '@arctura/atomics';
  *
- * const MyCard = () => (
- *  <Card>
- *    <Header title="Card Title" subtitle="Card Subtitle" />
- *    <Media src="/path/to/image.jpg" alt="Card Image" />
- *    <Footer actions={[{ label: 'Action', onClick: () => { console.log('Action clicked'); } }]} />
- *  </Card>
- * );
+ * export function FeatureCard() {
+ *   return (
+ *     <Card aria-label="Component quality">
+ *       <CardHeader title="Accessible atoms" subtitle="Ready for product surfaces" />
+ *       <CardMedia src="/images/quality.png" alt="Interface quality preview" />
+ *       <CardFooter actions={[{ label: 'Learn more', href: '/components' }]} />
+ *     </Card>
+ *   );
+ * }
  * ```
  */
 const Card: FC<CardProps> = ({ children, ref, ...rest }) => {
@@ -71,7 +77,7 @@ const Card: FC<CardProps> = ({ children, ref, ...rest }) => {
 
   return (
     <div
-      className="mg:flex mg:min-w-36 mg:max-w-52 mg:w-full mg:flex-col mg:justify-start mg:bg-primary-subtle mg:rounded-lg mg:shadow-lg mg:shadow-black/20 mg:ring-1 mg:ring-black/5 mg:transition-transform mg:duration-200 mg:hover:scale-[1.02]"
+      className="au:flex au:min-w-36 au:max-w-52 au:w-full au:flex-col au:justify-start au:bg-primary-subtle au:rounded-lg au:shadow-lg au:shadow-black/20 au:ring-1 au:ring-black/5 au:transition-transform au:duration-200 au:hover:scale-[1.02]"
       ref={ref}
       {...(rest as HTMLAttributes<HTMLDivElement>)}
     >
@@ -83,3 +89,4 @@ const Card: FC<CardProps> = ({ children, ref, ...rest }) => {
 Card.displayName = 'Card';
 
 export { Card };
+export type { CardProps };

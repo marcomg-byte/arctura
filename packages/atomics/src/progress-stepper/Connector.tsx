@@ -5,6 +5,9 @@ import { twMerge } from 'tailwind-merge';
 
 /**
  * Class name overrides for the connector container and line.
+ *
+ * @property [container] - Classes applied to the outer connector wrapper.
+ * @property [content] - Classes applied to the inner connector line.
  */
 interface ConnectorClasses {
   /** Classes applied to the outer connector wrapper. */
@@ -15,6 +18,17 @@ interface ConnectorClasses {
 
 /**
  * Props accepted by the `Connector` component.
+ *
+ * Use these props to render the visual line between stepper nodes, reflecting
+ * active, completed, pending, and terminal positions in horizontal or vertical
+ * layouts.
+ *
+ * @property [active] - Whether the connector is currently active.
+ * @property [classes] - Class name hooks for the connector wrapper and line.
+ * @property [completed] - Whether the preceding step has been completed.
+ * @property [lastIndex] - Prevents rendering for the final step when true.
+ * @property [orientation] - Horizontal or vertical connector orientation.
+ * @property [ref] - Ref forwarded to the connector container element.
  */
 interface ConnectorProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
   /** Whether the connector is currently active (uses active styling). */
@@ -41,11 +55,11 @@ interface ConnectorProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className
  * @returns {JSX.Element | null} The connector element or `null` for the last step.
  * @example
  * ```tsx
- * import { Connector } from '@/src';
+ * import { Connector } from '@arctura/atomics';
  *
- * const MyConnector = () => (
- *  <Connector active={true} completed={false} orientation="horizontal" />
- * );
+ * export function PreviewConnector() {
+ *   return <Connector active completed={false} orientation="horizontal" />;
+ * }
  * ```
  */
 const Connector: FC<ConnectorProps> = ({
@@ -57,15 +71,15 @@ const Connector: FC<ConnectorProps> = ({
   ref,
   ...rest
 }) => {
-  const containerClasses = twMerge('mg:relative mg:flex mg:h-full mg:grow', classes?.container);
+  const containerClasses = twMerge('au:relative au:flex au:h-full au:grow', classes?.container);
 
   const contentClasses = twMerge(
-    classNames('mg:relative mg:transform mg:translate-y-7', {
-      'mg:h-2px mg:w-full': orientation === 'horizontal',
-      'mg:w-2px mg:h-full': orientation === 'vertical',
-      'mg:bg-accent': !active && !completed,
-      'mg:bg-primary': active,
-      'mg:bg-success-primary': completed,
+    classNames('au:relative au:transform au:translate-y-7', {
+      'au:h-2px au:w-full': orientation === 'horizontal',
+      'au:w-2px au:h-full': orientation === 'vertical',
+      'au:bg-accent': !active && !completed,
+      'au:bg-primary': active,
+      'au:bg-success-primary': completed,
     }),
     classes?.content
   );
@@ -82,4 +96,4 @@ const Connector: FC<ConnectorProps> = ({
 };
 
 export { Connector };
-export type { ConnectorClasses };
+export type { ConnectorClasses, ConnectorProps };

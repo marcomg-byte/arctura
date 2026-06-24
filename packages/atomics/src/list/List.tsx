@@ -11,8 +11,8 @@ import type {
 import { Children, cloneElement, isValidElement, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
-import { useControlled } from '@/lib';
-import { ListItem as ListItemComponent } from '@/src/list/ListItem';
+import { useControlled } from '../../lib/hooks';
+import { ListItem as ListItemComponent } from './ListItem';
 
 /** React element helper that guarantees an optional `children` prop. */
 type ElementWithChildren = ReactElement<{ children?: ReactNode }>;
@@ -41,7 +41,14 @@ type ListBackground = 'primary' | 'secondary' | 'subtle' | 'inverse';
 /** Text and surface colors supported by the list container. */
 type ListColor = 'accent' | 'black' | 'inverse' | 'primary' | 'secondary' | 'subtle' | 'white';
 
-/** Internal list item shape used to track selection state. */
+/**
+ * Internal list item shape used to track selection state.
+ *
+ * @property [key] - Stable identifier assigned while walking the nested children tree.
+ * @property [label] - Human-readable label for the item.
+ * @property [selected] - Whether the item is currently selected.
+ * @property [value] - Backing value associated with the item.
+ */
 interface ListItem {
   /** Stable identifier assigned while walking the nested children tree. */
   key?: string;
@@ -62,7 +69,30 @@ type ListItemElement = ReactElement<ComponentProps<typeof ListItemComponent>>;
 /** Props extracted from the reusable list item component. */
 type ListItemProps = ComponentProps<typeof ListItemComponent>;
 
-/** Shared props supported by all list render targets. */
+/**
+ * Shared props supported by all list render targets.
+ *
+ * These props describe the public list behavior shared by `ul`, `ol`, and
+ * `div` render modes, including selection state, visual density, item
+ * propagation, and change notifications.
+ *
+ * @property [as] - Render target to use for the outer list wrapper.
+ * @property [adornmentColor] - Color token used for item adornments.
+ * @property [background] - Background token for the list container.
+ * @property [children] - Nested content used to discover and render list items.
+ * @property [className] - Additional class names merged onto the wrapper.
+ * @property [color] - Color token applied to text and item accents.
+ * @property [compact] - Compact spacing mode for dense layouts.
+ * @property [divider] - Whether to render dividers between items.
+ * @property [disabled] - Whether the list and its items are disabled.
+ * @property [fullWidth] - Whether the wrapper should expand to the full available width.
+ * @property [itemsAs] - Element type to render for nested list items.
+ * @property [onChange] - Callback fired when the selected item set changes.
+ * @property [selectable] - Whether list items can be selected.
+ * @property [size] - Size token controlling the wrapper width.
+ * @property [status] - Status token forwarded to child items.
+ * @property [value] - Controlled value used to seed or manage selected items.
+ */
 interface BaseProps {
   /** Render target to use for the outer list wrapper. */
   as?: 'ul' | 'ol' | 'div';
@@ -98,7 +128,12 @@ interface BaseProps {
   value?: ListItem[];
 }
 
-/** Props for rendering the list as a div. */
+/**
+ * Props for rendering the list as a div.
+ *
+ * @property [ref] - Optional ref forwarded to the div wrapper.
+ * @property [role] - Accessible role for the div wrapper.
+ */
 interface DivProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Optional ref forwarded to the div wrapper. */
   ref?: Ref<HTMLDivElement>;
@@ -106,7 +141,12 @@ interface DivProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   role?: JSX.IntrinsicElements['div']['role'];
 }
 
-/** Props for rendering the list as an ordered list. */
+/**
+ * Props for rendering the list as an ordered list.
+ *
+ * @property [ref] - Optional ref forwarded to the ordered list wrapper.
+ * @property [role] - Accessible role for the ordered list wrapper.
+ */
 interface OlProps extends Omit<OlHTMLAttributes<HTMLOListElement>, 'onChange'> {
   /** Optional ref forwarded to the ordered list wrapper. */
   ref?: Ref<HTMLOListElement>;
@@ -114,7 +154,12 @@ interface OlProps extends Omit<OlHTMLAttributes<HTMLOListElement>, 'onChange'> {
   role?: JSX.IntrinsicElements['ol']['role'];
 }
 
-/** Props for rendering the list as an unordered list. */
+/**
+ * Props for rendering the list as an unordered list.
+ *
+ * @property [ref] - Optional ref forwarded to the unordered list wrapper.
+ * @property [role] - Accessible role for the unordered list wrapper.
+ */
 interface UlProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onChange'> {
   /** Optional ref forwarded to the unordered list wrapper. */
   ref?: Ref<HTMLUListElement>;
@@ -122,7 +167,32 @@ interface UlProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onChange'> {
   role?: JSX.IntrinsicElements['ul']['role'];
 }
 
-/** Combined prop signature for the overloaded list component. */
+/**
+ * Combined prop signature for the overloaded list component.
+ *
+ * Use `ListProps` when typing consumer wrappers around `List`; it combines
+ * shared design-system behavior with the native props for the selected
+ * rendered element.
+ *
+ * @property [as] - Render target for the outer list wrapper.
+ * @property [adornmentColor] - Color token forwarded to item adornments.
+ * @property [background] - Background token for the list container.
+ * @property [children] - Nested content used to discover and render list items.
+ * @property [className] - Additional classes merged onto the wrapper.
+ * @property [color] - Text and item accent color token.
+ * @property [compact] - Enables compact spacing for dense layouts.
+ * @property [divider] - Renders dividers between items.
+ * @property [disabled] - Disables the list and its items.
+ * @property [fullWidth] - Expands the list to fill available width.
+ * @property [itemsAs] - Element type forwarded to nested list items.
+ * @property [onChange] - Callback fired when selected items change.
+ * @property [ref] - Ref forwarded to the rendered list wrapper.
+ * @property [role] - Accessible role for the rendered list wrapper.
+ * @property [selectable] - Whether list items can be selected.
+ * @property [size] - Size token controlling wrapper width.
+ * @property [status] - Status token forwarded to child items.
+ * @property [value] - Controlled value used to manage selected items.
+ */
 type ListProps = (DivProps | OlProps | UlProps) & BaseProps;
 
 /**
@@ -138,20 +208,11 @@ type ListProps = (DivProps | OlProps | UlProps) & BaseProps;
  *
  * @example
  * ```tsx
- * import { List } from '@/src';
- * import { ListItem } from '@/src';
+ * import { List, ListItem } from '@arctura/atomics';
  *
- * export function Example() {
+ * export function NavigationList() {
  *   return (
- *     <List
- *       as="ul"
- *       selectable
- *       fullWidth
- *       size="md"
- *       onChange={(selectedItems) => {
- *         console.log('Selected items:', selectedItems);
- *       }}
- *     >
+ *     <List as="ul" selectable fullWidth onChange={(selectedItems) => console.log(selectedItems)}>
  *       <ListItem label="Overview" value="overview" selected />
  *       <ListItem label="Projects" value="projects" />
  *       <ListItem label="Contact" value="contact" />
@@ -238,15 +299,15 @@ function List({
   );
 
   const classes = twMerge(
-    classNames('mg:flex mg:flex-col mg:rounded-lg', {
-      'mg:bg-inverse': background === 'inverse',
-      'mg:bg-primary': background === 'primary',
-      'mg:bg-secondary': background === 'secondary',
-      'mg:bg-subtle': background === 'subtle',
-      'mg:w-full': fullWidth,
-      'mg:w-24': size === 'sm' && !fullWidth,
-      'mg:w-32': size === 'md' && !fullWidth,
-      'mg:w-40': size === 'lg' && !fullWidth,
+    classNames('au:flex au:flex-col au:rounded-lg', {
+      'au:bg-inverse': background === 'inverse',
+      'au:bg-primary': background === 'primary',
+      'au:bg-secondary': background === 'secondary',
+      'au:bg-subtle': background === 'subtle',
+      'au:w-full': fullWidth,
+      'au:w-24': size === 'sm' && !fullWidth,
+      'au:w-32': size === 'md' && !fullWidth,
+      'au:w-40': size === 'lg' && !fullWidth,
     }),
     className
   );
@@ -355,4 +416,4 @@ function List({
 List.displayName = 'List';
 
 export { List };
-export type { Item };
+export type { Item, ListAdornmentColor, ListBackground, ListColor, ListProps, ListStatus };

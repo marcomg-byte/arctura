@@ -17,6 +17,12 @@ import { twMerge } from 'tailwind-merge';
  */
 type FabAdornment = IconDefinition | FabImage;
 
+/**
+ * Optional class name hooks for the Fab internals.
+ *
+ * @property [adornment] - Class names applied to the rendered adornment.
+ * @property [button] - Class names applied to the outer button or anchor element.
+ */
 interface FabClasses {
   adornment?: string;
   button?: string;
@@ -43,6 +49,14 @@ type FabVariant = 'circular' | 'extended';
 
 /**
  * Common props shared between anchor and button variants of `Fab`.
+ *
+ * @property [children] - Content placed inside the button.
+ * @property [classes] - Additional CSS classes to apply.
+ * @property [color] - Color theme for the Fab.
+ * @property [endAdornment] - Adornment rendered after the children.
+ * @property [size] - Size variant for the Fab.
+ * @property [startAdornment] - Adornment rendered before the children.
+ * @property [variant] - Visual variant of the Fab.
  */
 interface BaseProps {
   /** Content placed inside the button. */
@@ -64,6 +78,12 @@ interface BaseProps {
 /**
  * Props when the `Fab` is rendered as an anchor (`<a>`).
  * Extends native anchor attributes but disallows `type`.
+ *
+ * @property [href] - Destination URL for the anchor.
+ * @property [onClick] - Click handler when rendered as an anchor.
+ * @property [ref] - Ref forwarded to the anchor element.
+ * @property [target] - Link target, for example `_blank`.
+ * @property [type] - Explicitly disallowed on the anchor variant.
  */
 interface AnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
   /** Destination URL for the anchor. */
@@ -81,6 +101,12 @@ interface AnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'cla
 /**
  * Props when the `Fab` is rendered as a button (`<button>`).
  * Extends native button attributes but disallows `href` and `target`.
+ *
+ * @property [href] - Explicitly disallowed on the button variant.
+ * @property [onClick] - Click handler when rendered as a button.
+ * @property [ref] - Ref forwarded to the button element.
+ * @property [target] - Target is not applicable for button elements.
+ * @property [type] - Button type attribute.
  */
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   /** Explicitly disallowed on the button variant. */
@@ -98,6 +124,19 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'cla
 /**
  * Combined props accepted by `Fab`.
  * Either the anchor props or button props together with shared base props.
+ *
+ * @property [children] - Content placed inside the floating action button.
+ * @property [classes] - Optional class name hooks for the button and adornment.
+ * @property [color] - Color theme applied to the button border and text.
+ * @property [endAdornment] - Icon or image rendered after the button content.
+ * @property [href] - Optional URL that renders the Fab as an anchor.
+ * @property [onClick] - Click handler for the rendered button or anchor.
+ * @property [ref] - Ref forwarded to the rendered button or anchor element.
+ * @property [size] - Size token controlling the visual scale of the Fab.
+ * @property [startAdornment] - Icon or image rendered before the button content.
+ * @property [target] - Anchor target used when the Fab renders as a link.
+ * @property [type] - Native button type used when rendering a button element.
+ * @property [variant] - Shape variant for the Fab.
  */
 type FabProps = (AnchorProps | ButtonProps) & BaseProps;
 
@@ -107,9 +146,9 @@ type FabProps = (AnchorProps | ButtonProps) & BaseProps;
  * @returns {JSX.Element} The rendered adornment element.
  */
 const renderAdornment = (adornment: FabAdornment, className?: string) => {
-  const iconClasses = classNames('mg:text-xs', className);
+  const iconClasses = classNames('au:text-xs', className);
 
-  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
+  const imageClasses = twMerge('au:object-contain au:animate-fade-in au:duration-500', className);
 
   if ('iconName' in adornment) {
     return <FontAwesomeIcon className={iconClasses} icon={adornment} />;
@@ -136,19 +175,16 @@ const renderAdornment = (adornment: FabAdornment, className?: string) => {
  *
  * @example
  * ```tsx
- * import { Fab } from  '@/src';
+ * import { Fab } from '@arctura/atomics';
  * import { faPlus } from '@fortawesome/free-solid-svg-icons';
  *
- * const MyComponent = () => (
- *  <Fab
- *     color="primary"
- *      variant="extended"
- *    startAdornment={faPlus}
- *    onClick={() => console.log('Fab clicked!')}
- *  >
- *   Add Item
- *. </Fab>
- * );
+ * export function CreateAction() {
+ *   return (
+ *     <Fab color="accent" variant="extended" startAdornment={faPlus} onClick={() => openCreateDialog()}>
+ *       Add item
+ *     </Fab>
+ *   );
+ * }
  * ```
  */
 function Fab(props: AnchorProps & BaseProps): JSX.Element;
@@ -170,34 +206,34 @@ function Fab({
 }: FabProps): JSX.Element {
   const circularClasses =
     variant === 'circular'
-      ? classNames('mg:rounded-full', {
-          'mg:h-4 mg:w-4': size === 'sm',
-          'mg:h-6 mg:w-6': size === 'md',
-          'mg:h-8 mg:w-8': size === 'lg',
+      ? classNames('au:rounded-full', {
+          'au:h-4 au:w-4': size === 'sm',
+          'au:h-6 au:w-6': size === 'md',
+          'au:h-8 au:w-8': size === 'lg',
         })
       : '';
   const extendedClasses =
     variant === 'extended'
-      ? classNames('mg:rounded-lg', {
-          'mg:w-4 mg:h-2': size === 'sm',
-          'mg:w-5 mg:h-3': size === 'md',
-          'mg:w-6 mg:h-4': size === 'lg',
+      ? classNames('au:rounded-lg', {
+          'au:w-4 au:h-2': size === 'sm',
+          'au:w-5 au:h-3': size === 'md',
+          'au:w-6 au:h-4': size === 'lg',
         })
       : '';
   const buttonClasses = twMerge(
     classNames(
-      'mg:inline-flex mg:items-center mg:justify-center mg:border-solid mg:border-1 mg:hover:cursor-pointer',
-      'mg:focus-visible:outline-1 mg:focus-visible:outline-offset-4 mg:focus-visible:outline-primary',
+      'au:inline-flex au:items-center au:justify-center au:border-solid au:border-1 au:hover:cursor-pointer',
+      'au:focus-visible:outline-1 au:focus-visible:outline-offset-4 au:focus-visible:outline-primary',
       {
-        'mg:border-primary mg:text-primary': color === 'primary',
-        'mg:border-secondary mg:text-secondary': color === 'secondary',
-        'mg:border-accent mg:hover:border-accent-hover mg:text-accent mg:hover:text-accent-hover':
+        'au:border-primary au:text-primary': color === 'primary',
+        'au:border-secondary au:text-secondary': color === 'secondary',
+        'au:border-accent au:hover:border-accent-hover au:text-accent au:hover:text-accent-hover':
           color === 'accent',
-        'mg:border-error mg:text-danger': color === 'error',
-        'mg:border-info mg:text-info': color === 'info',
-        'mg:border-success mg:text-success': color === 'success',
-        'mg:border-warning mg:text-warning': color === 'warning',
-        'mg:hover:border-accent mg:hover:text-accent': color !== 'accent',
+        'au:border-error au:text-danger': color === 'error',
+        'au:border-info au:text-info': color === 'info',
+        'au:border-success au:text-success': color === 'success',
+        'au:border-warning au:text-warning': color === 'warning',
+        'au:hover:border-accent au:hover:text-accent': color !== 'accent',
       },
       circularClasses,
       extendedClasses
@@ -240,4 +276,4 @@ function Fab({
 Fab.displayName = 'Fab';
 
 export { Fab };
-export type { FabClasses };
+export type { FabAdornment, FabClasses, FabColor, FabProps, FabVariant };

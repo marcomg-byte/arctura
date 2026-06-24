@@ -13,7 +13,7 @@ describe('Header', () => {
     const title = screen.getByRole('heading', { level: 2, name: 'Project' });
     const subtitle = screen.getByText('Featured work');
 
-    expect(title.className).toContain('mg:lg:text-2xl');
+    expect(title.className).toContain('au:lg:text-2xl');
     expect(subtitle.tagName).toBe('P');
   });
 
@@ -26,8 +26,8 @@ describe('Header', () => {
     const badge = screen.getByText('New');
 
     expect(icon?.getAttribute('data-icon')).toBe('star');
-    expect(badge.className).toContain('mg:animate-fade-in');
-    expect(badge.className).toContain('mg:text-xs');
+    expect(badge.className).toContain('au:animate-fade-in');
+    expect(badge.className).toContain('au:text-xs');
     expect(badge.getAttribute('style')).toContain('animation-duration: 2s');
   });
 

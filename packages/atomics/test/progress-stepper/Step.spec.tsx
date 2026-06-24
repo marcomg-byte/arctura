@@ -27,8 +27,8 @@ describe('Step', () => {
     const title = screen.getByRole('heading', { level: 3, name: 'Details' });
     const description = screen.getByText('Step description');
 
-    expect(title.className).toContain('mg:text-base');
-    expect(description.className).toContain('mg:text-xs');
+    expect(title.className).toContain('au:text-base');
+    expect(description.className).toContain('au:text-xs');
   });
 
   it('renders completed non-linear steps as clickable fabs', () => {
@@ -50,7 +50,7 @@ describe('Step', () => {
     fireEvent.click(button);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
-    expect(button.className).toContain('mg:border-success');
+    expect(button.className).toContain('au:border-success');
     expect(button.querySelector('svg')?.getAttribute('data-icon')).toBe('check');
   });
 });

@@ -13,8 +13,8 @@ import { useState } from 'react';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
-import { Button, IconButton } from '@/src/buttons';
-import { useControlled } from '@/lib';
+import { Button, IconButton } from '../buttons';
+import { useControlled } from '../../lib/hooks';
 import { twMerge } from 'tailwind-merge';
 
 /**
@@ -89,6 +89,12 @@ type TextAreaStatus = 'error' | 'success' | 'warning';
  * - `container`: class applied to the root container of the component.
  * - `label`: class applied to the label element.
  * - `textarea`: class applied to the underlying `<textarea>` element.
+ *
+ * @property [adornment] - Class applied to each adornment element.
+ * @property [adornmentContainer] - Class applied to the wrapper that contains adornments.
+ * @property [container] - Class applied to the root container of the component.
+ * @property [label] - Class applied to the label element.
+ * @property [textarea] - Class applied to the underlying textarea element.
  */
 interface TextAreaClasses {
   adornment?: string;
@@ -100,8 +106,48 @@ interface TextAreaClasses {
 
 /**
  * Props for the `TextArea` component.
- * Extends native `TextareaHTMLAttributes` except `cols`, `onError`, and `rows` to
- * provide a controlled API tailored for this component.
+ *
+ * Use this interface for multiline text entry with controlled or uncontrolled
+ * value handling, optional adornments, clear interactions, validation states,
+ * and native textarea attributes.
+ *
+ * @property ['aria-describedby'] - ID of the element that describes this textarea.
+ * @property ['aria-label'] - Accessible label for the textarea.
+ * @property ['aria-invalid'] - Whether the textarea is in an invalid state.
+ * @property [adornmentColor] - Color used for adornments and label text.
+ * @property [autoFocus] - Whether the textarea receives focus on mount.
+ * @property [classes] - Class name hooks for textarea sub-elements.
+ * @property [clearable] - Shows a clear button to reset the value.
+ * @property [color] - Text color variant for the textarea content.
+ * @property [cols] - Number of visible columns for the textarea.
+ * @property [defaultValue] - Initial uncontrolled value.
+ * @property [disabled] - Disables the textarea.
+ * @property [endAdornments] - Adornments rendered at the end of the textarea.
+ * @property [error] - Marks the textarea as showing an error state.
+ * @property [fullWidth] - Expands the textarea to fill its parent.
+ * @property [id] - ID attribute for the textarea.
+ * @property [label] - Optional label displayed above the textarea.
+ * @property [maxLength] - Maximum allowed value length.
+ * @property [minLength] - Minimum required value length.
+ * @property [name] - Name attribute for form submission.
+ * @property [onChange] - Change handler for controlled usage.
+ * @property [onClear] - Handler invoked when the clear button is clicked.
+ * @property [onInput] - Input event handler.
+ * @property [onBlur] - Blur event handler.
+ * @property [onFocus] - Focus event handler.
+ * @property [onKeyDown] - Key down event handler.
+ * @property [onKeyUp] - Key up event handler.
+ * @property [onMouseDown] - Mouse down handler on the textarea.
+ * @property [placeholder] - Placeholder text shown when empty.
+ * @property [readonly] - Renders the textarea as read-only.
+ * @property [required] - Whether the field is required.
+ * @property [rows] - Number of visible rows for the textarea.
+ * @property [size] - Size preset controlling width and height.
+ * @property [spellCheck] - Whether spell checking is enabled.
+ * @property [startAdornments] - Adornments rendered at the start of the textarea.
+ * @property [status] - Visual status used to style the control.
+ * @property [value] - Controlled value for the textarea.
+ *
  * @extends {Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'cols' | 'onError' | 'rows'>}
  */
 interface TextAreaProps extends Omit<
@@ -292,7 +338,7 @@ const renderAdornment = (adornment: TextAreaAdornment, index: number, className?
     return (
       <Button
         key={`adornment-${index + 1}`}
-        classes={{ button: 'mg:py-1 mg:px-1.5' }}
+        classes={{ button: 'au:py-1 au:px-1.5' }}
         variant="outline"
         onClick={adornment?.onClick}
       >
@@ -303,7 +349,7 @@ const renderAdornment = (adornment: TextAreaAdornment, index: number, className?
 };
 
 /**
- * `TextArea` — a controlled/uncontrolled textarea with optional adornments.
+ * `TextArea` - a controlled/uncontrolled textarea with optional adornments.
  *
  * Features:
  * - Supports `value` (controlled) or `defaultValue` (uncontrolled) handled via `useControlled`.
@@ -319,21 +365,22 @@ const renderAdornment = (adornment: TextAreaAdornment, index: number, className?
  * @returns A JSX element rendering the styled textarea with optional adornments.
  * @example
  * ```tsx
- * import { TextArea } from '@/src';
+ * import { TextArea } from '@arctura/atomics';
+ * import { faComment } from '@fortawesome/free-solid-svg-icons';
  *
- * const MyTextArea = () => (
- *  <TextArea
- *   label="Your Message"
- *   placeholder="Type your message here..."
- *   adornmentColor="primary"
- *   color="primary"
- *   size="md"
- *   clearable
- *   startAdornments={[{ icon: faCoffee, onClick: () => alert('Start adornment clicked!') }]}
- *   endAdornments={[{ children: 'End', onClick: () => alert('End adornment clicked!') }]}
- *   onChange={(e) => console.log('TextArea value:', e.target.value)}
- *  />
- * );
+ * export function FeedbackField() {
+ *   return (
+ *     <TextArea
+ *       label="Feedback"
+ *       placeholder="Tell us what worked well"
+ *       clearable
+ *       fullWidth
+ *       rows={5}
+ *       startAdornments={[{ icon: faComment }]}
+ *       onChange={(event) => console.log(event.target.value)}
+ *     />
+ *   );
+ * }
  * ```
  */
 const TextArea: FC<TextAreaProps> = ({
@@ -382,65 +429,65 @@ const TextArea: FC<TextAreaProps> = ({
 
   const containerClasses = twMerge(
     classNames(
-      'mg:relative mg:bg-inherit mg:flex mg:flex-col mg:p-2 mg:border-solid mg:border-1 mg:rounded-lg',
+      'au:relative au:bg-inherit au:flex au:flex-col au:p-2 au:border-solid au:border-1 au:rounded-lg',
       {
-        'mg:border-danger': status === 'error' || error,
-        'mg:border-success': status === 'success',
-        'mg:border-warning': status === 'warning',
-        'mg:border-primary': !status && !error,
-        'mg:w-full': fullWidth,
-        'mg:has-[textarea:focus-visible]:outline-1 mg:has-[textarea:focus-visible]:outline-primary mg:has-[textarea:focus-visible]:outline-offset-4':
+        'au:border-danger': status === 'error' || error,
+        'au:border-success': status === 'success',
+        'au:border-warning': status === 'warning',
+        'au:border-primary': !status && !error,
+        'au:w-full': fullWidth,
+        'au:has-[textarea:focus-visible]:outline-1 au:has-[textarea:focus-visible]:outline-primary au:has-[textarea:focus-visible]:outline-offset-4':
           !clicked && value === '',
       }
     ),
     classes?.container
   );
   const adornmentClasses = classNames(
-    'mg:shrink-0',
+    'au:shrink-0',
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
     },
     classes?.adornment
   );
   const adornmentContainerClasses = twMerge(
-    'mg:flex mg:w-full mg:gap-2 mg:overflow-x-auto mg:scrollbar-subtle mg:p-1',
+    'au:flex au:w-full au:gap-2 au:overflow-x-auto au:scrollbar-subtle au:p-1',
     classes?.adornmentContainer
   );
   const rightAdormentContainerClasses = classNames(
     adornmentContainerClasses,
-    'mg:flex-row-reverse'
+    'au:flex-row-reverse'
   );
   const labelClasses = twMerge(
-    classNames('mg:font-body mg:text-sm', {
-      'mg:text-accent': adornmentColor === 'accent' && !status && !error,
-      'mg:text-black': adornmentColor === 'black' && !status && !error,
-      'mg:text-inverse': adornmentColor === 'inverse' && !status && !error,
-      'mg:text-primary': adornmentColor === 'primary' && !status && !error,
-      'mg:text-secondary': adornmentColor === 'secondary' && !status && !error,
-      'mg:text-subtle': adornmentColor === 'subtle' && !status && !error,
-      'mg:text-white': adornmentColor === 'white' && !status && !error,
-      'mg:text-success': status === 'success' && !error,
-      'mg:text-warning': status === 'warning' && !error,
-      'mg:text-danger': status === 'error' || error,
+    classNames('au:font-body au:text-sm', {
+      'au:text-accent': adornmentColor === 'accent' && !status && !error,
+      'au:text-black': adornmentColor === 'black' && !status && !error,
+      'au:text-inverse': adornmentColor === 'inverse' && !status && !error,
+      'au:text-primary': adornmentColor === 'primary' && !status && !error,
+      'au:text-secondary': adornmentColor === 'secondary' && !status && !error,
+      'au:text-subtle': adornmentColor === 'subtle' && !status && !error,
+      'au:text-white': adornmentColor === 'white' && !status && !error,
+      'au:text-success': status === 'success' && !error,
+      'au:text-warning': status === 'warning' && !error,
+      'au:text-danger': status === 'error' || error,
     }),
     classes?.label
   );
   const textareaClasses = twMerge(
-    classNames('mg:focus-visible:outline-0 mg:caret-accent', {
-      'mg:text-black': color === 'black',
-      'mg:text-inverse': color === 'inverse',
-      'mg:text-primary': color === 'primary',
-      'mg:text-white': color === 'white',
-      'mg:w-12': size === 'sm' && !fullWidth,
-      'mg:w-32': size === 'md' && !fullWidth,
-      'mg:w-52': size === 'lg' && !fullWidth,
-      'mg:w-full mg:h-24': fullWidth,
+    classNames('au:focus-visible:outline-0 au:caret-accent', {
+      'au:text-black': color === 'black',
+      'au:text-inverse': color === 'inverse',
+      'au:text-primary': color === 'primary',
+      'au:text-white': color === 'white',
+      'au:w-12': size === 'sm' && !fullWidth,
+      'au:w-32': size === 'md' && !fullWidth,
+      'au:w-52': size === 'lg' && !fullWidth,
+      'au:w-full au:h-24': fullWidth,
     }),
     classes?.textarea
   );
@@ -491,14 +538,14 @@ const TextArea: FC<TextAreaProps> = ({
   return (
     <div className={containerClasses}>
       {label && (
-        <div className="mg:absolute mg:bg-inherit mg:-top-1.5 mg:left-3.5 mg:animate-slide-in-top">
+        <div className="au:absolute au:bg-inherit au:-top-1.5 au:left-3.5 au:animate-slide-in-top">
           <p className={labelClasses}>
             {label}
-            {required && <span className="mg:text-danger"> *</span>}
+            {required && <span className="au:text-danger"> *</span>}
           </p>
         </div>
       )}
-      <div className="mg:flex mg:justify-between mg:gap-2 mg:pb-1">
+      <div className="au:flex au:justify-between au:gap-2 au:pb-1">
         <div className={adornmentContainerClasses}>
           {clearable && (
             <IconButton
@@ -553,3 +600,12 @@ const TextArea: FC<TextAreaProps> = ({
 TextArea.displayName = 'TextArea';
 
 export { TextArea };
+export type {
+  TextAreaAdornment,
+  TextAreaAdornmentColor,
+  TextAreaClasses,
+  TextAreaColor,
+  TextAreaProps,
+  TextAreaSize,
+  TextAreaStatus,
+};

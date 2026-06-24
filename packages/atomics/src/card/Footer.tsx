@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes, Ref } from 'react';
-import { Button } from '@/src/buttons';
-import type { ButtonAdornment, ButtonVariant } from '@/src/buttons';
-import { Typography } from '@/src/typography';
+import { Button } from '../buttons';
+import type { ButtonAdornment, ButtonVariant } from '../buttons';
+import { Typography } from '../typography';
 
 /**
  * Describes an action button for the Card Footer.
@@ -27,6 +27,9 @@ interface FooterAction {
 /**
  * Props for the Card Footer component.
  *
+ * Use these props to render supporting card copy and a compact list of
+ * action buttons, including link-style and click-handler actions.
+ *
  * @property {FooterAction[]} [actions] - Array of action button definitions to display in the footer.
  * @property {string} [description] - Optional description text to display below the title/subtitle.
  * @property {Ref<HTMLDivElement>} [ref] - Ref for the footer container div.
@@ -51,33 +54,32 @@ interface FooterProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @example
  * ```tsx
- * import { Footer } from '@/src';
+ * import { CardFooter } from '@arctura/atomics';
  *
- * const MyCardFooter = () => (
- *  <Footer
- *    title="Footer Title"
- *    subtitle="Footer Subtitle"
- *    description="This is a description for the card footer."
- *    actions={[
- *      { label: 'Action 1', onClick: () => console.log('Action 1 clicked') },
- *      { label: 'Action 2', href: 'https://example.com', target: '_blank' },
- *    ]}
- *  />
- * );
+ * export function ResourceFooter() {
+ *   return (
+ *     <CardFooter
+ *       title="Design tokens"
+ *       subtitle="Shared foundations"
+ *       description="Review the token contract used by the atomics package."
+ *       actions={[{ label: 'Open docs', href: '/docs/tokens' }]}
+ *     />
+ *   );
+ * }
  * ```
  */
 const Footer: FC<FooterProps> = ({ actions, description, subtitle, title, ref, ...rest }) => {
   return (
     <div
-      className="mg:flex mg:grow mg:flex-col mg:justify-between mg:items-start mg:gap-3 mg:w-full mg:px-3 mg:py-2"
+      className="au:flex au:grow au:flex-col au:justify-between au:items-start au:gap-3 au:w-full au:px-3 au:py-2"
       ref={ref}
       {...(rest as HTMLAttributes<HTMLDivElement>)}
     >
-      <div className="mg:flex mg:flex-col mg:justify-center mg:items-start mg:gap-1.5">
+      <div className="au:flex au:flex-col au:justify-center au:items-start au:gap-1.5">
         {title && (
           <>
             <Typography
-              className="mg:text-base mg:sm:text-xl mg:lg:text-3xl"
+              className="au:text-base au:sm:text-xl au:lg:text-3xl"
               clamp={3}
               bold
               variant="h3"
@@ -98,10 +100,10 @@ const Footer: FC<FooterProps> = ({ actions, description, subtitle, title, ref, .
         )}
       </div>
       {actions && (
-        <div className="mg:flex mg:justify-start mg:items-center mg:gap-2">
+        <div className="au:flex au:justify-start au:items-center au:gap-2">
           {actions.map((action, index) => (
             <Button
-              classes={{ button: 'mg:animate-fade-in mg:duration-500' }}
+              classes={{ button: 'au:animate-fade-in au:duration-500' }}
               endAdornment={action?.endAdornment}
               href={action?.href as string}
               key={`footer-action-${index}`}
@@ -124,4 +126,4 @@ const Footer: FC<FooterProps> = ({ actions, description, subtitle, title, ref, .
 Footer.displayName = 'Card.Footer';
 
 export { Footer };
-export type { FooterAction };
+export type { FooterAction, FooterProps };

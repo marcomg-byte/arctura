@@ -15,7 +15,12 @@ import { twMerge } from 'tailwind-merge';
 /** Child content supported by the icon button. */
 type IconButtonChildren = IconDefinition | ReactElement;
 
-/** Optional class name hooks for the icon button internals. */
+/**
+ * Optional class name hooks for the icon button internals.
+ *
+ * @property [children] - Class names applied to the rendered child icon or image.
+ * @property [iconButton] - Class names applied to the outer button or anchor element.
+ */
 interface IconButtonClasses {
   /** Class names applied to the rendered child icon or image. */
   children?: string;
@@ -57,7 +62,15 @@ type ImageLikeElement = ReactElement<{
   width?: number;
 }>;
 
-/** Shared props for both anchor and button variants. */
+/**
+ * Shared props for both anchor and button variants.
+ *
+ * @property [children] - Icon or custom element rendered inside the control.
+ * @property [classes] - Optional class name hooks for inner and outer styling.
+ * @property [color] - Color token for the button styling.
+ * @property [size] - Size token controlling the visual scale of the control.
+ * @property [variant] - Visual style variant for the control.
+ */
 interface BaseProps {
   /** Icon or custom element rendered inside the control. */
   children?: IconButtonChildren;
@@ -71,7 +84,14 @@ interface BaseProps {
   variant?: IconButtonVariant;
 }
 
-/** Props for the anchor variant of the IconButton component. */
+/**
+ * Props for the anchor variant of the IconButton component.
+ *
+ * @property [href] - Destination URL for the anchor variant.
+ * @property [onClick] - Click handler for the anchor variant.
+ * @property [ref] - Optional ref forwarded to the anchor element.
+ * @property [target] - Optional target for the anchor element.
+ */
 interface AnchorProps extends Omit<
   AnchorHTMLAttributes<HTMLAnchorElement>,
   'children' | 'className'
@@ -86,7 +106,14 @@ interface AnchorProps extends Omit<
   target?: string;
 }
 
-/** Props for the button variant of the IconButton component. */
+/**
+ * Props for the button variant of the IconButton component.
+ *
+ * @property [href] - Disallowed for the button variant.
+ * @property [onClick] - Click handler for the button variant.
+ * @property [ref] - Optional ref forwarded to the button element.
+ * @property [target] - Disallowed for the button variant.
+ */
 interface ButtonProps extends Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'children' | 'className'
@@ -101,7 +128,19 @@ interface ButtonProps extends Omit<
   target?: never;
 }
 
-/** Combined prop signature for the icon button component. */
+/**
+ * Combined prop signature for the icon button component.
+ *
+ * @property [children] - FontAwesome icon or React element rendered inside the control.
+ * @property [classes] - Optional class name hooks for the icon and root control.
+ * @property [color] - Color token used by the icon button styling.
+ * @property [href] - Optional URL that renders the icon button as an anchor.
+ * @property [onClick] - Click handler for the rendered button or anchor.
+ * @property [ref] - Ref forwarded to the rendered button or anchor element.
+ * @property [size] - Size token controlling the icon button scale.
+ * @property [target] - Anchor target used when the icon button renders as a link.
+ * @property [variant] - Visual style variant for the control.
+ */
 type IconButtonProps = (AnchorProps | ButtonProps) & BaseProps;
 
 /**
@@ -112,7 +151,7 @@ type IconButtonProps = (AnchorProps | ButtonProps) & BaseProps;
  * sizing and motion classes used by the component.
  */
 const renderChildren = (children: IconButtonChildren, className?: string) => {
-  const imageClasses = twMerge('mg:object-cover mg:animate-fade-in mg:duration-500', className);
+  const imageClasses = twMerge('au:object-cover au:animate-fade-in au:duration-500', className);
 
   if ('iconName' in children) {
     return <FontAwesomeIcon key={children.iconName} className={className} icon={children} />;
@@ -148,19 +187,16 @@ const renderChildren = (children: IconButtonChildren, className?: string) => {
  *
  * @example
  * ```tsx
- * import { IconButton } from '@/src';
- * import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+ * import { IconButton } from '@arctura/atomics';
+ * import { faGear } from '@fortawesome/free-solid-svg-icons';
  *
- * const MyIconButton = () => (
- *  <IconButton
- *    color="primary"
- *    size="md"
- *    variant="outline"
- *    onClick={() => alert('Icon button clicked!')}
- *  >
- *    faCoffee
- *  </IconButton>
- * );
+ * export function SettingsButton() {
+ *   return (
+ *     <IconButton aria-label="Open settings" color="secondary" size="md" onClick={() => openSettings()}>
+ *       {faGear}
+ *     </IconButton>
+ *   );
+ * }
  * ```
  */
 function IconButton(props: AnchorProps & BaseProps): JSX.Element;
@@ -176,33 +212,33 @@ function IconButton({
   ...rest
 }: IconButtonProps): JSX.Element {
   const containerClasses = classNames(
-    'mg:flex mg:items-center mg:justify-center mg:rounded-lg mg:font-body mg:p-1 mg:min-h-2 mg:min-w-2 mg:hover:cursor-pointer',
-    'mg:focus-visible:outline-1 mg:focus-visible:outline-offset-4 mg:focus-visible:outline-primary',
+    'au:flex au:items-center au:justify-center au:rounded-lg au:font-body au:p-1 au:min-h-2 au:min-w-2 au:hover:cursor-pointer',
+    'au:focus-visible:outline-1 au:focus-visible:outline-offset-4 au:focus-visible:outline-primary',
     {
-      'mg:text-sm': size === 'sm',
-      'mg:text-base': size === 'md',
-      'mg:text-lg': size === 'lg',
+      'au:text-sm': size === 'sm',
+      'au:text-base': size === 'md',
+      'au:text-lg': size === 'lg',
     }
   );
 
   const outlineClasses =
     variant === 'outline'
       ? classNames(
-          'mg:border-solid mg:border-1 mg:hover:border-accent mg:bg-transparent mg:text-primary',
+          'au:border-solid au:border-1 au:hover:border-accent au:bg-transparent au:text-primary',
           {
-            'mg:text-primary mg:border-primary': color === 'primary',
-            'mg:text-secondary mg:border-secondary': color === 'secondary',
-            'mg:text-accent mg:border-accent': color === 'accent',
+            'au:text-primary au:border-primary': color === 'primary',
+            'au:text-secondary au:border-secondary': color === 'secondary',
+            'au:text-accent au:border-accent': color === 'accent',
           }
         )
       : '';
 
   const filledClasses =
     variant === 'filled'
-      ? classNames('mg:text-primary mg:hover:text-inverse', {
-          'mg:bg-primary mg:hover:bg-primary-hover': color === 'primary',
-          'mg:bg-secondary mg:hover:bg-secondary-hover': color === 'secondary',
-          'mg:bg-accent mg:hover:bg-accent-hover': color === 'accent',
+      ? classNames('au:text-primary au:hover:text-inverse', {
+          'au:bg-primary au:hover:bg-primary-hover': color === 'primary',
+          'au:bg-secondary au:hover:bg-secondary-hover': color === 'secondary',
+          'au:bg-accent au:hover:bg-accent-hover': color === 'accent',
         })
       : '';
 
@@ -238,4 +274,11 @@ function IconButton({
 IconButton.displayName = 'IconButton';
 
 export { IconButton };
-export type { IconButtonClasses, IconButtonVariant };
+export type {
+  IconButtonChildren,
+  IconButtonClasses,
+  IconButtonColor,
+  IconButtonProps,
+  IconButtonSize,
+  IconButtonVariant,
+};

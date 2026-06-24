@@ -105,8 +105,8 @@ describe('Carousel', () => {
       'custom-slide'
     );
     expect(screen.getByText('Slide 1').parentElement?.parentElement?.className).toContain(
-      'mg:lg:basis-[22.5%]'
+      'au:lg:basis-[22.5%]'
     );
-    expect(container.querySelector('.custom-container')?.className).toContain('mg:cursor-grab');
+    expect(container.querySelector('.custom-container')?.className).toContain('au:cursor-grab');
   });
 });

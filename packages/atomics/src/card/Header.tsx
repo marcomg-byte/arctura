@@ -2,8 +2,8 @@ import type { ComponentProps, FC, HTMLAttributes, ReactElement, ReactNode, Ref }
 import { cloneElement, isValidElement } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { Badge } from '@/src/badge';
-import { Typography } from '@/src/typography';
+import { Badge } from '../badge';
+import { Typography } from '../typography';
 
 /**
  * An adornment that may appear in the card header.
@@ -18,6 +18,9 @@ type HeaderAdornment = IconDefinition | { src: string; alt?: string };
 
 /**
  * Props for the Card Header component.
+ *
+ * Use this interface to describe the visible title area at the top of a card,
+ * including optional supporting text, badge content, and a leading adornment.
  *
  * @property {HeaderAdornment} [adornment] - Optional adornment which can be an icon definition or an image source with alt text.
  * @property {ReactElement<ComponentProps<typeof Badge>>} [badge] - Optional badge element to display.
@@ -43,7 +46,7 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 const cloneBadge = (badge: ReactElement<ComponentProps<typeof Badge>>) => {
   if (isValidElement(badge)) {
     return cloneElement(badge, {
-      className: 'mg:animate-fade-in',
+      className: 'au:animate-fade-in',
       size: 'xs',
       style: { animationDuration: '2s' },
     });
@@ -69,12 +72,12 @@ const renderAdornment = (adornment: HeaderAdornment) => {
         src={adornment.src || ''}
         width={40}
         height={40}
-        className="mg-object-contain"
+        className="au:object-contain"
       />
     );
   }
 
-  return <FontAwesomeIcon icon={adornment} className="mg-text-sm" />;
+  return <FontAwesomeIcon icon={adornment} className="au:text-sm" />;
 };
 
 /**
@@ -85,32 +88,34 @@ const renderAdornment = (adornment: HeaderAdornment) => {
  *
  * @example
  * ```tsx
- * import { Badge, Header } from '@/src';
+ * import { Badge, CardHeader } from '@arctura/atomics';
  * import { faStar } from '@fortawesome/free-solid-svg-icons';
  *
- * const MyCardHeader = () => (
- *  <Header
- *    title="Card Title"
- *    subtitle="This is a subtitle for the card header."
- *    adornment={faStar}
- *    badge={<Badge>New</Badge>}
- *  />
- * );
+ * export function HighlightHeader() {
+ *   return (
+ *     <CardHeader
+ *       title="New component"
+ *       subtitle="Recently added to the design system"
+ *       adornment={faStar}
+ *       badge={<Badge color="accent">New</Badge>}
+ *     />
+ *   );
+ * }
  * ```
  */
 const Header: FC<HeaderProps> = ({ adornment, badge, ref, subtitle, title, ...rest }) => {
   return (
     <div
-      className="mg:flex mg:flex-col mg:gap-1 mg:px-3 mg:py-2"
+      className="au:flex au:flex-col au:gap-1 au:px-3 au:py-2"
       ref={ref}
       {...(rest as HTMLAttributes<HTMLDivElement>)}
     >
-      <div className="mg:flex mg:items-center mg:gap-3">
+      <div className="au:flex au:items-center au:gap-3">
         {adornment && renderAdornment(adornment)}
         <Typography
           clamp={3}
           bold
-          className="mg:lg:text-2xl mg:sm:text-lg mg:text-base"
+          className="au:lg:text-2xl au:sm:text-lg au:text-base"
           variant="h2"
         >
           {title}
@@ -129,3 +134,4 @@ const Header: FC<HeaderProps> = ({ adornment, badge, ref, subtitle, title, ...re
 Header.displayName = 'Card.Header';
 
 export { Header };
+export type { HeaderAdornment, HeaderProps };

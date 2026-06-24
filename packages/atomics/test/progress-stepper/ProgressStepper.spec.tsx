@@ -87,7 +87,7 @@ describe('ProgressStepper', () => {
       </ProgressStepper>
     );
 
-    expect(screen.getByRole('list').className).toContain('mg:flex-col');
+    expect(screen.getByRole('list').className).toContain('au:flex-col');
 
     rerender(
       <ProgressStepper data-testid="stepper" forceHorizontal>
@@ -96,6 +96,6 @@ describe('ProgressStepper', () => {
       </ProgressStepper>
     );
 
-    expect(screen.getByRole('list').className).not.toContain('mg:flex-col');
+    expect(screen.getByRole('list').className).not.toContain('au:flex-col');
   });
 });
