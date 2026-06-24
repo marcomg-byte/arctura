@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "incremental": true,
+    "jsx": "preserve",
+    "noEmit": true,
+    "paths": {
+      "@arctura/atomics": ["../atomics/src/index.ts"],
+      "@arctura/theme": ["../theme/src/index.ts"],
+      "@/lib": ["../atomics/lib/index.ts"],
+      "@/lib/*": ["../atomics/lib/*"],
+      "@/tokens.json": ["../atomics/tokens.json"],
+      "@/src/*": ["../atomics/src/*", "../theme/src/*"],
+      "@/*": ["./*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "types": ["node"]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
