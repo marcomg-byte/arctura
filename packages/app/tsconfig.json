@@ -10,7 +10,6 @@
       "@arctura/theme": ["../theme/src/index.ts"],
       "@/lib": ["../atomics/lib/index.ts"],
       "@/lib/*": ["../atomics/lib/*"],
-      "@/tokens.json": ["../atomics/tokens.json"],
       "@/src/*": ["../atomics/src/*", "../theme/src/*"],
       "@/*": ["./*"]
     },
