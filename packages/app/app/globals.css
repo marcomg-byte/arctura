@@ -1,4 +1,4 @@
-@import 'tailwindcss' prefix(mg);
+@import 'tailwindcss' prefix(au);
 @config "../tailwind.config.ts";
 @import './theme.css';
 

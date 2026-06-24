@@ -15,17 +15,17 @@ const packageLinks = [
 
 export default function Home() {
   return (
-    <main className="mg:grid mg:min-h-screen mg:content-center mg:gap-xl mg:bg-container mg:p-lg mg:sm:p-3xl mg:lg:p-5xl">
-      <section className="mg:grid mg:max-w-[64rem] mg:gap-md" aria-labelledby="home-title">
+    <main className="au:grid au:min-h-screen au:content-center au:gap-xl au:bg-container au:p-lg au:sm:p-3xl au:lg:p-5xl">
+      <section className="au:grid au:max-w-128 au:gap-md" aria-labelledby="home-title">
         <Typography
           id="home-title"
           variant="h1"
-          className="mg:max-w-[12ch] mg:text-primary"
+          className="au:max-w-[12ch] au:text-primary"
           removePadding
         >
           Arctura App
         </Typography>
-        <Typography variant="large" className="mg:max-w-[42rem] mg:text-primary-hover">
+        <Typography variant="large" className="au:max-w-84 au:text-primary-hover">
           A Next.js application workspace wired into the local Arctura packages.
         </Typography>
         <Button
@@ -33,7 +33,7 @@ export default function Home() {
           variant="outline"
           classes={{
             button:
-              'mg:w-fit mg:border-accent mg:text-accent mg:hover:bg-accent mg:hover:text-inverse',
+              'au:w-fit au:border-accent au:text-accent au:hover:bg-accent au:hover:text-inverse',
           }}
         >
           View repository
@@ -41,17 +41,17 @@ export default function Home() {
       </section>
 
       <section
-        className="mg:grid mg:max-w-[64rem] mg:grid-cols-1 mg:gap-md mg:sm:grid-cols-2"
+        className="au:grid au:max-w-128 au:grid-cols-1 au:gap-md au:sm:grid-cols-2"
         aria-label="Workspace packages"
       >
         {packageLinks.map((item) => (
           <a
-            className="mg:grid mg:min-h-[10rem] mg:content-start mg:gap-xs mg:rounded-lg mg:border-1 mg:border-solid mg:border-subtle mg:bg-primary mg:p-md mg:text-primary mg:no-underline mg:transition-colors mg:hover:border-hover mg:hover:bg-primary-hover"
+            className="au:grid au:min-h-20 au:content-start au:gap-xs au:rounded-lg au:border-1 au:border-solid au:border-subtle au:bg-primary au:p-md au:text-primary au:no-underline au:transition-colors au:hover:border-hover au:hover:bg-primary-hover"
             href={item.href}
             key={item.label}
           >
-            <span className="mg:font-bold mg:text-accent">{item.label}</span>
-            <p className="mg:m-0 mg:leading-[1.5]">{item.text}</p>
+            <span className="au:font-bold au:text-accent">{item.label}</span>
+            <p className="au:m-0 au:leading-normal">{item.text}</p>
           </a>
         ))}
       </section>

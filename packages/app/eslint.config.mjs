@@ -1,9 +1,10 @@
 import { defineConfig } from 'eslint/config';
-import { libraryConfig } from '../../eslint.config.mjs';
+import { appConfig } from '../../eslint.config.mjs';
 
 export default defineConfig(
-  libraryConfig,
+  appConfig,
   {
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parserOptions: {
         project: ['./tsconfig.json'],
@@ -12,6 +13,6 @@ export default defineConfig(
     },
   },
   {
-    ignores: ['.next/**', 'out/**', 'node_modules/**'],
+    ignores: ['.next/**', 'out/**', 'node_modules/**', 'next-env.d.ts', 'tsconfig.tsbuildinfo'],
   }
 );

@@ -2,16 +2,15 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "allowJs": false,
+    "esModuleInterop": true,
     "incremental": true,
     "jsx": "preserve",
+    "lib": ["DOM", "DOM.Iterable", "ES2023"],
     "noEmit": true,
     "paths": {
+      "@/*": ["./*"],
       "@arctura/atomics": ["../atomics/src/index.ts"],
-      "@arctura/theme": ["../theme/src/index.ts"],
-      "@/lib": ["../atomics/lib/index.ts"],
-      "@/lib/*": ["../atomics/lib/*"],
-      "@/src/*": ["../atomics/src/*", "../theme/src/*"],
-      "@/*": ["./*"]
+      "@arctura/theme": ["../theme/src/index.ts"]
     },
     "plugins": [
       {
@@ -20,6 +19,12 @@
     ],
     "types": ["node"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": ["node_modules", "out"]
 }
