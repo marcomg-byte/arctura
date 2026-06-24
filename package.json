@@ -24,6 +24,7 @@
     "lint:app": "yarn workspace @arctura/app lint",
     "lint:atomics": "yarn workspace @arctura/atomics lint",
     "lint:theme": "yarn workspace @arctura/theme lint",
+    "start:app": "yarn workspace @arctura/app start",
     "test": "vitest run",
     "test:cov": "vitest run --coverage",
     "test:watch": "vitest",
