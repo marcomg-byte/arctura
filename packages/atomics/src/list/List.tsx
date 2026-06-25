@@ -11,8 +11,8 @@ import type {
 import { Children, cloneElement, isValidElement, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
-import { useControlled } from '@/lib';
-import { ListItem as ListItemComponent } from '@/src/list/ListItem';
+import { useControlled } from '../../lib/hooks';
+import { ListItem as ListItemComponent } from './ListItem';
 
 /** React element helper that guarantees an optional `children` prop. */
 type ElementWithChildren = ReactElement<{ children?: ReactNode }>;

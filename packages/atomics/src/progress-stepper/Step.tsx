@@ -12,11 +12,11 @@ import { Children, cloneElement, isValidElement } from 'react';
 import classNames from 'classnames';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Fab } from '@/src/buttons';
-import type { FabClasses } from '@/src/buttons';
-import { Node } from '@/src/progress-stepper/Node';
-import type { NodeClasses } from '@/src/progress-stepper/Node';
-import { Typography } from '@/src/typography';
+import { Fab } from '../buttons';
+import type { FabClasses } from '../buttons';
+import { Node } from './Node';
+import type { NodeClasses } from './Node';
+import { Typography } from '../typography';
 import { twMerge } from 'tailwind-merge';
 
 /**

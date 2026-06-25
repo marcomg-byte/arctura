@@ -1,8 +1,8 @@
 import type { ComponentProps, FC, HTMLAttributes, ReactElement, ReactNode, Ref } from 'react';
 import React, { Children } from 'react';
-import { Header } from '@/src/card/Header';
-import { Media } from '@/src/card/Media';
-import { Footer } from '@/src/card/Footer';
+import { Header } from './Header';
+import { Media } from './Media';
+import { Footer } from './Footer';
 
 /**
  * Props for the Card component.

@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes, Ref } from 'react';
-import { Button } from '@/src/buttons';
-import type { ButtonAdornment, ButtonVariant } from '@/src/buttons';
-import { Typography } from '@/src/typography';
+import { Button } from '../buttons';
+import type { ButtonAdornment, ButtonVariant } from '../buttons';
+import { Typography } from '../typography';
 
 /**
  * Describes an action button for the Card Footer.

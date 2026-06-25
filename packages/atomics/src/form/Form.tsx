@@ -13,13 +13,13 @@ import type {
 import { Children, cloneElement, isValidElement, useEffect, useState } from 'react';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TextArea } from '@/src/form/TextArea';
-import { TextInput } from '@/src/form/TextInput';
+import { TextArea } from './TextArea';
+import { TextInput } from './TextInput';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import { Button } from '@/src/buttons';
-import { Typography } from '@/src/typography';
-import { useBreakpoints, useControlled } from '@/lib';
+import { Button } from '../buttons';
+import { Typography } from '../typography';
+import { useBreakpoints, useControlled } from '../../lib/hooks';
 
 /**
  * React element shape used when recursively traversing nested children.

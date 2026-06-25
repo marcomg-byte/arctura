@@ -4,47 +4,119 @@ import { useEffect } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { IconButton } from '@/src/buttons';
-import { useControlled } from '@/lib';
+import { IconButton } from '../buttons';
+import { useControlled } from '../../lib/hooks';
 
+/**
+ * Optional class name hooks for the drawer sub-elements.
+ */
 interface DrawerClasses {
+  /** Classes applied to the drawer body. */
   body?: string;
+  /** Classes applied to the backdrop container. */
   backdrop?: string;
-  header?: {
-    center?: string;
-    left?: string;
-    right?: string;
-    root?: string;
-  };
+  /** Classes applied to the drawer header sections. */
+  header?: DrawerHeaderClasses;
+  /** Classes applied to the overlay element. */
   overlay?: string;
+  /** Classes applied to the drawer panel root. */
   root?: string;
 }
 
-interface DrawerHeader {
-  title?: string;
-  leftSlot?: ReactNode;
-  rightSlot?: ReactNode;
+/**
+ * Optional class name hooks for the drawer header sections.
+ */
+interface DrawerHeaderClasses {
+  /** Classes applied to the center header section. */
+  center?: string;
+  /** Classes applied to the left header section. */
+  left?: string;
+  /** Classes applied to the right header section. */
+  right?: string;
+  /** Classes applied to the header container. */
+  root?: string;
 }
 
+/**
+ * Header content rendered inside the drawer.
+ */
+interface DrawerHeader {
+  /** Content rendered to the left of the title. */
+  leftSlot?: ReactNode;
+  /** Content rendered to the right of the title. */
+  rightSlot?: ReactNode;
+  /** Optional title rendered in the center section. */
+  title?: string;
+}
+
+/**
+ * Props for configuring the drawer component.
+ */
 interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
+  /** Accessible label for the drawer when there is no visible title. */
   'aria-label'?: string;
+  /** Accessible labelled-by target for the drawer when the title is rendered elsewhere. */
   'aria-labelledby'?: string;
+  /** Side of the screen where the drawer opens. */
   anchor?: 'left' | 'right' | 'top' | 'bottom';
+  /** Class name overrides for the drawer internals. */
   classes?: DrawerClasses;
+  /** Whether pressing Escape closes the drawer. */
   closeOnEscape?: boolean;
+  /** Content rendered inside the drawer body. */
   children?: ReactNode;
+  /** Additional props forwarded to the backdrop wrapper. */
   backdropProps?: HTMLAttributes<HTMLDivElement>;
+  /** Ref forwarded to the backdrop wrapper. */
   backdropRef?: Ref<HTMLDivElement>;
+  /** Header content and slot configuration. */
   header?: DrawerHeader;
+  /** Optional id for the drawer root element. */
   id?: string;
+  /** Callback fired when the backdrop is clicked. */
   onBackdropClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  /** Callback fired when the drawer should close. */
   onClose: () => void;
+  /** Key down handler for the drawer panel. */
   onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
+  /** Controlled open state for the drawer. */
   open: boolean;
+  /** Ref forwarded to the drawer panel. */
   ref?: Ref<HTMLDivElement>;
+  /** Whether the backdrop should be visible. */
   showBackdrop?: boolean;
 }
 
+/**
+ * Drawer component for sliding panels with an optional backdrop and header slots.
+ *
+ * @param {DrawerProps} props - Props for configuring the drawer content, behavior, and placement.
+ * @returns {JSX.Element} The rendered drawer.
+ *
+ * @example
+ * ```tsx
+ * import { useState } from 'react';
+ * import { Drawer, Button } from '@arctura/atomics';
+ *
+ * const Example = () => {
+ *   const [open, setOpen] = useState(false);
+ *
+ *   return (
+ *     <>
+ *       <Button onClick={() => setOpen(true)}>Open drawer</Button>
+ *       <Drawer
+ *         anchor="right"
+ *         header={{ title: 'Settings' }}
+ *         open={open}
+ *         onClose={() => setOpen(false)}
+ *       >
+ *         Drawer content goes here.
+ *       </Drawer>
+ *     </>
+ *   );
+ * };
+ * ```
+ */
 const Drawer: FC<DrawerProps> = ({
   anchor = 'left',
   backdropProps,

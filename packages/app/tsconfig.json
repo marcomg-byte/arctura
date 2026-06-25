@@ -10,6 +10,7 @@
     "paths": {
       "@/*": ["./*"],
       "@arctura/atomics": ["../atomics/src/index.ts"],
+      "@arctura/atomics/hooks": ["../atomics/lib/hooks.ts"],
       "@arctura/theme": ["../theme/src/index.ts"]
     },
     "plugins": [

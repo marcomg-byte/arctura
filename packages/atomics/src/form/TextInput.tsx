@@ -16,8 +16,8 @@ import { twMerge } from 'tailwind-merge';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faEyeSlash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconButton } from '@/src/buttons';
-import { useControlled } from '@/lib';
+import { IconButton } from '../buttons';
+import { useControlled } from '../../lib/hooks';
 
 /**
  * Adornment for `TextInput` — either a FontAwesome `IconDefinition`

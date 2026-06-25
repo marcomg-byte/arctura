@@ -4,8 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { useControlled } from '@/lib';
-import { capitalize } from '@/src/utils';
+import { useControlled } from '../../lib/hooks';
+import { capitalize } from '../utils';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 

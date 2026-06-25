@@ -12,9 +12,9 @@ import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
-import { Typography } from '@/src/typography';
-import type { TypographyColor } from '@/src/typography';
-import { useControlled } from '@/lib';
+import { Typography } from '../typography';
+import type { TypographyColor } from '../typography';
+import { useControlled } from '../../lib/hooks';
 
 /** Either an icon definition or an image source used for the leading adornment. */
 type ListItemAdornment = IconDefinition | { src: string; alt?: string };

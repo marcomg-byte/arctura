@@ -6,8 +6,8 @@ import Fade from 'embla-carousel-fade';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { IconButton } from '@/src/buttons';
-import type { IconButtonVariant } from '@/src/buttons';
+import { IconButton } from '../buttons';
+import type { IconButtonVariant } from '../buttons';
 
 /**
  * Optional class overrides for the carousel layout regions.

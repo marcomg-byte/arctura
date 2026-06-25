@@ -1,12 +1,12 @@
 import type { AnchorHTMLAttributes, FC, MouseEvent, ReactNode, Ref } from 'react';
-import { headingVariants, Typography } from '@/src/typography/Typography';
+import { headingVariants, Typography } from './Typography';
 import type {
   HeadingVariant,
   ParagraphVariant,
   TypographyColor,
   TypographyProps as TypographyComponentProps,
   TypographyVariant,
-} from '@/src/typography/Typography';
+} from './Typography';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
 
