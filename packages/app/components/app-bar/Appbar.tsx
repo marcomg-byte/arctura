@@ -42,7 +42,7 @@ const DesktopLayout: FC<{ links: Link[]; pathname: string }> = ({ links, pathnam
     <>
       <div className={sectionClasses}>
         <Image
-          src="/images/arctura-logo-banner.png"
+          src="/images/arctura-appbar-logo.png"
           alt="Logo"
           height={80}
           width={80}

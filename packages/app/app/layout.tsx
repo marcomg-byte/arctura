@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="mg:min-h-full mg:flex mg:flex-col">
         <Appbar links={links} />
         {children}
         <Footer />

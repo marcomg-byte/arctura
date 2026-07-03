@@ -5,6 +5,36 @@
       "href": "https://www.flaticon.com/free-icons/github",
       "text": "Github icons created by Pixel perfect - Flaticon",
       "title": "github icons"
+    },
+    "scalabilty": {
+      "src": "/images/scalability.png",
+      "href": "https://www.flaticon.com/free-icons/scalability",
+      "text": "Scalability icons created by Freepik - Flaticon",
+      "title": "scalability icons"
+    },
+    "coding": {
+      "src": "/images/coding.png",
+      "href": "https://www.flaticon.com/free-icons/programming-language",
+      "text": "Programming language icons created by Mayor Icons - Flaticon",
+      "title": "programming language icons"
+    },
+    "flash": {
+      "src": "/images/flash.png",
+      "href": "https://www.flaticon.com/free-icons/bolt",
+      "text": "Bolt icons created by Fir3Ghost - Flaticon",
+      "title": "bolt icons"
+    },
+    "quality": {
+      "src": "/images/quality.png",
+      "href": "https://www.flaticon.com/free-icons/quality",
+      "text": "Quality icons created by Freepik - Flaticon",
+      "title": "quality icons"
+    },
+    "star": {
+      "src": "/images/star.png",
+      "href": "https://www.flaticon.com/free-icons/star",
+      "title": "star icons",
+      "text": "Star icons created by Ilham Fitrotul Hayat - Flaticon"
     }
   }
 }

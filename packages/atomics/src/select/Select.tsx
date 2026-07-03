@@ -47,6 +47,7 @@ interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 
   defaultValue?: string;
   /** Whether the select is disabled. */
   disabled?: boolean;
+  fullWidth?: boolean;
   /** Label rendered above the select trigger. */
   label?: string;
   /** Name applied to the hidden input for form integration. */
@@ -59,6 +60,7 @@ interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 
   placeholder?: string;
   /** Ref forwarded to the root wrapper. */
   ref?: Ref<HTMLDivElement>;
+  size?: 'sm' | 'md' | 'lg';
   /** Keyboard tab index for the select trigger and options. */
   tabIndex?: number;
   /** Visual treatment for the dropdown. */
@@ -105,12 +107,14 @@ const Select: FC<SelectProps> = ({
   classes = {},
   defaultValue,
   disabled = false,
+  fullWidth = false,
   label,
   name,
   onChange,
   options = [],
   placeholder,
   ref,
+  size = 'md',
   tabIndex = 0,
   value,
   variant = 'outline',
@@ -127,13 +131,16 @@ const Select: FC<SelectProps> = ({
 
   const containerClasses = twMerge(
     classNames(
-      'au:relative au:flex au:justify-start au:items-center au:gap-1 au:rounded-sm au:w-full au:h-full',
+      'au:relative au:flex au:justify-start au:items-center au:gap-1 au:rounded-sm au:w-full',
       {
         'au:border-1 au:border-solid au:border-primary au:hover:border-hover':
           variant === 'outline',
         'au:bg-primary': variant === 'filled',
         'au:cursor-not-allowed au:opacity-50': disabled,
         'au:hover:cursor-pointer': !disabled,
+        'au:min-h-[32px]': size === 'sm',
+        'au:min-h-[40px]': size === 'md',
+        'au:min-h-[48px]': size === 'lg',
       }
     ),
     classes?.container
@@ -152,6 +159,10 @@ const Select: FC<SelectProps> = ({
       {
         'au:border-solid au:border-1 au:border-primary au:rounded-sm au:bg-secondary':
           variant === 'outline',
+        'au:w-12': size === 'sm' && !fullWidth,
+        'au:w-32': size === 'md' && !fullWidth,
+        'au:w-52': size === 'lg' && !fullWidth,
+        'au:grow': fullWidth,
       }
     ),
     classes?.optionsContainer
@@ -173,7 +184,15 @@ const Select: FC<SelectProps> = ({
   );
 
   const rootClasses = twMerge(
-    'au:inline-flex au:flex-col au:items-start au:justify-center au:gap-0.5 au:min-w-12 au:min-h-2 au:h-full au:font-body au:text-inverse',
+    classNames(
+      'au:inline-flex au:flex-col au:items-start au:justify-center au:gap-0.5 au:min-w-12 au:font-body au:text-inverse',
+      {
+        'au:w-full': fullWidth,
+        'au:w-24': size === 'sm' && !fullWidth,
+        'au:w-32': size === 'md' && !fullWidth,
+        'au:w-52': size === 'lg' && !fullWidth,
+      }
+    ),
     classes?.root
   );
 
