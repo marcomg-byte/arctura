@@ -43,7 +43,7 @@ interface PreviewPanelProps {
 
 const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) => {
   const classes = classNames(
-    'au:w-full au:grid au:grid-cols-1 au:gap-4 au:rounded-lg au:p-4 au:shadow-xl au:shadow-black/10 au:sm:grid-cols-2 au:xl:grid-cols-3',
+    'au:grid au:w-full au:min-w-0 au:grid-cols-1 au:gap-2 au:rounded-lg au:p-2 au:shadow-xl au:shadow-black/10 au:sm:gap-3 au:sm:p-3 au:md:grid-cols-2 au:lg:gap-4 au:lg:p-4 au:2xl:grid-cols-3',
     {
       'au:bg-accent': backgroundColor === 'accent',
       'au:bg-black': backgroundColor === 'black',
@@ -54,7 +54,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
     }
   );
   const previewItemClasses =
-    'au:flex au:min-h-40 au:flex-col au:items-start au:gap-3 au:rounded-lg au:bg-white au:p-4 au:shadow-md au:shadow-black/5 au:transition-all au:duration-300 au:ease-out au:hover:z-10 au:hover:scale-[1.02] au:hover:shadow-xl au:hover:shadow-black/15';
+    'au:flex au:min-w-0 au:flex-col au:items-start au:gap-2 au:overflow-hidden au:rounded-lg au:bg-white au:p-2 au:shadow-md au:shadow-black/5 au:transition-all au:duration-300 au:ease-out au:hover:z-10 au:hover:scale-[1.02] au:hover:shadow-xl au:hover:shadow-black/15 au:sm:gap-3 au:sm:p-3 au:lg:min-h-40 au:lg:p-4';
 
   return (
     <div className={classes}>
@@ -83,7 +83,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
         <Typography removePadding color="primary" variant="small">
           Button
         </Typography>
-        <div className="au:flex au:flex-wrap au:items-center au:gap-2">
+        <div className="au:flex au:w-full au:min-w-0 au:flex-wrap au:items-center au:gap-2">
           <Button size="sm">Primary</Button>
           <Button size="sm" variant="secondary">
             Secondary
@@ -100,7 +100,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
         <Typography removePadding color="primary" variant="small">
           IconButton / Fab
         </Typography>
-        <div className="au:flex au:flex-wrap au:items-center au:gap-3">
+        <div className="au:flex au:w-full au:min-w-0 au:flex-wrap au:items-center au:gap-3">
           <IconButton aria-label="Code" size="md">
             <FontAwesomeIcon icon={faCode} />
           </IconButton>
@@ -120,7 +120,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
         <Typography removePadding color="primary" variant="small">
           Badge
         </Typography>
-        <div className="au:flex au:flex-wrap au:items-start au:gap-2">
+        <div className="au:flex au:w-full au:min-w-0 au:flex-wrap au:items-start au:gap-2">
           <Badge color="primary" size="sm">
             Primary
           </Badge>
@@ -139,7 +139,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
         <Typography removePadding color="primary" variant="small">
           TextInput
         </Typography>
-        <div className="au:flex au:w-full au:flex-col au:gap-3">
+        <div className="au:flex au:w-full au:min-w-0 au:flex-col au:gap-3">
           <TextInput fullWidth aria-label="Name" placeholder="Enter your name" />
           <TextInput
             fullWidth
@@ -192,7 +192,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           startAdornment={faPaperPlane}
           title="Contact"
           classes={{
-            form: 'au:w-full au:p-3 au:border-1 au:border-solid au:border-primary/10',
+            form: 'au:w-full au:min-w-0 au:p-3 au:border-1 au:border-solid au:border-primary/10',
             header: 'au:hidden',
             footer: 'au:pt-1',
             submitButton: 'au:text-primary',
@@ -222,18 +222,20 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
         <Typography removePadding color="primary" variant="small">
           Card
         </Typography>
-        <Card>
-          <CardMedia src="/images/arctura-banner.png" alt="Arctura component preview" />
-          <CardHeader
-            adornment={faChartLine}
-            badge={<Badge color="info">New</Badge>}
-            title="Analytics"
-            subtitle="Composable card slots."
-          />
-          <CardFooter
-            actions={[{ label: 'View', endAdornment: faArrowRightLong, variant: 'text' }]}
-          />
-        </Card>
+        <div className="au:flex au:w-full au:min-w-0 au:justify-center au:sm:justify-start">
+          <Card>
+            <CardMedia src="/images/arctura-banner.png" alt="Arctura component preview" />
+            <CardHeader
+              adornment={faChartLine}
+              badge={<Badge color="info">New</Badge>}
+              title="Analytics"
+              subtitle="Composable card slots."
+            />
+            <CardFooter
+              actions={[{ label: 'View', endAdornment: faArrowRightLong, variant: 'text' }]}
+            />
+          </Card>
+        </div>
       </section>
       <section className={previewItemClasses} aria-label="ProgressStepper preview">
         <Typography removePadding color="primary" variant="small">
@@ -244,7 +246,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           linear={false}
           orientation="vertical"
           classes={{
-            root: 'au:overflow-visible au:px-0 au:py-0',
+            root: 'au:w-full au:min-w-0 au:overflow-visible au:px-0 au:py-0',
             step: {
               root: 'au:w-full au:max-w-full au:p-2',
               title: 'au:text-base au:sm:text-lg au:lg:text-xl',

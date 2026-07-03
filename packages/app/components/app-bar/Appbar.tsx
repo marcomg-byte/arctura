@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { FC, HTMLAttributes, MouseEvent, Ref } from 'react';
 import classNames from 'classnames';
 import { Button, Drawer, IconButton } from '@arctura/atomics';
@@ -22,6 +22,8 @@ interface Link {
 
 /** Props accepted by the app bar container. */
 interface AppbarProps extends HTMLAttributes<HTMLDivElement> {
+  /** Keeps the app bar fixed to the top of the viewport. */
+  fixed?: boolean;
   /** Links rendered in the desktop menu and mobile drawer. */
   links: Link[];
   /** Forwarded ref to the root container element. */
@@ -46,7 +48,7 @@ const DesktopLayout: FC<{ links: Link[]; pathname: string }> = ({ links, pathnam
           alt="Logo"
           height={80}
           width={80}
-          className="au:object-cover au:transition-transform au:duration-300 au:ease-out au:hover:scale-110"
+          className="au:object-cover au:transition-transform au:duration-300 au:ease-out au:hover:scale-130"
         />
       </div>
       <div className={sectionClasses}>
@@ -103,9 +105,18 @@ const MobileLayout: FC<{ action: (event: MouseEvent<HTMLButtonElement>) => void 
   return (
     <>
       <div className={containerClasses}>
-        <IconButton onClick={action} variant="outline">
-          {faBars}
-        </IconButton>
+        <div className={sectionClasses}>
+          <IconButton onClick={action} variant="outline">
+            {faBars}
+          </IconButton>
+          <Image
+            src="/images/arctura-appbar-logo.png"
+            alt="Logo"
+            height={40}
+            width={40}
+            className="au:object-cover au:transition-transform au:duration-300 au:ease-out au:hover:scale-130"
+          />
+        </div>
         <div className={sectionClasses}>
           <Button
             startAdornment={{ src: '/images/github.png', alt: 'Github logo' }}
@@ -152,15 +163,53 @@ MobileLayout.displayName = 'Appbar.MobileLayout';
  * }
  * ```
  */
-const Appbar: FC<AppbarProps> = ({ links, ref, ...rest }) => {
+const Appbar: FC<AppbarProps> = ({ fixed = true, links, ref, ...rest }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [appbarHeight, setAppbarHeight] = useState<number>(0);
+  const appbarRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { isBelow } = useBreakpoints();
   const isBelowSm = isBelow('sm');
 
   const containerClasses = classNames(
-    'au:flex au:items-center au:justify-between au:bg-primary au:px-3 au:py-2 au:w-full'
+    'au:flex au:items-center au:justify-between au:bg-primary au:px-3 au:py-2 au:w-full',
+    {
+      'au:fixed au:top-0 au:left-0 au:right-0 au:z-50 au:shadow-md au:shadow-black/10': fixed,
+    }
   );
+
+  useEffect(() => {
+    if (!fixed || !appbarRef.current) {
+      setAppbarHeight(0);
+      return;
+    }
+
+    const updateHeight = () => {
+      setAppbarHeight(appbarRef.current?.offsetHeight ?? 0);
+    };
+
+    updateHeight();
+
+    const resizeObserver = new ResizeObserver(updateHeight);
+    resizeObserver.observe(appbarRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [fixed, isBelowSm]);
+
+  const handleRef = (element: HTMLDivElement | null) => {
+    appbarRef.current = element;
+
+    if (!ref) return;
+
+    if (typeof ref === 'function') {
+      ref(element);
+      return;
+    }
+
+    ref.current = element;
+  };
 
   const handleBackdropClick = () => {
     setOpen(false);
@@ -175,37 +224,40 @@ const Appbar: FC<AppbarProps> = ({ links, ref, ...rest }) => {
   };
 
   return (
-    <div className={containerClasses} ref={ref} {...rest}>
-      {isBelowSm ? (
-        <MobileLayout action={handleOpen} />
-      ) : (
-        <DesktopLayout links={links} pathname={pathname} />
-      )}
-      {isBelowSm && open && (
-        <Drawer
-          classes={{ header: { root: 'au:px-3' } }}
-          onBackdropClick={handleBackdropClick}
-          onClose={handleClose}
-          open={open}
-        >
-          {links.map((link, index) => {
-            const isCurrentPath = link.href === pathname;
+    <>
+      {fixed && <div aria-hidden style={{ height: appbarHeight }} />}
+      <div className={containerClasses} ref={handleRef} {...rest}>
+        {isBelowSm ? (
+          <MobileLayout action={handleOpen} />
+        ) : (
+          <DesktopLayout links={links} pathname={pathname} />
+        )}
+        {isBelowSm && open && (
+          <Drawer
+            classes={{ header: { root: 'au:px-3' } }}
+            onBackdropClick={handleBackdropClick}
+            onClose={handleClose}
+            open={open}
+          >
+            {links.map((link, index) => {
+              const isCurrentPath = link.href === pathname;
 
-            return (
-              <Button
-                key={`app-bar-button-${index + 1}`}
-                href={isCurrentPath ? '/' : link.href}
-                onClick={link?.action}
-                target={link?.target}
-                variant="text"
-              >
-                {isCurrentPath ? 'Home' : link?.text}
-              </Button>
-            );
-          })}
-        </Drawer>
-      )}
-    </div>
+              return (
+                <Button
+                  key={`app-bar-button-${index + 1}`}
+                  href={isCurrentPath ? '/' : link.href}
+                  onClick={link?.action}
+                  target={link?.target}
+                  variant="text"
+                >
+                  {isCurrentPath ? 'Home' : link?.text}
+                </Button>
+              );
+            })}
+          </Drawer>
+        )}
+      </div>
+    </>
   );
 };
 

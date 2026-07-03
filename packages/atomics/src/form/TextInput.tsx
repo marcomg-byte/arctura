@@ -379,7 +379,7 @@ const TextInput: FC<TextInputProps> = ({
   );
 
   const inputClasses = twMerge(
-    classNames('au:focus-visible:outline-0 au:caret-white', {
+    classNames('au:focus-visible:outline-0 au:caret-accent', {
       'au:text-black': color === 'black',
       'au:text-inverse': color === 'inverse',
       'au:text-primary': color === 'primary',
