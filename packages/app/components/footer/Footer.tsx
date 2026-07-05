@@ -53,7 +53,7 @@ const Footer: FC<FooterProps> = ({ ref, ...rest }) => {
   return (
     <div className={containerClasses} ref={ref} {...rest}>
       <div className={sectionClasses}>
-        <Typography>&copy; Arctura. All rights reserved</Typography>
+        <Typography>&copy; Arctura. All rights reserved.</Typography>
       </div>
       <div className={sectionClasses}>
         {links.map((link, index) => (

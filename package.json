@@ -43,6 +43,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@eslint/json": "^2.0.0",
+    "@types/add": "^2",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
     "@vitest/coverage-istanbul": "4.1.8",
@@ -59,6 +60,10 @@
     "vitest": "4.1.8"
   },
   "dependencies": {
-    "typescript": "^6.0.3"
+    "@arctura/app": "workspace:^",
+    "add": "^2.0.6",
+    "tailwind-merge": "^3.6.0",
+    "typescript": "^6.0.3",
+    "workspace": "^0.0.1-preview.2"
   }
 }

@@ -1,6 +1,6 @@
 'use client';
 import type { FC } from 'react';
-import { Page, PreviewPanel } from '@/components';
+import { MonacoPlayground, Page, PreviewPanel } from '@/components';
 import { Button, Link, Typography } from '@arctura/atomics';
 import { useBreakpoints } from '@arctura/atomics/hooks';
 import { faArrowRightLong, faCube } from '@fortawesome/free-solid-svg-icons';
@@ -181,30 +181,39 @@ export default function Home() {
         <PreviewPanel />
       </div>
       <div className="au:flex au:w-full au:px-4 au:pb-4 au:sm:px-6 au:sm:pb-6">
-        <div className="au:flex au:w-full au:flex-col au:items-center au:gap-4 au:rounded-lg au:bg-primary au:p-3 au:sm:items-start au:sm:p-4 au:md:p-6">
-          <div className="au:flex au:w-full au:max-w-7xl au:flex-col au:items-center au:gap-3 au:sm:items-start au:lg:max-w-none">
-            <div className="au:flex au:w-full au:flex-col au:items-center au:gap-1 au:sm:items-start">
-              <Typography
-                align={isBelowSm ? 'center' : 'left'}
-                color="accent"
-                className="au:text-lg au:sm:text-xl au:lg:text-3xl"
-                removePadding
-                variant="h2"
-              >
-                DEVELOPER EXPERIENCE
-              </Typography>
-              <Typography align={isBelowSm ? 'center' : 'left'} removePadding variant="h3">
-                Everything you need to <br /> build with confidence
-              </Typography>
-              <Typography align={isBelowSm ? 'center' : 'left'} removePadding>
-                Powerful APIs, theming, dark mode, TypeScript first and a great developer experience
-              </Typography>
+        <div className="au:flex au:w-full au:flex-col au:items-center au:gap-4 au:rounded-lg au:bg-primary au:sm:items-start">
+          <div className="au:flex au:w-full au:max-w-7xl au:flex-col au:items-stretch au:gap-4 au:lg:max-w-none au:lg:flex-row au:lg:items-start au:lg:gap-6">
+            <div className="au:flex au:w-full au:flex-col au:items-center au:gap-3 au:sm:items-start au:lg:w-1/3 au:lg:min-w-52 au:xl:min-w-72 au:lg:max-w-96">
+              <div className="au:flex au:w-full au:flex-col au:items-center au:gap-1 au:sm:items-start">
+                <Typography
+                  align={isBelowSm ? 'center' : 'left'}
+                  color="accent"
+                  className="au:text-lg au:sm:text-xl au:lg:text-3xl"
+                  removePadding
+                  variant="h2"
+                >
+                  DEVELOPER EXPERIENCE
+                </Typography>
+                <Typography
+                  clamp={8}
+                  align={isBelowSm ? 'center' : 'left'}
+                  removePadding
+                  variant="h3"
+                >
+                  Everything you need to <br /> build with confidence
+                </Typography>
+                <Typography align={isBelowSm ? 'center' : 'left'} removePadding>
+                  Powerful APIs, theming, dark mode, TypeScript first and a great developer
+                  experience
+                </Typography>
+              </div>
+              <div>
+                <Button endAdornment={faArrowRightLong} href="#docs" target="_blank" variant="text">
+                  Explore the docs
+                </Button>
+              </div>
             </div>
-            <div>
-              <Button endAdornment={faArrowRightLong} href="#docs" target="_blank" variant="text">
-                Explore the docs
-              </Button>
-            </div>
+            <MonacoPlayground />
           </div>
         </div>
       </div>

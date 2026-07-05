@@ -44,13 +44,15 @@ const DesktopLayout: FC<{ links: Link[]; pathname: string }> = ({ links, pathnam
   return (
     <>
       <div className={sectionClasses}>
-        <Image
-          src="/images/arctura-appbar-logo.png"
-          alt="Logo"
-          height={80}
-          width={80}
-          className="au:object-cover au:transition-transform au:duration-300 au:ease-out au:hover:scale-130"
-        />
+        <div className="au:relative au:h-[80px] au:w-[80px] au:transition-transform au:duration-300 au:ease-out au:hover:scale-130">
+          <Image
+            src="/images/arctura-appbar-logo.png"
+            alt="Logo"
+            fill
+            sizes="80px"
+            className="au:object-contain"
+          />
+        </div>
       </div>
       <div className={sectionClasses}>
         {links.map((link, index) => {
@@ -114,13 +116,15 @@ const MobileLayout: FC<{ action: (event: MouseEvent<HTMLButtonElement>) => void 
           <IconButton onClick={action} variant="outline">
             {faBars}
           </IconButton>
-          <Image
-            src="/images/arctura-appbar-logo.png"
-            alt="Logo"
-            height={40}
-            width={40}
-            className="au:object-cover au:transition-transform au:duration-300 au:ease-out au:hover:scale-130"
-          />
+          <div className="au:relative au:h-[40px] au:w-[40px] au:transition-transform au:duration-300 au:ease-out au:hover:scale-130">
+            <Image
+              src="/images/arctura-appbar-logo.png"
+              alt="Logo"
+              fill
+              sizes="40px"
+              className="au:object-contain"
+            />
+          </div>
         </div>
         <div className={sectionClasses}>
           <Button
