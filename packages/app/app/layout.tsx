@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const links: Link[] = [
   { href: '#docs', text: 'Docs' },
-  { href: '#components', text: 'Components' },
+  { href: '/components', text: 'Components' },
   { href: '#patters', text: 'Patterns' },
   { href: '#Resources', text: 'Resources' },
   { href: '#Playground', text: 'Playground' },

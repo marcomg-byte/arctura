@@ -131,7 +131,7 @@ export default function Home() {
             <Button href="#Docs" endAdornment={faArrowRightLong}>
               Get started
             </Button>
-            <Button href="#Components" endAdornment={faCube}>
+            <Button href="/components" endAdornment={faCube}>
               Explore components
             </Button>
           </div>
