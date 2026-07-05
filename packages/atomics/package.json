@@ -20,6 +20,11 @@
       "types": "./dist/lib/hooks.d.ts",
       "import": "./dist/hooks.js",
       "require": "./dist/hooks.cjs"
+    },
+    "./theme": {
+      "types": "./dist/src/theme/index.d.ts",
+      "import": "./dist/theme.js",
+      "require": "./dist/theme.cjs"
     }
   },
   "files": [

@@ -54,7 +54,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
     }
   );
   const previewItemClasses =
-    'au:flex au:min-w-0 au:flex-col au:items-start au:gap-2 au:overflow-hidden au:rounded-lg au:bg-white au:p-2 au:shadow-md au:shadow-black/5 au:transition-all au:duration-300 au:ease-out au:hover:z-10 au:hover:scale-[1.02] au:hover:shadow-xl au:hover:shadow-black/15 au:sm:gap-3 au:sm:p-3 au:lg:min-h-40 au:lg:p-4';
+    'au:flex au:min-w-0 au:flex-col au:items-start au:gap-2 au:overflow-hidden au:rounded-lg au:p-2 au:shadow-md au:shadow-black/5 au:transition-all au:duration-300 au:ease-out au:hover:z-10 au:hover:scale-[1.02] au:hover:shadow-xl au:hover:shadow-black/15 au:sm:gap-3 au:sm:p-3 au:lg:min-h-40 au:lg:p-4';
 
   return (
     <div className={classes}>

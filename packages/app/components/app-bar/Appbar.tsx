@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { FC, HTMLAttributes, MouseEvent, Ref } from 'react';
 import classNames from 'classnames';
 import { Button, Drawer, IconButton } from '@arctura/atomics';
+import { Button as ThemeButton } from '@arctura/atomics/theme';
 import { useBreakpoints } from '@arctura/atomics/hooks';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -84,6 +85,10 @@ const DesktopLayout: FC<{ links: Link[]; pathname: string }> = ({ links, pathnam
         >
           1.0.0
         </Button>
+        <ThemeButton
+          aria-label="Toggle theme"
+          classes={{ iconButton: 'au:h-[53px] au:w-[53px] au:shrink-0' }}
+        />
       </div>
     </>
   );
@@ -172,7 +177,7 @@ const Appbar: FC<AppbarProps> = ({ fixed = true, links, ref, ...rest }) => {
   const isBelowSm = isBelow('sm');
 
   const containerClasses = classNames(
-    'au:flex au:items-center au:justify-between au:bg-primary au:px-3 au:py-2 au:w-full',
+    'au:flex au:items-center au:justify-between au:px-3 au:py-2 au:w-full au:bg-secondary',
     {
       'au:fixed au:top-0 au:left-0 au:right-0 au:z-50 au:shadow-md au:shadow-black/10': fixed,
     }

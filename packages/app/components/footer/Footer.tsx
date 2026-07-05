@@ -43,7 +43,7 @@ const links: Link[] = [
  */
 const Footer: FC<FooterProps> = ({ ref, ...rest }) => {
   const containerClasses = classNames(
-    'au:flex au:w-full au:flex-col au:items-center au:justify-center au:gap-2 au:bg-primary au:px-3 au:py-3 au:sm:flex-row au:sm:justify-between au:sm:py-2'
+    'au:flex au:w-full au:flex-col au:items-center au:justify-center au:gap-2 au:bg-secondary au:px-3 au:py-3 au:sm:flex-row au:sm:justify-between au:sm:py-2'
   );
 
   const sectionClasses = classNames(

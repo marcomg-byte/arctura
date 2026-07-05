@@ -566,10 +566,10 @@
 }
 
 [data-theme="dark"] {
-    --background-primary: rgb(var(--color-aurora-700));
-    --background-primary-hover: rgb(var(--color-aurora-700));
+    --background-primary: rgb(var(--color-slate-700));
+    --background-primary-hover: rgb(var(--color-slate-600));
     --background-primary-active: rgb(var(--color-black));
-    --background-primary-subtle: rgb(var(--color-aurora-600));
+    --background-primary-subtle: rgb(var(--color-slate-800));
     --background-primary-accent: rgb(var(--color-teal-500));
     --background-secondary: rgb(var(--color-slate-600));
     --background-secondary-hover: rgb(var(--color-slate-400));

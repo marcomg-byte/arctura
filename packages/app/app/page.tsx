@@ -8,7 +8,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-type CardBackground = 'accent' | 'primary' | 'secondary' | 'subtle';
+type CardBackground = 'accent' | 'inverse' | 'primary' | 'secondary' | 'subtle';
 
 interface CardAdornment {
   background?: CardBackground;
@@ -34,6 +34,7 @@ const Card: FC<CardProps> = ({ adornment = {}, text, title }) => {
     'au:flex au:items-center au:justify-center au:p-2 au:rounded-lg',
     {
       'au:bg-accent': adornment?.background === 'accent',
+      'au:bg-inverse': adornment?.background === 'inverse',
       'au:bg-primary': adornment?.background === 'primary',
       'au:bg-secondary': adornment?.background === 'secondary',
       'au:bg-subtle': adornment?.background === 'subtle',
@@ -68,7 +69,7 @@ const Card: FC<CardProps> = ({ adornment = {}, text, title }) => {
 const cards: CardProps[] = [
   {
     adornment: {
-      background: 'primary',
+      background: 'inverse',
       image: { src: '/images/scalability.png', alt: 'Scalability Icon' },
     },
     title: 'Scalability',
@@ -105,7 +106,7 @@ export default function Home() {
   const isBelowSm = isBelow('sm');
 
   return (
-    <Page color="white" title="Home">
+    <Page color="primary" title="Home">
       <div className="au:relative au:w-full au:overflow-hidden au:h-64 au:sm:h-56 au:md:h-64 au:lg:h-72 au:xl:h-80">
         <Image
           src="/images/arctura_banner.gif"
