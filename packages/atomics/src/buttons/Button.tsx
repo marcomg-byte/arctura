@@ -10,19 +10,21 @@ import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
  */
 type ButtonAdornment = IconDefinition | ButtonImage;
 
+/** Class name hooks for the Button component internals. */
 interface ButtonClasses {
+  /** Class names applied to the rendered adornment. */
   adornment?: string;
+  /** Class names applied to the outer button or anchor element. */
   button?: string;
 }
 
 /**
  * Image object for use as a button adornment.
- *
- * @property {string} [src] - Image source URL.
- * @property {string} [alt] - Alternative text for the image.
  */
 interface ButtonImage {
+  /** Image source URL. */
   src?: string;
+  /** Alternative text for the image. */
   alt?: string;
 }
 
@@ -55,70 +57,85 @@ type ButtonSize = 'sm' | 'md' | 'lg';
 type ButtonVariant = 'primary' | 'secondary' | 'text' | 'outline';
 
 /**
- * Maps ButtonSize values to fixed spacing, radius, and text size classes.
+ * Maps ButtonSize values to fixed width, height, spacing, radius, and text size classes.
  */
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'au:px-1.5 au:py-1 au:rounded-sm au:text-sm',
-  md: 'au:px-2.5 au:py-2 au:rounded-md au:text-sm',
-  lg: 'au:px-3.5 au:py-3 au:rounded-lg au:text-base',
+  sm: 'au:h-7 au:w-24 au:px-1.5 au:py-1 au:rounded-sm au:text-sm',
+  md: 'au:h-9 au:w-32 au:px-2.5 au:py-2 au:rounded-md au:text-sm',
+  lg: 'au:h-12 au:w-40 au:px-3.5 au:py-3 au:rounded-lg au:text-base',
 };
 
 /**
- * Maps ButtonSize values to mobile-first spacing, radius, and text size classes.
+ * Maps ButtonSize values to mobile-first width, height, spacing, radius, and text size classes.
  * Larger breakpoints preserve the fixed size classes.
  */
 const responsiveSizeClasses: Record<ButtonSize, string> = {
-  sm: 'au:px-1.5 au:py-1 au:rounded-sm au:text-sm',
-  md: 'au:px-2 au:py-1.5 au:rounded-md au:text-sm au:sm:px-2.5 au:sm:py-2',
-  lg: 'au:px-2.5 au:py-2 au:rounded-md au:text-sm au:sm:px-3.5 au:sm:py-3 au:sm:rounded-lg au:sm:text-base',
+  sm: 'au:h-7 au:w-24 au:px-1.5 au:py-1 au:rounded-sm au:text-sm',
+  md: 'au:h-8 au:w-28 au:px-2 au:py-1.5 au:rounded-md au:text-sm au:sm:h-9 au:sm:w-32 au:sm:px-2.5 au:sm:py-2',
+  lg: 'au:h-9 au:w-32 au:px-2.5 au:py-2 au:rounded-md au:text-sm au:sm:h-12 au:sm:w-40 au:sm:px-3.5 au:sm:py-3 au:sm:rounded-lg au:sm:text-base',
+};
+
+const fullWidthSizeClasses: Record<ButtonSize, string> = {
+  sm: 'au:h-7 au:w-full au:px-1.5 au:py-1 au:rounded-sm au:text-sm',
+  md: 'au:h-9 au:w-full au:px-2.5 au:py-2 au:rounded-md au:text-sm',
+  lg: 'au:h-12 au:w-full au:px-3.5 au:py-3 au:rounded-lg au:text-base',
+};
+
+const responsiveFullWidthSizeClasses: Record<ButtonSize, string> = {
+  sm: 'au:h-7 au:w-full au:px-1.5 au:py-1 au:rounded-sm au:text-sm',
+  md: 'au:h-8 au:w-full au:px-2 au:py-1.5 au:rounded-md au:text-sm au:sm:h-9 au:sm:px-2.5 au:sm:py-2',
+  lg: 'au:h-9 au:w-full au:px-2.5 au:py-2 au:rounded-md au:text-sm au:sm:h-12 au:sm:px-3.5 au:sm:py-3 au:sm:rounded-lg au:sm:text-base',
 };
 
 /**
  * Common props for the Button component, shared by both anchor and button variants.
  */
 interface BaseProps {
+  /** Content rendered inside the button. */
   children?: ReactNode;
+  /** Optional class name hooks for internal elements. */
   classes?: ButtonClasses;
+  /** Icon or image rendered after the button content. */
   endAdornment?: ButtonAdornment;
+  /** Expands the button to fill the width of its parent container. */
   fullWidth?: boolean;
+  /** Enables mobile-first responsive sizing. */
   responsive?: boolean;
+  /** Size token controlling the button dimensions and spacing. */
   size?: ButtonSize;
+  /** Icon or image rendered before the button content. */
   startAdornment?: ButtonAdornment;
+  /** Ref forwarded to the rendered anchor element. */
   ref?: Ref<HTMLAnchorElement>;
+  /** Visual style variant for the button. */
   variant?: ButtonVariant;
 }
 
 /**
  * Props for the anchor variant of the Button component.
- *
- * @property {ReactNode} [children] - The content of the anchor.
- * @property {string} href - The URL to link to (required for anchor usage).
- * @property {'sm' | 'md' | 'lg'} [size] - The size of the anchor button.
- * @property {never} [type] - Not allowed for anchor usage.
- * @property {Ref<HTMLAnchorElement>} [ref] - Ref for the anchor element.
- * @property {'primary' | 'secondary' | 'text' | 'outline'} [variant] - The visual style of the anchor button.
  */
 interface AnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
+  /** URL used by the anchor button. */
   href: string;
+  /** Ref forwarded to the rendered anchor element. */
   ref?: Ref<HTMLAnchorElement>;
+  /** Optional target attribute for the anchor element. */
   target?: string;
+  /** Disallowed for the anchor variant. */
   type?: never;
 }
 
 /**
  * Props for the button variant of the Button component.
- *
- * @property {ReactNode} [children] - The content of the button.
- * @property {never} [href] - Not allowed for button usage.
- * @property {'sm' | 'md' | 'lg'} [size] - The size of the button.
- * @property {ButtonType} [type] - The button type attribute.
- * @property {Ref<HTMLButtonElement>} [ref] - Ref for the button element.
- * @property {'primary' | 'secondary' | 'text' | 'outline'} [variant] - The visual style of the button.
  */
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
+  /** Disallowed for the native button variant. */
   href?: never;
+  /** Ref forwarded to the rendered button element. */
   ref?: Ref<HTMLButtonElement>;
+  /** Disallowed for the native button variant. */
   target?: never;
+  /** Native button type attribute. */
   type?: ButtonType;
 }
 
@@ -206,12 +223,12 @@ function Button({
   const isEndAdornmentImage = endAdornment && 'src' in endAdornment;
   const buttonSizeClasses = responsive ? responsiveSizeClasses[size] : sizeClasses[size];
   const fullWidthClasses = responsive
-    ? 'au:w-full au:py-2 au:rounded-lg au:text-sm au:sm:py-3 au:sm:text-base'
-    : 'au:w-full au:py-3 au:rounded-lg au:text-base';
+    ? responsiveFullWidthSizeClasses[size]
+    : fullWidthSizeClasses[size];
 
   const buttonClasses = twMerge(
     classNames(
-      'au:inline-flex au:items-center au:justify-between au:font-body au:text-primary au:hover:text-primary-hover au:hover:cursor-pointer',
+      'au:inline-flex au:shrink-0 au:justify-start au:items-center au:font-body au:text-primary au:hover:text-primary-hover au:hover:cursor-pointer',
       'au:focus-visible:outline-1 au:focus-visible:outline-offset-4 au:focus-visible:outline-primary',
       fullWidth ? fullWidthClasses : buttonSizeClasses,
       {

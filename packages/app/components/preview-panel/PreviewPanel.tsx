@@ -1,6 +1,5 @@
 ﻿'use client';
-import classNames from 'classnames';
-import type { FC } from 'react';
+import type { FC, HTMLAttributes, Ref } from 'react';
 import {
   Badge,
   Button,
@@ -34,31 +33,66 @@ import {
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import { twMerge } from 'tailwind-merge';
 
+/**
+ * Background color tokens supported by the preview panel container.
+ *
+ * - 'accent': Uses the accent theme background.
+ * - 'black': Uses the black theme background.
+ * - 'primary': Uses the primary theme background.
+ * - 'secondary': Uses the secondary theme background.
+ * - 'subtle': Uses the subtle theme background.
+ * - 'white': Uses the white theme background.
+ */
 type BackgroundColor = 'accent' | 'black' | 'primary' | 'secondary' | 'subtle' | 'white';
 
-interface PreviewPanelProps {
-  backgroundColor?: BackgroundColor;
+/** Class name hooks for the PreviewPanel component internals. */
+interface PreviewPanelClasses {
+  /** Class names applied to the root preview grid. */
+  root?: string;
+  /** Class names applied to each preview item section. */
+  item?: string;
 }
 
-const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) => {
-  const classes = classNames(
-    'au:grid au:w-full au:min-w-0 au:grid-cols-1 au:gap-2 au:rounded-lg au:p-2 au:shadow-xl au:shadow-black/10 au:sm:gap-3 au:sm:p-3 au:md:grid-cols-2 au:lg:gap-4 au:lg:p-4 au:2xl:grid-cols-3',
-    {
-      'au:bg-accent': backgroundColor === 'accent',
-      'au:bg-black': backgroundColor === 'black',
-      'au:bg-primary': backgroundColor === 'primary',
-      'au:bg-secondary': backgroundColor === 'secondary',
-      'au:bg-subtle': backgroundColor === 'subtle',
-      'au:bg-white': backgroundColor === 'white',
-    }
+/** Props accepted by the PreviewPanel component. */
+interface PreviewPanelProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
+  /** Optional class name hooks for internal elements. */
+  classes?: PreviewPanelClasses;
+  /** Background color token applied to the root preview grid. */
+  backgroundColor?: BackgroundColor;
+  ref?: Ref<HTMLDivElement>;
+}
+
+const PreviewPanel: FC<PreviewPanelProps> = ({
+  backgroundColor = 'primary',
+  classes = {},
+  ref,
+  ...rest
+}) => {
+  const rootClasses = twMerge(
+    classNames(
+      'au:grid au:w-full au:min-w-0 au:grid-cols-1 au:gap-2 au:rounded-lg au:p-2 au:shadow-xl au:shadow-black/10 au:sm:gap-3 au:sm:p-3 au:md:grid-cols-2 au:lg:gap-4 au:lg:p-4 au:2xl:grid-cols-3',
+      {
+        'au:bg-accent': backgroundColor === 'accent',
+        'au:bg-black': backgroundColor === 'black',
+        'au:bg-primary': backgroundColor === 'primary',
+        'au:bg-secondary': backgroundColor === 'secondary',
+        'au:bg-subtle': backgroundColor === 'subtle',
+        'au:bg-white': backgroundColor === 'white',
+      }
+    ),
+    classes?.root
   );
-  const previewItemClasses =
-    'au:flex au:min-w-0 au:flex-col au:items-start au:gap-2 au:overflow-hidden au:rounded-lg au:p-2 au:shadow-md au:shadow-black/5 au:transition-all au:duration-300 au:ease-out au:hover:z-10 au:hover:scale-[1.02] au:hover:shadow-xl au:hover:shadow-black/15 au:sm:gap-3 au:sm:p-3 au:lg:min-h-40 au:lg:p-4';
+  const itemClasses = twMerge(
+    'au:flex au:min-w-0 au:flex-col au:items-start au:gap-2 au:overflow-hidden au:rounded-lg au:p-2 au:shadow-md au:shadow-black/5 au:transition-all au:duration-300 au:ease-out au:hover:z-10 au:hover:scale-[1.02] au:hover:shadow-xl au:hover:shadow-black/15 au:sm:gap-3 au:sm:p-3 au:lg:min-h-40 au:lg:p-4',
+    classes?.item
+  );
 
   return (
-    <div className={classes}>
-      <section className={previewItemClasses} aria-label="Typography preview">
+    <div className={rootClasses} ref={ref} {...rest}>
+      <section className={itemClasses} aria-label="Typography preview">
         <Typography removePadding color="primary" variant="small">
           Typography
         </Typography>
@@ -71,7 +105,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           </Typography>
         </div>
       </section>
-      <section className={previewItemClasses} aria-label="Link preview">
+      <section className={itemClasses} aria-label="Link preview">
         <Typography removePadding color="primary" variant="small">
           Link
         </Typography>
@@ -79,7 +113,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           Browse components
         </Link>
       </section>
-      <section className={previewItemClasses} aria-label="Button preview">
+      <section className={itemClasses} aria-label="Button preview">
         <Typography removePadding color="primary" variant="small">
           Button
         </Typography>
@@ -96,7 +130,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           </Button>
         </div>
       </section>
-      <section className={previewItemClasses} aria-label="IconButton and Fab preview">
+      <section className={itemClasses} aria-label="IconButton and Fab preview">
         <Typography removePadding color="primary" variant="small">
           IconButton / Fab
         </Typography>
@@ -116,7 +150,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           />
         </div>
       </section>
-      <section className={previewItemClasses} aria-label="Badge preview">
+      <section className={itemClasses} aria-label="Badge preview">
         <Typography removePadding color="primary" variant="small">
           Badge
         </Typography>
@@ -135,7 +169,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           </Badge>
         </div>
       </section>
-      <section className={previewItemClasses} aria-label="TextInput preview">
+      <section className={itemClasses} aria-label="TextInput preview">
         <Typography removePadding color="primary" variant="small">
           TextInput
         </Typography>
@@ -150,7 +184,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           />
         </div>
       </section>
-      <section className={previewItemClasses} aria-label="TextArea preview">
+      <section className={itemClasses} aria-label="TextArea preview">
         <Typography removePadding color="primary" variant="small">
           TextArea
         </Typography>
@@ -162,7 +196,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           rows={3}
         />
       </section>
-      <section className={previewItemClasses} aria-label="Select preview">
+      <section className={itemClasses} aria-label="Select preview">
         <Typography removePadding color="primary" variant="small">
           Select
         </Typography>
@@ -182,7 +216,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           }}
         />
       </section>
-      <section className={previewItemClasses} aria-label="Form preview">
+      <section className={itemClasses} aria-label="Form preview">
         <Typography removePadding color="primary" variant="small">
           Form
         </Typography>
@@ -201,7 +235,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           <TextInput fullWidth aria-label="Preview form email" placeholder="Email" />
         </Form>
       </section>
-      <section className={previewItemClasses} aria-label="List preview">
+      <section className={itemClasses} aria-label="List preview">
         <Typography removePadding color="primary" variant="small">
           List
         </Typography>
@@ -218,7 +252,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           <ListItem title="Theme" label="Token-driven styling" adornment={faPalette} />
         </List>
       </section>
-      <section className={previewItemClasses} aria-label="Card preview">
+      <section className={itemClasses} aria-label="Card preview">
         <Typography removePadding color="primary" variant="small">
           Card
         </Typography>
@@ -237,7 +271,7 @@ const PreviewPanel: FC<PreviewPanelProps> = ({ backgroundColor = 'primary' }) =>
           </Card>
         </div>
       </section>
-      <section className={previewItemClasses} aria-label="ProgressStepper preview">
+      <section className={itemClasses} aria-label="ProgressStepper preview">
         <Typography removePadding color="primary" variant="small">
           ProgressStepper / Step / Connector
         </Typography>

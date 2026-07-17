@@ -7,6 +7,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Arctura',
   description: 'A Next.js workspace app for the Arctura monorepo.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 const links: Link[] = [

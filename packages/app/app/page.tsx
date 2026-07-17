@@ -296,9 +296,9 @@ export default function Home() {
           </div>
           <div>
             <Button
-              classes={{
-                button: 'au:justify-center au:whitespace-nowrap au:[&>svg]:h-3 au:[&>svg]:w-3',
-              }}
+              href="https://github.com/marcomg-byte/arctura"
+              target="_blank"
+              fullWidth
               startAdornment={faStar}
             >
               Star on Github

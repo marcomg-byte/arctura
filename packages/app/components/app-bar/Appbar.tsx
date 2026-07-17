@@ -31,6 +31,10 @@ interface AppbarProps extends HTMLAttributes<HTMLDivElement> {
   ref?: Ref<HTMLDivElement>;
 }
 
+const appbarButtonClasses = 'au:h-5 au:w-auto au:px-1.5 au:py-0.5 au:rounded-sm au:text-sm';
+const appbarIconButtonClasses =
+  'au:h-5 au:w-5 au:min-h-0 au:min-w-0 au:p-0.5 au:rounded-sm au:text-sm';
+
 /**
  * Renders the full desktop navigation layout for the app bar.
  *
@@ -39,7 +43,7 @@ interface AppbarProps extends HTMLAttributes<HTMLDivElement> {
  * @property pathname - Current route path used to highlight the active link.
  */
 const DesktopLayout: FC<{ links: Link[]; pathname: string }> = ({ links, pathname }) => {
-  const sectionClasses = classNames('au:flex au:gap-3');
+  const sectionClasses = classNames('au:flex au:items-center au:gap-3');
 
   return (
     <>
@@ -61,8 +65,10 @@ const DesktopLayout: FC<{ links: Link[]; pathname: string }> = ({ links, pathnam
           return (
             <Button
               key={`app-bar-button-${index + 1}`}
+              classes={{ button: appbarButtonClasses }}
               href={isCurrentPath ? '/' : link.href}
               onClick={link?.action}
+              size="sm"
               target={link?.target}
               variant="text"
             >
@@ -73,24 +79,25 @@ const DesktopLayout: FC<{ links: Link[]; pathname: string }> = ({ links, pathnam
       </div>
       <div className={sectionClasses}>
         <Button
+          classes={{ button: appbarButtonClasses }}
           startAdornment={{ src: '/images/github.png', alt: 'Github logo' }}
           href="https://github.com/marcomg-byte/arctura"
+          size="sm"
           target="_blank"
           variant="text"
         >
           Github
         </Button>
         <Button
+          classes={{ button: appbarButtonClasses }}
           href="https://github.com/marcomg-byte/arctura/releases/"
+          size="sm"
           target="_blank"
           variant="outline"
         >
           1.0.0
         </Button>
-        <ThemeButton
-          aria-label="Toggle theme"
-          classes={{ iconButton: 'au:h-[53px] au:w-[53px] au:shrink-0' }}
-        />
+        <ThemeButton aria-label="Toggle theme" classes={{ iconButton: appbarIconButtonClasses }} />
       </div>
     </>
   );
@@ -107,13 +114,17 @@ const MobileLayout: FC<{ action: (event: MouseEvent<HTMLButtonElement>) => void 
   action,
 }) => {
   const containerClasses = classNames('au:flex au:items-center au:justify-between au:w-full');
-  const sectionClasses = classNames('au:flex au:gap-2');
+  const sectionClasses = classNames('au:flex au:items-center au:gap-2');
 
   return (
     <>
       <div className={containerClasses}>
         <div className={sectionClasses}>
-          <IconButton onClick={action} variant="outline">
+          <IconButton
+            classes={{ iconButton: appbarIconButtonClasses }}
+            onClick={action}
+            variant="outline"
+          >
             {faBars}
           </IconButton>
           <div className="au:relative au:h-[40px] au:w-[40px] au:transition-transform au:duration-300 au:ease-out au:hover:scale-130">
@@ -128,20 +139,28 @@ const MobileLayout: FC<{ action: (event: MouseEvent<HTMLButtonElement>) => void 
         </div>
         <div className={sectionClasses}>
           <Button
+            classes={{ button: appbarButtonClasses }}
             startAdornment={{ src: '/images/github.png', alt: 'Github logo' }}
             href="https://github.com/marcomg-byte/arctura"
+            size="sm"
             target="_blank"
             variant="text"
           >
             Github
           </Button>
           <Button
+            classes={{ button: appbarButtonClasses }}
             href="https://github.com/marcomg-byte/arctura/releases/"
+            size="sm"
             target="_blank"
             variant="outline"
           >
             1.0.0
           </Button>
+          <ThemeButton
+            aria-label="Toggle theme"
+            classes={{ iconButton: appbarIconButtonClasses }}
+          />
         </div>
       </div>
     </>
@@ -256,6 +275,7 @@ const Appbar: FC<AppbarProps> = ({ fixed = true, links, ref, ...rest }) => {
                   key={`app-bar-button-${index + 1}`}
                   href={isCurrentPath ? '/' : link.href}
                   onClick={link?.action}
+                  fullWidth
                   target={link?.target}
                   variant="text"
                 >

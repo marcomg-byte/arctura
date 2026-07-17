@@ -57,6 +57,21 @@ describe('Button', () => {
     expect(button.className).toContain('custom-button');
   });
 
+  it('keeps the default responsive size classes when full width', () => {
+    render(<Button fullWidth>Continue</Button>);
+
+    const button = screen.getByRole('button', { name: 'Continue' });
+
+    expect(button.className).toContain('au:w-full');
+    expect(button.className).toContain('au:h-8');
+    expect(button.className).toContain('au:px-2');
+    expect(button.className).toContain('au:sm:h-9');
+    expect(button.className).toContain('au:sm:px-2.5');
+    expect(button.className).not.toContain('au:w-28');
+    expect(button.className).not.toContain('au:w-32');
+    expect(button.className).not.toContain('au:sm:w-32');
+  });
+
   it('forwards native button props', () => {
     render(
       <Button type="submit" disabled aria-label="Submit form">
