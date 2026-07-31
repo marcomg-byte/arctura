@@ -23,6 +23,10 @@ type MediaPriority = 'eager' | 'lazy';
 /**
  * Props for the Card Media component.
  *
+ * Use these props to render responsive image media inside a card, with
+ * optional aspect ratio control and edge rounding when header or footer
+ * slots are omitted.
+ *
  * @property {string} [alt] - Alternative text for the image.
  * @property {AspectRatio} [aspectRatio] - Aspect ratio for the media container.
  * @property {boolean} [footerless] - If true, applies rounded corners to the bottom of the media.
@@ -54,11 +58,11 @@ interface MediaProps extends HTMLAttributes<HTMLDivElement> {
  * @returns {Record<AspectRatio, string>} Object mapping aspect ratios to their corresponding CSS classes.
  */
 const aspectRatioClasses: Record<AspectRatio, string> = {
-  '1:1': 'mg:aspect-square',
-  '16:9': 'mg:aspect-video',
-  '4:3': 'mg:aspect-[4/3]',
-  '3:2': 'mg:aspect-[3/2]',
-  '21:9': 'mg:aspect-[21/9]',
+  '1:1': 'au:aspect-square',
+  '16:9': 'au:aspect-video',
+  '4:3': 'au:aspect-[4/3]',
+  '3:2': 'au:aspect-[3/2]',
+  '21:9': 'au:aspect-[21/9]',
 };
 
 /**
@@ -70,16 +74,11 @@ const aspectRatioClasses: Record<AspectRatio, string> = {
  *
  * @example
  * ```tsx
- * import { Media } from '@/src';
+ * import { CardMedia } from '@arctura/atomics';
  *
- * const MyCardMedia = () => (
- *  <Media
- *    src="/path/to/image.jpg"
- *    alt="Description of the image"
- *    aspectRatio="16:9"
- *    priority="eager"
- *  />
- * );
+ * export function ProductMedia() {
+ *   return <CardMedia src="/images/component-preview.png" alt="Component preview" aspectRatio="16:9" priority="eager" />;
+ * }
  * ```
  */
 const Media: FC<MediaProps> = ({
@@ -94,11 +93,11 @@ const Media: FC<MediaProps> = ({
   ...rest
 }) => {
   const classes = classNames(
-    'mg:relative mg:w-full mg:overflow-hidden',
+    'au:relative au:w-full au:overflow-hidden',
     aspectRatioClasses[aspectRatio],
     {
-      'mg:rounded-tl-lg mg:rounded-tr-lg': headerless,
-      'mg:rounded-bl-lg mg:rounded-br-lg': footerless,
+      'au:rounded-tl-lg au:rounded-tr-lg': headerless,
+      'au:rounded-bl-lg au:rounded-br-lg': footerless,
     }
   );
 
@@ -109,7 +108,7 @@ const Media: FC<MediaProps> = ({
         src={src}
         loading={priority}
         sizes={sizes}
-        className="mg:absolute mg:inset-0 mg:h-full mg:w-full mg:object-cover mg:animate-fade-in"
+        className="au:absolute au:inset-0 au:h-full au:w-full au:object-cover au:animate-fade-in"
       />
     </div>
   );
@@ -118,4 +117,4 @@ const Media: FC<MediaProps> = ({
 Media.displayName = 'Card.Media';
 
 export { Media };
-export type { MediaProps };
+export type { AspectRatio, MediaPriority, MediaProps };

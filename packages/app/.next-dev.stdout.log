@@ -1,0 +1,25 @@
+[0] [33m[nodemon] 3.1.14[39m
+[0] [33m[nodemon] to restart at any time, enter `rs`[39m
+[0] [33m[nodemon] watching path(s): tokens.json[39m
+[0] [33m[nodemon] watching extensions: json[39m
+[0] [32m[nodemon] starting `yarn theme:run`[39m
+[0] 🎨 Generating CSS Theme...
+[0] 💾 Writing theme CSS to ./app/theme.css...
+[0] ✅ Successfully wrote theme CSS to ./app/theme.css
+[1] ⚠ Port 3000 is in use by process 15732, using available port 3001 instead.
+[1] ▲ Next.js 16.2.9 (Turbopack)
+[1] - Local:         http://localhost:3001
+[1] - Network:       http://192.168.1.10:3001
+[1] ✓ Ready in 860ms
+[0] [32m[nodemon] clean exit - waiting for changes before restart[39m
+[1] ⨯ Another next dev server is already running.
+[1] 
+[1] - Local:        http://localhost:3000
+[1] - PID:          15732
+[1] - Dir:          D:\Documentos\Proyectos\arctura\packages\app
+[1] - Log:          .next\dev\logs\next-development.log
+[1] 
+[1] Run taskkill /PID 15732 /F to stop it.
+[1] [?25h
+[1] next dev exited with code 1
+--> Sending SIGTERM to other processes..

@@ -12,9 +12,9 @@ import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
-import { Typography } from '@/src/typography';
-import type { TypographyColor } from '@/src/typography';
-import { useControlled } from '@/lib';
+import { Typography } from '../typography';
+import type { TypographyColor } from '../typography';
+import { useControlled } from '../../lib/hooks';
 
 /** Either an icon definition or an image source used for the leading adornment. */
 type ListItemAdornment = IconDefinition | { src: string; alt?: string };
@@ -37,7 +37,17 @@ type ListItemAdornmentColor =
 /** Status tokens that influence the item accent color. */
 type ListItemStatus = 'success' | 'warning' | 'error' | 'info';
 
-/** Optional class name hooks for the item sub-elements. */
+/**
+ * Optional class name hooks for the item sub-elements.
+ *
+ * @property [adornment] - Class names applied to the adornment element.
+ * @property [button] - Class names applied to the interactive root element.
+ * @property [children] - Class names applied to the text content wrapper.
+ * @property [container] - Class names applied to the inner container row.
+ * @property [root] - Class names applied to the outer root element.
+ * @property [label] - Class names applied to the label text.
+ * @property [title] - Class names applied to the title text.
+ */
 interface ListItemClasses {
   /** Class names applied to the adornment element. */
   adornment?: string;
@@ -55,7 +65,32 @@ interface ListItemClasses {
   title?: string;
 }
 
-/** Shared props that control the visual and behavioral state of a list item. */
+/**
+ * Shared props that control the visual and behavioral state of a list item.
+ *
+ * These props describe the selectable content, adornment, value, and
+ * presentation state used whether the item renders as a link, div, or native
+ * list item.
+ *
+ * @property [as] - Element type to render for the wrapper.
+ * @property [adornment] - Optional leading adornment.
+ * @property [adornmentColor] - Color token used for the adornment.
+ * @property [classes] - Custom class names for item sub-elements.
+ * @property [color] - Text color used by the title and label typography.
+ * @property [defaultSelected] - Whether the item should start selected when uncontrolled.
+ * @property [disabled] - Whether the item is disabled.
+ * @property [divider] - Whether to render a separator below the item.
+ * @property [firstIndex] - Whether this item is the first rendered item.
+ * @property [href] - Destination URL used when rendering as a link.
+ * @property [label] - Primary text shown for the item.
+ * @property [lastIndex] - Whether this item is the last rendered item.
+ * @property [selectable] - Whether the item can be selected.
+ * @property [status] - Status token that overrides or reinforces the adornment color.
+ * @property [tabIndex] - Keyboard focus order when the item is selectable.
+ * @property [title] - Optional secondary heading shown above the label.
+ * @property [selected] - Controlled selected state.
+ * @property [value] - Value associated with this item for selection tracking.
+ */
 interface BaseProps {
   /** Element type to render for the wrapper. */
   as?: 'a' | 'div' | 'li';
@@ -95,7 +130,16 @@ interface BaseProps {
   value?: string | number;
 }
 
-/** Props used when the item renders as an anchor. */
+/**
+ * Props used when the item renders as an anchor.
+ *
+ * @property [href] - Destination URL for the anchor.
+ * @property [onClick] - Click handler for the anchor variant.
+ * @property [onKeyDown] - Keyboard handler for the anchor variant.
+ * @property [ref] - Optional ref forwarded to the anchor element.
+ * @property [role] - Accessible role for the anchor element.
+ * @property [target] - Optional target for the anchor element.
+ */
 interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** Destination URL for the anchor. */
   href?: string;
@@ -111,7 +155,16 @@ interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   target?: string;
 }
 
-/** Props used when the item renders as a div. */
+/**
+ * Props used when the item renders as a div.
+ *
+ * @property [href] - Disallowed in the div variant.
+ * @property [onClick] - Click handler for the div variant.
+ * @property [onKeyDown] - Keyboard handler for the div variant.
+ * @property [ref] - Optional ref forwarded to the div element.
+ * @property [role] - Accessible role for the div element.
+ * @property [target] - Disallowed in the div variant.
+ */
 interface DivProps extends HTMLAttributes<HTMLDivElement> {
   /** Disallowed in the div variant. */
   href?: never;
@@ -127,7 +180,16 @@ interface DivProps extends HTMLAttributes<HTMLDivElement> {
   target?: never;
 }
 
-/** Props used when the item renders as a list item. */
+/**
+ * Props used when the item renders as a list item.
+ *
+ * @property [href] - Disallowed in the li variant.
+ * @property [onClick] - Click handler for the li variant.
+ * @property [onKeyDown] - Keyboard handler for the li variant.
+ * @property [ref] - Optional ref forwarded to the li element.
+ * @property [role] - Accessible role for the li element.
+ * @property [target] - Disallowed in the li variant.
+ */
 interface LiProps extends LiHTMLAttributes<HTMLLIElement> {
   /** Disallowed in the li variant. */
   href?: never;
@@ -143,7 +205,37 @@ interface LiProps extends LiHTMLAttributes<HTMLLIElement> {
   target?: never;
 }
 
-/** Combined prop signature for the list item component. */
+/**
+ * Combined prop signature for the list item component.
+ *
+ * Use `ListItemProps` when typing reusable navigation rows or selectable
+ * content items that should preserve the same overloaded render targets as
+ * the component itself.
+ *
+ * @property [as] - Element type used for the item wrapper.
+ * @property [adornment] - Optional leading icon or image adornment.
+ * @property [adornmentColor] - Color token used for the adornment.
+ * @property [classes] - Class name hooks for item sub-elements.
+ * @property [color] - Typography color for title and label text.
+ * @property [defaultSelected] - Initial selected state when uncontrolled.
+ * @property [disabled] - Disables the item.
+ * @property [divider] - Renders a separator below the item.
+ * @property [firstIndex] - Marks the item as first in a rendered list.
+ * @property [href] - Destination URL used when rendering as a link.
+ * @property [label] - Primary text shown for the item.
+ * @property [lastIndex] - Marks the item as last in a rendered list.
+ * @property [onClick] - Click handler for the rendered item.
+ * @property [onKeyDown] - Keyboard handler for the rendered item.
+ * @property [ref] - Ref forwarded to the rendered item element.
+ * @property [role] - Accessible role for the rendered item.
+ * @property [selectable] - Whether the item can be selected.
+ * @property [status] - Status token that influences item accent color.
+ * @property [tabIndex] - Keyboard focus order when selectable.
+ * @property [target] - Anchor target used when rendering as a link.
+ * @property [title] - Optional secondary heading shown above the label.
+ * @property [selected] - Controlled selected state.
+ * @property [value] - Value associated with selection tracking.
+ */
 type ListItemProps = (AnchorProps | DivProps | LiProps) & BaseProps;
 
 /**
@@ -156,7 +248,7 @@ type ListItemProps = (AnchorProps | DivProps | LiProps) & BaseProps;
  * classes applied.
  */
 const renderAdornment = (adornment: ListItemAdornment, className?: string) => {
-  const imageClasses = twMerge('mg:object-contain mg:animate-fade-in mg:duration-500', className);
+  const imageClasses = twMerge('au:object-contain au:animate-fade-in au:duration-500', className);
 
   if ('iconName' in adornment) {
     return <FontAwesomeIcon icon={adornment} className={className} />;
@@ -185,18 +277,12 @@ const renderAdornment = (adornment: ListItemAdornment, className?: string) => {
  *
  * @example
  * ```tsx
- * import { ListItem } from '@/src/list/ListItem';
+ * import { ListItem } from '@arctura/atomics';
  *
- * export function Example() {
+ * export function SidebarItem() {
  *   return (
  *     <ul>
- *       <ListItem
- *         as="li"
- *         title="Projects"
- *         label="See the latest work"
- *         value="projects"
- *         selected
- *       />
+ *       <ListItem as="li" title="Projects" label="See the latest work" value="projects" selected />
  *       <ListItem
  *         as="a"
  *         href="/contact"
@@ -241,52 +327,52 @@ function ListItem({
   });
 
   const adornmentClasses = classNames(
-    'mg:text-base mg:p-1 mg:group-hover:text-accent',
+    'au:text-base au:p-1 au:group-hover:text-accent',
     {
-      'mg:text-accent': adornmentColor === 'accent' && !status,
-      'mg:text-black': adornmentColor === 'black' && !status,
-      'mg:text-inverse': adornmentColor === 'inverse' && !status,
-      'mg:text-primary': adornmentColor === 'primary' && !status,
-      'mg:text-secondary': adornmentColor === 'secondary' && !status,
-      'mg:text-subtle': adornmentColor === 'subtle' && !status,
-      'mg:text-white': adornmentColor === 'white' && !status,
-      'mg:text-success': status === 'success' || adornmentColor === 'success',
-      'mg:text-danger': status === 'error' || adornmentColor === 'danger',
-      'mg:text-info': status === 'info' || adornmentColor === 'info',
-      'mg:text-warning': status === 'warning' || adornmentColor === 'warning',
+      'au:text-accent': adornmentColor === 'accent' && !status,
+      'au:text-black': adornmentColor === 'black' && !status,
+      'au:text-inverse': adornmentColor === 'inverse' && !status,
+      'au:text-primary': adornmentColor === 'primary' && !status,
+      'au:text-secondary': adornmentColor === 'secondary' && !status,
+      'au:text-subtle': adornmentColor === 'subtle' && !status,
+      'au:text-white': adornmentColor === 'white' && !status,
+      'au:text-success': status === 'success' || adornmentColor === 'success',
+      'au:text-danger': status === 'error' || adornmentColor === 'danger',
+      'au:text-info': status === 'info' || adornmentColor === 'info',
+      'au:text-warning': status === 'warning' || adornmentColor === 'warning',
     },
     classes?.adornment
   );
 
   const rootClasses = twMerge(
     classNames(
-      'mg:flex mg:flex-col mg:items-center mg:w-full mg:transition-all',
-      'mg:focus-visible:outline-1 mg:focus-visible:outline-offset-4 mg:focus-visible:outline-primary',
+      'au:flex au:flex-col au:items-center au:w-full au:transition-all',
+      'au:focus-visible:outline-1 au:focus-visible:outline-offset-4 au:focus-visible:outline-primary',
       {
-        'mg:group mg:hover:cursor-pointer mg:duration-200': selectable,
-        'mg:rounded-t-lg': firstIndex,
-        'mg:bg-black/50': selected,
-        'mg:opacity-80': disabled,
-        'mg:rounded-b-lg': lastIndex,
-        'mg:hover:scale-105 mg:hover:px-2 mg:duration-500': !selectable,
+        'au:group au:hover:cursor-pointer au:duration-200': selectable,
+        'au:rounded-t-lg': firstIndex,
+        'au:bg-black/50': selected,
+        'au:opacity-80': disabled,
+        'au:rounded-b-lg': lastIndex,
+        'au:hover:scale-105 au:hover:px-2 au:duration-500': !selectable,
       }
     ),
     classes?.root
   );
 
   const containerClasses = twMerge(
-    classNames('mg:flex mg:items-center mg:w-full'),
+    classNames('au:flex au:items-center au:w-full'),
     classes?.container
   );
 
   const childrenClasses = twMerge(
-    classNames('mg:flex mg:flex-col mg:grow mg:gap-2 mg:py-2 mg:pr-2'),
+    classNames('au:flex au:flex-col au:grow au:gap-2 au:py-2 au:pr-2'),
     classes?.children
   );
 
-  const labelClasses = twMerge(classNames('mg:group-hover:text-accent'), classes?.label);
+  const labelClasses = twMerge(classNames('au:group-hover:text-accent'), classes?.label);
 
-  const titleClasses = twMerge(classNames('mg:group-hover:text-accent'), classes?.title);
+  const titleClasses = twMerge(classNames('au:group-hover:text-accent'), classes?.title);
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement | HTMLDivElement | HTMLLIElement>) => {
     if (onClick) {
@@ -384,7 +470,7 @@ function ListItem({
         </div>
       </div>
       {divider && !lastIndex && (
-        <div className="mg:w-9/10 mg:h-0 mg:border-solid mg:border-b-1 mg:border-b-primary" />
+        <div className="au:w-9/10 au:h-0 au:border-solid au:border-b-1 au:border-b-primary" />
       )}
     </li>
   );
@@ -393,3 +479,10 @@ function ListItem({
 ListItem.displayName = 'List.ListItem';
 
 export { ListItem };
+export type {
+  ListItemAdornment,
+  ListItemAdornmentColor,
+  ListItemClasses,
+  ListItemProps,
+  ListItemStatus,
+};

@@ -4,12 +4,18 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { useControlled } from '@/lib';
-import { capitalize } from '@/src/utils';
+import { useControlled } from '../../lib/hooks';
+import { capitalize } from '../utils';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 
-/** Option data consumed by the Select component. */
+/**
+ * Option data consumed by the Select component.
+ *
+ * @property value - Value used for selection state and form submission.
+ * @property label - Visible label shown in the dropdown.
+ * @property [icon] - Optional icon rendered alongside the label.
+ */
 interface Option {
   /** Value used for selection state and form submission. */
   value: string;
@@ -19,7 +25,18 @@ interface Option {
   icon?: IconDefinition;
 }
 
-/** Optional class name hooks for the Select component internals. */
+/**
+ * Optional class name hooks for the Select component internals.
+ *
+ * @property [container] - Class names applied to the outer container.
+ * @property [icon] - Class names applied to the chevron icon.
+ * @property [iconContainer] - Class names applied to the icon wrapper.
+ * @property [label] - Class names applied to the label above the control.
+ * @property [placeholder] - Class names applied to the placeholder value.
+ * @property [option] - Class names applied to the option row and option icon.
+ * @property [optionsContainer] - Class names applied to the dropdown list container.
+ * @property [root] - Class names applied to the root wrapper.
+ */
 interface SelectClasses {
   /** Class names applied to the outer container. */
   container?: string;
@@ -39,7 +56,28 @@ interface SelectClasses {
   root?: string;
 }
 
-/** Props for the Select component. */
+/**
+ * Props for the Select component.
+ *
+ * Use this interface to configure an accessible themed dropdown with
+ * controlled or uncontrolled selection, optional icons in options, hidden
+ * input integration, sizing, and class name hooks.
+ *
+ * @property [classes] - Class name hooks for internal elements.
+ * @property [defaultValue] - Initial selected value for uncontrolled usage.
+ * @property [disabled] - Disables the select.
+ * @property [fullWidth] - Expands the select to fill its parent.
+ * @property [label] - Label rendered above the select trigger.
+ * @property [name] - Name applied to the hidden input for forms.
+ * @property [onChange] - Callback fired when an option is selected.
+ * @property [options] - Options displayed in the dropdown.
+ * @property [placeholder] - Text shown when no selection is active.
+ * @property [ref] - Ref forwarded to the root wrapper.
+ * @property [size] - Size token controlling trigger dimensions.
+ * @property [tabIndex] - Keyboard tab index for trigger and options.
+ * @property [variant] - Visual treatment for the dropdown.
+ * @property [value] - Controlled selected value.
+ */
 interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'className'> {
   /** Class name hooks for the internal elements. */
   classes?: SelectClasses;
@@ -47,6 +85,8 @@ interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 
   defaultValue?: string;
   /** Whether the select is disabled. */
   disabled?: boolean;
+  /** Expands the select control to fill the width of its parent container. */
+  fullWidth?: boolean;
   /** Label rendered above the select trigger. */
   label?: string;
   /** Name applied to the hidden input for form integration. */
@@ -59,6 +99,8 @@ interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 
   placeholder?: string;
   /** Ref forwarded to the root wrapper. */
   ref?: Ref<HTMLDivElement>;
+  /** Size token controlling the select trigger width and height. */
+  size?: 'sm' | 'md' | 'lg';
   /** Keyboard tab index for the select trigger and options. */
   tabIndex?: number;
   /** Visual treatment for the dropdown. */
@@ -81,21 +123,22 @@ interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 
  *
  * @example
  * ```tsx
- * import { Select } from '@/src/select/Select';
+ * import { Select } from '@arctura/atomics';
+ * import { faLayerGroup, faTableCells } from '@fortawesome/free-solid-svg-icons';
  *
- * function App() {
- *  const options = [
- *   { value: 'option1', label: 'Option 1' },
- *   { value: 'option2', label: 'Option 2', icon: faStar },
- * ];
- *
- * return (
- *   <Select
- *    label="Choose an option"
- *    options={options}
- *    placeholder="Select an option"
- * />
- * );
+ * export function ViewModeSelect() {
+ *   return (
+ *     <Select
+ *       label="View"
+ *       name="view"
+ *       options={[
+ *         { value: 'cards', label: 'Cards', icon: faLayerGroup },
+ *         { value: 'table', label: 'Table', icon: faTableCells },
+ *       ]}
+ *       placeholder="Choose a layout"
+ *     />
+ *   );
+ * }
  * ```
  *
  * @see Option
@@ -105,12 +148,14 @@ const Select: FC<SelectProps> = ({
   classes = {},
   defaultValue,
   disabled = false,
+  fullWidth = false,
   label,
   name,
   onChange,
   options = [],
   placeholder,
   ref,
+  size = 'md',
   tabIndex = 0,
   value,
   variant = 'outline',
@@ -127,31 +172,38 @@ const Select: FC<SelectProps> = ({
 
   const containerClasses = twMerge(
     classNames(
-      'mg:relative mg:flex mg:justify-start mg:items-center mg:gap-1 mg:rounded-sm mg:w-full mg:h-full',
+      'au:relative au:flex au:justify-start au:items-center au:gap-1 au:rounded-sm au:w-full',
       {
-        'mg:border-1 mg:border-solid mg:border-primary mg:hover:border-hover':
+        'au:border-1 au:border-solid au:border-primary au:hover:border-hover':
           variant === 'outline',
-        'mg:bg-primary': variant === 'filled',
-        'mg:cursor-not-allowed mg:opacity-50': disabled,
-        'mg:hover:cursor-pointer': !disabled,
+        'au:bg-primary': variant === 'filled',
+        'au:cursor-not-allowed au:opacity-50': disabled,
+        'au:hover:cursor-pointer': !disabled,
+        'au:min-h-[32px]': size === 'sm',
+        'au:min-h-[40px]': size === 'md',
+        'au:min-h-[48px]': size === 'lg',
       }
     ),
     classes?.container
   );
 
-  const labelClasses = twMerge('mg:text-xs mg:sm:text-sm mg:lg:text-lg', classes?.label);
+  const labelClasses = twMerge('au:text-xs au:sm:text-sm au:lg:text-lg', classes?.label);
 
   const placeholderClasses = twMerge(
-    'mg:relative mg:flex mg:justify-start mg:items-center mg:gap-1 mg:p-1 mg:text-xs mg:w-full',
+    'au:relative au:flex au:justify-start au:items-center au:gap-1 au:p-1 au:text-xs au:w-full',
     classes?.placeholder
   );
 
   const optionsContainerClasses = twMerge(
     classNames(
-      'mg:absolute mg:top-full mg:left-0 mg:mt-1 mg:flex mg:flex-col mg:justify-start mg:items-center mg:w-full',
+      'au:absolute au:top-full au:left-0 au:mt-1 au:flex au:flex-col au:justify-start au:items-center au:w-full',
       {
-        'mg:border-solid mg:border-1 mg:border-primary mg:rounded-sm mg:bg-secondary':
+        'au:border-solid au:border-1 au:border-primary au:rounded-sm au:bg-secondary':
           variant === 'outline',
+        'au:w-12': size === 'sm' && !fullWidth,
+        'au:w-32': size === 'md' && !fullWidth,
+        'au:w-52': size === 'lg' && !fullWidth,
+        'au:grow': fullWidth,
       }
     ),
     classes?.optionsContainer
@@ -159,33 +211,41 @@ const Select: FC<SelectProps> = ({
 
   const optionClasses = twMerge(
     classNames(
-      'mg:flex mg:justify-between mg:items-center mg:px-1.5 mg:py-1 mg:w-full mg:text-xs',
+      'au:flex au:justify-between au:items-center au:px-1.5 au:py-1 au:w-full au:text-xs',
       {
-        'mg:hover:text-accent': variant === 'outline',
+        'au:hover:text-accent': variant === 'outline',
       }
     ),
     classes?.option?.root
   );
 
   const optionIconClasses = twMerge(
-    'mg:text-sm mg:sm:text-sm mg:lg:text-lg',
+    'au:text-sm au:sm:text-sm au:lg:text-lg',
     classes?.option?.icon
   );
 
   const rootClasses = twMerge(
-    'mg:inline-flex mg:flex-col mg:items-start mg:justify-center mg:gap-0.5 mg:min-w-12 mg:min-h-2 mg:h-full mg:font-body mg:text-inverse',
+    classNames(
+      'au:inline-flex au:flex-col au:items-start au:justify-center au:gap-0.5 au:min-w-12 au:font-body au:text-inverse',
+      {
+        'au:w-full': fullWidth,
+        'au:w-24': size === 'sm' && !fullWidth,
+        'au:w-32': size === 'md' && !fullWidth,
+        'au:w-52': size === 'lg' && !fullWidth,
+      }
+    ),
     classes?.root
   );
 
   const iconClasses = twMerge(
-    classNames('mg:text-sm mg:transition-transform mg:duration-200', {
-      'mg:rotate-180': isOpen,
+    classNames('au:text-sm au:transition-transform au:duration-200', {
+      'au:rotate-180': isOpen,
     }),
     classes?.icon
   );
 
   const iconContainerClasses = twMerge(
-    'mg:relative mg:flex mg:justify-center mg:items-center mg:p-0.5',
+    'au:relative au:flex au:justify-center au:items-center au:p-0.5',
     classes?.iconContainer
   );
 
@@ -263,4 +323,4 @@ const Select: FC<SelectProps> = ({
 Select.displayName = 'Select';
 
 export { Select };
-export type { SelectClasses };
+export type { Option, SelectClasses, SelectProps };

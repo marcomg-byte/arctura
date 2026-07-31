@@ -12,7 +12,7 @@ describe('ListItem', () => {
     const item = screen.getByText('Projects').closest('li') as HTMLElement;
 
     expect(item.tagName).toBe('LI');
-    expect(item.className).toContain('mg:bg-black/50');
+    expect(item.className).toContain('au:bg-black/50');
     expect(screen.getByText('Recent work')).toBeDefined();
   });
 
@@ -42,7 +42,7 @@ describe('ListItem', () => {
 
     fireEvent.click(item);
 
-    expect(item.className).toContain('mg:bg-black/50');
+    expect(item.className).toContain('au:bg-black/50');
   });
 
   it('renders icon and image adornments with status classes', () => {
@@ -51,7 +51,7 @@ describe('ListItem', () => {
     );
 
     expect(container.querySelector('svg')?.getAttribute('data-icon')).toBe('check');
-    expect(container.querySelector('svg')?.getAttribute('class')).toContain('mg:text-success');
+    expect(container.querySelector('svg')?.getAttribute('class')).toContain('au:text-success');
 
     rerender(<ListItem label="Avatar" adornment={{ src: '/images/avatar.png', alt: 'Avatar' }} />);
 

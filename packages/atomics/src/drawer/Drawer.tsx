@@ -4,47 +4,155 @@ import { useEffect } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { IconButton } from '@/src/buttons';
-import { useControlled } from '@/lib';
+import { IconButton } from '../buttons';
+import { useControlled } from '../../lib/hooks';
 
+/**
+ * Optional class name hooks for the drawer sub-elements.
+ *
+ * @property [body] - Classes applied to the drawer body.
+ * @property [backdrop] - Classes applied to the backdrop container.
+ * @property [header] - Classes applied to the drawer header sections.
+ * @property [overlay] - Classes applied to the overlay element.
+ * @property [root] - Classes applied to the drawer panel root.
+ */
 interface DrawerClasses {
+  /** Classes applied to the drawer body. */
   body?: string;
+  /** Classes applied to the backdrop container. */
   backdrop?: string;
-  header?: {
-    center?: string;
-    left?: string;
-    right?: string;
-    root?: string;
-  };
+  /** Classes applied to the drawer header sections. */
+  header?: DrawerHeaderClasses;
+  /** Classes applied to the overlay element. */
   overlay?: string;
+  /** Classes applied to the drawer panel root. */
   root?: string;
 }
 
-interface DrawerHeader {
-  title?: string;
-  leftSlot?: ReactNode;
-  rightSlot?: ReactNode;
+/**
+ * Optional class name hooks for the drawer header sections.
+ *
+ * @property [center] - Classes applied to the center header section.
+ * @property [left] - Classes applied to the left header section.
+ * @property [right] - Classes applied to the right header section.
+ * @property [root] - Classes applied to the header container.
+ */
+interface DrawerHeaderClasses {
+  /** Classes applied to the center header section. */
+  center?: string;
+  /** Classes applied to the left header section. */
+  left?: string;
+  /** Classes applied to the right header section. */
+  right?: string;
+  /** Classes applied to the header container. */
+  root?: string;
 }
 
+/**
+ * Header content rendered inside the drawer.
+ *
+ * @property [leftSlot] - Content rendered to the left of the title.
+ * @property [rightSlot] - Content rendered to the right of the title.
+ * @property [title] - Optional title rendered in the center section.
+ */
+interface DrawerHeader {
+  /** Content rendered to the left of the title. */
+  leftSlot?: ReactNode;
+  /** Content rendered to the right of the title. */
+  rightSlot?: ReactNode;
+  /** Optional title rendered in the center section. */
+  title?: string;
+}
+
+/**
+ * Props for configuring the drawer component.
+ *
+ * Use this interface for controlled slide-over panels that need a fixed
+ * placement, optional backdrop, keyboard closing, and header slots for
+ * actions or contextual titles.
+ *
+ * @property ['aria-label'] - Accessible label for the drawer when there is no visible title.
+ * @property ['aria-labelledby'] - Accessible labelled-by target for externally rendered titles.
+ * @property [anchor] - Side of the screen where the drawer opens.
+ * @property [classes] - Class name hooks for drawer internals.
+ * @property [closeOnEscape] - Whether pressing Escape closes the drawer.
+ * @property [children] - Content rendered inside the drawer body.
+ * @property [backdropProps] - Additional props forwarded to the backdrop wrapper.
+ * @property [backdropRef] - Ref forwarded to the backdrop wrapper.
+ * @property [header] - Header content and slot configuration.
+ * @property [id] - Optional id for the drawer root element.
+ * @property [onBackdropClick] - Callback fired when the backdrop is clicked.
+ * @property [onClose] - Callback fired when the drawer should close.
+ * @property [onKeyDown] - Key down handler for the drawer panel.
+ * @property [open] - Controlled open state for the drawer.
+ * @property [ref] - Ref forwarded to the drawer panel.
+ * @property [showBackdrop] - Whether the backdrop should be visible.
+ */
 interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
+  /** Accessible label for the drawer when there is no visible title. */
   'aria-label'?: string;
+  /** Accessible labelled-by target for the drawer when the title is rendered elsewhere. */
   'aria-labelledby'?: string;
+  /** Side of the screen where the drawer opens. */
   anchor?: 'left' | 'right' | 'top' | 'bottom';
+  /** Class name overrides for the drawer internals. */
   classes?: DrawerClasses;
+  /** Whether pressing Escape closes the drawer. */
   closeOnEscape?: boolean;
+  /** Content rendered inside the drawer body. */
   children?: ReactNode;
+  /** Additional props forwarded to the backdrop wrapper. */
   backdropProps?: HTMLAttributes<HTMLDivElement>;
+  /** Ref forwarded to the backdrop wrapper. */
   backdropRef?: Ref<HTMLDivElement>;
+  /** Header content and slot configuration. */
   header?: DrawerHeader;
+  /** Optional id for the drawer root element. */
   id?: string;
+  /** Callback fired when the backdrop is clicked. */
   onBackdropClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  /** Callback fired when the drawer should close. */
   onClose: () => void;
+  /** Key down handler for the drawer panel. */
   onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
+  /** Controlled open state for the drawer. */
   open: boolean;
+  /** Ref forwarded to the drawer panel. */
   ref?: Ref<HTMLDivElement>;
+  /** Whether the backdrop should be visible. */
   showBackdrop?: boolean;
 }
 
+/**
+ * Drawer component for sliding panels with an optional backdrop and header slots.
+ *
+ * @param {DrawerProps} props - Props for configuring the drawer content, behavior, and placement.
+ * @returns {JSX.Element} The rendered drawer.
+ *
+ * @example
+ * ```tsx
+ * import { Drawer, Button } from '@arctura/atomics';
+ * import { useState } from 'react';
+ *
+ * const Example = () => {
+ *   const [open, setOpen] = useState(false);
+ *
+ *   return (
+ *     <>
+ *       <Button onClick={() => setOpen(true)}>Open drawer</Button>
+ *       <Drawer
+ *         anchor="right"
+ *         header={{ title: 'Settings' }}
+ *         open={open}
+ *         onClose={() => setOpen(false)}
+ *       >
+ *         Account settings and preferences.
+ *       </Drawer>
+ *     </>
+ *   );
+ * };
+ * ```
+ */
 const Drawer: FC<DrawerProps> = ({
   anchor = 'left',
   backdropProps,
@@ -87,12 +195,12 @@ const Drawer: FC<DrawerProps> = ({
 
   const backdropClasses = twMerge(
     classNames(
-      'mg:fixed mg:w-full mg:h-full mg:inset-0 mg:z-40 mg:flex mg:overflow-hidden mg:transition-opacity mg:duration-200 mg:ease-out',
+      'au:fixed au:w-full au:h-full au:inset-0 au:z-40 au:flex au:overflow-hidden au:transition-opacity au:duration-200 au:ease-out',
       {
-        'mg:items-start mg:justify-start': anchor === 'left',
-        'mg:items-start mg:justify-end': anchor === 'right',
-        'mg:items-start mg:justify-stretch': anchor === 'top',
-        'mg:items-end mg:justify-stretch': anchor === 'bottom',
+        'au:items-start au:justify-start': anchor === 'left',
+        'au:items-start au:justify-end': anchor === 'right',
+        'au:items-start au:justify-stretch': anchor === 'top',
+        'au:items-end au:justify-stretch': anchor === 'bottom',
       }
     ),
     classes?.backdrop
@@ -100,39 +208,39 @@ const Drawer: FC<DrawerProps> = ({
 
   const overlayClasses = twMerge(
     classNames(
-      'mg:absolute mg:inset-0 mg:bg-secondary/80 mg:backdrop-blur-sm mg:transition-opacity mg:duration-200 mg:ease-out',
+      'au:absolute au:inset-0 au:bg-secondary/80 au:backdrop-blur-sm au:transition-opacity au:duration-200 au:ease-out',
       {
-        'mg:opacity-100': showBackdrop,
-        'mg:opacity-0': !showBackdrop,
+        'au:opacity-100': showBackdrop,
+        'au:opacity-0': !showBackdrop,
       }
     ),
     classes?.overlay
   );
   const headerClasses = twMerge(
-    classNames('mg:flex mg:justify-between mg:w-full mg:py-3 mg:px-6'),
+    classNames('au:flex au:justify-between au:w-full au:py-3 au:px-6'),
     classes?.header?.root
   );
 
-  const headerCenterClasses = twMerge(classNames('mg:flex mg:gap-3'), classes?.header?.center);
+  const headerCenterClasses = twMerge(classNames('au:flex au:gap-3'), classes?.header?.center);
 
-  const headerLeftSectionClasses = twMerge(classNames('mg:flex mg:gap-3'), classes?.header?.left);
+  const headerLeftSectionClasses = twMerge(classNames('au:flex au:gap-3'), classes?.header?.left);
 
-  const headerRightClasses = twMerge(classNames('mg:flex mg:gap-3'), classes?.header?.right);
+  const headerRightClasses = twMerge(classNames('au:flex au:gap-3'), classes?.header?.right);
 
-  const bodyClasses = twMerge(classNames('mg:flex mg:flex-col mg:w-full'), classes?.body);
+  const bodyClasses = twMerge(classNames('au:flex au:flex-col au:w-full'), classes?.body);
 
   const rootClasses = twMerge(
     classNames(
-      'mg:relative mg:flex mg:w-full mg:max-w-full mg:grow-0 mg:flex-col mg:pb-2 mg:z-50 mg:bg-secondary mg:opacity-100 mg:text-primary mg:shadow-xl mg:shadow-black/20 mg:transition-transform mg:duration-300 mg:ease-out',
+      'au:relative au:flex au:w-full au:max-w-full au:grow-0 au:flex-col au:pb-2 au:z-50 au:bg-secondary au:opacity-100 au:text-primary au:shadow-xl au:shadow-black/20 au:transition-transform au:duration-300 au:ease-out',
       {
-        'mg:max-w-80 mg:sm:max-w-96': anchor === 'left' || anchor === 'right',
-        'mg:max-h-[85dvh]': anchor === 'top' || anchor === 'bottom',
-        'mg:translate-x-0': open && (anchor === 'left' || anchor === 'right'),
-        'mg:translate-y-0': open && (anchor === 'top' || anchor === 'bottom'),
-        'mg:-translate-x-full': !open && anchor === 'left',
-        'mg:translate-x-full': !open && anchor === 'right',
-        'mg:-translate-y-full': !open && anchor === 'top',
-        'mg:translate-y-full': !open && anchor === 'bottom',
+        'au:max-w-80 au:sm:max-w-96': anchor === 'left' || anchor === 'right',
+        'au:max-h-[85dvh]': anchor === 'top' || anchor === 'bottom',
+        'au:translate-x-0': open && (anchor === 'left' || anchor === 'right'),
+        'au:translate-y-0': open && (anchor === 'top' || anchor === 'bottom'),
+        'au:-translate-x-full': !open && anchor === 'left',
+        'au:translate-x-full': !open && anchor === 'right',
+        'au:-translate-y-full': !open && anchor === 'top',
+        'au:translate-y-full': !open && anchor === 'bottom',
       }
     ),
     classes?.root
@@ -167,4 +275,4 @@ const Drawer: FC<DrawerProps> = ({
 Drawer.displayName = 'Drawer';
 
 export { Drawer };
-export type { DrawerClasses };
+export type { DrawerClasses, DrawerHeader, DrawerHeaderClasses, DrawerProps };

@@ -1,6 +1,6 @@
 'use client';
 import { useSyncExternalStore } from 'react';
-import tokens from '@/tokens.json';
+import tokens from '../tokens.json';
 
 /**
  * Viewport breakpoint names recognized by the app.

@@ -1,12 +1,12 @@
 import type { AnchorHTMLAttributes, FC, MouseEvent, ReactNode, Ref } from 'react';
-import { headingVariants, Typography } from '@/src/typography/Typography';
+import { headingVariants, Typography } from './Typography';
 import type {
   HeadingVariant,
   ParagraphVariant,
   TypographyColor,
   TypographyProps as TypographyComponentProps,
   TypographyVariant,
-} from '@/src/typography/Typography';
+} from './Typography';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
 
@@ -21,6 +21,9 @@ const isHeadingVariant = (variant: TypographyVariant): variant is HeadingVariant
 
 /**
  * Optional class name overrides for the anchor wrapper and Typography content.
+ *
+ * @property [anchor] - Extra classes applied to the outer anchor element.
+ * @property [typography] - Extra classes applied to the inner Typography element.
  */
 interface LinkClasses {
   /** Extra classes applied to the outer anchor element. */
@@ -38,7 +41,20 @@ type TypographyProps = Omit<
 >;
 
 /**
- * Props for the Link component, combining anchor behavior with Typography styling.
+ * Props for the Link component.
+ *
+ * Use this interface when a text link needs standard anchor behavior plus the
+ * typography system's variant, color, clamp, and emphasis controls.
+ *
+ * @property [anchorProps] - Additional props forwarded to the anchor element.
+ * @property [anchorRef] - Ref forwarded to the outer anchor element.
+ * @property [children] - Content rendered inside the link.
+ * @property [classes] - Class name hooks for anchor and Typography elements.
+ * @property [color] - Typography color variant applied to the inner text.
+ * @property [href] - Destination URL for the link.
+ * @property [onClick] - Click handler attached to the anchor element.
+ * @property [target] - Target browsing context for the anchor element.
+ * @property [variant] - Typography variant used for the rendered text style.
  */
 interface LinkProps extends TypographyProps {
   /** Additional props forwarded to the anchor element. */
@@ -71,18 +87,18 @@ interface LinkProps extends TypographyProps {
  *
  * @example
  * ```tsx
- * import { Link } from '@/src/typography';
+ * import { Link } from '@arctura/atomics';
  *
  * export function ContactLinks() {
  *   return (
- *     <div className="mg:flex mg:flex-col mg:gap-3">
+ *     <div className="au:flex au:flex-col au:gap-3">
  *       <Link
  *         href="mailto:hello@example.com"
  *         variant="h3"
  *         color="primary"
  *         classes={{
- *           anchor: 'mg:inline-flex',
- *           typography: 'mg:font-semibold',
+ *           anchor: 'au:inline-flex',
+ *           typography: 'au:font-semibold',
  *         }}
  *       >
  *         hello@example.com
@@ -117,13 +133,13 @@ const Link: FC<LinkProps> = ({
   variant = 'base',
   ...rest
 }) => {
-  const anchorClasses = twMerge(classNames('mg:flex mg:group'), classes?.anchor);
+  const anchorClasses = twMerge(classNames('au:flex au:group'), classes?.anchor);
   const typographyClasses = twMerge(
-    classNames('mg:cursor-pointer', {
-      'mg:group-hover:text-accent': color !== 'accent',
-      'mg:group-hover:text-subtle-hover': color === 'accent',
-      'mg:group-active:text-active mg:group-visited:text-active': color !== 'active',
-      'mg:group-active:text-active-hover mg:group-visited:text-active-hover': color === 'active',
+    classNames('au:cursor-pointer', {
+      'au:group-hover:text-accent': color !== 'accent',
+      'au:group-hover:text-subtle-hover': color === 'accent',
+      'au:group-active:text-active au:group-visited:text-active': color !== 'active',
+      'au:group-active:text-active-hover au:group-visited:text-active-hover': color === 'active',
     }),
     classes?.typography
   );
@@ -174,4 +190,4 @@ const Link: FC<LinkProps> = ({
 Link.displayName = 'Link';
 
 export { Link };
-export type { LinkClasses };
+export type { LinkClasses, LinkProps };

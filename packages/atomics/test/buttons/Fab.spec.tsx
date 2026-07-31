@@ -13,12 +13,12 @@ describe('Fab', () => {
     const icon = fab.querySelector('svg');
 
     expect(fab.tagName).toBe('BUTTON');
-    expect(fab.className).toContain('mg:inline-flex');
-    expect(fab.className).toContain('mg:rounded-full');
-    expect(fab.className).toContain('mg:h-6');
-    expect(fab.className).toContain('mg:w-6');
-    expect(fab.className).toContain('mg:border-primary');
-    expect(fab.className).toContain('mg:text-primary');
+    expect(fab.className).toContain('au:inline-flex');
+    expect(fab.className).toContain('au:rounded-full');
+    expect(fab.className).toContain('au:h-6');
+    expect(fab.className).toContain('au:w-6');
+    expect(fab.className).toContain('au:border-primary');
+    expect(fab.className).toContain('au:text-primary');
     expect(icon?.getAttribute('data-icon')).toBe('plus');
   });
 
@@ -35,7 +35,7 @@ describe('Fab', () => {
     expect(fab.getAttribute('href')).toBe('/contact');
     expect(fab.getAttribute('target')).toBe('_blank');
     expect(fab.getAttribute('aria-label')).toBe('Open contact');
-    expect(fab.className).toContain('mg:border-primary');
+    expect(fab.className).toContain('au:border-primary');
   });
 
   it('applies extended variant, size, color, and custom classes', () => {
@@ -47,11 +47,11 @@ describe('Fab', () => {
 
     const fab = screen.getByRole('button', { name: 'Create' });
 
-    expect(fab.className).toContain('mg:rounded-lg');
-    expect(fab.className).toContain('mg:w-6');
-    expect(fab.className).toContain('mg:h-4');
-    expect(fab.className).toContain('mg:border-accent');
-    expect(fab.className).toContain('mg:text-accent');
+    expect(fab.className).toContain('au:rounded-lg');
+    expect(fab.className).toContain('au:w-6');
+    expect(fab.className).toContain('au:h-4');
+    expect(fab.className).toContain('au:border-accent');
+    expect(fab.className).toContain('au:text-accent');
     expect(fab.className).toContain('custom-fab');
   });
 
@@ -84,7 +84,7 @@ describe('Fab', () => {
 
     expect(icon).not.toBeNull();
     expect(icon?.getAttribute('data-icon')).toBe('check');
-    expect(icon?.getAttribute('class')).toContain('mg:text-xs');
+    expect(icon?.getAttribute('class')).toContain('au:text-xs');
     expect(icon?.getAttribute('class')).toContain('custom-icon');
     expect(fab.firstElementChild).toBe(icon);
   });
@@ -97,7 +97,7 @@ describe('Fab', () => {
 
     expect(icon).not.toBeNull();
     expect(icon?.getAttribute('data-icon')).toBe('check');
-    expect(icon?.getAttribute('class')).toContain('mg:text-xs');
+    expect(icon?.getAttribute('class')).toContain('au:text-xs');
     expect(fab.lastElementChild).toBe(icon);
   });
 });

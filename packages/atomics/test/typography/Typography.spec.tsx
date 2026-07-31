@@ -18,10 +18,10 @@ describe('Typography', () => {
     });
 
     expect(heading.tagName).toBe('H2');
-    expect(heading.className).toContain('mg:font-extrabold');
-    expect(heading.className).toContain('mg:text-accent');
-    expect(heading.className).toContain('mg:text-center');
-    expect(heading.className).toContain('mg:text-4xl');
+    expect(heading.className).toContain('au:font-extrabold');
+    expect(heading.className).toContain('au:text-accent');
+    expect(heading.className).toContain('au:text-center');
+    expect(heading.className).toContain('au:text-4xl');
   });
 
   it('renders paragraph variants by default', () => {
@@ -34,9 +34,9 @@ describe('Typography', () => {
     const paragraph = screen.getByText('Body copy');
 
     expect(paragraph.tagName).toBe('P');
-    expect(paragraph.className).toContain('mg:font-body');
-    expect(paragraph.className).toContain('mg:text-secondary');
-    expect(paragraph.className).toContain('mg:line-clamp-4');
+    expect(paragraph.className).toContain('au:font-body');
+    expect(paragraph.className).toContain('au:text-secondary');
+    expect(paragraph.className).toContain('au:line-clamp-4');
   });
 
   it('renders as a span when requested', () => {
@@ -49,9 +49,9 @@ describe('Typography', () => {
     const span = screen.getByText('Inline label');
 
     expect(span.tagName).toBe('SPAN');
-    expect(span.className).toContain('mg:truncate');
-    expect(span.className).toContain('mg:underline');
+    expect(span.className).toContain('au:truncate');
+    expect(span.className).toContain('au:underline');
     expect(span.className).toContain('custom-type');
-    expect(span.className).not.toContain('mg:py-1');
+    expect(span.className).not.toContain('au:py-1');
   });
 });

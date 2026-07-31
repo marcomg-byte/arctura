@@ -12,11 +12,11 @@ describe('Badge', () => {
     const badge = screen.getByText('Available');
 
     expect(badge.tagName).toBe('DIV');
-    expect(badge.className).toContain('mg:flex');
-    expect(badge.className).toContain('mg:px-3');
-    expect(badge.className).toContain('mg:text-base');
-    expect(badge.className).toContain('mg:bg-primary');
-    expect(badge.className).toContain('mg:border-primary');
+    expect(badge.className).toContain('au:flex');
+    expect(badge.className).toContain('au:px-3');
+    expect(badge.className).toContain('au:text-base');
+    expect(badge.className).toContain('au:bg-primary');
+    expect(badge.className).toContain('au:border-primary');
   });
 
   it('renders an anchor badge when href is provided', () => {
@@ -32,7 +32,7 @@ describe('Badge', () => {
     expect(badge.getAttribute('href')).toBe('/projects');
     expect(badge.getAttribute('target')).toBe('_blank');
     expect(badge.getAttribute('aria-label')).toBe('Projects badge');
-    expect(badge.className).toContain('mg:hover:bg-primary-hover');
+    expect(badge.className).toContain('au:hover:bg-primary-hover');
   });
 
   it('applies explicit size, color, variant, and custom classes', () => {
@@ -44,10 +44,10 @@ describe('Badge', () => {
 
     const badge = screen.getByText('Critical');
 
-    expect(badge.className).toContain('mg:px-4');
-    expect(badge.className).toContain('mg:text-lg');
-    expect(badge.className).toContain('mg:bg-transparent');
-    expect(badge.className).toContain('mg:border-danger');
+    expect(badge.className).toContain('au:px-4');
+    expect(badge.className).toContain('au:text-lg');
+    expect(badge.className).toContain('au:bg-transparent');
+    expect(badge.className).toContain('au:border-danger');
     expect(badge.className).toContain('custom-badge');
   });
 
@@ -63,7 +63,7 @@ describe('Badge', () => {
 
     expect(icon).not.toBeNull();
     expect(icon?.getAttribute('data-icon')).toBe('check');
-    expect(icon?.getAttribute('class')).toContain('mg:text-success');
+    expect(icon?.getAttribute('class')).toContain('au:text-success');
     expect(badge.firstElementChild).toBe(icon);
   });
 
@@ -79,7 +79,7 @@ describe('Badge', () => {
 
     expect(icon).not.toBeNull();
     expect(icon?.getAttribute('data-icon')).toBe('check');
-    expect(icon?.getAttribute('class')).toContain('mg:text-info');
+    expect(icon?.getAttribute('class')).toContain('au:text-info');
     expect(badge.lastElementChild).toBe(icon);
   });
 });

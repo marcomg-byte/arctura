@@ -16,11 +16,11 @@ import { twMerge } from 'tailwind-merge';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faEyeSlash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconButton } from '@/src/buttons';
-import { useControlled } from '@/lib';
+import { IconButton } from '../buttons';
+import { useControlled } from '../../lib/hooks';
 
 /**
- * Adornment for `TextInput` — either a FontAwesome `IconDefinition`
+ * Adornment for `TextInput` - either a FontAwesome `IconDefinition`
  * or an image object `{ src, alt? }`.
  */
 type TextInputAdornment = IconDefinition | { src: string; alt?: string };
@@ -48,6 +48,16 @@ type TextInputAdornmentColor =
 /**
  * Optional class overrides for `TextInput` sub-elements.
  * Use these to merge or replace default styles on internal parts.
+ *
+ * @property [container] - Class applied to the root container for the component.
+ * @property [clearButton] - Class applied to the clear button or icon.
+ * @property [endAdornment] - Class applied to the end adornment element.
+ * @property [helper] - Class applied to the helper text element.
+ * @property [input] - Class applied to the native input element.
+ * @property [inputContainer] - Class applied to the input border and wrapper.
+ * @property [label] - Class applied to the label element.
+ * @property [startAdornment] - Class applied to the start adornment element.
+ * @property [toggleButton] - Class applied to the password visibility toggle button.
  */
 interface TextInputClasses {
   /** Root container for the component. */
@@ -107,7 +117,53 @@ type TextInputType = Exclude<
 
 /**
  * Props for `TextInput`.
- * Extends native input attributes (omitting component-controlled `size`, `pattern`, `onError`).
+ *
+ * Use this interface for single-line text entry with controlled or uncontrolled
+ * value handling, custom validation patterns, helper text, adornments, clear
+ * actions, and text-oriented native input attributes.
+ *
+ * @property ['aria-describedby'] - ID of the element that describes this input.
+ * @property ['aria-label'] - Accessible label for the input.
+ * @property ['aria-invalid'] - Whether the input is in an invalid state.
+ * @property [adornmentColor] - Color theme used for adornments and small text.
+ * @property [autoComplete] - Native autocomplete behavior.
+ * @property [autoFocus] - Whether the input receives focus on mount.
+ * @property [classes] - Class name hooks for input sub-elements.
+ * @property [clearable] - Shows a clear button inside the input.
+ * @property [color] - Text color variant for the input.
+ * @property [defaultValue] - Initial uncontrolled value.
+ * @property [disabled] - Disables the input.
+ * @property [endAdornment] - Adornment rendered at the end of the input.
+ * @property [error] - Controlled external error state.
+ * @property [fullWidth] - Expands the input to fill its parent.
+ * @property [helperText] - Helper or error text displayed below the input.
+ * @property [id] - ID attribute for the input element.
+ * @property [inputMode] - Native input mode hint for virtual keyboards.
+ * @property [label] - Visible label text for the input.
+ * @property [maxLength] - Maximum allowed value length.
+ * @property [minLength] - Minimum required value length.
+ * @property [name] - Name attribute for form submission.
+ * @property [pattern] - RegExp validation pattern applied client-side.
+ * @property [placeholder] - Placeholder text shown when empty.
+ * @property [readOnly] - Renders the input as read-only.
+ * @property [ref] - Ref forwarded to the native input element.
+ * @property [required] - Whether the field is required.
+ * @property [showPasswordToggle] - Shows a password visibility toggle for password inputs.
+ * @property [size] - Size token controlling the input dimensions.
+ * @property [status] - Visual status used to style border and helper text.
+ * @property [spellCheck] - Whether spell checking is enabled.
+ * @property [startAdornment] - Adornment rendered at the start of the input.
+ * @property [type] - Text-oriented native input type.
+ * @property [onChange] - Change event handler.
+ * @property [onClear] - Clear button click handler.
+ * @property [onError] - Callback invoked when the error state changes.
+ * @property [onInput] - Low-level input event handler.
+ * @property [onBlur] - Blur event handler.
+ * @property [onFocus] - Focus event handler.
+ * @property [onKeyDown] - Key down event handler.
+ * @property [onKeyUp] - Key up event handler.
+ * @property [onMouseDown] - Mouse down handler for the input element.
+ * @property [value] - Controlled value for the input.
  */
 interface TextInputProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -217,20 +273,20 @@ const renderAdornment = (
   className?: string
 ) => {
   const iconClasses = classNames(
-    'mg:text-base',
+    'au:text-base',
     {
-      'mg:text-white': color === 'white',
-      'mg:text-black': color === 'black',
-      'mg:text-primary': color === 'primary',
-      'mg:text-secondary': color === 'secondary',
-      'mg:text-accent': color === 'accent',
-      'mg:text-subtle': color === 'subtle',
+      'au:text-white': color === 'white',
+      'au:text-black': color === 'black',
+      'au:text-primary': color === 'primary',
+      'au:text-secondary': color === 'secondary',
+      'au:text-accent': color === 'accent',
+      'au:text-subtle': color === 'subtle',
     },
     className
   );
 
   const imageClasses = classNames(
-    'mg:object-contain mg:animate-fade-in mg:duration-500',
+    'au:object-contain au:animate-fade-in au:duration-500',
     className
   );
 
@@ -250,7 +306,7 @@ const renderAdornment = (
 };
 
 /**
- * `TextInput` — a fully featured, accessible text input component.
+ * `TextInput` - a fully featured, accessible text input component.
  *
  * Features:
  * - Optional `label`, `helperText`, and required marker
@@ -268,18 +324,20 @@ const renderAdornment = (
  * @returns JSX element representing the `TextInput` component.
  * @example
  * ```tsx
- * import { TextInput } from '@/src';
+ * import { TextInput } from '@arctura/atomics';
  *
- * const MyTextInput = () => (
- *  <TextInput
- *    label="Username"
- *    placeholder="Enter your username"
- *    helperText="Must be 4-16 characters"
- *    required
- *    pattern={/^[a-zA-Z0-9]{4,16}$/}
- *    onError={(error) => console.log('Validation error:', error)}
- *  />
- * );
+ * export function UsernameField() {
+ *   return (
+ *     <TextInput
+ *       label="Username"
+ *       placeholder="Enter your username"
+ *       helperText="Use 4 to 16 letters or numbers"
+ *       required
+ *       pattern={/^[a-zA-Z0-9]{4,16}$/}
+ *       onError={(error) => console.log('Validation error:', error)}
+ *     />
+ *   );
+ * }
  * ```
  */
 const TextInput: FC<TextInputProps> = ({
@@ -340,9 +398,9 @@ const TextInput: FC<TextInputProps> = ({
 
   const containerClasses = twMerge(
     classNames(
-      'mg:flex mg:flex-col mg:gap-2 mg:relative mg:bg-inherit mg:pt-0.5 mg:pb-3 mg:h-full',
+      'au:flex au:flex-col au:gap-2 au:relative au:bg-inherit au:pt-0.5 au:pb-3 au:h-full',
       {
-        'mg:w-full': fullWidth,
+        'au:w-full': fullWidth,
       }
     ),
     classes?.container
@@ -350,58 +408,58 @@ const TextInput: FC<TextInputProps> = ({
 
   const clearButtonClasses = classNames(
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
-      'mg:shrink-0': fullWidth,
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
+      'au:shrink-0': fullWidth,
     },
     classes?.clearButton
   );
 
   const helperClasses = twMerge(
-    classNames('mg:font-body mg:text-sm', {
-      'mg:text-accent': adornmentColor === 'accent' && !status && !error,
-      'mg:text-black': adornmentColor === 'black' && !status && !error,
-      'mg:text-inverse': adornmentColor === 'inverse' && !status && !error,
-      'mg:text-primary': adornmentColor === 'primary' && !status && !error,
-      'mg:text-secondary': adornmentColor === 'secondary' && !status && !error,
-      'mg:text-subtle': adornmentColor === 'subtle' && !status && !error,
-      'mg:text-white': adornmentColor === 'white' && !status && !error,
-      'mg:text-success': status === 'success' && !error,
-      'mg:text-warning': status === 'warning' && !error,
-      'mg:text-danger': status === 'error' || error,
+    classNames('au:font-body au:text-sm', {
+      'au:text-accent': adornmentColor === 'accent' && !status && !error,
+      'au:text-black': adornmentColor === 'black' && !status && !error,
+      'au:text-inverse': adornmentColor === 'inverse' && !status && !error,
+      'au:text-primary': adornmentColor === 'primary' && !status && !error,
+      'au:text-secondary': adornmentColor === 'secondary' && !status && !error,
+      'au:text-subtle': adornmentColor === 'subtle' && !status && !error,
+      'au:text-white': adornmentColor === 'white' && !status && !error,
+      'au:text-success': status === 'success' && !error,
+      'au:text-warning': status === 'warning' && !error,
+      'au:text-danger': status === 'error' || error,
     }),
     classes?.helper
   );
 
   const inputClasses = twMerge(
-    classNames('mg:focus-visible:outline-0 mg:caret-white', {
-      'mg:text-black': color === 'black',
-      'mg:text-inverse': color === 'inverse',
-      'mg:text-primary': color === 'primary',
-      'mg:text-white': color === 'white',
-      'mg:w-12': size === 'sm' && !fullWidth,
-      'mg:w-32': size === 'md' && !fullWidth,
-      'mg:w-52': size === 'lg' && !fullWidth,
-      'mg:grow': fullWidth,
+    classNames('au:focus-visible:outline-0 au:caret-accent', {
+      'au:text-black': color === 'black',
+      'au:text-inverse': color === 'inverse',
+      'au:text-primary': color === 'primary',
+      'au:text-white': color === 'white',
+      'au:w-12': size === 'sm' && !fullWidth,
+      'au:w-32': size === 'md' && !fullWidth,
+      'au:w-52': size === 'lg' && !fullWidth,
+      'au:grow': fullWidth,
     }),
     classes?.input
   );
 
   const inputContainerClasses = twMerge(
     classNames(
-      'mg:flex mg:h-full mg:items-center mg:border-solid mg:gap-2 mg:border-1 mg:rounded-md mg:px-3 mg:py-2 mg:hover:border-accent',
+      'au:flex au:h-full au:items-center au:border-solid au:gap-2 au:border-1 au:rounded-md au:px-3 au:py-2 au:hover:border-accent',
       {
-        'mg:border-danger': error || status === 'error',
-        'mg:border-warning': status === 'warning',
-        'mg:border-success': status === 'success',
-        'mg:border-primary': !error && !status,
-        'mg:w-full': fullWidth,
-        'mg:has-[input:focus]:outline-1 mg:has-[input:focus]:outline-primary mg:has-[input:focus]:outline-offset-4':
+        'au:border-danger': error || status === 'error',
+        'au:border-warning': status === 'warning',
+        'au:border-success': status === 'success',
+        'au:border-primary': !error && !status,
+        'au:w-full': fullWidth,
+        'au:has-[input:focus]:outline-1 au:has-[input:focus]:outline-primary au:has-[input:focus]:outline-offset-4':
           !clicked && value === '',
       }
     ),
@@ -409,31 +467,31 @@ const TextInput: FC<TextInputProps> = ({
   );
 
   const labelClasses = twMerge(
-    classNames('mg:font-body mg:text-sm', {
-      'mg:text-accent': adornmentColor === 'accent' && !status && !error,
-      'mg:text-black': adornmentColor === 'black' && !status && !error,
-      'mg:text-inverse': adornmentColor === 'inverse' && !status && !error,
-      'mg:text-primary': adornmentColor === 'primary' && !status && !error,
-      'mg:text-secondary': adornmentColor === 'secondary' && !status && !error,
-      'mg:text-subtle': adornmentColor === 'subtle' && !status && !error,
-      'mg:text-white': adornmentColor === 'white' && !status && !error,
-      'mg:text-success': status === 'success' && !error,
-      'mg:text-warning': status === 'warning' && !error,
-      'mg:text-danger': status === 'error' || error,
+    classNames('au:font-body au:text-sm', {
+      'au:text-accent': adornmentColor === 'accent' && !status && !error,
+      'au:text-black': adornmentColor === 'black' && !status && !error,
+      'au:text-inverse': adornmentColor === 'inverse' && !status && !error,
+      'au:text-primary': adornmentColor === 'primary' && !status && !error,
+      'au:text-secondary': adornmentColor === 'secondary' && !status && !error,
+      'au:text-subtle': adornmentColor === 'subtle' && !status && !error,
+      'au:text-white': adornmentColor === 'white' && !status && !error,
+      'au:text-success': status === 'success' && !error,
+      'au:text-warning': status === 'warning' && !error,
+      'au:text-danger': status === 'error' || error,
     }),
     classes?.label
   );
 
   const toggleButtonClasses = classNames(
     {
-      'mg:text-accent': adornmentColor === 'accent',
-      'mg:text-black': adornmentColor === 'black',
-      'mg:text-inverse': adornmentColor === 'inverse',
-      'mg:text-primary': adornmentColor === 'primary',
-      'mg:text-secondary': adornmentColor === 'secondary',
-      'mg:text-subtle': adornmentColor === 'subtle',
-      'mg:text-white': adornmentColor === 'white',
-      'mg:shrink-0': fullWidth,
+      'au:text-accent': adornmentColor === 'accent',
+      'au:text-black': adornmentColor === 'black',
+      'au:text-inverse': adornmentColor === 'inverse',
+      'au:text-primary': adornmentColor === 'primary',
+      'au:text-secondary': adornmentColor === 'secondary',
+      'au:text-subtle': adornmentColor === 'subtle',
+      'au:text-white': adornmentColor === 'white',
+      'au:shrink-0': fullWidth,
     },
     classes?.toggleButton
   );
@@ -511,11 +569,11 @@ const TextInput: FC<TextInputProps> = ({
 
   return (
     <div className={containerClasses}>
-      <div className="mg:absolute mg:-top-0.75 mg:bg-inherit mg:left-3.5 mg:animate-slide-in-top">
+      <div className="au:absolute au:-top-0.75 au:bg-inherit au:left-3.5 au:animate-slide-in-top">
         {label && (
           <p className={labelClasses}>
             {label}
-            {required && <span className="mg:text-danger"> *</span>}
+            {required && <span className="au:text-danger"> *</span>}
           </p>
         )}
       </div>
@@ -574,11 +632,11 @@ const TextInput: FC<TextInputProps> = ({
           </IconButton>
         )}
       </div>
-      <div className="mg:absolute mg:bottom-0 mg:left-3.5 mg:bg-inherit mg:animate-slide-in-bottom">
+      <div className="au:absolute au:bottom-0 au:left-3.5 au:bg-inherit au:animate-slide-in-bottom">
         {helperText && (
           <p className={helperClasses}>
             {helperText}
-            {required && <span className="mg:text-danger"> *</span>}
+            {required && <span className="au:text-danger"> *</span>}
           </p>
         )}
       </div>
@@ -589,3 +647,13 @@ const TextInput: FC<TextInputProps> = ({
 TextInput.displayName = 'TextInput';
 
 export { TextInput };
+export type {
+  TextInputAdornment,
+  TextInputAdornmentColor,
+  TextInputClasses,
+  TextInputColor,
+  TextInputProps,
+  TextInputSize,
+  TextInputStatus,
+  TextInputType,
+};

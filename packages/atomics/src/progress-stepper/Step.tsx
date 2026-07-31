@@ -12,15 +12,22 @@ import { Children, cloneElement, isValidElement } from 'react';
 import classNames from 'classnames';
 import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Fab } from '@/src/buttons';
-import type { FabClasses } from '@/src/buttons';
-import { Node } from '@/src/progress-stepper/Node';
-import type { NodeClasses } from '@/src/progress-stepper/Node';
-import { Typography } from '@/src/typography';
+import { Fab } from '../buttons';
+import type { FabClasses } from '../buttons';
+import { Node } from './Node';
+import type { NodeClasses } from './Node';
+import { Typography } from '../typography';
 import { twMerge } from 'tailwind-merge';
 
 /**
  * Class name overrides for the `Step` component parts.
+ *
+ * @property [descriptionContainer] - Classes applied to the description wrapper.
+ * @property [body] - Classes applied to the step body content.
+ * @property [node] - Class overrides passed to the node or fab used for the step marker.
+ * @property [nodeContainer] - Classes applied to the node container wrapper.
+ * @property [root] - Classes applied to the root step container.
+ * @property [title] - Classes applied to the step title.
  */
 interface StepClasses {
   /** Classes applied to the description wrapper. */
@@ -49,9 +56,25 @@ interface StepClasses {
 type StepColor = 'primary' | 'secondary' | 'accent' | 'error' | 'info' | 'warning';
 
 /**
- * @interface StepProps
- * @extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>
- * @description Props accepted by the `Step` component.
+ * Props accepted by the `Step` component.
+ *
+ * Use this interface for each item rendered inside a `ProgressStepper`,
+ * including the step label, active/completed state, optional icon, rich
+ * description content, orientation, and class name hooks.
+ *
+ * @property [active] - Whether the step is currently active.
+ * @property [classes] - Class name hooks for step container, node, and content.
+ * @property [color] - Color variant for the step node.
+ * @property [completed] - Whether the step is marked as completed.
+ * @property [description] - Descriptive content displayed when the step is active.
+ * @property [icon] - Optional FontAwesome icon rendered inside the node.
+ * @property [index] - Zero-based index assigned by the parent stepper.
+ * @property [label] - Optional label displayed when the step is active.
+ * @property [linear] - Whether the stepper enforces linear progression.
+ * @property [onClick] - Click handler for non-linear interactive steps.
+ * @property [orientation] - Layout orientation for the step content.
+ * @property [ref] - Ref forwarded to the step container element.
+ * @property [title] - Title displayed when the step is active.
  */
 interface StepProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'className'> {
   /** Whether the step is currently active (shows expanded content). */
@@ -106,7 +129,7 @@ const renderDescription = (description: ReactNode): ReactNode => {
 
       if (child.type === Typography) {
         return cloneElement<TypographyProps>(child as TypographyComponent, {
-          className: 'mg:text-xs mg:sm:text-sm mg:lg:text-lg',
+          className: 'au:text-xs au:sm:text-sm au:lg:text-lg',
         });
       }
 
@@ -129,17 +152,21 @@ const renderDescription = (description: ReactNode): ReactNode => {
  *
  * @example
  * ```tsx
- * import { Step } from '@/src';
+ * import { Step, Typography } from '@arctura/atomics';
+ * import { faMugHot } from '@fortawesome/free-solid-svg-icons';
  *
- * const MyStep = () => (
- *  <Step
- *   active={true}
- *   color="primary"
- *   title="Step Title"
- *   description="Detailed description of the step content."
- *   icon={faMugHot}
- *  />
- * );
+ * export function ReviewStep() {
+ *   return (
+ *     <Step
+ *       active
+ *       color="primary"
+ *       title="Review"
+ *       label="Review order"
+ *       description={<Typography variant="small">Confirm details before publishing.</Typography>}
+ *       icon={faMugHot}
+ *     />
+ *   );
+ * }
  * ```
  */
 const Step: FC<StepProps> = ({
@@ -159,28 +186,28 @@ const Step: FC<StepProps> = ({
   ...rest
 }) => {
   const bodyClasses = twMerge(
-    'mg:animate-fade-in mg:transition-opacity mg:duration-300',
+    'au:animate-fade-in au:transition-opacity au:duration-300',
     classes?.body
   );
 
   const descriptionContainerClasses = twMerge(
-    'mg:flex mg:flex-col mg:text-primary mg:gap-1',
+    'au:flex au:flex-col au:text-primary au:gap-1',
     classes?.descriptionContainer
   );
 
   const rootClasses = twMerge(
-    classNames('mg:flex mg:max-w-44 mg:p-3 mg:rounded-md', {
-      'mg:flex-col mg:gap-1': orientation === 'horizontal',
-      'mg:justify-between mg:items-start': orientation === 'vertical',
-      'mg:relative mg:z-10 mg:min-w-32 mg:hover:bg-primary mg:transition-all mg:duration-200 mg:ease-in-out mg:hover:scale-105 mg:hover:shadow-lg':
+    classNames('au:flex au:max-w-44 au:p-3 au:rounded-md', {
+      'au:flex-col au:gap-1': orientation === 'horizontal',
+      'au:justify-between au:items-start': orientation === 'vertical',
+      'au:relative au:z-10 au:min-w-32 au:hover:bg-primary au:transition-all au:duration-200 au:ease-in-out au:hover:scale-105 au:hover:shadow-lg':
         active,
     }),
     classes?.root
   );
 
-  const titleClasses = classNames('mg:text-base mg:sm:text-xl mg:lg:text-3xl', classes?.title);
+  const titleClasses = classNames('au:text-base au:sm:text-xl au:lg:text-3xl', classes?.title);
 
-  const nodeContainerClasses = twMerge('mg:flex mg:pb-2', classes?.nodeContainer);
+  const nodeContainerClasses = twMerge('au:flex au:pb-2', classes?.nodeContainer);
 
   const index = indexProp !== undefined ? (indexProp + 1).toString() : '–';
 
@@ -241,4 +268,4 @@ const Step: FC<StepProps> = ({
 Step.displayName = 'ProgressStepper.Step';
 
 export { Step };
-export type { StepClasses };
+export type { StepClasses, StepColor, StepProps };
