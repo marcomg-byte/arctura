@@ -22,25 +22,55 @@ import type { HeadingVariant } from '../typography';
  * @property [header] - Classes applied to header overlay regions.
  */
 interface HeaderClasses {
-  /** Class applied to the header action row. */
+  /**
+   * Class applied to the header action row.
+   * @defaultValue undefined
+   */
   action?: string;
-  /** Class applied to the overlay controls wrapper. */
+  /**
+   * Class applied to the overlay controls wrapper.
+   * @defaultValue undefined
+   */
   controls?: string;
-  /** Class applied to each pagination dot. */
+  /**
+   * Class applied to each pagination dot.
+   * @defaultValue undefined
+   */
   dot?: string;
-  /** Class applied to the pagination dots container. */
+  /**
+   * Class applied to the pagination dots container.
+   * @defaultValue undefined
+   */
   dotsContainer?: string;
-  /** Class applied to the root hero container. */
+  /**
+   * Class applied to the root hero container.
+   * @defaultValue undefined
+   */
   root?: string;
-  /** Class applied to each hero slide. */
+  /**
+   * Class applied to each hero slide.
+   * @defaultValue undefined
+   */
   slide?: string;
-  /** Class applied to the slide viewport wrapper. */
+  /**
+   * Class applied to the slide viewport wrapper.
+   * @defaultValue undefined
+   */
   viewport?: string;
-  /** Classes applied to header overlay regions. */
+  /**
+   * Classes applied to header overlay regions.
+   * @defaultValue undefined
+   */
   header?: {
-    /** Class applied to the main header overlay container. */
+    /**
+     * Class applied to the main header overlay container.
+     * @defaultValue undefined
+     */
     root?: string;
-    /** Class applied to the header title. */
+    /**
+     * Class applied to the header title.
+     * @defaultValue undefined
+     */
     title?: string;
   };
 }
@@ -53,11 +83,20 @@ interface HeaderClasses {
  * @property [variant] - Optional visual style for the action button.
  */
 interface HeroLink {
-  /** Destination URL for the hero action. */
+  /**
+   * Destination URL for the hero action.
+   * @defaultValue undefined
+   */
   href: string;
-  /** Visible label for the action. */
+  /**
+   * Visible label for the action.
+   * @defaultValue undefined
+   */
   label: string;
-  /** Optional visual style for the action button. */
+  /**
+   * Optional visual style for the action button.
+   * @defaultValue undefined
+   */
   variant?: 'primary' | 'secondary' | 'text' | 'outline';
 }
 
@@ -70,13 +109,25 @@ interface HeroLink {
  * @property [variant] - Typography variant used for the title.
  */
 interface HeroHeader {
-  /** Optional description text rendered below the title. */
+  /**
+   * Optional description text rendered below the title.
+   * @defaultValue undefined
+   */
   description?: ReactNode;
-  /** Optional array of action links or buttons shown in the header. */
+  /**
+   * Optional array of action links or buttons shown in the header.
+   * @defaultValue undefined
+   */
   links?: HeroLink[];
-  /** Optional title content, either plain text or JSX. */
+  /**
+   * Optional title content, either plain text or JSX.
+   * @defaultValue undefined
+   */
   title?: string;
-  /** Typography variant used for the title. */
+  /**
+   * Typography variant used for the title.
+   * @defaultValue undefined
+   */
   variant?: HeadingVariant;
 }
 
@@ -87,9 +138,15 @@ interface HeroHeader {
  * @property alt - Alternative text describing the hero image.
  */
 interface HeroImage {
-  /** Source path or URL for the hero image. */
+  /**
+   * Source path or URL for the hero image.
+   * @defaultValue undefined
+   */
   src: string;
-  /** Alternative text describing the hero image. */
+  /**
+   * Alternative text describing the hero image.
+   * @defaultValue undefined
+   */
   alt: string;
 }
 
@@ -186,39 +243,90 @@ const responsiveAspectRatioClasses: Record<HeroAspectRatio, string> = {
  * @property [transitionDuration] - Transition duration in milliseconds.
  */
 interface HeroProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
-  /** Aspect ratio used when the hero is rendered as an image container. */
+  /**
+   * Aspect ratio used when the hero is rendered as an image container.
+   * @defaultValue undefined
+   */
   aspectRatio?: HeroAspectRatio;
-  /** Automatically advances between images on a timer. */
+  /**
+   * Automatically advances between images on a timer.
+   * @defaultValue false
+   */
   autoPlay?: boolean;
-  /** Optional class overrides for hero layout regions. */
+  /**
+   * Optional class overrides for hero layout regions.
+   * @defaultValue {}
+   */
   classes?: HeaderClasses;
-  /** Enables swipe and drag gestures for the hero carousel. */
+  /**
+   * Enables swipe and drag gestures for the hero carousel.
+   * @defaultValue true
+   */
   enableSwipe?: boolean;
-  /** Header content rendered over the hero images. */
+  /**
+   * Header content rendered over the hero images.
+   * @defaultValue { links: [], variant: 'h2' }
+   */
   header?: HeroHeader;
-  /** Fixed hero height preset used when `aspectRatio` is not provided. */
+  /**
+   * Fixed hero height preset used when `aspectRatio` is not provided.
+   * @defaultValue 'md'
+   */
   height?: HeroHeight;
-  /** Images displayed inside the hero carousel. */
+  /**
+   * Images displayed inside the hero carousel.
+   * @defaultValue []
+   */
   images?: HeroImage[];
-  /** Autoplay interval in milliseconds. */
+  /**
+   * Autoplay interval in milliseconds.
+   * @defaultValue 3000
+   */
   interval?: number;
-  /** Uses lazy loading for hero images instead of eager loading. */
+  /**
+   * Uses lazy loading for hero images instead of eager loading.
+   * @defaultValue false
+   */
   lazyLoad?: boolean;
-  /** Enables looping when the carousel reaches either end. */
+  /**
+   * Enables looping when the carousel reaches either end.
+   * @defaultValue true
+   */
   loop?: boolean;
-  /** CSS object-fit value used for the hero images. */
+  /**
+   * CSS object-fit value used for the hero images.
+   * @defaultValue 'cover'
+   */
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
-  /** Shows the previous and next navigation controls. */
+  /**
+   * Shows the previous and next navigation controls.
+   * @defaultValue true
+   */
   showControls?: boolean;
-  /** Pauses autoplay while the pointer is over the hero. */
+  /**
+   * Pauses autoplay while the pointer is over the hero.
+   * @defaultValue true
+   */
   pauseOnHover?: boolean;
-  /** Enables the mobile-first responsive layout. */
+  /**
+   * Enables the mobile-first responsive layout.
+   * @defaultValue true
+   */
   responsive?: boolean;
-  /** Shows pagination dots below the hero. */
+  /**
+   * Shows pagination dots below the hero.
+   * @defaultValue true
+   */
   showDots?: boolean;
-  /** Transition style used between hero images. */
+  /**
+   * Transition style used between hero images.
+   * @defaultValue 'slide'
+   */
   transition?: 'fade' | 'slide';
-  /** Transition duration in milliseconds. */
+  /**
+   * Transition duration in milliseconds.
+   * @defaultValue 500
+   */
   transitionDuration?: number;
 }
 

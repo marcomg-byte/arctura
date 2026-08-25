@@ -5,6 +5,7 @@ import {
   findReflections,
   getComponentDocs,
   getComponentMarkdownFiles,
+  getComponentProps,
 } from '../src';
 import type { TypeDocReflection } from '../src';
 
@@ -18,6 +19,55 @@ const docsFixture: TypeDocReflection = {
         summary: [
           {
             text: 'Props for the Button component.',
+          },
+        ],
+        blockTags: [
+          {
+            tag: '@property',
+            name: '[children]',
+            defaultValue: 'undefined',
+            type: {
+              type: 'raw',
+              name: 'ReactNode',
+              primitive: 'unknown',
+            },
+            content: [
+              {
+                text: 'Content rendered inside the button.',
+              },
+            ],
+          },
+          {
+            tag: '@property',
+            name: 'href',
+            defaultValue: 'undefined',
+            type: {
+              type: 'raw',
+              name: 'string',
+              primitive: 'string',
+            },
+            content: [
+              {
+                text: 'URL that renders the button as a link.',
+              },
+            ],
+          },
+          {
+            tag: '@property',
+            name: '[size]',
+            defaultValue: "'md'",
+            type: {
+              type: 'raw',
+              name: 'ButtonSize | undefined',
+              kind: 'enum',
+              primitive: 'string',
+              values: ['sm', 'md', 'lg'],
+            },
+            content: [
+              {
+                text: 'Visual size of the button.',
+              },
+            ],
           },
         ],
       },
@@ -89,6 +139,65 @@ const docsFixture: TypeDocReflection = {
     {
       name: 'TextInputProps',
       kind: 256,
+      children: [
+        {
+          name: 'classes',
+          kind: 1024,
+          comment: {
+            summary: [
+              {
+                text: 'Class name hooks for the input.',
+              },
+            ],
+          },
+          defaultValue: '{}',
+          flags: {
+            isOptional: true,
+          },
+          type: {
+            type: 'raw',
+            name: 'TextInputClasses',
+            primitive: 'object',
+            kind: 'object',
+            properties: [
+              {
+                name: 'root',
+                description: 'Class name applied to the root element.',
+                required: false,
+                kind: 'primitive',
+                primitive: 'string',
+                type: {
+                  type: 'intrinsic',
+                  name: 'string',
+                  kind: 'primitive',
+                  primitive: 'string',
+                },
+                typeName: 'string',
+              },
+            ],
+          },
+        },
+        {
+          name: 'label',
+          kind: 1024,
+          comment: {
+            summary: [
+              {
+                text: 'Visible label text for the input.',
+              },
+            ],
+          },
+          flags: {
+            isOptional: true,
+          },
+          type: {
+            type: 'intrinsic',
+            name: 'string',
+            kind: 'primitive',
+            primitive: 'string',
+          },
+        },
+      ],
     },
     {
       name: 'TextInput',
@@ -198,6 +307,55 @@ describe('arctura-docs', () => {
         example: '```tsx\n<Button>Save</Button>\n```',
         returns: 'The rendered button element.',
         propsDescription: 'Props for the Button component.',
+        props: [
+          {
+            name: 'children',
+            description: 'Content rendered inside the button.',
+            required: false,
+            defaultValue: 'undefined',
+            primitive: 'object',
+            kind: 'slot',
+            type: {
+              type: 'raw',
+              name: 'ReactNode',
+              kind: 'slot',
+              primitive: 'object',
+            },
+            typeName: 'ReactNode',
+          },
+          {
+            name: 'href',
+            description: 'URL that renders the button as a link.',
+            required: true,
+            defaultValue: 'undefined',
+            kind: 'primitive',
+            primitive: 'string',
+            type: {
+              type: 'raw',
+              name: 'string',
+              kind: 'primitive',
+              primitive: 'string',
+            },
+            typeName: 'string',
+          },
+          {
+            name: 'size',
+            description: 'Visual size of the button.',
+            required: false,
+            defaultValue: "'md'",
+            kind: 'enum',
+            primitive: 'string',
+            type: {
+              type: 'raw',
+              name: 'ButtonSize | undefined',
+              kind: 'enum',
+              primitive: 'string',
+              values: ['sm', 'md', 'lg'],
+            },
+            typeName: 'ButtonSize | undefined',
+            values: ['sm', 'md', 'lg'],
+          },
+        ],
         parameters: [
           {
             name: 'props',
@@ -225,6 +383,7 @@ describe('arctura-docs', () => {
         description: 'Summary from the component reflection.',
         example: '',
         parameters: [],
+        props: [],
         propsDescription: '',
         returns: '',
         signatures: [],
@@ -240,6 +399,120 @@ describe('arctura-docs', () => {
         returns: '',
         signatures: [],
       });
+    });
+  });
+
+  describe('getComponentProps', () => {
+    it('extracts prop docs from TypeDoc interface children', () => {
+      expect(getComponentProps(docsFixture, 'TextInput')).toEqual([
+        {
+          name: 'classes',
+          description: 'Class name hooks for the input.',
+          required: false,
+          defaultValue: '{}',
+          kind: 'object',
+          primitive: 'object',
+          type: {
+            type: 'raw',
+            name: 'TextInputClasses',
+            kind: 'object',
+            primitive: 'object',
+            properties: [
+              {
+                name: 'root',
+                description: 'Class name applied to the root element.',
+                required: false,
+                kind: 'primitive',
+                primitive: 'string',
+                type: {
+                  type: 'intrinsic',
+                  name: 'string',
+                  kind: 'primitive',
+                  primitive: 'string',
+                },
+                typeName: 'string',
+              },
+            ],
+          },
+          typeName: 'TextInputClasses',
+          reflection: expect.objectContaining({
+            name: 'classes',
+          }),
+        },
+        {
+          name: 'label',
+          description: 'Visible label text for the input.',
+          required: false,
+          kind: 'primitive',
+          primitive: 'string',
+          type: {
+            type: 'intrinsic',
+            name: 'string',
+            kind: 'primitive',
+            primitive: 'string',
+          },
+          typeName: 'string',
+          reflection: expect.objectContaining({
+            name: 'label',
+          }),
+        },
+      ]);
+    });
+
+    it('extracts prop docs from TypeDoc property block tags', () => {
+      expect(getComponentProps(docsFixture, 'Button')).toEqual([
+        {
+          name: 'children',
+          description: 'Content rendered inside the button.',
+          required: false,
+          defaultValue: 'undefined',
+          kind: 'slot',
+          primitive: 'object',
+          type: {
+            type: 'raw',
+            name: 'ReactNode',
+            kind: 'slot',
+            primitive: 'object',
+          },
+          typeName: 'ReactNode',
+        },
+        {
+          name: 'href',
+          description: 'URL that renders the button as a link.',
+          required: true,
+          defaultValue: 'undefined',
+          kind: 'primitive',
+          primitive: 'string',
+          type: {
+            type: 'raw',
+            name: 'string',
+            kind: 'primitive',
+            primitive: 'string',
+          },
+          typeName: 'string',
+        },
+        {
+          name: 'size',
+          description: 'Visual size of the button.',
+          required: false,
+          defaultValue: "'md'",
+          kind: 'enum',
+          primitive: 'string',
+          type: {
+            type: 'raw',
+            name: 'ButtonSize | undefined',
+            kind: 'enum',
+            primitive: 'string',
+            values: ['sm', 'md', 'lg'],
+          },
+          typeName: 'ButtonSize | undefined',
+          values: ['sm', 'md', 'lg'],
+        },
+      ]);
+    });
+
+    it('returns an empty prop list when props cannot be found', () => {
+      expect(getComponentProps(docsFixture, 'MissingComponent')).toEqual([]);
     });
   });
 

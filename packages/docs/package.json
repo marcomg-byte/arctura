@@ -24,9 +24,9 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "rimraf dist && typedoc --options typedoc.config.mjs && vite build && tsc -p tsconfig.build.json",
+    "build": "rimraf dist && typedoc --options typedoc.config.mjs && node scripts/enrich-typedoc-properties.mjs && vite build && tsc -p tsconfig.build.json",
     "clean": "rimraf dist",
-    "dev": "typedoc --options typedoc.config.mjs --watch",
+    "dev": "node scripts/watch-typedoc.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest run",

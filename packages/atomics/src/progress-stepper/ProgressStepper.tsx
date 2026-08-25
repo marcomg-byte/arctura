@@ -26,13 +26,25 @@ import { twMerge } from 'tailwind-merge';
  * @description Represents the minimal shape of a step managed by the stepper.
  */
 interface StepType {
-  /** Unique key identifying the step. */
+  /**
+   * Unique key identifying the step.
+   * @defaultValue undefined
+   */
   key?: string;
-  /** Whether the step is currently active (shows expanded content). */
+  /**
+   * Whether the step is currently active (shows expanded content).
+   * @defaultValue undefined
+   */
   active?: boolean;
-  /** Whether the step is marked as completed. */
+  /**
+   * Whether the step is marked as completed.
+   * @defaultValue undefined
+   */
   completed?: boolean;
-  /** Optional label for the step, used for accessibility and display purposes. */
+  /**
+   * Optional label for the step, used for accessibility and display purposes.
+   * @defaultValue undefined
+   */
   label?: string;
 }
 
@@ -58,9 +70,15 @@ type ConnectorComponent = ReactElement<ComponentProps<typeof Connector>>;
  * @property {ConnectorComponent} [connector] - The connector element, if present.
  */
 interface Slots {
-  /** The step node element. */
+  /**
+   * The step node element.
+   * @defaultValue undefined
+   */
   node: StepComponent;
-  /** The connector element, if present. */
+  /**
+   * The connector element, if present.
+   * @defaultValue undefined
+   */
   connector?: ConnectorComponent;
 }
 
@@ -68,21 +86,45 @@ interface Slots {
  * Class name overrides for the `ProgressStepper` component parts.
  */
 interface ProgressStepperClasses {
-  /** Classes applied to the action buttons. */
+  /**
+   * Classes applied to the action buttons.
+   * @defaultValue undefined
+   */
   button?: ButtonClasses;
-  /** Classes applied to the button wrapper inside the controls footer. */
+  /**
+   * Classes applied to the button wrapper inside the controls footer.
+   * @defaultValue undefined
+   */
   buttonsContainer?: string;
-  /** Classes applied to the step connectors. */
+  /**
+   * Classes applied to the step connectors.
+   * @defaultValue undefined
+   */
   connector?: ConnectorClasses;
-  /** Classes applied to the footer controls container. */
+  /**
+   * Classes applied to the footer controls container.
+   * @defaultValue undefined
+   */
   controls?: string;
-  /** Classes applied to the active step label. */
+  /**
+   * Classes applied to the active step label.
+   * @defaultValue undefined
+   */
   label?: string;
-  /** Classes applied to the outer wrapper around the stepper and controls. */
+  /**
+   * Classes applied to the outer wrapper around the stepper and controls.
+   * @defaultValue undefined
+   */
   outer?: string;
-  /** Classes applied to the root step list container. */
+  /**
+   * Classes applied to the root step list container.
+   * @defaultValue undefined
+   */
   root?: string;
-  /** Classes applied to each rendered step. */
+  /**
+   * Classes applied to each rendered step.
+   * @defaultValue undefined
+   */
   step?: StepClasses;
 }
 
@@ -108,31 +150,70 @@ interface ProgressStepperClasses {
  * @property [ref] - Ref forwarded to the root step list container.
  */
 interface ProgressStepperProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
-  /** Controlled value representing the currently active step object. */
+  /**
+   * Controlled value representing the currently active step object.
+   * @defaultValue undefined
+   */
   activeStep?: StepType;
-  /** One or more `<Step />` nodes to render inside the stepper. */
+  /**
+   * One or more `<Step />` nodes to render inside the stepper.
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Optional class overrides for the stepper layout, controls, and steps. */
+  /**
+   * Optional class overrides for the stepper layout, controls, and steps.
+   * @defaultValue {}
+   */
   classes?: ProgressStepperClasses;
-  /** Whether all steps have been completed. */
+  /**
+   * Whether all steps have been completed.
+   * @defaultValue undefined
+   */
   completed?: boolean;
-  /** Index of the initially active step when uncontrolled (default: `0`). */
+  /**
+   * Index of the initially active step when uncontrolled (default: `0`).
+   * @defaultValue 0
+   */
   defaultStep?: number;
-  /** Forces horizontal layout even on small screens. */
+  /**
+   * Forces horizontal layout even on small screens.
+   * @defaultValue false
+   */
   forceHorizontal?: boolean;
-  /** When `true`, hides the default step controls in non linear Progress Steppers. */
+  /**
+   * When `true`, hides the default step controls in non linear Progress Steppers.
+   * @defaultValue false
+   */
   hideControls?: boolean;
-  /** When `true`, step activation follows linear behaviour; when `false`, steps are clickable. */
+  /**
+   * When `true`, step activation follows linear behaviour; when `false`, steps are clickable.
+   * @defaultValue true
+   */
   linear?: boolean;
-  /** Callback invoked when the completion state changes; receives the new completed value. */
+  /**
+   * Callback invoked when the completion state changes; receives the new completed value.
+   * @defaultValue undefined
+   */
   onComplete?: (completed: boolean) => void;
-  /** Callback invoked once on mount with the initial active `StepType`. */
+  /**
+   * Callback invoked once on mount with the initial active `StepType`.
+   * @defaultValue undefined
+   */
   onInit?: (step: StepType) => void;
-  /** Fired when a step is clicked; receives the click event and the resulting `StepType`. */
+  /**
+   * Fired when a step is clicked; receives the click event and the resulting `StepType`.
+   * @defaultValue undefined
+   */
   onStepClick?: (event: MouseEvent<HTMLButtonElement>, step: StepType) => void;
-  /** Layout orientation for the stepper (default: `'horizontal'`). */
+  /**
+   * Layout orientation for the stepper (default: `'horizontal'`).
+   * @defaultValue 'horizontal'
+   */
   orientation?: 'horizontal' | 'vertical';
-  /** Ref forwarded to the root container element. */
+  /**
+   * Ref forwarded to the root container element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLDivElement>;
 }
 

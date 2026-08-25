@@ -19,13 +19,18 @@ The package also exports helpers for reading the generated TypeDoc JSON:
 
 ```ts
 import docs from '@arctura/docs/atomics-components.json';
-import { getComponentDocs, getComponentMarkdownFiles } from '@arctura/docs';
+import { getComponentDocs, getComponentMarkdownFiles, getComponentProps } from '@arctura/docs';
 
 const buttonDocs = getComponentDocs(docs, 'Button');
+const buttonProps = buttonDocs.props;
+const textInputProps = getComponentProps(docs, 'TextInput');
 const buttonMarkdownFiles = getComponentMarkdownFiles(docs, 'Button');
 ```
 
 - `findReflection(docs, name)` finds any reflection by name.
 - `findReflections(docs, name)` finds every reflection with the same name.
-- `getComponentDocs(docs, componentName)` extracts the component description, example, return text, parameters, and props reflection.
+- `getComponentDocs(docs, componentName)` extracts the component description, example, return text, parameters, props reflection, and normalized props.
+- `getComponentProps(docs, componentName)` returns the normalized prop list for a component, including `defaultValue`, runtime `primitive`, control-friendly `kind`, enum `values`, `type`, display-ready `typeName`, and nested `type.properties` for object/interface props.
 - `getComponentMarkdownFiles(docs, componentName)` returns the shipped Markdown files related to the component.
+
+`primitive` describes the runtime value family, while `kind` describes the best UI/control treatment. For example, `href` is `{ primitive: 'string', kind: 'primitive' }`, while `variant` is `{ primitive: 'string', kind: 'enum', values: ['primary', 'secondary', 'outline', 'text'] }`.

@@ -26,9 +26,15 @@ const isHeadingVariant = (variant: TypographyVariant): variant is HeadingVariant
  * @property [typography] - Extra classes applied to the inner Typography element.
  */
 interface LinkClasses {
-  /** Extra classes applied to the outer anchor element. */
+  /**
+   * Extra classes applied to the outer anchor element.
+   * @defaultValue undefined
+   */
   anchor?: string;
-  /** Extra classes applied to the inner Typography element. */
+  /**
+   * Extra classes applied to the inner Typography element.
+   * @defaultValue undefined
+   */
   typography?: string;
 }
 
@@ -57,23 +63,50 @@ type TypographyProps = Omit<
  * @property [variant] - Typography variant used for the rendered text style.
  */
 interface LinkProps extends TypographyProps {
-  /** Additional props forwarded to the anchor element. */
+  /**
+   * Additional props forwarded to the anchor element.
+   * @defaultValue {}
+   */
   anchorProps?: AnchorHTMLAttributes<HTMLAnchorElement>;
-  /** Ref for the outer anchor element. */
+  /**
+   * Ref for the outer anchor element.
+   * @defaultValue undefined
+   */
   anchorRef?: Ref<HTMLAnchorElement>;
-  /** Content rendered inside the link. */
+  /**
+   * Content rendered inside the link.
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Class overrides for the anchor and Typography elements. */
+  /**
+   * Class overrides for the anchor and Typography elements.
+   * @defaultValue {}
+   */
   classes?: LinkClasses;
-  /** Typography color variant applied to the inner text. */
+  /**
+   * Typography color variant applied to the inner text.
+   * @defaultValue 'primary'
+   */
   color?: TypographyColor;
-  /** Destination URL for the link. */
+  /**
+   * Destination URL for the link.
+   * @defaultValue undefined
+   */
   href?: string;
-  /** Click handler attached to the anchor element. */
+  /**
+   * Click handler attached to the anchor element.
+   * @defaultValue undefined
+   */
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
-  /** Target browsing context for the anchor element. */
+  /**
+   * Target browsing context for the anchor element.
+   * @defaultValue undefined
+   */
   target?: string;
-  /** Typography variant used to choose the rendered text style. */
+  /**
+   * Typography variant used to choose the rendered text style.
+   * @defaultValue 'base'
+   */
   variant?: TypographyVariant;
 }
 

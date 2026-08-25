@@ -49,19 +49,40 @@ type ListItemStatus = 'success' | 'warning' | 'error' | 'info';
  * @property [title] - Class names applied to the title text.
  */
 interface ListItemClasses {
-  /** Class names applied to the adornment element. */
+  /**
+   * Class names applied to the adornment element.
+   * @defaultValue undefined
+   */
   adornment?: string;
-  /** Class names applied to the interactive root element. */
+  /**
+   * Class names applied to the interactive root element.
+   * @defaultValue undefined
+   */
   button?: string;
-  /** Class names applied to the text content wrapper. */
+  /**
+   * Class names applied to the text content wrapper.
+   * @defaultValue undefined
+   */
   children?: string;
-  /** Class names applied to the inner container row. */
+  /**
+   * Class names applied to the inner container row.
+   * @defaultValue undefined
+   */
   container?: string;
-  /** Class names applied to the outer root element. */
+  /**
+   * Class names applied to the outer root element.
+   * @defaultValue undefined
+   */
   root?: string;
-  /** Class names applied to the label text. */
+  /**
+   * Class names applied to the label text.
+   * @defaultValue undefined
+   */
   label?: string;
-  /** Class names applied to the title text. */
+  /**
+   * Class names applied to the title text.
+   * @defaultValue undefined
+   */
   title?: string;
 }
 
@@ -92,41 +113,95 @@ interface ListItemClasses {
  * @property [value] - Value associated with this item for selection tracking.
  */
 interface BaseProps {
-  /** Element type to render for the wrapper. */
+  /**
+   * Element type to render for the wrapper.
+   * @defaultValue undefined
+   */
   as?: 'a' | 'div' | 'li';
-  /** Optional leading adornment. */
+  /**
+   * Optional leading adornment.
+   * @defaultValue undefined
+   */
   adornment?: ListItemAdornment;
-  /** Color token used for the adornment. */
+  /**
+   * Color token used for the adornment.
+   * @defaultValue undefined
+   */
   adornmentColor?: ListItemAdornmentColor;
-  /** Custom class names for item sub-elements. */
+  /**
+   * Custom class names for item sub-elements.
+   * @defaultValue undefined
+   */
   classes?: ListItemClasses;
-  /** Text color used by the title and label typography. */
+  /**
+   * Text color used by the title and label typography.
+   * @defaultValue undefined
+   */
   color?: TypographyColor;
-  /** Whether the item should start selected when uncontrolled. */
+  /**
+   * Whether the item should start selected when uncontrolled.
+   * @defaultValue undefined
+   */
   defaultSelected?: boolean;
-  /** Whether the item is disabled. */
+  /**
+   * Whether the item is disabled.
+   * @defaultValue undefined
+   */
   disabled?: boolean;
-  /** Whether to render a separator below the item. */
+  /**
+   * Whether to render a separator below the item.
+   * @defaultValue undefined
+   */
   divider?: boolean;
-  /** Whether this item is the first rendered item. */
+  /**
+   * Whether this item is the first rendered item.
+   * @defaultValue undefined
+   */
   firstIndex?: boolean;
-  /** Destination URL used when rendering as a link. */
+  /**
+   * Destination URL used when rendering as a link.
+   * @defaultValue undefined
+   */
   href?: string;
-  /** Primary text shown for the item. */
+  /**
+   * Primary text shown for the item.
+   * @defaultValue undefined
+   */
   label?: string;
-  /** Whether this item is the last rendered item. */
+  /**
+   * Whether this item is the last rendered item.
+   * @defaultValue undefined
+   */
   lastIndex?: boolean;
-  /** Whether the item can be selected. */
+  /**
+   * Whether the item can be selected.
+   * @defaultValue undefined
+   */
   selectable?: boolean;
-  /** Status token that overrides or reinforces the adornment color. */
+  /**
+   * Status token that overrides or reinforces the adornment color.
+   * @defaultValue undefined
+   */
   status?: ListItemStatus;
-  /** Keyboard focus order when the item is selectable. */
+  /**
+   * Keyboard focus order when the item is selectable.
+   * @defaultValue undefined
+   */
   tabIndex?: number;
-  /** Optional secondary heading shown above the label. */
+  /**
+   * Optional secondary heading shown above the label.
+   * @defaultValue undefined
+   */
   title?: string;
-  /** Controlled selected state. */
+  /**
+   * Controlled selected state.
+   * @defaultValue undefined
+   */
   selected?: boolean;
-  /** Value associated with this item for selection tracking. */
+  /**
+   * Value associated with this item for selection tracking.
+   * @defaultValue undefined
+   */
   value?: string | number;
 }
 
@@ -141,17 +216,35 @@ interface BaseProps {
  * @property [target] - Optional target for the anchor element.
  */
 interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  /** Destination URL for the anchor. */
+  /**
+   * Destination URL for the anchor.
+   * @defaultValue undefined
+   */
   href?: string;
-  /** Click handler for the anchor variant. */
+  /**
+   * Click handler for the anchor variant.
+   * @defaultValue undefined
+   */
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
-  /** Keyboard handler for the anchor variant. */
+  /**
+   * Keyboard handler for the anchor variant.
+   * @defaultValue undefined
+   */
   onKeyDown?: (event: KeyboardEvent<HTMLAnchorElement>) => void;
-  /** Optional ref forwarded to the anchor element. */
+  /**
+   * Optional ref forwarded to the anchor element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLAnchorElement>;
-  /** Accessible role for the anchor element. */
+  /**
+   * Accessible role for the anchor element.
+   * @defaultValue undefined
+   */
   role?: JSX.IntrinsicElements['a']['role'];
-  /** Optional target for the anchor element. */
+  /**
+   * Optional target for the anchor element.
+   * @defaultValue undefined
+   */
   target?: string;
 }
 
@@ -166,17 +259,35 @@ interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  * @property [target] - Disallowed in the div variant.
  */
 interface DivProps extends HTMLAttributes<HTMLDivElement> {
-  /** Disallowed in the div variant. */
+  /**
+   * Disallowed in the div variant.
+   * @defaultValue undefined
+   */
   href?: never;
-  /** Click handler for the div variant. */
+  /**
+   * Click handler for the div variant.
+   * @defaultValue undefined
+   */
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
-  /** Keyboard handler for the div variant. */
+  /**
+   * Keyboard handler for the div variant.
+   * @defaultValue undefined
+   */
   onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
-  /** Optional ref forwarded to the div element. */
+  /**
+   * Optional ref forwarded to the div element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLDivElement>;
-  /** Accessible role for the div element. */
+  /**
+   * Accessible role for the div element.
+   * @defaultValue undefined
+   */
   role?: JSX.IntrinsicElements['div']['role'];
-  /** Disallowed in the div variant. */
+  /**
+   * Disallowed in the div variant.
+   * @defaultValue undefined
+   */
   target?: never;
 }
 
@@ -191,17 +302,35 @@ interface DivProps extends HTMLAttributes<HTMLDivElement> {
  * @property [target] - Disallowed in the li variant.
  */
 interface LiProps extends LiHTMLAttributes<HTMLLIElement> {
-  /** Disallowed in the li variant. */
+  /**
+   * Disallowed in the li variant.
+   * @defaultValue undefined
+   */
   href?: never;
-  /** Click handler for the li variant. */
+  /**
+   * Click handler for the li variant.
+   * @defaultValue undefined
+   */
   onClick?: (event: MouseEvent<HTMLLIElement>) => void;
-  /** Keyboard handler for the li variant. */
+  /**
+   * Keyboard handler for the li variant.
+   * @defaultValue undefined
+   */
   onKeyDown?: (event: KeyboardEvent<HTMLLIElement>) => void;
-  /** Optional ref forwarded to the li element. */
+  /**
+   * Optional ref forwarded to the li element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLLIElement>;
-  /** Accessible role for the li element. */
+  /**
+   * Accessible role for the li element.
+   * @defaultValue undefined
+   */
   role?: JSX.IntrinsicElements['li']['role'];
-  /** Disallowed in the li variant. */
+  /**
+   * Disallowed in the li variant.
+   * @defaultValue undefined
+   */
   target?: never;
 }
 

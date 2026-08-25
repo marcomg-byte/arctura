@@ -40,6 +40,8 @@ import type {
 } from './progress-stepper';
 import { Select } from './select';
 import type { SelectClasses, SelectProps } from './select';
+import { Toggle } from './toggle';
+import type { ToggleClasses, ToggleProps, ToggleSize, ToggleVariant } from './toggle';
 import { Link, Typography } from './typography';
 import type {
   HeadingVariant,
@@ -73,6 +75,7 @@ export {
   Step,
   TextArea,
   TextInput,
+  Toggle,
   Typography,
 };
 
@@ -119,4 +122,8 @@ export type {
   FooterAction,
   TextAreaProps,
   TextInputProps,
+  ToggleClasses,
+  ToggleProps,
+  ToggleSize,
+  ToggleVariant,
 };

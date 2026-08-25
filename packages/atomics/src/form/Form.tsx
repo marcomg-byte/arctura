@@ -49,11 +49,20 @@ type FormColor = 'accent' | 'black' | 'inverse' | 'primary' | 'secondary' | 'sub
  * @property [text] - Classes applied to the disclaimer text element.
  */
 interface DisclaimerClasses {
-  /** Classes applied to the disclaimer adornment (icon or image). */
+  /**
+   * Classes applied to the disclaimer adornment (icon or image).
+   * @defaultValue undefined
+   */
   adornment?: string;
-  /** Classes applied to the disclaimer container wrapper. */
+  /**
+   * Classes applied to the disclaimer container wrapper.
+   * @defaultValue undefined
+   */
   container?: string;
-  /** Classes applied to the disclaimer text element. */
+  /**
+   * Classes applied to the disclaimer text element.
+   * @defaultValue undefined
+   */
   text?: string;
 }
 
@@ -73,21 +82,45 @@ interface DisclaimerClasses {
  * @property [submitButton] - Classes applied to the submit button container.
  */
 interface FormClasses {
-  /** Classes applied to the header/start adornment. */
+  /**
+   * Classes applied to the header/start adornment.
+   * @defaultValue undefined
+   */
   adornment?: string;
-  /** Classes applied to the main body wrapper containing form children. */
+  /**
+   * Classes applied to the main body wrapper containing form children.
+   * @defaultValue undefined
+   */
   body?: string;
-  /** Classes for the disclaimer sub-elements. */
+  /**
+   * Classes for the disclaimer sub-elements.
+   * @defaultValue undefined
+   */
   disclaimer?: DisclaimerClasses;
-  /** Classes applied to the form header. */
+  /**
+   * Classes applied to the form header.
+   * @defaultValue undefined
+   */
   header?: string;
-  /** Classes applied to the form footer. */
+  /**
+   * Classes applied to the form footer.
+   * @defaultValue undefined
+   */
   footer?: string;
-  /** Classes applied to the wrapper that contains the footer action buttons. */
+  /**
+   * Classes applied to the wrapper that contains the footer action buttons.
+   * @defaultValue undefined
+   */
   footerButtonsContainer?: string;
-  /** Classes applied to the root `<form>` element. */
+  /**
+   * Classes applied to the root `<form>` element.
+   * @defaultValue undefined
+   */
   form?: string;
-  /** Classes applied to the submit button container. */
+  /**
+   * Classes applied to the submit button container.
+   * @defaultValue undefined
+   */
   submitButton?: string;
 }
 
@@ -134,49 +167,115 @@ interface FormProps extends Omit<
   FormHTMLAttributes<HTMLFormElement>,
   'className' | 'onChange' | 'onSubmit'
 > {
-  /** Accessible label for the form (maps to `aria-label`). */
+  /**
+   * Accessible label for the form (maps to `aria-label`).
+   * @defaultValue undefined
+   */
   'aria-label'?: string;
-  /** ID of an element that labels the form (maps to `aria-labelledby`). */
+  /**
+   * ID of an element that labels the form (maps to `aria-labelledby`).
+   * @defaultValue undefined
+   */
   'aria-labelledby'?: string;
-  /** Native HTML `action` attribute (submission URL). */
+  /**
+   * Native HTML `action` attribute (submission URL).
+   * @defaultValue undefined
+   */
   action?: JSX.IntrinsicElements['form']['action'];
-  /** Color used for adornments and accents inside the form (maps to theme tokens). */
+  /**
+   * Color used for adornments and accents inside the form (maps to theme tokens).
+   * @defaultValue 'primary'
+   */
   adornmentColor?: FormColor;
-  /** Child nodes to render inside the form (inputs, buttons, etc.). */
+  /**
+   * Child nodes to render inside the form (inputs, buttons, etc.).
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Additional CSS classes to apply to the form container. */
+  /**
+   * Additional CSS classes to apply to the form container.
+   * @defaultValue {}
+   */
   classes?: FormClasses;
-  /** Color used for text elements in the form and disclaimer (maps to theme tokens). */
+  /**
+   * Color used for text elements in the form and disclaimer (maps to theme tokens).
+   * @defaultValue 'primary'
+   */
   color?: FormColor;
-  /** Optional disclaimer shown in the form footer; includes an optional adornment and text. */
+  /**
+   * Optional disclaimer shown in the form footer; includes an optional adornment and text.
+   * @defaultValue undefined
+   */
   disclaimer?: FormDisclaimer;
-  /** Encoding type for the form, e.g. `multipart/form-data` for file uploads. */
+  /**
+   * Encoding type for the form, e.g. `multipart/form-data` for file uploads.
+   * @defaultValue undefined
+   */
   encType?: JSX.IntrinsicElements['form']['encType'];
-  /** Optional adornment to render at the end of the form header (icon or image). */
+  /**
+   * Optional adornment to render at the end of the form header (icon or image).
+   * @defaultValue undefined
+   */
   endAdornment?: FormAdornment;
-  /** Controlled error state for the form, derived from child field validation. */
+  /**
+   * Controlled error state for the form, derived from child field validation.
+   * @defaultValue undefined
+   */
   error?: boolean;
-  /** `id` attribute for the form element. */
+  /**
+   * `id` attribute for the form element.
+   * @defaultValue undefined
+   */
   id?: string;
-  /** HTTP method used when submitting the form (`get` | `post`). */
+  /**
+   * HTTP method used when submitting the form (`get` | `post`).
+   * @defaultValue undefined
+   */
   method?: JSX.IntrinsicElements['form']['method'];
-  /** `name` attribute for the form. */
+  /**
+   * `name` attribute for the form.
+   * @defaultValue undefined
+   */
   name?: string;
-  /** When true, disables the browser's native validation (`noValidate`). */
+  /**
+   * When true, disables the browser's native validation (`noValidate`).
+   * @defaultValue undefined
+   */
   noValidate?: boolean;
-  /** Change event handler for the form element. */
+  /**
+   * Change event handler for the form element.
+   * @defaultValue undefined
+   */
   onChange?: (values: FormValue[], error: boolean) => void;
-  /** Reset event handler for the form element. */
+  /**
+   * Reset event handler for the form element.
+   * @defaultValue undefined
+   */
   onReset?: (event: SubmitEvent<HTMLFormElement>) => void;
-  /** Submit event handler for the form element. */
+  /**
+   * Submit event handler for the form element.
+   * @defaultValue undefined
+   */
   onSubmit?: (event: SubmitEvent<HTMLFormElement>, values?: FormValue[], error?: boolean) => void;
-  /** Ref to access the underlying HTML form element. */
+  /**
+   * Ref to access the underlying HTML form element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLFormElement>;
-  /** Optional adornment to render at the start of the form header (icon or image). */
+  /**
+   * Optional adornment to render at the start of the form header (icon or image).
+   * @defaultValue undefined
+   */
   startAdornment?: FormAdornment;
-  /** Optional title displayed next to adornments in the form header. */
+  /**
+   * Optional title displayed next to adornments in the form header.
+   * @defaultValue undefined
+   */
   title?: string;
-  /** Initial values for form fields, used to populate internal state. */
+  /**
+   * Initial values for form fields, used to populate internal state.
+   * @defaultValue undefined
+   */
   value?: FormValue[];
 }
 
@@ -195,13 +294,25 @@ interface FormProps extends Omit<
  * @property [value] - Current string value for the field.
  */
 interface FormValue {
-  /** Whether the field currently has a validation error. */
+  /**
+   * Whether the field currently has a validation error.
+   * @defaultValue undefined
+   */
   error?: boolean;
-  /** Unique key generated when mapping children into form state. */
+  /**
+   * Unique key generated when mapping children into form state.
+   * @defaultValue undefined
+   */
   key?: string;
-  /** Component type of the field (`TextInput` or `TextArea`). */
+  /**
+   * Component type of the field (`TextInput` or `TextArea`).
+   * @defaultValue undefined
+   */
   type?: 'TextInput' | 'TextArea';
-  /** Current string value for the field. */
+  /**
+   * Current string value for the field.
+   * @defaultValue undefined
+   */
   value?: string;
 }
 

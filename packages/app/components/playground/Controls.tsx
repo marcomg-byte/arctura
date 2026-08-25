@@ -1,29 +1,26 @@
 import { Fragment } from 'react';
 import type { FC, JSX, HTMLAttributes } from 'react';
-import { TextInput } from '@arctura/atomics';
-import type { ComponentName, ComponentPropsByComponent } from './Component';
+import { Select, TextInput, Toggle } from '@arctura/atomics';
+import type { ComponentDocsPrimitive, ComponentDocsProp } from '@arctura/docs';
 
-/**
- * Extracts the string prop names for a selected playground component.
- *
- * This keeps control records tied to real props on the component they edit.
- */
-type ComponentPropName<K extends ComponentName> = Extract<
-  keyof ComponentPropsByComponent[K],
-  string
->;
+type ControlPrimitive = Extract<ComponentDocsPrimitive, 'boolean' | 'string' | 'number'>;
+type ControlObjectValue = Record<string, unknown> | unknown[] | null | undefined;
+type ComponentDocsProps = ComponentDocsProp[];
+
+const PrimitiveTypes: ControlPrimitive[] = ['boolean', 'number', 'string'];
 
 /**
  * Describes one control entry for a component prop.
  *
- * The `type` field selects the control renderer, while `value` stores either a
- * prop name or nested slot controls.
+ * The `type` field selects the control renderer, while `value` stores the
+ * prop default value.
  */
-type ControlRecord<V extends string = string> =
-  | { type: 'string'; value: V }
-  | { type: 'number'; value: V }
-  | { type: 'boolean'; value: V }
-  | { type: 'slot'; value: ControlRecord<V>[] };
+type ControlRecord =
+  | { name: string; type: 'string'; value: string | undefined }
+  | { name: string; options: string[]; type: 'enum'; value: string | undefined }
+  | { name: string; type: 'number'; value: number | undefined }
+  | { name: string; type: 'boolean'; value: boolean | undefined }
+  | { controls: ControlRecord[]; name: string; type: 'object'; value: ControlObjectValue };
 
 /** Playground control entry that can be rendered by the controls panel. */
 type Control = ControlRecord;
@@ -32,37 +29,104 @@ type Control = ControlRecord;
 type ControlType = Control['type'];
 
 /** Value accepted by an individual control entry. */
-type ControlValue = string | Control[];
+type ControlValue = Control['value'];
 
-/**
- * Control entry constrained to the props of a specific atomic component.
- *
- * For example, `ComponentControl<'Button'>` can only reference string prop
- * names that exist on the atomics `Button` component.
- */
-type ComponentControl<K extends ComponentName> = ControlRecord<ComponentPropName<K>>;
+const getPrimitiveType = ({ primitive }: ComponentDocsProp): ControlPrimitive | undefined => {
+  if (primitive === 'boolean' || primitive === 'number' || primitive === 'string') {
+    return primitive;
+  }
 
-/**
- * Registry shape for the controls available to each playground component.
- *
- * Component names are optional so unsupported components can omit their control
- * configuration and render without editor controls.
- */
-type ComponentControls = {
-  [K in ComponentName]?: readonly ComponentControl<K>[];
+  return undefined;
 };
 
-const componentControls: ComponentControls = {
-  Button: [
-    { type: 'string', value: 'variant' },
-    { type: 'string', value: 'size' },
-    { type: 'string', value: 'type' },
-    { type: 'string', value: 'href' },
-    { type: 'string', value: 'target' },
-    { type: 'boolean', value: 'fullWidth' },
-    { type: 'boolean', value: 'responsive' },
-    { type: 'boolean', value: 'disabled' },
-  ],
+const emptyDefaultValues = new Set(['', 'undefined']);
+
+const cleanDefaultValue = (defaultValue?: string) => defaultValue?.trim() ?? '';
+
+const getStringDefaultValue = (defaultValue?: string) => {
+  const value = cleanDefaultValue(defaultValue);
+  if (emptyDefaultValues.has(value)) return undefined;
+
+  const quotedValue = /^(['"])(.*)\1$/.exec(value);
+
+  return quotedValue?.[2] ?? value;
+};
+
+const getBooleanDefaultValue = (defaultValue?: string) => {
+  const value = cleanDefaultValue(defaultValue);
+  if (emptyDefaultValues.has(value)) return undefined;
+
+  return value === 'true';
+};
+
+const getNumberDefaultValue = (defaultValue?: string) => {
+  const value = cleanDefaultValue(defaultValue);
+  if (emptyDefaultValues.has(value)) return undefined;
+
+  const numberValue = Number(value);
+
+  return Number.isNaN(numberValue) ? undefined : numberValue;
+};
+
+const getObjectDefaultValue = (defaultValue?: string): ControlObjectValue => {
+  const value = cleanDefaultValue(defaultValue);
+  if (emptyDefaultValues.has(value)) return undefined;
+  if (value === 'null') return null;
+  if (value === '{}') return {};
+  if (value === '[]') return [];
+
+  return undefined;
+};
+
+const getEnumOptions = ({ values }: ComponentDocsProp) =>
+  values?.map((value) => String(value)) ?? [];
+
+const getControls = (componentProps: ComponentDocsProps): Control[] => {
+  return componentProps.flatMap<Control>((prop) => {
+    const primitiveType = getPrimitiveType(prop);
+
+    if (prop.type?.properties?.length) {
+      return [
+        {
+          name: prop.name,
+          type: 'object',
+          value: getObjectDefaultValue(prop.defaultValue),
+          controls: getControls(prop.type.properties),
+        },
+      ];
+    }
+
+    if (prop.kind === 'enum' && primitiveType === 'string') {
+      return [
+        {
+          name: prop.name,
+          options: getEnumOptions(prop),
+          type: 'enum',
+          value: getStringDefaultValue(prop.defaultValue),
+        },
+      ];
+    }
+
+    if (primitiveType === 'boolean') {
+      return [
+        { name: prop.name, type: primitiveType, value: getBooleanDefaultValue(prop.defaultValue) },
+      ];
+    }
+
+    if (primitiveType === 'number') {
+      return [
+        { name: prop.name, type: primitiveType, value: getNumberDefaultValue(prop.defaultValue) },
+      ];
+    }
+
+    if (primitiveType === 'string') {
+      return [
+        { name: prop.name, type: primitiveType, value: getStringDefaultValue(prop.defaultValue) },
+      ];
+    }
+
+    return [];
+  });
 };
 
 interface ControlsClasses {
@@ -82,16 +146,6 @@ interface ControlProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'>
 }
 
 /**
- * Returns the configured controls for a selected playground component.
- *
- * The returned array is a shallow copy so callers can sort, filter, or extend
- * it without mutating the shared registry.
- */
-const getControls = <K extends ComponentName>(component: K): ComponentControl<K>[] => {
-  return [...(componentControls[component] ?? [])] as ComponentControl<K>[];
-};
-
-/**
  * Renders a single playground control entry.
  *
  * Unsupported primitive control types intentionally return `null` until their
@@ -99,21 +153,35 @@ const getControls = <K extends ComponentName>(component: K): ComponentControl<K>
  */
 const renderControl = (item: Control): JSX.Element | null => {
   if (item.type === 'boolean') {
-    return null;
+    return <Toggle name={item.name} label={item.name} defaultChecked={item.value} />;
   }
 
   if (item.type === 'number') {
     return null;
   }
 
+  if (item.type === 'enum') {
+    return (
+      <Select
+        name={item.name}
+        label={item.name}
+        defaultValue={item.value}
+        color="white"
+        options={item.options.map((option) => ({ value: option, label: option }))}
+      />
+    );
+  }
+
   if (item.type === 'string') {
-    return <TextInput name={item.value} label={item.value} />;
+    return (
+      <TextInput color="primary" name={item.name} label={item.name} defaultValue={item.value} />
+    );
   }
 
   return (
     <>
-      {item.value.map((entry, index) => (
-        <Fragment key={index}>{renderControl(entry)}</Fragment>
+      {item.controls.map((entry, index) => (
+        <Fragment key={`control-${index + 1}`}>{renderControl(entry)}</Fragment>
       ))}
     </>
   );
@@ -138,25 +206,29 @@ const renderItems = (items: Control | Control[]): JSX.Element | (JSX.Element | n
  *
  * `Controls` accepts either a single control descriptor or the configured
  * control list returned by `getControls`. String controls render a `TextInput`
- * using the prop name as both the input `name` and visible label. Slot controls
- * render their nested controls recursively, which allows compound component
- * editors to group child controls while preserving the same descriptor shape.
+ * using the prop name as both the input `name` and visible label. Object
+ * controls render their nested controls recursively, which allows compound
+ * component editors to group child controls while preserving the same descriptor
+ * shape.
  *
  * @example
  * ```tsx
  * import { Controls, getControls } from '@/components/playground';
  * import type { Control } from '@/components/playground';
+ * import type { ComponentDocsProp } from '@arctura/docs';
  *
- * export function ButtonPlaygroundControls() {
- *   const buttonControls = getControls('Button');
+ * export function ButtonPlaygroundControls({ props }: { props: ComponentDocsProp[] }) {
+ *   const buttonControls = getControls(props);
  *
  *   const customControls: Control[] = [
  *     ...buttonControls,
  *     {
- *       type: 'slot',
- *       value: [
- *         { type: 'string', value: 'children' },
- *         { type: 'string', value: 'aria-label' },
+ *       name: 'slots',
+ *       type: 'object',
+ *       value: {},
+ *       controls: [
+ *         { name: 'children', type: 'string', value: undefined },
+ *         { name: 'variant', options: ['primary', 'secondary'], type: 'enum', value: 'primary' },
  *       ],
  *     },
  *   ];
@@ -184,5 +256,5 @@ const Controls: FC<ControlProps> = ({ items }) => {
 
 Controls.displayName = 'Playground.Controls';
 
-export type { Control, ControlType, ControlValue };
-export { Controls, getControls };
+export type { ComponentDocsProps, Control, ControlType, ControlValue, ControlPrimitive };
+export { Controls, getControls, PrimitiveTypes };

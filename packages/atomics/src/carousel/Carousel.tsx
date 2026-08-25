@@ -23,23 +23,50 @@ import type { IconButtonVariant } from '../buttons';
  * @property [slideInner] - Class applied to the inner slide content wrapper.
  */
 interface CarouselClasses {
-  /** Class applied to the outer carousel container. */
+  /**
+   * Class applied to the outer carousel container.
+   * @defaultValue undefined
+   */
   container?: string;
-  /** Class applied to the carousel controls. */
+  /**
+   * Class applied to the carousel controls.
+   * @defaultValue undefined
+   */
   controls?: string;
-  /** Class applied to the controls wrapper. */
+  /**
+   * Class applied to the controls wrapper.
+   * @defaultValue undefined
+   */
   controlsContainer?: string;
-  /** Class applied to each pagination dot. */
+  /**
+   * Class applied to each pagination dot.
+   * @defaultValue undefined
+   */
   dot?: string;
-  /** Class applied to the pagination dots container. */
+  /**
+   * Class applied to the pagination dots container.
+   * @defaultValue undefined
+   */
   dotsContainer?: string;
-  /** Class applied to the root carousel wrapper. */
+  /**
+   * Class applied to the root carousel wrapper.
+   * @defaultValue undefined
+   */
   root?: string;
-  /** Class applied to each carousel slide. */
+  /**
+   * Class applied to each carousel slide.
+   * @defaultValue undefined
+   */
   slide?: string;
-  /** Class applied to the slides container. */
+  /**
+   * Class applied to the slides container.
+   * @defaultValue undefined
+   */
   slidesContainer?: string;
-  /** Class applied to the inner slide content wrapper. */
+  /**
+   * Class applied to the inner slide content wrapper.
+   * @defaultValue undefined
+   */
   slideInner?: string;
 }
 
@@ -123,43 +150,100 @@ const lgSlideBasisClasses: Record<CarouselSlidesPerView, string> = {
  * @property [transitionDuration] - Transition duration used by Embla, in milliseconds.
  */
 interface CarouselProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
-  /** ARIA label for the carousel region. */
+  /**
+   * ARIA label for the carousel region.
+   * @defaultValue undefined
+   */
   'aria-label'?: string;
-  /** Automatically advances slides on an interval. */
+  /**
+   * Automatically advances slides on an interval.
+   * @defaultValue false
+   */
   autoPlay?: boolean;
-  /** Slide content rendered inside the carousel. */
+  /**
+   * Slide content rendered inside the carousel.
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Optional class overrides for carousel layout regions. */
+  /**
+   * Optional class overrides for carousel layout regions.
+   * @defaultValue {}
+   */
   classes?: CarouselClasses;
-  /** Visual variant for the previous and next controls. */
+  /**
+   * Visual variant for the previous and next controls.
+   * @defaultValue 'filled'
+   */
   controlsVariant?: IconButtonVariant;
-  /** Initial slide index to show on mount. */
+  /**
+   * Initial slide index to show on mount.
+   * @defaultValue 0
+   */
   defaultIndex?: number;
-  /** Enables swipe and drag gestures. */
+  /**
+   * Enables swipe and drag gestures.
+   * @defaultValue true
+   */
   enableSwipe?: boolean;
-  /** Horizontal gap between slides, in pixels. */
+  /**
+   * Horizontal gap between slides, in pixels.
+   * @defaultValue 16
+   */
   gap?: CarouselGap;
-  /** Autoplay interval, in milliseconds. */
+  /**
+   * Autoplay interval, in milliseconds.
+   * @defaultValue 3000
+   */
   interval?: number;
-  /** Number of slides visible in the viewport. */
+  /**
+   * Number of slides visible in the viewport.
+   * @defaultValue 3
+   */
   slidesPerView?: CarouselSlidesPerView;
-  /** Number of slides advanced per navigation action. */
+  /**
+   * Number of slides advanced per navigation action.
+   * @defaultValue 3
+   */
   slidesPerGroup?: CarouselSlidesPerGroup;
-  /** Enables looping when the carousel reaches either end. */
+  /**
+   * Enables looping when the carousel reaches either end.
+   * @defaultValue true
+   */
   loop?: boolean;
-  /** Pauses autoplay while the pointer is over the carousel. */
+  /**
+   * Pauses autoplay while the pointer is over the carousel.
+   * @defaultValue true
+   */
   pauseOnHover?: boolean;
-  /** ARIA role for the carousel wrapper. */
+  /**
+   * ARIA role for the carousel wrapper.
+   * @defaultValue 'region'
+   */
   role?: CarouselRole;
-  /** Ref forwarded to the outer carousel wrapper. */
+  /**
+   * Ref forwarded to the outer carousel wrapper.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLDivElement>;
-  /** Shows the previous and next navigation buttons. */
+  /**
+   * Shows the previous and next navigation buttons.
+   * @defaultValue true
+   */
   showControls?: boolean;
-  /** Shows pagination dots below the carousel. */
+  /**
+   * Shows pagination dots below the carousel.
+   * @defaultValue true
+   */
   showDots?: boolean;
-  /** Transition style between slides. */
+  /**
+   * Transition style between slides.
+   * @defaultValue 'slide'
+   */
   transition?: CarouselTransition;
-  /** Transition duration used by Embla, in milliseconds. */
+  /**
+   * Transition duration used by Embla, in milliseconds.
+   * @defaultValue 25
+   */
   transitionDuration?: number;
 }
 

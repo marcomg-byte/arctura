@@ -17,7 +17,10 @@ type IconButtonProps = ComponentProps<typeof IconButton>;
  * @property [classes] - Class name hooks for the theme toggle internals.
  */
 interface ButtonProps extends IconButtonProps {
-  /** Optional class name overrides for the button internals. */
+  /**
+   * Optional class name overrides for the button internals.
+   * @defaultValue undefined
+   */
   classes?: IconButtonClasses;
 }
 

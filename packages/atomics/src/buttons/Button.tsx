@@ -17,9 +17,15 @@ type ButtonAdornment = IconDefinition | ButtonImage;
  * @property [button] - Class names applied to the outer button or anchor element.
  */
 interface ButtonClasses {
-  /** Class names applied to the rendered adornment. */
+  /**
+   * Class names applied to the rendered adornment.
+   * @defaultValue undefined
+   */
   adornment?: string;
-  /** Class names applied to the outer button or anchor element. */
+  /**
+   * Class names applied to the outer button or anchor element.
+   * @defaultValue undefined
+   */
   button?: string;
 }
 
@@ -30,9 +36,15 @@ interface ButtonClasses {
  * @property [alt] - Alternative text for the image.
  */
 interface ButtonImage {
-  /** Image source URL. */
+  /**
+   * Image source URL.
+   * @defaultValue undefined
+   */
   src?: string;
-  /** Alternative text for the image. */
+  /**
+   * Alternative text for the image.
+   * @defaultValue undefined
+   */
   alt?: string;
 }
 
@@ -109,23 +121,50 @@ const responsiveFullWidthSizeClasses: Record<ButtonSize, string> = {
  * @property [variant] - Visual style variant for the button.
  */
 interface BaseProps {
-  /** Content rendered inside the button. */
+  /**
+   * Content rendered inside the button.
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Optional class name hooks for internal elements. */
+  /**
+   * Optional class name hooks for internal elements.
+   * @defaultValue undefined
+   */
   classes?: ButtonClasses;
-  /** Icon or image rendered after the button content. */
+  /**
+   * Icon or image rendered after the button content.
+   * @defaultValue undefined
+   */
   endAdornment?: ButtonAdornment;
-  /** Expands the button to fill the width of its parent container. */
+  /**
+   * Expands the button to fill the width of its parent container.
+   * @defaultValue undefined
+   */
   fullWidth?: boolean;
-  /** Enables mobile-first responsive sizing. */
+  /**
+   * Enables mobile-first responsive sizing.
+   * @defaultValue undefined
+   */
   responsive?: boolean;
-  /** Size token controlling the button dimensions and spacing. */
+  /**
+   * Size token controlling the button dimensions and spacing.
+   * @defaultValue undefined
+   */
   size?: ButtonSize;
-  /** Icon or image rendered before the button content. */
+  /**
+   * Icon or image rendered before the button content.
+   * @defaultValue undefined
+   */
   startAdornment?: ButtonAdornment;
-  /** Ref forwarded to the rendered anchor element. */
+  /**
+   * Ref forwarded to the rendered anchor element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLAnchorElement>;
-  /** Visual style variant for the button. */
+  /**
+   * Visual style variant for the button.
+   * @defaultValue undefined
+   */
   variant?: ButtonVariant;
 }
 
@@ -138,13 +177,25 @@ interface BaseProps {
  * @property [type] - Disallowed for the anchor variant.
  */
 interface AnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
-  /** URL used by the anchor button. */
+  /**
+   * URL used by the anchor button.
+   * @defaultValue undefined
+   */
   href: string;
-  /** Ref forwarded to the rendered anchor element. */
+  /**
+   * Ref forwarded to the rendered anchor element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLAnchorElement>;
-  /** Optional target attribute for the anchor element. */
+  /**
+   * Optional target attribute for the anchor element.
+   * @defaultValue undefined
+   */
   target?: string;
-  /** Disallowed for the anchor variant. */
+  /**
+   * Disallowed for the anchor variant.
+   * @defaultValue undefined
+   */
   type?: never;
 }
 
@@ -157,13 +208,25 @@ interface AnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'cla
  * @property [type] - Native button type attribute.
  */
 interface ButtonNativeProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
-  /** Disallowed for the native button variant. */
+  /**
+   * Disallowed for the native button variant.
+   * @defaultValue undefined
+   */
   href?: never;
-  /** Ref forwarded to the rendered button element. */
+  /**
+   * Ref forwarded to the rendered button element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLButtonElement>;
-  /** Disallowed for the native button variant. */
+  /**
+   * Disallowed for the native button variant.
+   * @defaultValue undefined
+   */
   target?: never;
-  /** Native button type attribute. */
+  /**
+   * Native button type attribute.
+   * @defaultValue undefined
+   */
   type?: ButtonType;
 }
 

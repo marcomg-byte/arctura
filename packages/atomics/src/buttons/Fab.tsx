@@ -59,19 +59,40 @@ type FabVariant = 'circular' | 'extended';
  * @property [variant] - Visual variant of the Fab.
  */
 interface BaseProps {
-  /** Content placed inside the button. */
+  /**
+   * Content placed inside the button.
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Additional CSS classes to apply. */
+  /**
+   * Additional CSS classes to apply.
+   * @defaultValue undefined
+   */
   classes?: FabClasses;
-  /** Color theme for the Fab. */
+  /**
+   * Color theme for the Fab.
+   * @defaultValue undefined
+   */
   color?: FabColor;
-  /** Adornment rendered after the children. */
+  /**
+   * Adornment rendered after the children.
+   * @defaultValue undefined
+   */
   endAdornment?: FabAdornment;
-  /** Size variant for the Fab: 'sm' | 'md' | 'lg'. */
+  /**
+   * Size variant for the Fab: 'sm' | 'md' | 'lg'.
+   * @defaultValue undefined
+   */
   size?: 'sm' | 'md' | 'lg';
-  /** Adornment rendered before the children. */
+  /**
+   * Adornment rendered before the children.
+   * @defaultValue undefined
+   */
   startAdornment?: FabAdornment;
-  /** Visual variant of the Fab: 'circular' or 'extended'. */
+  /**
+   * Visual variant of the Fab: 'circular' or 'extended'.
+   * @defaultValue undefined
+   */
   variant?: FabVariant;
 }
 
@@ -86,15 +107,30 @@ interface BaseProps {
  * @property [type] - Explicitly disallowed on the anchor variant.
  */
 interface AnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
-  /** Destination URL for the anchor. */
+  /**
+   * Destination URL for the anchor.
+   * @defaultValue undefined
+   */
   href?: string;
-  /** Click handler when rendered as an anchor. */
+  /**
+   * Click handler when rendered as an anchor.
+   * @defaultValue undefined
+   */
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
-  /** Ref forwarded to the anchor element. */
+  /**
+   * Ref forwarded to the anchor element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLAnchorElement>;
-  /** Link target (for example, '_blank'). */
+  /**
+   * Link target (for example, '_blank').
+   * @defaultValue undefined
+   */
   target?: string;
-  /** Explicitly disallowed on the anchor variant. */
+  /**
+   * Explicitly disallowed on the anchor variant.
+   * @defaultValue undefined
+   */
   type?: never;
 }
 
@@ -109,15 +145,30 @@ interface AnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'cla
  * @property [type] - Button type attribute.
  */
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
-  /** Explicitly disallowed on the button variant. */
+  /**
+   * Explicitly disallowed on the button variant.
+   * @defaultValue undefined
+   */
   href?: never;
-  /** Click handler when rendered as a button. */
+  /**
+   * Click handler when rendered as a button.
+   * @defaultValue undefined
+   */
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-  /** Ref forwarded to the button element. */
+  /**
+   * Ref forwarded to the button element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLButtonElement>;
-  /** Target is not applicable for button elements. */
+  /**
+   * Target is not applicable for button elements.
+   * @defaultValue undefined
+   */
   target?: never;
-  /** Button `type` attribute (e.g. 'button' | 'submit' | 'reset'). */
+  /**
+   * Button `type` attribute (e.g. 'button' | 'submit' | 'reset').
+   * @defaultValue undefined
+   */
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
 }
 

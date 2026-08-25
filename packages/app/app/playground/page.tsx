@@ -1,8 +1,6 @@
 'use client';
-
-import { useState } from 'react';
 import { Button, TextInput, Typography } from '@arctura/atomics';
-import { Page, Navbar } from '@/components';
+import { Page, Navbar, Playground as PlaygroundComponent } from '@/components';
 import Image from 'next/image';
 import {
   faSearch,
@@ -19,14 +17,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-type PlaygroundView = 'content-1' | 'content-2' | 'content-3';
-
-const playgroundViews: { label: string; value: PlaygroundView }[] = [
-  { label: 'Content 1', value: 'content-1' },
-  { label: 'Content 2', value: 'content-2' },
-  { label: 'Content 3', value: 'content-3' },
-];
-
 const components = [
   { label: 'Button', href: '#button' },
   { label: 'Carousel', href: '#carousel' },
@@ -38,8 +28,6 @@ const components = [
 ];
 
 export default function Playground() {
-  const [activeView, setActiveView] = useState<PlaygroundView>('content-1');
-
   return (
     <Page color="primary">
       <div className="au:relative au:w-full au:overflow-hidden au:h-64 au:sm:h-56 au:md:h-64 au:lg:h-72 au:xl:h-80">
@@ -155,19 +143,7 @@ export default function Playground() {
           </div>
         </div>
         <main className="au:flex au:min-w-0 au:flex-1 au:flex-col au:gap-4 au:p-3 au:sm:p-4 au:lg:p-6">
-          {playgroundViews.map((view) => (
-            <section
-              aria-labelledby={`${view.value}-tab`}
-              className={
-                activeView === view.value
-                  ? 'au:min-h-96 au:w-full au:rounded-lg au:border-1 au:border-solid au:border-primary'
-                  : 'au:hidden'
-              }
-              id={`${view.value}-panel`}
-              key={view.value}
-              role="tabpanel"
-            />
-          ))}
+          <PlaygroundComponent component="Button" />
         </main>
       </div>
     </Page>

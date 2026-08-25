@@ -60,23 +60,50 @@ type TextInputAdornmentColor =
  * @property [toggleButton] - Class applied to the password visibility toggle button.
  */
 interface TextInputClasses {
-  /** Root container for the component. */
+  /**
+   * Root container for the component.
+   * @defaultValue undefined
+   */
   container?: string;
-  /** Class applied to the clear button/icon. */
+  /**
+   * Class applied to the clear button/icon.
+   * @defaultValue undefined
+   */
   clearButton?: string;
-  /** Class applied to the end adornment element. */
+  /**
+   * Class applied to the end adornment element.
+   * @defaultValue undefined
+   */
   endAdornment?: string;
-  /** Class applied to the helper text element. */
+  /**
+   * Class applied to the helper text element.
+   * @defaultValue undefined
+   */
   helper?: string;
-  /** Class applied to the native input element. */
+  /**
+   * Class applied to the native input element.
+   * @defaultValue undefined
+   */
   input?: string;
-  /** Class applied to the input container (border/wrapper). */
+  /**
+   * Class applied to the input container (border/wrapper).
+   * @defaultValue undefined
+   */
   inputContainer?: string;
-  /** Class applied to the label element. */
+  /**
+   * Class applied to the label element.
+   * @defaultValue undefined
+   */
   label?: string;
-  /** Class applied to the start adornment element. */
+  /**
+   * Class applied to the start adornment element.
+   * @defaultValue undefined
+   */
   startAdornment?: string;
-  /** Class applied to the toggle button (e.g., show password). */
+  /**
+   * Class applied to the toggle button (e.g., show password).
+   * @defaultValue undefined
+   */
   toggleButton?: string;
 }
 
@@ -169,89 +196,215 @@ interface TextInputProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'size' | 'pattern' | 'onError'
 > {
-  /** ID of the element that describes this input (helper or error message). */
+  /**
+   * ID of the element that describes this input (helper or error message).
+   * @defaultValue undefined
+   */
   'aria-describedby'?: string;
-  /** Accessible label for the input when a visible label is not present. */
+  /**
+   * Accessible label for the input when a visible label is not present.
+   * @defaultValue undefined
+   */
   'aria-label'?: string;
-  /** Indicates the input has a validation error (true/false). */
+  /**
+   * Indicates the input has a validation error (true/false).
+   * @defaultValue undefined
+   */
   'aria-invalid'?: boolean;
-  /** Color theme to use for adornments and small text. */
+  /**
+   * Color theme to use for adornments and small text.
+   * @defaultValue undefined
+   */
   adornmentColor?: TextInputAdornmentColor;
-  /** Native `autocomplete` value (e.g., 'on', 'off', 'email'). */
+  /**
+   * Native `autocomplete` value (e.g., 'on', 'off', 'email').
+   * @defaultValue false
+   */
   autoComplete?: string;
-  /** Autofocus the input on mount. */
+  /**
+   * Autofocus the input on mount.
+   * @defaultValue false
+   */
   autoFocus?: boolean;
-  /** Class overrides for component sub-elements. */
+  /**
+   * Class overrides for component sub-elements.
+   * @defaultValue {}
+   */
   classes?: TextInputClasses;
-  /** Show a clear button inside the input. */
+  /**
+   * Show a clear button inside the input.
+   * @defaultValue false
+   */
   clearable?: boolean;
-  /** Text color variant for the input. */
+  /**
+   * Text color variant for the input.
+   * @defaultValue 'black'
+   */
   color?: TextInputColor;
-  /** Default (uncontrolled) value for the input. */
+  /**
+   * Default (uncontrolled) value for the input.
+   * @defaultValue undefined
+   */
   defaultValue?: string;
-  /** Disable the input. */
+  /**
+   * Disable the input.
+   * @defaultValue false
+   */
   disabled?: boolean;
-  /** Adornment to render at the end of the input. */
+  /**
+   * Adornment to render at the end of the input.
+   * @defaultValue undefined
+   */
   endAdornment?: TextInputAdornment;
-  /** External error state (controlled). */
+  /**
+   * External error state (controlled).
+   * @defaultValue undefined
+   */
   error?: boolean;
-  /** When true, input expands to fill available width. */
+  /**
+   * When true, input expands to fill available width.
+   * @defaultValue false
+   */
   fullWidth?: boolean;
-  /** Helper or error text displayed below the input. */
+  /**
+   * Helper or error text displayed below the input.
+   * @defaultValue undefined
+   */
   helperText?: string;
-  /** Element id attribute. */
+  /**
+   * Element id attribute.
+   * @defaultValue undefined
+   */
   id?: string;
-  /** Native `inputmode` value hinting the type of virtual keyboard. */
+  /**
+   * Native `inputmode` value hinting the type of virtual keyboard.
+   * @defaultValue undefined
+   */
   inputMode?: JSX.IntrinsicElements['input']['inputMode'];
-  /** Visible label text for the input. */
+  /**
+   * Visible label text for the input.
+   * @defaultValue undefined
+   */
   label?: string;
-  /** Maximum allowed length of the input value. */
+  /**
+   * Maximum allowed length of the input value.
+   * @defaultValue undefined
+   */
   maxLength?: number;
-  /** Minimum allowed length of the input value. */
+  /**
+   * Minimum allowed length of the input value.
+   * @defaultValue undefined
+   */
   minLength?: number;
-  /** Name attribute for form submission. */
+  /**
+   * Name attribute for form submission.
+   * @defaultValue undefined
+   */
   name?: string;
-  /** Validation pattern (RegExp) applied client-side. */
+  /**
+   * Validation pattern (RegExp) applied client-side.
+   * @defaultValue undefined
+   */
   pattern?: RegExp;
-  /** Placeholder text shown when the input is empty. */
+  /**
+   * Placeholder text shown when the input is empty.
+   * @defaultValue undefined
+   */
   placeholder?: string;
-  /** Make the input read-only. */
+  /**
+   * Make the input read-only.
+   * @defaultValue false
+   */
   readOnly?: boolean;
-  /** Forwarded ref to the native input element. */
+  /**
+   * Forwarded ref to the native input element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLInputElement>;
-  /** Whether the input is required. */
+  /**
+   * Whether the input is required.
+   * @defaultValue false
+   */
   required?: boolean;
-  /** Show a toggle for password visibility when `type='password'`. */
+  /**
+   * Show a toggle for password visibility when `type='password'`.
+   * @defaultValue true
+   */
   showPasswordToggle?: boolean;
-  /** Size variant of the input. */
+  /**
+   * Size variant of the input.
+   * @defaultValue 'md'
+   */
   size?: TextInputSize;
-  /** Visual status for styling (affects border/helper color). */
+  /**
+   * Visual status for styling (affects border/helper color).
+   * @defaultValue undefined
+   */
   status?: TextInputStatus;
-  /** Enable browser spell checking. */
+  /**
+   * Enable browser spell checking.
+   * @defaultValue false
+   */
   spellCheck?: boolean;
-  /** Adornment to render at the start of the input. */
+  /**
+   * Adornment to render at the start of the input.
+   * @defaultValue undefined
+   */
   startAdornment?: TextInputAdornment;
-  /** Input `type` (textual types only). */
+  /**
+   * Input `type` (textual types only).
+   * @defaultValue 'text'
+   */
   type?: TextInputType;
-  /** Change event handler. */
+  /**
+   * Change event handler.
+   * @defaultValue undefined
+   */
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  /** Clear button click handler. Receives the event and current error state. */
+  /**
+   * Clear button click handler. Receives the event and current error state.
+   * @defaultValue undefined
+   */
   onClear?: (event: MouseEvent<HTMLButtonElement>, error: boolean) => void;
-  /** Callback invoked when the error state changes. */
+  /**
+   * Callback invoked when the error state changes.
+   * @defaultValue undefined
+   */
   onError?: (error: boolean) => void;
-  /** Low-level input event handler. */
+  /**
+   * Low-level input event handler.
+   * @defaultValue undefined
+   */
   onInput?: (event: InputEvent<HTMLInputElement>) => void;
-  /** Blur event handler. */
+  /**
+   * Blur event handler.
+   * @defaultValue undefined
+   */
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
-  /** Focus event handler. */
+  /**
+   * Focus event handler.
+   * @defaultValue undefined
+   */
   onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
-  /** Key down handler. */
+  /**
+   * Key down handler.
+   * @defaultValue undefined
+   */
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
-  /** Key up handler. */
+  /**
+   * Key up handler.
+   * @defaultValue undefined
+   */
   onKeyUp?: (event: KeyboardEvent<HTMLInputElement>) => void;
-  /** Key down handler for the input element. */
+  /**
+   * Key down handler for the input element.
+   * @defaultValue undefined
+   */
   onMouseDown?: (event: MouseEvent<HTMLInputElement>) => void;
-  /** Controlled value for the input. */
+  /**
+   * Controlled value for the input.
+   * @defaultValue undefined
+   */
   value?: string;
 }
 

@@ -156,146 +156,182 @@ interface TextAreaProps extends Omit<
 > {
   /**
    * ID of the element that describes this textarea (for `aria-describedby`).
+   * @defaultValue undefined
    */
   'aria-describedby'?: string;
   /**
    * Accessible label for the textarea (for `aria-label`).
+   * @defaultValue undefined
    */
   'aria-label'?: string;
   /**
    * Whether the textarea is in an invalid state (for `aria-invalid`).
+   * @defaultValue undefined
    */
   'aria-invalid'?: boolean;
   /**
    * Color used for adornments and label text.
+   * @defaultValue 'primary'
    */
   adornmentColor?: TextAreaAdornmentColor;
   /**
    * Whether the textarea should receive focus automatically on mount.
+   * @defaultValue false
    */
   autoFocus?: boolean;
   /**
    * Override or extend CSS classes for internal sub-elements.
+   * @defaultValue {}
    */
   classes?: TextAreaClasses;
   /**
    * Show a clear button to reset the textarea value.
+   * @defaultValue false
    */
   clearable?: boolean;
   /**
    * Text color variant for the textarea content.
+   * @defaultValue 'primary'
    */
   color?: TextAreaColor;
   /**
    * Number of columns (width) for the textarea.
+   * @defaultValue undefined
    */
   cols?: number;
   /**
    * Initial uncontrolled value for the textarea.
+   * @defaultValue undefined
    */
   defaultValue?: string;
   /**
    * Disable the textarea.
+   * @defaultValue false
    */
   disabled?: boolean;
   /**
    * Adornments rendered at the end of the textarea (icons, images, or nodes).
+   * @defaultValue []
    */
   endAdornments?: TextAreaAdornment[];
   /**
    * Mark the textarea as showing an error state.
+   * @defaultValue false
    */
   error?: boolean;
   /**
    * Make the textarea take full width of its container.
+   * @defaultValue false
    */
   fullWidth?: boolean;
   /**
    * The `id` attribute for the textarea.
+   * @defaultValue undefined
    */
   id?: string;
   /**
    * Optional label text displayed above the textarea.
+   * @defaultValue undefined
    */
   label?: string;
   /**
    * Maximum allowed length of the value.
+   * @defaultValue undefined
    */
   maxLength?: number;
   /**
    * Minimum required length of the value.
+   * @defaultValue undefined
    */
   minLength?: number;
   /**
    * The `name` attribute for form submission.
+   * @defaultValue undefined
    */
   name?: string;
   /**
    * Change event handler for controlled usage.
+   * @defaultValue undefined
    */
   onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   /**
    * Handler invoked when the clear button is clicked.
+   * @defaultValue undefined
    */
   onClear?: (event: MouseEvent<HTMLButtonElement>) => void;
   /**
    * Input event handler.
+   * @defaultValue undefined
    */
   onInput?: (event: InputEvent<HTMLTextAreaElement>) => void;
   /**
    * Blur event handler.
+   * @defaultValue undefined
    */
   onBlur?: (event: FocusEvent<HTMLTextAreaElement>) => void;
   /**
    * Focus event handler.
+   * @defaultValue undefined
    */
   onFocus?: (event: FocusEvent<HTMLTextAreaElement>) => void;
   /**
    * Key down event handler.
+   * @defaultValue undefined
    */
   onKeyDown?: (event: KeyboardEvent<HTMLTextAreaElement>) => void;
   /**
    * Key up event handler.
+   * @defaultValue undefined
    */
   onKeyUp?: (event: KeyboardEvent<HTMLTextAreaElement>) => void;
   /**
    * Mouse down handler on the textarea element.
+   * @defaultValue undefined
    */
   onMouseDown?: (event: MouseEvent<HTMLTextAreaElement>) => void;
   /**
    * Placeholder text shown when the textarea is empty.
+   * @defaultValue undefined
    */
   placeholder?: string;
   /**
    * Render the textarea as read-only.
+   * @defaultValue false
    */
   readonly?: boolean;
   /**
    * Whether the field is required.
+   * @defaultValue false
    */
   required?: boolean;
   /**
    * Number of visible rows for the textarea.
+   * @defaultValue undefined
    */
   rows?: number;
   /**
    * Size preset controlling width/height when not fullWidth.
+   * @defaultValue 'md'
    */
   size?: TextAreaSize;
   /**
    * Whether spell checking is enabled.
+   * @defaultValue true
    */
   spellCheck?: boolean;
   /**
    * Adornments rendered at the start of the textarea.
+   * @defaultValue []
    */
   startAdornments?: TextAreaAdornment[];
   /**
    * Visual status (error, success, warning) to style the control.
+   * @defaultValue undefined
    */
   status?: TextAreaStatus;
   /**
    * Controlled value for the textarea.
+   * @defaultValue undefined
    */
   value?: string;
 }

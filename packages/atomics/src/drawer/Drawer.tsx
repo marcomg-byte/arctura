@@ -17,15 +17,30 @@ import { useControlled } from '../../lib/hooks';
  * @property [root] - Classes applied to the drawer panel root.
  */
 interface DrawerClasses {
-  /** Classes applied to the drawer body. */
+  /**
+   * Classes applied to the drawer body.
+   * @defaultValue undefined
+   */
   body?: string;
-  /** Classes applied to the backdrop container. */
+  /**
+   * Classes applied to the backdrop container.
+   * @defaultValue undefined
+   */
   backdrop?: string;
-  /** Classes applied to the drawer header sections. */
+  /**
+   * Classes applied to the drawer header sections.
+   * @defaultValue undefined
+   */
   header?: DrawerHeaderClasses;
-  /** Classes applied to the overlay element. */
+  /**
+   * Classes applied to the overlay element.
+   * @defaultValue undefined
+   */
   overlay?: string;
-  /** Classes applied to the drawer panel root. */
+  /**
+   * Classes applied to the drawer panel root.
+   * @defaultValue undefined
+   */
   root?: string;
 }
 
@@ -38,13 +53,25 @@ interface DrawerClasses {
  * @property [root] - Classes applied to the header container.
  */
 interface DrawerHeaderClasses {
-  /** Classes applied to the center header section. */
+  /**
+   * Classes applied to the center header section.
+   * @defaultValue undefined
+   */
   center?: string;
-  /** Classes applied to the left header section. */
+  /**
+   * Classes applied to the left header section.
+   * @defaultValue undefined
+   */
   left?: string;
-  /** Classes applied to the right header section. */
+  /**
+   * Classes applied to the right header section.
+   * @defaultValue undefined
+   */
   right?: string;
-  /** Classes applied to the header container. */
+  /**
+   * Classes applied to the header container.
+   * @defaultValue undefined
+   */
   root?: string;
 }
 
@@ -56,11 +83,20 @@ interface DrawerHeaderClasses {
  * @property [title] - Optional title rendered in the center section.
  */
 interface DrawerHeader {
-  /** Content rendered to the left of the title. */
+  /**
+   * Content rendered to the left of the title.
+   * @defaultValue undefined
+   */
   leftSlot?: ReactNode;
-  /** Content rendered to the right of the title. */
+  /**
+   * Content rendered to the right of the title.
+   * @defaultValue undefined
+   */
   rightSlot?: ReactNode;
-  /** Optional title rendered in the center section. */
+  /**
+   * Optional title rendered in the center section.
+   * @defaultValue undefined
+   */
   title?: string;
 }
 
@@ -89,37 +125,85 @@ interface DrawerHeader {
  * @property [showBackdrop] - Whether the backdrop should be visible.
  */
 interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
-  /** Accessible label for the drawer when there is no visible title. */
+  /**
+   * Accessible label for the drawer when there is no visible title.
+   * @defaultValue undefined
+   */
   'aria-label'?: string;
-  /** Accessible labelled-by target for the drawer when the title is rendered elsewhere. */
+  /**
+   * Accessible labelled-by target for the drawer when the title is rendered elsewhere.
+   * @defaultValue undefined
+   */
   'aria-labelledby'?: string;
-  /** Side of the screen where the drawer opens. */
+  /**
+   * Side of the screen where the drawer opens.
+   * @defaultValue 'left'
+   */
   anchor?: 'left' | 'right' | 'top' | 'bottom';
-  /** Class name overrides for the drawer internals. */
+  /**
+   * Class name overrides for the drawer internals.
+   * @defaultValue undefined
+   */
   classes?: DrawerClasses;
-  /** Whether pressing Escape closes the drawer. */
+  /**
+   * Whether pressing Escape closes the drawer.
+   * @defaultValue true
+   */
   closeOnEscape?: boolean;
-  /** Content rendered inside the drawer body. */
+  /**
+   * Content rendered inside the drawer body.
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Additional props forwarded to the backdrop wrapper. */
+  /**
+   * Additional props forwarded to the backdrop wrapper.
+   * @defaultValue undefined
+   */
   backdropProps?: HTMLAttributes<HTMLDivElement>;
-  /** Ref forwarded to the backdrop wrapper. */
+  /**
+   * Ref forwarded to the backdrop wrapper.
+   * @defaultValue undefined
+   */
   backdropRef?: Ref<HTMLDivElement>;
-  /** Header content and slot configuration. */
+  /**
+   * Header content and slot configuration.
+   * @defaultValue undefined
+   */
   header?: DrawerHeader;
-  /** Optional id for the drawer root element. */
+  /**
+   * Optional id for the drawer root element.
+   * @defaultValue undefined
+   */
   id?: string;
-  /** Callback fired when the backdrop is clicked. */
+  /**
+   * Callback fired when the backdrop is clicked.
+   * @defaultValue undefined
+   */
   onBackdropClick?: (event: MouseEvent<HTMLDivElement>) => void;
-  /** Callback fired when the drawer should close. */
+  /**
+   * Callback fired when the drawer should close.
+   * @defaultValue undefined
+   */
   onClose: () => void;
-  /** Key down handler for the drawer panel. */
+  /**
+   * Key down handler for the drawer panel.
+   * @defaultValue undefined
+   */
   onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
-  /** Controlled open state for the drawer. */
+  /**
+   * Controlled open state for the drawer.
+   * @defaultValue undefined
+   */
   open: boolean;
-  /** Ref forwarded to the drawer panel. */
+  /**
+   * Ref forwarded to the drawer panel.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLDivElement>;
-  /** Whether the backdrop should be visible. */
+  /**
+   * Whether the backdrop should be visible.
+   * @defaultValue true
+   */
   showBackdrop?: boolean;
 }
 

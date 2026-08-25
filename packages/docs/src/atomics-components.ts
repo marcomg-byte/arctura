@@ -20,6 +20,7 @@ export {
   Step,
   TextArea,
   TextInput,
+  Toggle,
   Typography,
 } from '../../atomics/src';
 export { Button as ThemeButton, Selector as ThemeSelector } from '../../atomics/src/theme';
@@ -46,6 +47,10 @@ export type {
   StepProps,
   TextAreaProps,
   TextInputProps,
+  ToggleClasses,
+  ToggleProps,
+  ToggleSize,
+  ToggleVariant,
   TypographyProps,
 } from '../../atomics/src';
 export type { ThemeButtonProps, ThemeSelectorProps } from '../../atomics/src/theme';

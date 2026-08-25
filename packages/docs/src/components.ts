@@ -1,4 +1,5 @@
 import { commentText, getBlockTag } from './comments.js';
+import { extractPropsFromReflection } from './props.js';
 import { findReflection, findReflections } from './reflections.js';
 import type {
   ComponentDocs,
@@ -76,6 +77,7 @@ const getComponentDocs = (
     returns: commentText(getBlockTag(signature, '@returns')?.content),
     propsDescription: commentText(props?.comment?.summary),
     propsType: props?.type,
+    props: extractPropsFromReflection(props),
     parameters:
       signature?.parameters?.map((parameter) => ({
         name: parameter.name,

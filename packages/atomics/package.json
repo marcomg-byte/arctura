@@ -25,6 +25,11 @@
       "types": "./dist/src/theme/index.d.ts",
       "import": "./dist/theme.js",
       "require": "./dist/theme.cjs"
+    },
+    "./toggle": {
+      "types": "./dist/src/toggle/index.d.ts",
+      "import": "./dist/toggle.js",
+      "require": "./dist/toggle.cjs"
     }
   },
   "files": [

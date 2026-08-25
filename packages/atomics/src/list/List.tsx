@@ -50,13 +50,25 @@ type ListColor = 'accent' | 'black' | 'inverse' | 'primary' | 'secondary' | 'sub
  * @property [value] - Backing value associated with the item.
  */
 interface ListItem {
-  /** Stable identifier assigned while walking the nested children tree. */
+  /**
+   * Stable identifier assigned while walking the nested children tree.
+   * @defaultValue undefined
+   */
   key?: string;
-  /** Human-readable label for the item. */
+  /**
+   * Human-readable label for the item.
+   * @defaultValue undefined
+   */
   label?: string;
-  /** Whether the item is currently selected. */
+  /**
+   * Whether the item is currently selected.
+   * @defaultValue undefined
+   */
   selected?: boolean;
-  /** Backing value associated with the item. */
+  /**
+   * Backing value associated with the item.
+   * @defaultValue undefined
+   */
   value?: string | number;
 }
 
@@ -94,37 +106,85 @@ type ListItemProps = ComponentProps<typeof ListItemComponent>;
  * @property [value] - Controlled value used to seed or manage selected items.
  */
 interface BaseProps {
-  /** Render target to use for the outer list wrapper. */
+  /**
+   * Render target to use for the outer list wrapper.
+   * @defaultValue undefined
+   */
   as?: 'ul' | 'ol' | 'div';
-  /** Color token used for item adornments. */
+  /**
+   * Color token used for item adornments.
+   * @defaultValue undefined
+   */
   adornmentColor?: ListAdornmentColor;
-  /** Background token for the list container. */
+  /**
+   * Background token for the list container.
+   * @defaultValue undefined
+   */
   background?: ListBackground;
-  /** Nested content used to discover and render list items. */
+  /**
+   * Nested content used to discover and render list items.
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Additional class names merged onto the wrapper. */
+  /**
+   * Additional class names merged onto the wrapper.
+   * @defaultValue undefined
+   */
   className?: string;
-  /** Color token applied to text and item accents. */
+  /**
+   * Color token applied to text and item accents.
+   * @defaultValue undefined
+   */
   color?: ListColor;
-  /** Compact spacing mode for dense layouts. */
+  /**
+   * Compact spacing mode for dense layouts.
+   * @defaultValue undefined
+   */
   compact?: boolean;
-  /** Whether to render dividers between items. */
+  /**
+   * Whether to render dividers between items.
+   * @defaultValue undefined
+   */
   divider?: boolean;
-  /** Whether the list and its items are disabled. */
+  /**
+   * Whether the list and its items are disabled.
+   * @defaultValue undefined
+   */
   disabled?: boolean;
-  /** Whether the wrapper should expand to the full available width. */
+  /**
+   * Whether the wrapper should expand to the full available width.
+   * @defaultValue undefined
+   */
   fullWidth?: boolean;
-  /** Element type to render for nested list items. */
+  /**
+   * Element type to render for nested list items.
+   * @defaultValue undefined
+   */
   itemsAs?: 'a' | 'div' | 'li';
-  /** Callback fired when the selected item set changes. */
+  /**
+   * Callback fired when the selected item set changes.
+   * @defaultValue undefined
+   */
   onChange?: (selectedItems: Item[]) => void;
-  /** Whether list items can be selected. */
+  /**
+   * Whether list items can be selected.
+   * @defaultValue undefined
+   */
   selectable?: boolean;
-  /** Size token controlling the wrapper width. */
+  /**
+   * Size token controlling the wrapper width.
+   * @defaultValue undefined
+   */
   size?: 'sm' | 'md' | 'lg';
-  /** Status token forwarded to child items. */
+  /**
+   * Status token forwarded to child items.
+   * @defaultValue undefined
+   */
   status?: ListStatus;
-  /** Controlled value used to seed or manage selected items. */
+  /**
+   * Controlled value used to seed or manage selected items.
+   * @defaultValue undefined
+   */
   value?: ListItem[];
 }
 
@@ -135,9 +195,15 @@ interface BaseProps {
  * @property [role] - Accessible role for the div wrapper.
  */
 interface DivProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  /** Optional ref forwarded to the div wrapper. */
+  /**
+   * Optional ref forwarded to the div wrapper.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLDivElement>;
-  /** Accessible role for the div wrapper. */
+  /**
+   * Accessible role for the div wrapper.
+   * @defaultValue undefined
+   */
   role?: JSX.IntrinsicElements['div']['role'];
 }
 
@@ -148,9 +214,15 @@ interface DivProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
  * @property [role] - Accessible role for the ordered list wrapper.
  */
 interface OlProps extends Omit<OlHTMLAttributes<HTMLOListElement>, 'onChange'> {
-  /** Optional ref forwarded to the ordered list wrapper. */
+  /**
+   * Optional ref forwarded to the ordered list wrapper.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLOListElement>;
-  /** Accessible role for the ordered list wrapper. */
+  /**
+   * Accessible role for the ordered list wrapper.
+   * @defaultValue undefined
+   */
   role?: JSX.IntrinsicElements['ol']['role'];
 }
 
@@ -161,9 +233,15 @@ interface OlProps extends Omit<OlHTMLAttributes<HTMLOListElement>, 'onChange'> {
  * @property [role] - Accessible role for the unordered list wrapper.
  */
 interface UlProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onChange'> {
-  /** Optional ref forwarded to the unordered list wrapper. */
+  /**
+   * Optional ref forwarded to the unordered list wrapper.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLUListElement>;
-  /** Accessible role for the unordered list wrapper. */
+  /**
+   * Accessible role for the unordered list wrapper.
+   * @defaultValue undefined
+   */
   role?: JSX.IntrinsicElements['ul']['role'];
 }
 

@@ -22,9 +22,15 @@ type IconButtonChildren = IconDefinition | ReactElement;
  * @property [iconButton] - Class names applied to the outer button or anchor element.
  */
 interface IconButtonClasses {
-  /** Class names applied to the rendered child icon or image. */
+  /**
+   * Class names applied to the rendered child icon or image.
+   * @defaultValue undefined
+   */
   children?: string;
-  /** Class names applied to the outer button or anchor element. */
+  /**
+   * Class names applied to the outer button or anchor element.
+   * @defaultValue undefined
+   */
   iconButton?: string;
 }
 
@@ -72,15 +78,30 @@ type ImageLikeElement = ReactElement<{
  * @property [variant] - Visual style variant for the control.
  */
 interface BaseProps {
-  /** Icon or custom element rendered inside the control. */
+  /**
+   * Icon or custom element rendered inside the control.
+   * @defaultValue undefined
+   */
   children?: IconButtonChildren;
-  /** Optional class name hooks for inner and outer styling. */
+  /**
+   * Optional class name hooks for inner and outer styling.
+   * @defaultValue undefined
+   */
   classes?: IconButtonClasses;
-  /** Color token for the button styling. */
+  /**
+   * Color token for the button styling.
+   * @defaultValue undefined
+   */
   color?: IconButtonColor;
-  /** Size token controlling the visual scale of the control. */
+  /**
+   * Size token controlling the visual scale of the control.
+   * @defaultValue undefined
+   */
   size?: IconButtonSize;
-  /** Visual style variant for the control. */
+  /**
+   * Visual style variant for the control.
+   * @defaultValue undefined
+   */
   variant?: IconButtonVariant;
 }
 
@@ -96,13 +117,25 @@ interface AnchorProps extends Omit<
   AnchorHTMLAttributes<HTMLAnchorElement>,
   'children' | 'className'
 > {
-  /** Destination URL for the anchor variant. */
+  /**
+   * Destination URL for the anchor variant.
+   * @defaultValue undefined
+   */
   href?: string;
-  /** Click handler for the anchor variant. */
+  /**
+   * Click handler for the anchor variant.
+   * @defaultValue undefined
+   */
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
-  /** Optional ref forwarded to the anchor element. */
+  /**
+   * Optional ref forwarded to the anchor element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLAnchorElement>;
-  /** Optional target for the anchor element. */
+  /**
+   * Optional target for the anchor element.
+   * @defaultValue undefined
+   */
   target?: string;
 }
 
@@ -118,13 +151,25 @@ interface ButtonProps extends Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'children' | 'className'
 > {
-  /** Disallowed for the button variant. */
+  /**
+   * Disallowed for the button variant.
+   * @defaultValue undefined
+   */
   href?: never;
-  /** Click handler for the button variant. */
+  /**
+   * Click handler for the button variant.
+   * @defaultValue undefined
+   */
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-  /** Optional ref forwarded to the button element. */
+  /**
+   * Optional ref forwarded to the button element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLButtonElement>;
-  /** Disallowed for the button variant. */
+  /**
+   * Disallowed for the button variant.
+   * @defaultValue undefined
+   */
   target?: never;
 }
 

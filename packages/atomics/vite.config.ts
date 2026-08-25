@@ -8,6 +8,7 @@ export default makeLibraryConfig({
     index: resolve(__dirname, 'src/index.ts'),
     hooks: resolve(__dirname, 'lib/hooks.ts'),
     theme: resolve(__dirname, 'src/theme/index.ts'),
+    toggle: resolve(__dirname, 'src/toggle/index.ts'),
   },
   aliases: [
     {

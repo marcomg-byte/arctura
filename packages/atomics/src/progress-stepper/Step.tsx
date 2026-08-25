@@ -30,17 +30,35 @@ import { twMerge } from 'tailwind-merge';
  * @property [title] - Classes applied to the step title.
  */
 interface StepClasses {
-  /** Classes applied to the description wrapper. */
+  /**
+   * Classes applied to the description wrapper.
+   * @defaultValue undefined
+   */
   descriptionContainer?: string;
-  /** Classes applied to the step body content. */
+  /**
+   * Classes applied to the step body content.
+   * @defaultValue undefined
+   */
   body?: string;
-  /** Class overrides passed to the node or fab used for the step marker. */
+  /**
+   * Class overrides passed to the node or fab used for the step marker.
+   * @defaultValue undefined
+   */
   node?: FabClasses | NodeClasses;
-  /** Classes applied to the node container wrapper. */
+  /**
+   * Classes applied to the node container wrapper.
+   * @defaultValue undefined
+   */
   nodeContainer?: string;
-  /** Classes applied to the root step container. */
+  /**
+   * Classes applied to the root step container.
+   * @defaultValue undefined
+   */
   root?: string;
-  /** Classes applied to the step title. */
+  /**
+   * Classes applied to the step title.
+   * @defaultValue undefined
+   */
   title?: string;
 }
 
@@ -77,31 +95,70 @@ type StepColor = 'primary' | 'secondary' | 'accent' | 'error' | 'info' | 'warnin
  * @property [title] - Title displayed when the step is active.
  */
 interface StepProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'className'> {
-  /** Whether the step is currently active (shows expanded content). */
+  /**
+   * Whether the step is currently active (shows expanded content).
+   * @defaultValue false
+   */
   active?: boolean;
-  /** Optional class overrides for the step container, node, and content. */
+  /**
+   * Optional class overrides for the step container, node, and content.
+   * @defaultValue {}
+   */
   classes?: StepClasses;
-  /** Color variant for the step node. */
+  /**
+   * Color variant for the step node.
+   * @defaultValue 'primary'
+   */
   color?: StepColor;
-  /** Whether the step is marked as completed. */
+  /**
+   * Whether the step is marked as completed.
+   * @defaultValue false
+   */
   completed?: boolean;
-  /** Optional descriptive content displayed when the step is active. */
+  /**
+   * Optional descriptive content displayed when the step is active.
+   * @defaultValue undefined
+   */
   description?: ReactNode;
-  /** Optional FontAwesome icon rendered inside the node. */
+  /**
+   * Optional FontAwesome icon rendered inside the node.
+   * @defaultValue undefined
+   */
   icon?: IconDefinition;
-  /** Zero-based index assigned by the parent stepper. */
+  /**
+   * Zero-based index assigned by the parent stepper.
+   * @defaultValue undefined
+   */
   index?: number;
-  /** Optional label displayed when step is active. */
+  /**
+   * Optional label displayed when step is active.
+   * @defaultValue undefined
+   */
   label?: string;
-  /** When true, stepper enforces linear progression; when false the step is interactive. */
+  /**
+   * When true, stepper enforces linear progression; when false the step is interactive.
+   * @defaultValue true
+   */
   linear?: boolean;
-  /** Click handler for interactive (non-linear) steps. */
+  /**
+   * Click handler for interactive (non-linear) steps.
+   * @defaultValue undefined
+   */
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-  /** Layout orientation for the step content. */
+  /**
+   * Layout orientation for the step content.
+   * @defaultValue 'horizontal'
+   */
   orientation?: 'horizontal' | 'vertical';
-  /** Ref forwarded to the step container element. */
+  /**
+   * Ref forwarded to the step container element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLDivElement>;
-  /** Title displayed when the step is active. */
+  /**
+   * Title displayed when the step is active.
+   * @defaultValue undefined
+   */
   title?: string;
 }
 

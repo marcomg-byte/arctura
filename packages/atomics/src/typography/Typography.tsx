@@ -119,25 +119,55 @@ const variantTextClasses: Record<TypographyVariant, string> = {
  * @property [underline] - Underlines the text.
  */
 interface BaseProps {
-  /** Text alignment. */
+  /**
+   * Text alignment.
+   * @defaultValue undefined
+   */
   align?: 'left' | 'center' | 'right' | 'justify';
-  /** Whether to use bold font weight. */
+  /**
+   * Whether to use bold font weight.
+   * @defaultValue undefined
+   */
   bold?: boolean;
-  /** Additional CSS classes to apply. */
+  /**
+   * Additional CSS classes to apply.
+   * @defaultValue undefined
+   */
   className?: string;
-  /** Text color variant. */
+  /**
+   * Text color variant.
+   * @defaultValue undefined
+   */
   color?: TypographyColor;
-  /** Number of lines to clamp, truncating overflow. */
+  /**
+   * Number of lines to clamp, truncating overflow.
+   * @defaultValue undefined
+   */
   clamp?: ClampLine;
-  /** Content to render inside the component. */
+  /**
+   * Content to render inside the component.
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Removes the default vertical padding when true. */
+  /**
+   * Removes the default vertical padding when true.
+   * @defaultValue undefined
+   */
   removePadding?: boolean;
-  /** Renders the content as a `span` instead of a heading or paragraph. */
+  /**
+   * Renders the content as a `span` instead of a heading or paragraph.
+   * @defaultValue undefined
+   */
   span?: boolean;
-  /** Truncates text with an ellipsis when it overflows. */
+  /**
+   * Truncates text with an ellipsis when it overflows.
+   * @defaultValue undefined
+   */
   truncate?: boolean;
-  /** Underlines the text. */
+  /**
+   * Underlines the text.
+   * @defaultValue undefined
+   */
   underline?: boolean;
 }
 
@@ -148,9 +178,15 @@ interface BaseProps {
  * @property [variant] - Specifies which heading tag to render.
  */
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
-  /** React ref for the heading element. */
+  /**
+   * React ref for the heading element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLHeadingElement>;
-  /** Specifies which heading tag to render (`h1`-`h6`). */
+  /**
+   * Specifies which heading tag to render (`h1`-`h6`).
+   * @defaultValue undefined
+   */
   variant?: HeadingVariant;
 }
 
@@ -161,9 +197,15 @@ interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
  * @property [variant] - Paragraph style variant.
  */
 interface ParagraphProps extends HTMLAttributes<HTMLParagraphElement> {
-  /** React ref for the paragraph element. */
+  /**
+   * React ref for the paragraph element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLParagraphElement>;
-  /** Paragraph style variant (`base`, `small`, or `large`). */
+  /**
+   * Paragraph style variant (`base`, `small`, or `large`).
+   * @defaultValue undefined
+   */
   variant?: ParagraphVariant;
 }
 
@@ -174,9 +216,15 @@ interface ParagraphProps extends HTMLAttributes<HTMLParagraphElement> {
  * @property [variant] - Span style variant.
  */
 interface SpanProps extends HTMLAttributes<HTMLSpanElement> {
-  /** React ref for the span element. */
+  /**
+   * React ref for the span element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLSpanElement>;
-  /** Span style variant (`base`, `small`, or `large`). */
+  /**
+   * Span style variant (`base`, `small`, or `large`).
+   * @defaultValue undefined
+   */
   variant?: ParagraphVariant;
 }
 

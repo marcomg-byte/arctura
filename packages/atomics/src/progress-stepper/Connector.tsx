@@ -10,9 +10,15 @@ import { twMerge } from 'tailwind-merge';
  * @property [content] - Classes applied to the inner connector line.
  */
 interface ConnectorClasses {
-  /** Classes applied to the outer connector wrapper. */
+  /**
+   * Classes applied to the outer connector wrapper.
+   * @defaultValue undefined
+   */
   container?: string;
-  /** Classes applied to the inner connector line. */
+  /**
+   * Classes applied to the inner connector line.
+   * @defaultValue undefined
+   */
   content?: string;
 }
 
@@ -31,17 +37,35 @@ interface ConnectorClasses {
  * @property [ref] - Ref forwarded to the connector container element.
  */
 interface ConnectorProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
-  /** Whether the connector is currently active (uses active styling). */
+  /**
+   * Whether the connector is currently active (uses active styling).
+   * @defaultValue false
+   */
   active?: boolean;
-  /** Optional class overrides for the connector wrapper and line. */
+  /**
+   * Optional class overrides for the connector wrapper and line.
+   * @defaultValue {}
+   */
   classes?: ConnectorClasses;
-  /** Whether the preceding step has been completed. */
+  /**
+   * Whether the preceding step has been completed.
+   * @defaultValue false
+   */
   completed?: boolean;
-  /** If true, the connector will not be rendered for the last step. */
+  /**
+   * If true, the connector will not be rendered for the last step.
+   * @defaultValue false
+   */
   lastIndex?: boolean;
-  /** Orientation of the connector: horizontal or vertical. */
+  /**
+   * Orientation of the connector: horizontal or vertical.
+   * @defaultValue 'horizontal'
+   */
   orientation?: 'horizontal' | 'vertical';
-  /** Ref forwarded to the connector container element. */
+  /**
+   * Ref forwarded to the connector container element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLDivElement>;
 }
 

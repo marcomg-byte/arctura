@@ -17,9 +17,15 @@ type NodeAdornment = IconDefinition | NodeImage;
  * @property [container] - Classes applied to the root node container.
  */
 interface NodeClasses {
-  /** Classes applied to the adornment icon or image. */
+  /**
+   * Classes applied to the adornment icon or image.
+   * @defaultValue undefined
+   */
   adornment?: string;
-  /** Classes applied to the root node container. */
+  /**
+   * Classes applied to the root node container.
+   * @defaultValue undefined
+   */
   container?: string;
 }
 
@@ -55,21 +61,45 @@ type NodeImage = { alt?: string; src: string };
  * @property [variant] - Circular or extended visual variant.
  */
 interface NodeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
-  /** Child nodes rendered inside the node (e.g., text or icon). */
+  /**
+   * Child nodes rendered inside the node (e.g., text or icon).
+   * @defaultValue undefined
+   */
   children?: ReactNode;
-  /** Optional class overrides for the node container and adornments. */
+  /**
+   * Optional class overrides for the node container and adornments.
+   * @defaultValue {}
+   */
   classes?: NodeClasses;
-  /** Color variant applied to the node border and hover state. */
+  /**
+   * Color variant applied to the node border and hover state.
+   * @defaultValue 'primary'
+   */
   color?: NodeColor;
-  /** Optional adornment rendered after the children (e.g., icon or image). */
+  /**
+   * Optional adornment rendered after the children (e.g., icon or image).
+   * @defaultValue undefined
+   */
   endAdornment?: NodeAdornment;
-  /** Ref forwarded to the root container element. */
+  /**
+   * Ref forwarded to the root container element.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLDivElement>;
-  /** Size modifier for the node: `sm` | `md` | `lg`. */
+  /**
+   * Size modifier for the node: `sm` | `md` | `lg`.
+   * @defaultValue 'md'
+   */
   size?: 'sm' | 'md' | 'lg';
-  /** Optional adornment rendered before the children (e.g., icon or image). */
+  /**
+   * Optional adornment rendered before the children (e.g., icon or image).
+   * @defaultValue undefined
+   */
   startAdornment?: NodeAdornment;
-  /** Visual variant: `circular` (default) or `extended`. */
+  /**
+   * Visual variant: `circular` (default) or `extended`.
+   * @defaultValue 'circular'
+   */
   variant?: 'circular' | 'extended';
 }
 

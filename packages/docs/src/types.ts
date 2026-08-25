@@ -5,6 +5,9 @@ type TypeDocCommentPart = {
 
 type TypeDocBlockTag = {
   tag: string;
+  name?: string;
+  defaultValue?: string;
+  type?: TypeDocType;
   content?: TypeDocCommentPart[];
 };
 
@@ -16,11 +19,30 @@ type TypeDocComment = {
 type TypeDocType = {
   type?: string;
   name?: string;
+  kind?: string;
+  primitive?: string;
+  properties?: TypeDocProperty[];
+  value?: unknown;
+  values?: unknown[];
   types?: TypeDocType[];
+  typeArguments?: TypeDocType[];
   target?: unknown;
   declaration?: TypeDocReflection;
   qualifiedName?: string;
   package?: string;
+};
+
+type TypeDocProperty = {
+  name?: string;
+  description?: string;
+  required?: boolean;
+  defaultValue?: string;
+  kind?: string;
+  primitive?: string;
+  type?: TypeDocType;
+  typeName?: string;
+  values?: unknown[];
+  reflection?: TypeDocReflection;
 };
 
 type TypeDocSource = {
@@ -40,6 +62,7 @@ type TypeDocReflection = {
   signatures?: TypeDocReflection[];
   parameters?: TypeDocReflection[];
   type?: TypeDocType;
+  defaultValue?: string;
   flags?: {
     isOptional?: boolean;
     [key: string]: unknown;
@@ -53,6 +76,51 @@ type ComponentDocsParameter = {
   type?: TypeDocType;
 };
 
+type ComponentDocsPrimitive =
+  | 'array'
+  | 'boolean'
+  | 'function'
+  | 'number'
+  | 'object'
+  | 'string'
+  | 'unknown';
+
+type ComponentDocsKind =
+  | 'array'
+  | 'enum'
+  | 'function'
+  | 'object'
+  | 'primitive'
+  | 'slot'
+  | 'unknown';
+
+type ComponentDocsValue = boolean | number | string;
+
+type ComponentDocsType = Omit<
+  TypeDocType,
+  'kind' | 'primitive' | 'properties' | 'types' | 'typeArguments' | 'values'
+> & {
+  kind?: ComponentDocsKind;
+  primitive?: ComponentDocsPrimitive;
+  properties?: ComponentDocsProp[];
+  types?: ComponentDocsType[];
+  typeArguments?: ComponentDocsType[];
+  values?: ComponentDocsValue[];
+};
+
+type ComponentDocsProp = {
+  name: string;
+  description: string;
+  required: boolean;
+  defaultValue?: string;
+  kind: ComponentDocsKind;
+  primitive: ComponentDocsPrimitive;
+  type?: ComponentDocsType;
+  typeName: string;
+  values?: ComponentDocsValue[];
+  reflection?: TypeDocReflection;
+};
+
 type ComponentDocs = {
   name?: string;
   description: string;
@@ -60,6 +128,7 @@ type ComponentDocs = {
   returns: string;
   propsDescription: string;
   propsType?: TypeDocType;
+  props: ComponentDocsProp[];
   parameters: ComponentDocsParameter[];
   reflection?: TypeDocReflection;
   propsReflection?: TypeDocReflection;
@@ -89,13 +158,19 @@ export type {
   ComponentDocs,
   ComponentMarkdownFile,
   ComponentMarkdownFileRole,
+  ComponentDocsKind,
   ComponentDocsParameter,
+  ComponentDocsPrimitive,
+  ComponentDocsProp,
+  ComponentDocsType,
+  ComponentDocsValue,
   GetComponentDocsOptions,
   GetComponentMarkdownFilesOptions,
   TypeDocBlockTag,
   TypeDocComment,
   TypeDocCommentPart,
   TypeDocReflection,
+  TypeDocProperty,
   TypeDocSource,
   TypeDocType,
 };

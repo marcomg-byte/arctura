@@ -17,6 +17,7 @@ __metadata:
   resolution: "@arctura/app@workspace:packages/app"
   dependencies:
     "@arctura/atomics": "workspace:*"
+    "@arctura/docs": "workspace:*"
     "@arctura/theme": "workspace:*"
     "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
@@ -73,7 +74,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@arctura/docs@workspace:packages/docs":
+"@arctura/docs@workspace:*, @arctura/docs@workspace:packages/docs":
   version: 0.0.0-use.local
   resolution: "@arctura/docs@workspace:packages/docs"
   dependencies:

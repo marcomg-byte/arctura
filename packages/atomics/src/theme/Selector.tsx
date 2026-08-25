@@ -16,7 +16,10 @@ type SelectProps = ComponentProps<typeof Select>;
  * @property [classes] - Class name hooks for the underlying select internals.
  */
 interface SelectorProps extends SelectProps {
-  /** Optional class name overrides for the underlying select internals. */
+  /**
+   * Optional class name overrides for the underlying select internals.
+   * @defaultValue {}
+   */
   classes?: SelectClasses;
 }
 

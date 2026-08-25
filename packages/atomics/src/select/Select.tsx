@@ -17,11 +17,20 @@ import { twMerge } from 'tailwind-merge';
  * @property [icon] - Optional icon rendered alongside the label.
  */
 interface Option {
-  /** Value used for selection state and form submission. */
+  /**
+   * Value used for selection state and form submission.
+   * @defaultValue undefined
+   */
   value: string;
-  /** Visible label shown in the dropdown. */
+  /**
+   * Visible label shown in the dropdown.
+   * @defaultValue undefined
+   */
   label: string;
-  /** Optional icon rendered alongside the label. */
+  /**
+   * Optional icon rendered alongside the label.
+   * @defaultValue undefined
+   */
   icon?: IconDefinition;
 }
 
@@ -38,21 +47,45 @@ interface Option {
  * @property [root] - Class names applied to the root wrapper.
  */
 interface SelectClasses {
-  /** Class names applied to the outer container. */
+  /**
+   * Class names applied to the outer container.
+   * @defaultValue undefined
+   */
   container?: string;
-  /** Class names applied to the chevron icon. */
+  /**
+   * Class names applied to the chevron icon.
+   * @defaultValue undefined
+   */
   icon?: string;
-  /** Class names applied to the icon wrapper. */
+  /**
+   * Class names applied to the icon wrapper.
+   * @defaultValue undefined
+   */
   iconContainer?: string;
-  /** Class names applied to the label above the control. */
+  /**
+   * Class names applied to the label above the control.
+   * @defaultValue undefined
+   */
   label?: string;
-  /** Class names applied to the placeholder value. */
+  /**
+   * Class names applied to the placeholder value.
+   * @defaultValue undefined
+   */
   placeholder?: string;
-  /** Class names applied to the option row and option icon. */
+  /**
+   * Class names applied to the option row and option icon.
+   * @defaultValue undefined
+   */
   option?: { root?: string; icon?: string };
-  /** Class names applied to the dropdown list container. */
+  /**
+   * Class names applied to the dropdown list container.
+   * @defaultValue undefined
+   */
   optionsContainer?: string;
-  /** Class names applied to the root wrapper. */
+  /**
+   * Class names applied to the root wrapper.
+   * @defaultValue undefined
+   */
   root?: string;
 }
 
@@ -79,33 +112,75 @@ interface SelectClasses {
  * @property [value] - Controlled selected value.
  */
 interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'className'> {
-  /** Class name hooks for the internal elements. */
+  /**
+   * Class name hooks for the internal elements.
+   * @defaultValue {}
+   */
   classes?: SelectClasses;
-  /** Initial value used when the component is uncontrolled. */
+  /**
+   * Initial value used when the component is uncontrolled.
+   * @defaultValue undefined
+   */
   defaultValue?: string;
-  /** Whether the select is disabled. */
+  /**
+   * Whether the select is disabled.
+   * @defaultValue false
+   */
   disabled?: boolean;
-  /** Expands the select control to fill the width of its parent container. */
+  /**
+   * Expands the select control to fill the width of its parent container.
+   * @defaultValue false
+   */
   fullWidth?: boolean;
-  /** Label rendered above the select trigger. */
+  /**
+   * Label rendered above the select trigger.
+   * @defaultValue undefined
+   */
   label?: string;
-  /** Name applied to the hidden input for form integration. */
+  /**
+   * Name applied to the hidden input for form integration.
+   * @defaultValue undefined
+   */
   name?: string;
-  /** Callback fired when an option is selected. */
+  /**
+   * Callback fired when an option is selected.
+   * @defaultValue undefined
+   */
   onChange?: (event: MouseEvent<HTMLLIElement>) => void;
-  /** Available options to display in the dropdown. */
+  /**
+   * Available options to display in the dropdown.
+   * @defaultValue []
+   */
   options?: Option[];
-  /** Placeholder shown when no selection is active. */
+  /**
+   * Placeholder shown when no selection is active.
+   * @defaultValue undefined
+   */
   placeholder?: string;
-  /** Ref forwarded to the root wrapper. */
+  /**
+   * Ref forwarded to the root wrapper.
+   * @defaultValue undefined
+   */
   ref?: Ref<HTMLDivElement>;
-  /** Size token controlling the select trigger width and height. */
+  /**
+   * Size token controlling the select trigger width and height.
+   * @defaultValue 'md'
+   */
   size?: 'sm' | 'md' | 'lg';
-  /** Keyboard tab index for the select trigger and options. */
+  /**
+   * Keyboard tab index for the select trigger and options.
+   * @defaultValue 0
+   */
   tabIndex?: number;
-  /** Visual treatment for the dropdown. */
+  /**
+   * Visual treatment for the dropdown.
+   * @defaultValue 'outline'
+   */
   variant?: 'outline' | 'filled';
-  /** Controlled selected value. */
+  /**
+   * Controlled selected value.
+   * @defaultValue undefined
+   */
   value?: string;
 }
 
