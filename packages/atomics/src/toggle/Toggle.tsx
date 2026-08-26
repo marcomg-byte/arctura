@@ -1,4 +1,4 @@
-import type { ChangeEvent, FC, InputHTMLAttributes, Ref } from 'react';
+import type { ChangeEvent, FC, InputHTMLAttributes, KeyboardEvent, Ref } from 'react';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
 
@@ -103,11 +103,13 @@ interface ToggleProps extends Omit<
    * @defaultValue undefined
    */
   onCheckedChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>, checked?: boolean) => void;
   /**
    * Disables the toggle.
    * @defaultValue false
    */
   disabled?: boolean;
+  fullWidth?: boolean;
   /**
    * Marks the toggle as required for form submission.
    * @defaultValue false
@@ -172,7 +174,9 @@ const Toggle: FC<ToggleProps> = ({
   checked,
   defaultChecked = false,
   onCheckedChange,
+  onKeyDown,
   disabled = false,
+  fullWidth = false,
   required = false,
   name,
   value,
@@ -186,14 +190,64 @@ const Toggle: FC<ToggleProps> = ({
   containerRef,
   ...rest
 }) => {
-  const containerClasses = twMerge(classNames(), classes?.container);
-  const inputClasses = twMerge(classNames(), classes?.input);
-  const sliderClasses = twMerge(classNames(), classes?.slider);
-  const labelClasses = twMerge(classNames(), classes?.label);
-  const descriptionClasses = twMerge(classNames(), classes?.description);
+  const containerClasses = twMerge(
+    classNames(
+      'au:relative au:inline-flex au:items-center au:gap-3 au:pl-1.5 au:pr-0.5 au:pt-1 au:pb-3 au:hover:cursor-pointer',
+      {
+        'au:w-22': size === 'sm' && !fullWidth,
+        'au:w-32': size === 'md' && !fullWidth,
+        'au:w-52': size === 'lg' && !fullWidth,
+        'au:w-full': fullWidth,
+      }
+    ),
+    classes?.container
+  );
+  const inputClasses = twMerge(classNames('au:sr-only au:peer'), classes?.input);
+  const sliderClasses = twMerge(
+    classNames(
+      'au:relative au:rounded-full au:bg-subtle au:transition-colors au:duration-200 au:h-1.5',
+      "au:after:absolute au:after:h-3 au:after:w-3 au:after:top-1/2 au:after:-inset-s-1.5 au:after:-mt-1.5 au:after:rounded-full au:after:border-none au:after:content-[''] au:after:transition-all",
+      'au:peer-focus-visible:outline-1 au:peer-focus-visible:outline-primary au:peer-focus-visible:outline-offset-2 au:rtl:peer-checked:after:-translate-x-full',
+      {
+        'au:peer-checked:bg-accent-subtle au:after:bg-accent': variant === 'default',
+        'au:peer-checked:bg-success-primary-subtle au:after:bg-success-primary':
+          variant === 'success',
+        'au:peer-checked:bg-danger-primary-subtle au:after:bg-danger-primary': variant === 'danger',
+        'au:opacity-50': disabled,
+        'au:w-5 au:peer-checked:after:translate-x-4.5': size === 'sm',
+        'au:w-7 au:peer-checked:after:translate-x-6.5': size === 'md',
+        'au:w-9 au:peer-checked:after:translate-x-8.5': size === 'lg',
+      }
+    ),
+    classes?.slider
+  );
+  const labelClasses = twMerge(
+    classNames('au:text-primary au:text-xs au:sm:text-sm au:lg:text-base'),
+    classes?.label
+  );
+  const descriptionClasses = twMerge(
+    classNames('au:text-subtle au:text-xs au:sm:text-sm au:lg:text-base'),
+    classes?.description
+  );
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    rest.onChange?.(event);
-    onCheckedChange?.(event, event.currentTarget.checked);
+    if (onCheckedChange) {
+      onCheckedChange(event, event.currentTarget.checked);
+    }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      const currentChecked = event.currentTarget.checked;
+      event.currentTarget.checked = !currentChecked;
+    }
+
+    if (event.key === 'Escape') {
+      event.currentTarget.checked = false;
+    }
+
+    if (onKeyDown) {
+      onKeyDown(event, event.currentTarget.checked);
+    }
   };
 
   return (
@@ -217,6 +271,7 @@ const Toggle: FC<ToggleProps> = ({
         data-size={size}
         data-variant={variant}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
       <span className={sliderClasses}></span>
       <span className={labelClasses}>{label}</span>

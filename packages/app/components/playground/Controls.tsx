@@ -195,7 +195,9 @@ const renderControl = (item: Control): JSX.Element | null => {
  */
 const renderItems = (items: Control | Control[]): JSX.Element | (JSX.Element | null)[] | null => {
   if (Array.isArray(items)) {
-    return items.map((item) => renderControl(item));
+    return items.map((item, index) => (
+      <Fragment key={`control-item-${item.name}-${index + 1}`}>{renderControl(item)}</Fragment>
+    ));
   }
 
   return renderControl(items);

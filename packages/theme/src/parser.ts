@@ -409,6 +409,7 @@ function categoryToThemeNamespace(category: string): string {
   if (category === 'outline') return '--outline-color';
   if (category === 'caret') return '--caret-color';
   if (category === 'ring') return '--ring-color';
+  if (category === 'ring-offset') return '--ring-offset-color';
   return `--color-${category}`;
 }
 

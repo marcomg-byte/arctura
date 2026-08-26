@@ -50,6 +50,12 @@ const tokens: Tokens = {
           border: {
             primary: 'colors.aurora.700',
           },
+          ring: {
+            primary: 'colors.aurora.500',
+          },
+          'ring-offset': {
+            primary: 'colors.aurora.500',
+          },
           custom: {
             accent: 'colors.aurora.500',
           },
@@ -64,6 +70,12 @@ const tokens: Tokens = {
           },
           border: {
             primary: 'colors.aurora.500',
+          },
+          ring: {
+            primary: 'colors.white',
+          },
+          'ring-offset': {
+            primary: 'colors.white',
           },
           custom: {
             accent: 'colors.white',
@@ -174,12 +186,16 @@ describe('parser', () => {
       expect(css).toContain('--background-primary: rgb(var(--color-aurora-500))');
       expect(css).toContain('--text-primary: rgb(var(--color-black))');
       expect(css).toContain('--border-primary: rgb(var(--color-aurora-700))');
+      expect(css).toContain('--ring-primary: rgb(var(--color-aurora-500))');
+      expect(css).toContain('--ring-offset-primary: rgb(var(--color-aurora-500))');
       expect(css).toContain('--custom-accent: rgb(var(--color-aurora-500))');
 
       expect(css).toContain('@theme inline');
       expect(css).toContain('--background-color-primary: var(--background-primary)');
       expect(css).toContain('--text-color-primary: var(--text-primary)');
       expect(css).toContain('--border-color-primary: var(--border-primary)');
+      expect(css).toContain('--ring-color-primary: var(--ring-primary)');
+      expect(css).toContain('--ring-offset-color-primary: var(--ring-offset-primary)');
       expect(css).toContain('--color-custom-accent: var(--custom-accent)');
       expect(css).toContain('--spacing: 8px');
       expect(css).toContain('--spacing-sm: 12px');

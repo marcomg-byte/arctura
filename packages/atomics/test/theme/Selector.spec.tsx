@@ -25,9 +25,9 @@ describe('Theme Selector', () => {
     render(<Selector />);
 
     expect(screen.getByText('Theme')).toBeDefined();
-    expect(screen.getByText('System')).toBeDefined();
+    expect(screen.getByText('system')).toBeDefined();
 
-    fireEvent.click(screen.getByText('System'));
+    fireEvent.click(screen.getByText('system'));
 
     expect(screen.getByText('Light')).toBeDefined();
     expect(screen.getByText('Dark')).toBeDefined();
@@ -36,7 +36,7 @@ describe('Theme Selector', () => {
   it('updates stored mode when selecting a valid option', async () => {
     render(<Selector />);
 
-    fireEvent.click(screen.getByText('System'));
+    fireEvent.click(screen.getByText('system'));
     fireEvent.click(screen.getByText('Dark'));
 
     await waitFor(() => {
@@ -51,7 +51,7 @@ describe('Theme Selector', () => {
     render(<Selector />);
 
     await waitFor(() => {
-      expect(screen.getByText('Light')).toBeDefined();
+      expect(screen.getByText('light')).toBeDefined();
       expect(document.documentElement.getAttribute('data-theme')).toBe('light');
     });
   });

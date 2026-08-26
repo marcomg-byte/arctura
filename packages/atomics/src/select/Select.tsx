@@ -89,6 +89,8 @@ interface SelectClasses {
   root?: string;
 }
 
+type SelectColor = 'black' | 'inverse' | 'primary' | 'white';
+
 /**
  * Props for the Select component.
  *
@@ -112,11 +114,13 @@ interface SelectClasses {
  * @property [value] - Controlled selected value.
  */
 interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'className'> {
+  capitalize?: boolean;
   /**
    * Class name hooks for the internal elements.
    * @defaultValue {}
    */
   classes?: SelectClasses;
+  color?: SelectColor;
   /**
    * Initial value used when the component is uncontrolled.
    * @defaultValue undefined
@@ -220,7 +224,9 @@ interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 
  * @see SelectProps
  */
 const Select: FC<SelectProps> = ({
+  capitalize: capitalizeProp = false,
   classes = {},
+  color = 'primary',
   defaultValue,
   disabled = false,
   fullWidth = false,
@@ -240,45 +246,58 @@ const Select: FC<SelectProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentValue, setCurrentValue] = useControlled<Option>({
     defaultValue: defaultValue
-      ? { value: defaultValue, label: capitalize(defaultValue) }
+      ? { value: defaultValue, label: capitalizeProp ? capitalize(defaultValue) : defaultValue }
       : undefined,
-    value: value ? { value: value, label: capitalize(value) } : undefined,
+    value: value ? { value: value, label: capitalizeProp ? capitalize(value) : value } : undefined,
   });
 
   const containerClasses = twMerge(
-    classNames(
-      'au:relative au:flex au:justify-start au:items-center au:gap-1 au:rounded-sm au:w-full',
-      {
-        'au:border-1 au:border-solid au:border-primary au:hover:border-hover':
-          variant === 'outline',
-        'au:bg-primary': variant === 'filled',
-        'au:cursor-not-allowed au:opacity-50': disabled,
-        'au:hover:cursor-pointer': !disabled,
-        'au:min-h-[32px]': size === 'sm',
-        'au:min-h-[40px]': size === 'md',
-        'au:min-h-[48px]': size === 'lg',
-      }
-    ),
+    classNames('au:relative au:flex au:justify-start au:items-center au:gap-1 au:rounded-sm', {
+      'au:border-1 au:border-solid au:border-primary au:hover:border-hover': variant === 'outline',
+      'au:bg-primary': variant === 'filled',
+      'au:cursor-not-allowed au:opacity-50': disabled,
+      'au:hover:cursor-pointer': !disabled,
+      'au:min-h-[32px]': size === 'sm',
+      'au:min-h-[40px]': size === 'md',
+      'au:min-h-[48px]': size === 'lg',
+      'au:w-full': fullWidth,
+    }),
     classes?.container
   );
 
-  const labelClasses = twMerge('au:text-xs au:sm:text-sm au:lg:text-lg', classes?.label);
+  const labelClasses = twMerge(
+    classNames('au:text-xs au:sm:text-sm au:lg:text-base', {
+      'au:text-black': color === 'black',
+      'au:text-primary': color === 'primary',
+      'au:text-inverse': color === 'inverse',
+      'au:text-white': color === 'white',
+    }),
+    classes?.label
+  );
 
   const placeholderClasses = twMerge(
-    'au:relative au:flex au:justify-start au:items-center au:gap-1 au:p-1 au:text-xs au:w-full',
+    classNames(
+      'au:relative au:flex au:justify-start au:items-center au:gap-1 au:pl-3 au:py-2 au:text-xs au:sm:text-sm au:lg:text-base au:w-full',
+      {
+        'au:text-black': color === 'black',
+        'au:text-primary': color === 'primary',
+        'au:text-inverse': color === 'inverse',
+        'au:text-white': color === 'white',
+        'au:w-12': size === 'sm' && !fullWidth,
+        'au:w-32': size === 'md' && !fullWidth,
+        'au:w-52': size === 'lg' && !fullWidth,
+        'au:grow': fullWidth,
+      }
+    ),
     classes?.placeholder
   );
 
   const optionsContainerClasses = twMerge(
     classNames(
-      'au:absolute au:top-full au:left-0 au:mt-1 au:flex au:flex-col au:justify-start au:items-center au:w-full',
+      'au:absolute au:top-full au:left-0 au:mt-1 au:flex au:flex-col au:justify-start au:items-center au:w-full au:z-10',
       {
         'au:border-solid au:border-1 au:border-primary au:rounded-sm au:bg-secondary':
           variant === 'outline',
-        'au:w-12': size === 'sm' && !fullWidth,
-        'au:w-32': size === 'md' && !fullWidth,
-        'au:w-52': size === 'lg' && !fullWidth,
-        'au:grow': fullWidth,
       }
     ),
     classes?.optionsContainer
@@ -286,27 +305,34 @@ const Select: FC<SelectProps> = ({
 
   const optionClasses = twMerge(
     classNames(
-      'au:flex au:justify-between au:items-center au:px-1.5 au:py-1 au:w-full au:text-xs',
+      'au:flex au:justify-between au:items-center au:px-1.5 au:py-1 au:w-full au:text-xs au:sm:text-sm au:lg:text-base',
       {
         'au:hover:text-accent': variant === 'outline',
+        'au:text-black': color === 'black',
+        'au:text-primary': color === 'primary',
+        'au:text-inverse': color === 'inverse',
+        'au:text-white': color === 'white',
       }
     ),
     classes?.option?.root
   );
 
   const optionIconClasses = twMerge(
-    'au:text-sm au:sm:text-sm au:lg:text-lg',
+    classNames('au:text-sm au:sm:text-sm au:lg:text-lg', {
+      'au:text-black': color === 'black',
+      'au:text-primary': color === 'primary',
+      'au:text-inverse': color === 'inverse',
+      'au:text-white': color === 'white',
+    }),
     classes?.option?.icon
   );
 
   const rootClasses = twMerge(
     classNames(
-      'au:inline-flex au:flex-col au:items-start au:justify-center au:gap-0.5 au:min-w-12 au:font-body au:text-inverse',
+      'au:inline-flex au:flex-col au:items-start au:justify-center au:gap-0.5 au:pt-0.5 au:pb-3 au:min-w-12 au:font-body au:text-inverse',
       {
         'au:w-full': fullWidth,
-        'au:w-24': size === 'sm' && !fullWidth,
-        'au:w-32': size === 'md' && !fullWidth,
-        'au:w-52': size === 'lg' && !fullWidth,
+        'au:grow': fullWidth,
       }
     ),
     classes?.root
@@ -315,12 +341,16 @@ const Select: FC<SelectProps> = ({
   const iconClasses = twMerge(
     classNames('au:text-sm au:transition-transform au:duration-200', {
       'au:rotate-180': isOpen,
+      'au:text-primary': color === 'primary',
+      'au:text-white': color === 'white',
+      'au:text-black': color === 'black',
+      'au:text-inverse': color === 'inverse',
     }),
     classes?.icon
   );
 
   const iconContainerClasses = twMerge(
-    'au:relative au:flex au:justify-center au:items-center au:p-0.5',
+    'au:relative au:flex au:justify-center au:items-center au:pl-0.5 au:pr-2 au:py-2',
     classes?.iconContainer
   );
 
@@ -338,7 +368,7 @@ const Select: FC<SelectProps> = ({
       const newValue = event.currentTarget.getAttribute('data-value');
       setCurrentValue({
         value: newValue ?? '',
-        label: capitalize(newValue ?? ''),
+        label: capitalizeProp ? capitalize(newValue ?? '') : (newValue ?? ''),
       });
     }
   };

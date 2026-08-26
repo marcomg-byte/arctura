@@ -46,11 +46,14 @@ const Playground: FC<PlaygroundProps> = ({
   );
   const controls = useMemo(() => getControls(componentProps), [componentProps]);
 
-  const rootClasses = twMerge(classNames('au:flex au:p-4 au:w-full'), classes?.root);
-  const contentClasses = twMerge(classNames('au:flex au:flex-col'), classes?.content);
-  const overviewClasses = twMerge(classNames('au:flex au:gap-2'), classes?.overview);
-  const playgroundClasses = twMerge(classNames('au:flex au:flex-col'), classes?.playground);
-  const editorClasses = twMerge(classNames('au:h-full au:grow'), classes?.editor);
+  const rootClasses = twMerge(classNames('au:flex au:p-4 au:w-full au:bg-inherit'), classes?.root);
+  const contentClasses = twMerge(classNames('au:flex au:flex-col au:bg-inherit'), classes?.content);
+  const overviewClasses = twMerge(classNames('au:flex au:gap-2 au:bg-inherit'), classes?.overview);
+  const playgroundClasses = twMerge(
+    classNames('au:flex au:flex-col au:bg-inherit'),
+    classes?.playground
+  );
+  const editorClasses = twMerge(classNames('au:h-full au:grow au:bg-inherit'), classes?.editor);
 
   useEffect(() => console.log('Props: ', componentDocs), [componentDocs]);
   useEffect(() => console.log('Props: ', componentProps), [componentProps]);

@@ -55,7 +55,7 @@ export default function Playground() {
           </div>
         </div>
       </div>
-      <div className="au:flex au:w-full">
+      <div className="au:flex au:w-full au:bg-inherit">
         <div className="au:w-1/2 au:sm:w-1/4 au:lg:w-1/5 au:flex au:flex-col au:gap-4 au:py-4 au:px-2 au:border-solid au:border-r-1 au:border-r-primary">
           <Navbar classes={{ root: 'au:w-full au:gap-3' }}>
             <div className="au:flex au:flex-col au:gap-0">
@@ -142,7 +142,7 @@ export default function Playground() {
             </Button>
           </div>
         </div>
-        <main className="au:flex au:min-w-0 au:flex-1 au:flex-col au:gap-4 au:p-3 au:sm:p-4 au:lg:p-6">
+        <main className="au:flex au:min-w-0 au:flex-1 au:flex-col au:gap-4 au:p-3 au:sm:p-4 au:lg:p-6 au:bg-inherit">
           <PlaygroundComponent component="Button" />
         </main>
       </div>
